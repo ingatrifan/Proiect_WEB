@@ -1,4 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 /*CSS for the actual header container*/
 .header {
@@ -17,6 +16,7 @@
     border-radius: 4px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
 /*Makes the project name display on the left*/
@@ -38,7 +38,6 @@
 }
 
 /*Styling for the different buttons in the header*/
-
 .about-us:hover {
     background-color: #ddd;
     color: black;

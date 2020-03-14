@@ -1,4 +1,12 @@
 
+/* colors
+
+
+*/
+
+
+
+
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}
@@ -27,7 +35,7 @@
       display: block !important;
       width:10%!important;
       height: 100%;
-      background-color :#3C3735;
+      background-color :#4d4545;
       position: absolute;
       float: left;
     }
@@ -52,6 +60,7 @@
 }
 body{
     margin: 0;
+    background-color:#4d4545;
 }
 h1,h2,h3,h4,h5,h6 {
   margin:0;
@@ -79,7 +88,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 .sidepart{
     position: absolute;
-    background-color:#3C3735;
+    background-color:#393232;
     height: 100%;
     overflow-y: auto;
 }
@@ -104,12 +113,13 @@ h1,h2,h3,h4,h5,h6 {
     font-size: 18px;
 }
 .folder-List li{
-    border-top :2px solid #634b4a;
+    border-top :2px solid #8d6262;
     padding: 10px;
     margin:0;
 }
 .options{
-    background-image: url('../images/1.jpg');
+    /* background-image: url('../images/1.jpg'); */
+    background-color: #8d6262;
     position: relative;
     width:100%;
     height: 200px;
@@ -117,9 +127,6 @@ h1,h2,h3,h4,h5,h6 {
     justify-content: center;
 }
 
-button:hover {
-    background: #ccc;
-}
 .upload{
     margin:10px auto;
     height: 36px;
@@ -130,9 +137,12 @@ button:hover {
     cursor: pointer;
     display: flex;
     padding: 0 16px;
-    border: 2px solid #634b4a ;
+    border: 2px solid #8d6262 ;
     color:white;
-    background-color: #DF4500;
+    background-color: #FFA34D;
+}
+.upload:hover{
+  color: #DF4500
 }
 .search {
     width: 100%;
@@ -142,22 +152,19 @@ button:hover {
   
   .searchTerm {
     width: 100%;
-    border: 3px solid #00B4CC;
+    border: 3px solid #ed8d8d;
     border-right: none;
     padding: 5px;
     border-radius: 5px 0 0 5px;
     outline: none;
     color: #9DBFAF;
   }
-  
-  .searchTerm:focus{
-    color: #00B4CC;
-  }
+
   
   .searchButton {
     height: 36px;
-    border: 1px solid #00B4CC;
-    background: #00B4CC;
+    border: none;
+    background: #ed8d8d;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -165,12 +172,13 @@ button:hover {
     font-size: 20px;
   }
   
-  .wrap{
-    width: 70%;
-    align-self: center;
-  }
+.wrap{
+  width: 70%;
+  align-self: center;
+}
+
 .fa-folder{
-    color : #634b4a;
+    color : #8d6262;
     margin-right:5px;
 }
 
@@ -184,151 +192,122 @@ button:hover {
     align-items: center;
   }
   
-  .flex-card {
-    background: #fff;
-    border-radius: 5px;
-    box-shadow: 0px 5px 10px #ccc;
-    overflow: hidden;
-    /* -webkit- transition: all .2s ease; */
-    transition: all .2s ease;
-    margin: 20px;
-  }
-  
-  .flex-card:hover {
-    box-shadow: 0px 10px 40px #ccc; 
-  }
-  
-  .flex-card__media img {
-    display: block;
-    max-width: 100%;
-    margin:auto;
-  }
-  .flex-card__media{
-    max-width: 100px;
-    margin:auto;
-  }
-  
-  
-  .flex-card__content-title {
-    width: 100%;
-    text-align: center;
-    font-size: 14px;
-    margin: 5px auto;
-  }
+.flex-card {
+  background: #4d4545;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: all .2s ease;
+  margin: 20px;
+}
 
-  
-  .flex-card__actions {
-    padding: 18px;
-  }
-  
-  .flex-card__actions-button {
-    background: #009688;
-    border-radius: 5px;
-    box-shadow: 0px 3px 10px #ccc; 
-    border: none; 
-    color: #fff;
-    cursor: pointer; 
-    display: inline-block;
-    font: 18px/1.7222 "Montserrat", sans-serif;
-    padding: 8px 18px;
-    text-align: center;
-    text-decoration: none;
-  }
+.flex-card:hover {
+  box-shadow: 0px 5px 10px #ccc; 
+}
 
-  /* modal */
-  :root {
-    --modal-duration: 1s;
-    --modal-color: #428bca;
-  }
-  
-  
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
+.flex-card__media img {
+  display: block;
+  max-width: 100%;
+  margin:auto;
+}
+.flex-card__media{
+  max-width: 100px;
+  margin:auto;
+}
 
-  }
-  
-  .modal-content {
-    margin: 10% auto;
-    width: 40%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
-    animation-name: modalopen;
-    animation-duration: var(--modal-duration);
-  }
-  
 
-  
-  .modal-header {
-    background: var(--modal-color);
-    padding: 5px;
-    color: #fff;
-    text-align: center;
-  }
-  
-  .modal-body {
-    text-align: center;
-    padding: 10px 20px;
-    background: #fff;
-  }
-  .modal-body form{
-    display: inline-block;
-    width: 100%;
+.flex-card__content-title {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  margin: 5px auto;
+}
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.modal-content {
+  margin: 10% auto;
+  width: 40%;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  max-width: 400px;
+}
+
+
+
+.modal-header {
+  background: #ed8d8d;
+  padding: 5px;
+  color: #fff;
+  text-align: center;
+}
+
+.modal-body {
+  text-align: center;
+  padding: 10px 20px;
+  background: #fff;
+}
+.modal-body form{
+  display: inline-block;
+  width: 100%;
+
+}
+.modal-body input[type=text]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.modal-body input[type=file] {
+  width: 100%;
+}
+
+.modal-body input[type=submit] {
+  width: 100%;
+  background-color:  #ed8d8d;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.close {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+  color: #fff;
+}
+
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
   }
-  .modal-body input[type=text]{
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+  to {                  
+    opacity: 1;   
   }
-  .modal-body input[type=file] {
-    width: 100%;
-  }
-  dir{
-    padding-inline-start: 0 !important;
-  }
-  .modal-body input[type=submit] {
-    width: 100%;
-    background-color:  #428bca;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .close {
-    color: #ccc;
-    float: right;
-    font-size: 30px;
-    color: #fff;
-  }
-  
-  
-  .close:hover,
-  .close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  
-  @keyframes modalopen {
-    from {
-      opacity: 0;
-    }
-    to {                  
-      opacity: 1;   
-    }
-  }
-  
+}
+

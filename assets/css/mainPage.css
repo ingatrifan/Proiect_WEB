@@ -4,9 +4,6 @@
 
 */
 
-
-
-
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}
@@ -152,7 +149,7 @@ h1,h2,h3,h4,h5,h6 {
   
   .searchTerm {
     width: 100%;
-    border: 3px solid #ed8d8d;
+    border: 3px solid #4d4545;
     border-right: none;
     padding: 5px;
     border-radius: 5px 0 0 5px;
@@ -164,7 +161,7 @@ h1,h2,h3,h4,h5,h6 {
   .searchButton {
     height: 36px;
     border: none;
-    background: #ed8d8d;
+    background: #4d4545;
     text-align: center;
     color: #fff;
     border-radius: 0 5px 5px 0;
@@ -198,6 +195,7 @@ h1,h2,h3,h4,h5,h6 {
   overflow: hidden;
   transition: all .2s ease;
   margin: 20px;
+  color:white;
 }
 
 .flex-card:hover {

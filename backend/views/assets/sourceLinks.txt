@@ -1,0 +1,10 @@
+BOX-SHADOW GENERATORS
+https://www.cssmatic.com/box-shadow
+FLEXBOX STUFF
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+
+CSS TUTORIALS
+https://developer.mozilla.org/en-US/docs/Web/CSS
+
+FONT API
+https://fonts.googleapis.com/css?family=Roboto&display=swap

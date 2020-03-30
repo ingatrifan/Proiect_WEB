@@ -2,7 +2,7 @@
 const http = require('http');
 const url = require('url');
 
-const endpointUtils = require('./routes/endpoint_utilities');
+const endpointUtils = require('./controllers/routes/endpoint_utilities');
 
 const server =http.createServer( (req,res)=>{
     try {

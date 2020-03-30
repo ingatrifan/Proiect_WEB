@@ -18,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/ingatrifan/Proiect_WEB/issues"
   },
-  "homepage": "https://github.com/ingatrifan/Proiect_WEB#readme"
+  "homepage": "https://github.com/ingatrifan/Proiect_WEB#readme",
+  "devDependencies": {
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "ejs": "^3.0.2"
+  }
 }

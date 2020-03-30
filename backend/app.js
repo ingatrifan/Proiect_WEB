@@ -4,7 +4,8 @@ const url = require('url');
 const httpStatusCode = require('http-status-codes');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-//MOngo connection
+
+//Mongo connection
 mongoose
   .connect("mongodb+srv://admin:admin@twproject-skgsk.mongodb.net/test?retryWrites=true&w=majority", {
     useNewUrlParser: true,
@@ -14,6 +15,10 @@ mongoose
 
 //accesing models
 const db = require("./models");
+//accesing controllers
+const controllers = require("./controllers");
+//controllers.authController.login()
+
 
 const endpointUtils = require('./routes/endpoint_utilities');
 
@@ -24,7 +29,7 @@ const testDatabase = async()=>{
     const file = await db.File.create({name:"file1",path:"foof.com"});
     console.log(file);
 }
-testDatabase();
+//testDatabase();
 
 const server =http.createServer( (req,res)=>{
     try {

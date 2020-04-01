@@ -2,45 +2,45 @@
 const http = require('http');
 const url = require('url');
 const httpStatusCode = require('http-status-codes');
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const ejs = require('ejs');
+const fs = require('fs');
+const endPointUtils = require('./routes/endpoint_utilities');
+const pages = require('./routes/pageRendering.js');
 
-//Mongo connection
-mongoose
-  .connect("mongodb+srv://admin:admin@twproject-skgsk.mongodb.net/test?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log("successfully connected to database"));
-
-//accesing models
-const db = require("./models");
-//accesing controllers
-const controllers = require("./controllers");
-//controllers.authController.login()
-
-
-const endpointUtils = require('./routes/endpoint_utilities');
-
-//testing database connection
-const testDatabase = async()=>{
-    const user = await db.User.create({email:"first",password:"second"});
-    console.log(user);
-    const file = await db.File.create({name:"file1",path:"foof.com"});
-    console.log(file);
-}
-//testDatabase();
+endPointUtils.registerEndPoint('GET','/landing',(req,res) => {
+    let path =__dirname +'/views/ejs/landingPage/landingPage.ejs';
+    let assetsPath = __dirname +'/views/assets/css';
+    fs.readFile( path, {encoding:'utf-8', flag:'r'},function(error,data){
+        if(error){
+            res.writeHead(404);
+            res.end(JSON.stringify(error));
+        }
+        else{
+            res.writeHead(200,{'Content-Type': 'text/html'});
+            let template = ejs.compile(data,{filename: path});
+            let myCss= {
+                headerStyle: fs.readFileSync(assetsPath + '/header.css','utf8'),
+                footerStyle: fs.readFileSync(assetsPath + '/footer.css','utf8'),
+                landingStyle: fs.readFileSync(assetsPath + '/landingPage.css','utf8'),
+            };
+            html = template({myCss: myCss});
+            res.end(html);
+        }
+    });
+});
 
 const server =http.createServer( (req,res)=>{
     try {
         let reqUrlString = req.url;
-        let pathName = url.parse(reqUrlString,true,false);
+        let pathName = url.parse(reqUrlString,true,false).pathname;
         let method = req.method;
-        let handler = endpointUtils.getHandler(method,pathName);
+    
+        let handler = endPointUtils.getHandler(method,pathName);
         handler(req,res);
+        //pages.pageRendering(res,req);
     }catch(err) {
         res.statusCode = httpStatusCode.INTERNAL_SERVER_ERROR;
-        res.end();
+        res.end(); 
     }   
 });
 

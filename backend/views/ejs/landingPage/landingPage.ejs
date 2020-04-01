@@ -1,0 +1,47 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://kit.fontawesome.com/d6976534fe.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Welcome to STOL</title>
+        <link rel="shortcut icon" href="../assets/images/title-icon.svg">
+        <style>
+            <%- myCss.headerStyle %>
+            <%- myCss.footerStyle %>
+            <%- myCss.landingStyle %>
+        </style>
+    </head>
+    <body>
+        <!--Header-->
+        <%- include( '../partials/header.ejs') %>
+        <!--End of Header--> 
+        <!--Main Content-->
+        <div class="main-container">
+            <h1>Welcome to STOL</h1>
+            <h3>What is STOL?</h3>
+            <p>STOL is a smart and easy-to-use web application that allows users to store and manage large files, <b>for free!</b></p>
+            <h3>How does it work?</h3>
+            <p>Behind the scenes, the application implements a very clever arhitecture that takes advantage of numerous cloud-storage services, such as Dropbox, 
+                Google Drive and Microsoft OneDrive.</p>
+            <h3>Who created STOL?</h3>
+            <p>The application was created by 3 students from the Faculty Of Computer Science in Iasi as their final project for the Web Technologies subject. <br>
+                For more information please feel free to visit the <a href="#" class="ref">About Us</a> page.
+            </p>
+            <h3>How can I use STOL?</h3>
+            <p>It's all very simple! To start using the application you can easily register or log in with an existing account.<br>
+                After that, everything should be made very easy by our beginner-friendly user interface!<br>
+                For any questions left unanswered, please visit our <a href="#" class="ref">F.A.Q.</a> page.
+            </p>
+            <h3>Like what you read?</h3>
+            <div class="button-container">
+                <a href="./mainPage.html" class="start-button">Start using the app</a>
+            </div>
+        </div>
+        <!--End of Main Content-->
+        <!--Footer-->
+        <%- include ('../partials/footer.ejs') %>
+        <!--End of Footer-->
+    </body>
+</html>

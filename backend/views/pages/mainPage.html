@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/css/mainPage.css">
+    <script src="https://kit.fontawesome.com/d6976534fe.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
+    <title>Document</title>
+    <link rel="shortcut icon" href="../assets/images/title-icon.svg">
+</head>
+<body>
+<!--Header-->
+<div class="header">
+        <div class="header-left">
+            <a href="./landingPage.html" class="project-name">STOL - Modern Cloud Storage</a>
+        </div>
+        <div class="header-right">
+            <a href="./about.html" class="about-us">About us</a>
+            <a href="./register.html" class="account-button">Register</a>
+            <a href="./login.html" class="account-button">Log in</a>
+        </div>
+    </div>
+    <!--End of Header--> 
+
+
+    <!-- SIDE BAR WHEN WIDTH < 730 -->
+    <div class="bar">
+            <button id ="burger"><i class="fas fa-bars"></i></button> 
+    </div>
+    <!-- END OF SIDEBAR WHEN WIDTH < 730 -->
+    <!-- NORMAL SIDEBAR -->
+    <div class="sidepart col-3">
+        <div class="container">
+            <div class="options">
+                <button class="back-arrow"><i class="fas fa-arrow-left"></i></button>
+                <div class="wrap">
+                    <div class="search">
+                        <input type="text" class="searchTerm" placeholder="What are you looking for?">
+                        <button type="submit" class="searchButton">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button class="upload" id ="modal-btn">
+                Upload new file
+            </button>
+            <ul class="folder-List">
+                <li><a href="#"><i class="fas fa-folder"></i>Folder1</a></li>
+                <li><a href="#"><i class="fas fa-folder"></i>Folder2</a></li>
+                <li><a href="#"><i class="fas fa-folder"></i>Folder3</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- END OF NORMAL SIDEBAR -->
+    <!-- MAIN CONTENT -->
+    <div class="flex-container col-9">
+            <div class="flex-card col-2">
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">File.aif</h3>
+              </div>
+            </div>
+            <div class="flex-card col-2">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/cpp.png" alt = "img1">
+                </div>
+                <div class="flex-card__content">
+                    <h3 class="flex-card__content-title">Main.cpp</h3>
+                </div>
+            </div>
+            <div class="flex-card col-2">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
+                </div>
+                <div class="flex-card__content">
+                    <h3 class="flex-card__content-title">Information.doc</h3>
+                </div>
+            </div>
+            <div class="flex-card col-2">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
+                </div>
+                <div class="flex-card__content">
+                    <h3 class="flex-card__content-title">Classes.doc</h3>
+                </div>
+            </div>
+            <div class="flex-card col-2">
+            <div class="flex-card__media">
+                 <img src="../assets/images/icons/187640-file-types/png/asp.png" alt = "img1">
+                </div>
+                <div class="flex-card__content">
+                    <h3 class="flex-card__content-title">Core.asp</h3>
+                </div>
+            </div>    
+    </div>
+    <!-- END OF MAIN CONTENT -->
+    <!-- MODAL WHEN UPLOAD IS PRESSED -->
+    <div id="my-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Add new file</h2>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div>
+                    <input type="text" name="name" id="name" placeholder="Title">
+                </div>
+                <div>
+                    <input type="file" id="file" name="file">
+                </div>
+                <input type="submit" value = "Upload">
+            </form>
+          </div>
+        </div>
+    </div>
+    <!-- END OF MODAL -->
+
+
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+</body>
+</html>

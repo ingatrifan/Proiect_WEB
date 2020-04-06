@@ -1,0 +1,82 @@
+
+/*CSS for the actual header container*/
+.header {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    padding: 20px 10px;
+    font-family: "Roboto", sans-serif;
+}
+
+/*settings for the different buttons*/
+.header a {
+    text-align: center;
+    padding: 12px;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+/*Makes the project name display on the left*/
+.header-left {
+    float: left;
+}
+
+/*Makes the about us sign in and register buttons display on the right*/
+.header-right {
+    float: right;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+/*Project name font settings*/
+.project-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/*Styling for the different buttons in the header*/
+.about-us:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.header-right .account-button {
+    background-color: #FFA34D;
+    border-radius: 12px;
+    color: whitesmoke;
+}
+
+.account-button:hover {
+    background-color: #DF4500;
+}
+
+
+/*Media query for smaller screens - have the links under the company name*/ 
+@media screen and (max-width: 500px) {
+
+    .header a {
+        display: block;
+        text-align: center;
+    }
+
+    .header-right {
+        float: none;
+        margin-right: 0px;
+    }
+
+    .header-left {
+        float: none;
+    }
+
+    .about-us {
+        margin: 20px 15px;
+    }
+
+    .header-right .account-button {
+        margin: 20px 15px;
+    }
+}
+

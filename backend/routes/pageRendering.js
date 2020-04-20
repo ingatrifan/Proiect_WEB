@@ -7,7 +7,8 @@ const mimetypes = {
     'js': 'text/javascript',
     'png': 'image/png',
     'jpeg': 'image/jpeg',
-    'jpg': 'image/jpg'
+    'jpg': 'image/jpg',
+    'svg': 'image/svg+xml'
 };
 
 function pageRendering(res,req){

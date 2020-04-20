@@ -2,12 +2,11 @@
 const http = require('http');
 const url = require('url');
 const httpStatusCode = require('http-status-codes');
-const ejs = require('ejs');
 const fs = require('fs');
-const endPointUtils = require('./routes/endpoint_utilities');
-const pages = require('./routes/pageRendering.js');
+const {Router} = require('./routes/router');
+const {HTTPServer} = require('./utils/server');
 
-endPointUtils.registerEndPoint('GET','/landing',(req,res) => {
+/*endPointUtils.registerEndPoint('GET','/landing',(req,res) => {
     let path =__dirname +'/views/ejs/landingPage/landingPage.ejs';
     let assetsPath = __dirname +'/views/assets/css';
     fs.readFile( path, {encoding:'utf-8', flag:'r'},function(error,data){
@@ -27,29 +26,20 @@ endPointUtils.registerEndPoint('GET','/landing',(req,res) => {
             res.end(html);
         }
     });
+});*/
+
+const router = new Router();
+process.on("uncaughtException", (err) => {
+    console.log("Caught error", err);
 });
 
-const server =http.createServer( (req,res)=>{
-    try {
-        let reqUrlString = req.url;
-        let pathName = url.parse(reqUrlString,true,false).pathname;
-        let method = req.method;
-    
-        let handler = endPointUtils.getHandler(method,pathName);
-        handler(req,res);
-        //pages.pageRendering(res,req);
-    }catch(err) {
-        res.statusCode = httpStatusCode.INTERNAL_SERVER_ERROR;
-        res.end(); 
-    }   
+router.registerEndPoint('GET', '/ex', function (req, res) {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    res.write(JSON.stringify({success: true, message: 'example ran successfully'}))
 });
 
-process.on("uncaughtException",(err) =>{
-    console.log("Caught error",err);
-});
-
-const PORT = 3000;
-server.listen(PORT);
-console.log('Listening on port: ',PORT);
+const app = new HTTPServer(router);
+app.listen();
 
 

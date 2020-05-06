@@ -1,3 +1,3 @@
 # Proiect_WEB
-#Icons and Fonts:
-https://fontawesome.com/icons/folder?style=solid
+#Icons and Fonts: https://fontawesome.com/icons/folder?style=solid
+

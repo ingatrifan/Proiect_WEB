@@ -4,14 +4,18 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const httpStatusCode = require('http-status-codes');
+
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-
 //built in
+const {Router} = require('./routes/router');
+const {HTTPServer} = require('./utils/server');
 const rendering = require('./routes/pageRendering');
 const controllers = require('./controllers/index');
 const models = require('./models/index');
+const router = new Router();
 
 
 //configuration
@@ -41,33 +45,18 @@ async function connectDB(){
 }
 connectDB();
 
-const port = 3000;
-const server = http.createServer((req, res) => {
-  //FOR SOME ERRORS 
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    if(req.method==='GET'){
-      rendering.pageRendering(res,req);
-    }
-    else if(req.method==='POST')
-    {
-      var pathUrl = url.parse(req.url).pathname.split('/').reverse()[0];
-      if(pathUrl =='login')
-      {
-        controllers.login.login(req,res);
-      }
-      else if(pathUrl=='register'){
-        controllers.register.register(req,res);
-        //handle register
-      }
-      
 
-    }
-    else{
-      res.statusCode=404;
-      res.end();
-    }
+const router = new Router();
+
+router.registerEndPoint('GET', '/ex', function (req, res) {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    res.write(JSON.stringify({success: true, message: 'example ran successfully'}))
 });
 
-server.listen(config.PORT, config.HOSTNAME, () => {
-  console.log(`Server running at http://${config.HOSTNAME}:${config.PORT}`);
+process.on("uncaughtException", (err) => {
+  console.log("Caught error", err);
 });
+
+const app = new HTTPServer(router);
+app.listen();

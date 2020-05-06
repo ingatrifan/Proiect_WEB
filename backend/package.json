@@ -20,8 +20,11 @@
   },
   "homepage": "https://github.com/ingatrifan/Proiect_WEB#readme",
   "dependencies": {
+    "binary-parser": "^1.6.2",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "ejs": "^3.0.2",
+    "find": "^0.3.0",
     "http-status-codes": "^1.4.0",
     "mongoose": "^5.9.7"
   }

@@ -1,10 +1,22 @@
-//for demonstrative purposes
+
+//libs
 const http = require('http');
+const fs = require('fs');
+const path = require('path');
 const url = require('url');
 const httpStatusCode = require('http-status-codes');
-const fs = require('fs');
+
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+
+//built in
 const {Router} = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
+const rendering = require('./routes/pageRendering');
+const controllers = require('./controllers/index');
+const models = require('./models/index');
+const router = new Router();
+
 
 //configuration
 const config =dotenv.config({
@@ -48,5 +60,3 @@ process.on("uncaughtException", (err) => {
 
 const app = new HTTPServer(router);
 app.listen();
-
-

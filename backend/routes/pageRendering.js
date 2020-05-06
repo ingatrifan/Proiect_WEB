@@ -14,6 +14,7 @@ const mimetypes = {
 function pageRendering(res,req){
     var uri = url.parse(req.url).pathname;
     var filename ;
+
     
     if(uri.split('.').reverse()[0]=='html')
         filename = path.join(process.cwd(),'views/pages',unescape(uri));
@@ -28,7 +29,7 @@ function pageRendering(res,req){
             "Content-Type": 'text/plain'
         });
         res.write('404 Internal Error');
-        console.log(err);
+
         res.end();
         return;
     }
@@ -49,4 +50,6 @@ function pageRendering(res,req){
 }
 module.exports={
     pageRendering
+
 };
+

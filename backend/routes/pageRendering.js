@@ -29,6 +29,7 @@ function pageRendering(res,req){
             "Content-Type": 'text/plain'
         });
         res.write('404 Internal Error');
+
         res.end();
         return;
     }
@@ -49,4 +50,6 @@ function pageRendering(res,req){
 }
 module.exports={
     pageRendering
+
 };
+

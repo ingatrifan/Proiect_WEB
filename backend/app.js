@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const { Router } = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
-const router = require('./routes')
+const index = require('./routes')
 
 
 //configuration
@@ -43,6 +43,15 @@ async function connectDB(){
 }
 connectDB();
 
+
+const router = new Router();
+
+router.registerEndPoint('GET', '/ex', function (req, res) {
+    res.statusCode = 200
+    res.setHeader('Content-Type', 'application/json')
+    res.write(JSON.stringify({success: true, message: 'example ran successfully'}))
+});
+router.use('',index.router);
 
 process.on("uncaughtException", (err) => {
   console.log("Caught error", err);

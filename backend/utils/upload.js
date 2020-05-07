@@ -54,7 +54,7 @@ exports.googleUpload=(file)=> {
       fields: 'id'
     }, (err, file) => {
       if (err) {
-        console.error(err);
+        console.error(err.message);
       } else {
         console.log('File Id: ', JSON.stringify(file))
       }

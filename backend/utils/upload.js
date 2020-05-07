@@ -40,7 +40,7 @@ exports.dropboxUpload =(file) =>{
 
 
 exports.googleUpload= async(file)=> {
-    const drive = google.drive({version: 'v3', oAuth2Client});
+    const drive = google.drive({version: 'v3', auth: oAuth2Client});
     const fileMetadata = {
       'name': file.name
     };

@@ -7,6 +7,7 @@ exports.upload = async (req,res) => {
     const form = new formidable.IncomingForm();
     form.parse(req, async(err, fields, files) => {
       if (files.file){
+        console.log("uploading...")
         await uploadFuncs.googleUpload(files.file)       
       } 
     });

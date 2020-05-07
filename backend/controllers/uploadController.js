@@ -1,12 +1,11 @@
 const HttpStatusCodes = require("http-status-codes");
 const uploadFuncs = require("../utils/upload")
 const formidable = require("formidable")
-const sleep = require("sleep")
+
 exports.upload = async (req,res) => {
   try {
     const form = new formidable.IncomingForm();
     form.parse(req, async(err, fields, files) => {
-      console.log(files.file.name)
       if (files.file){
         await uploadFuncs.googleUpload(files.file)       
       } 

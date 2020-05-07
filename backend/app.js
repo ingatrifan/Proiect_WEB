@@ -4,9 +4,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 //built in
-const { Router } = require('./routes/router');
+const  {Router}  = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
+const auth= require('./routes/auth');
 
 
 
@@ -36,11 +37,7 @@ async function connectDB(){
   });
 }
 connectDB();
-
-
-process.on("uncaughtException", (err) => {
-  console.log("Caught error", err);
-});
-
+const router = new Router();
+router.use('',auth.rout);
 const app = new HTTPServer(router);
 app.listen();

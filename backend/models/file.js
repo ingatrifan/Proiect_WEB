@@ -25,6 +25,7 @@ const fileSchema = new Schema(
     lastLength:{
       type:Int32Array,
       defautl:null
+
     }
   },
   {

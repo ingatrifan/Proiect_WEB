@@ -39,7 +39,7 @@ exports.dropboxUpload =(file) =>{
 }
 
 
-exports.googleUpload=(file)=> {
+exports.googleUpload= async(file)=> {
     const drive = google.drive({version: 'v3', oAuth2Client});
     const fileMetadata = {
       'name': file.name
@@ -48,7 +48,7 @@ exports.googleUpload=(file)=> {
       mimeType: mimeType.lookup(file.name),
       body: fs.createReadStream(file.path)
     };
-    drive.files.create({
+    await drive.files.create({
       resource: fileMetadata,
       media: media,
       fields: 'id'

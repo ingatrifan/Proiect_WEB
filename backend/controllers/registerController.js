@@ -6,14 +6,19 @@ const models = require('../models/index');
 //add and establish register rules
 function register(req,res)
 {
+    var buffer ='';
     req.on('data',function(data){
+        buffer+=data;
+        
+    });
 
-        body = JSON.parse(data);
+    req.on('end',function(){
+        var post  = JSON.parse(buffer);
         //check user data here
-        UniqueId(body).then(
-            function(data){
-                console.log(data);
-            if(data== true){
+        UniqueId(post).then(
+            function(validate){
+                
+            if(validate== true){
                 var user = new models.User({
                     email : body.user_id,
                     name : body.user_name,
@@ -35,8 +40,8 @@ function register(req,res)
                 res.end();
             }
         }
-        ).catch((err)=>console.log(err));
-    });
+        );
+    })
 }
 async function UniqueId(data){
     let user;

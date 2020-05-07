@@ -2,13 +2,20 @@ const { Schema, model } = require("mongoose");
 
 const fileSchema = new Schema(
   {
-    name: {
+    id_file: {
       type: String,
       default: null
     },
-    path: {
-      required: true,
-      type: String
+    id_user:{
+      type:String,
+      default:null
+    },
+    fileName:{
+    type:String,
+    default:null},
+    extention:{
+      type:String,
+      default:null
     }
   },
   {

@@ -2,11 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const folderSchema = new Schema(
   {
-    name: {
+    id_folder: {
       type: String,
       default: null
     },
-    files: {
+    id_file: {
       type: Array,
       default:[]
     }

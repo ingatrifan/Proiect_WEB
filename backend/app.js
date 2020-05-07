@@ -10,12 +10,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 //built in
-const {Router} = require('./routes/router');
+const { Router } = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
-const rendering = require('./routes/pageRendering');
-const controllers = require('./controllers/index');
 const models = require('./models/index');
-const router = new Router();
+const index = require('./routes')
 
 
 //configuration
@@ -65,6 +63,7 @@ router.registerEndPoint('POST','/login',(req,res)=>{
   bla.login.login(req,res);
   //res.write(JSON.stringify({success: true, message: 'example ran successfully'}));
 });
+router.use('',index.router);
 
 /*router.registerEndPoint('OPTIONS','/login',(req,res)=>{
 

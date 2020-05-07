@@ -1,0 +1,43 @@
+{
+  "name": "stol-backend",
+  "version": "1.0.0",
+  "description": "Backend for the STOL project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingatrifan/Proiect_WEB.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ingatrifan/Proiect_WEB/issues"
+  },
+  "homepage": "https://github.com/ingatrifan/Proiect_WEB#readme",
+  "dependencies": {
+    "app-root-path": "^3.0.0",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "dropbox": "^4.0.30",
+    "dropbox-v2-api": "^2.4.17",
+    "ejs": "^3.0.2",
+    "ejs-lint": "^1.0.1",
+    "finalhandler": "^1.1.2",
+    "formidable": "^1.2.2",
+    "googleapis": "^39.2.0",
+    "http-status-codes": "^1.4.0",
+    "mime-types": "^2.1.27",
+    "mongoose": "^5.9.7",
+    "onedrive-api": "^0.3.4",
+    "open": "^7.0.3",
+    "path": "^0.12.7",
+    "request": "^2.88.2",
+    "serve-static": "^1.14.1",
+    "sleep": "^6.1.0"
+  }
+}

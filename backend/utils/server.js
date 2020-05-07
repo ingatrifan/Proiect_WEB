@@ -14,8 +14,10 @@ class HTTPServer {
         let app = this;
         try {
             server = http.createServer((req, res) => {
+                console.log(req.method)
+                console.log(req.url)
                 if(req.method == 'GET' && urlModule.parse(req.url).pathname.indexOf('.')!== -1) {
-                    pageRenderer.pageRendering(res,req);
+                    pageRenderer.pageRendering(req,res);
                 }
                 else {
                     app.router.route(req, res);

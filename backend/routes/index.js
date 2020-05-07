@@ -8,8 +8,6 @@ process.on("uncaughtException", (err) => {
 
 router.registerEndPoint("POST","/upload",uploadController.upload)
 
-
-
 module.exports = {
     router
 };

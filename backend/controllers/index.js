@@ -1,4 +1,3 @@
-exports.authController = require("./authController");
 
 exports.uploadController = require("./uploadController")
 

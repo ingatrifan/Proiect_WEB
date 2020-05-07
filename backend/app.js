@@ -51,6 +51,7 @@ router.registerEndPoint('GET', '/ex', function (req, res) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.write(JSON.stringify({success: true, message: 'example ran successfully'}));
+    res.end();
 });
 router.registerEndPoint('POST', '/register', function (req, res) {
   bla.register.register(req,res);
@@ -65,7 +66,7 @@ router.registerEndPoint('POST','/login',(req,res)=>{
   //res.write(JSON.stringify({success: true, message: 'example ran successfully'}));
 });
 
-router.registerEndPoint('OPTIONS','/login',(req,res)=>{
+/*router.registerEndPoint('OPTIONS','/login',(req,res)=>{
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -76,8 +77,9 @@ router.registerEndPoint('OPTIONS','/login',(req,res)=>{
   
     res.writeHead(204, headers);
     res.end();
-});
-router.registerEndPoint('OPTIONS','/register',(req,res)=>{
+});*/
+
+/*router.registerEndPoint('OPTIONS','/register',(req,res)=>{
 
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -88,7 +90,8 @@ router.registerEndPoint('OPTIONS','/register',(req,res)=>{
   
     res.writeHead(204, headers);
     res.end();
-});
+});*/
+
 process.on("uncaughtException", (err) => {
   console.log("Caught error", err);
 });

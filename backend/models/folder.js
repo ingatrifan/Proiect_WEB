@@ -16,6 +16,6 @@ const fileSchema = new Schema(
   }
 );
 
-const File = model("files", fileSchema);
+const File = model("folders", fileSchema);
 
 module.exports = File;

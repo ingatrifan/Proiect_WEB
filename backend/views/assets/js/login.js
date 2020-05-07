@@ -24,8 +24,10 @@ function postData(url,data,succes){
         if(httpRequest.readyState===httpRequest.DONE && httpRequest.status ==200)
         {
             succes(httpRequest.responseText);
+            
         } 
     };
+    httpRequest.setRequestHeader('LOGIN', 'LOGIN');
     httpRequest.setRequestHeader('Content-Type', 'plaint/text');
     httpRequest.send(data);
 }

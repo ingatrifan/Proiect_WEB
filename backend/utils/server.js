@@ -19,7 +19,7 @@ class HTTPServer {
                 }
                 else {
                     app.router.route(req, res);
-                    res.end();
+                    //res.end();
                 }
             });
         } catch (err) {

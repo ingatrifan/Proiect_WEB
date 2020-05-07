@@ -1,29 +1,33 @@
+const qs = require('querystring');
 const models = require('../models');
 async function login(req,res)
-{
+{   var buffer='';
     req.on('data',function(data){
-
-        body = JSON.parse(data);
-        validateUser(body).then(
-            function(data){
-                console.log(data);
-                if(data==true){
+        buffer +=data;        
+        });
+    req.on('end',function(){
+        
+        var post = JSON.parse(buffer);
+        console.log(post);
+        
+        validateUser(post).then(
+            function(validation){
+                if(validation==true){
                     res.writeHead(200, {
                         "Content-Type": 'text/plain'
                     });
-                    res.write('USER LOGGED IN');
-                    res.end();
-                }
-                else{
+                    res.write('Done');                  
+                    res.end();  
+                }else{
                     res.writeHead(404, {
                         "Content-Type": 'text/plain'
                     });
-                    res.write('Invalid ID/PASS');
+                    res.write('WRONG ID/PASS');
                     res.end();
                 }
-
             }
-        );
+    );
+  
     });
 }
 

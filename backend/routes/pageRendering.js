@@ -11,11 +11,9 @@ const mimetypes = {
     'svg': 'image/svg+xml'
 };
 
-function pageRendering(res,req){
+pageRendering = async (req,res) => {
     var uri = url.parse(req.url).pathname;
-    var filename ;
-
-    
+    var filename 
     if(uri.split('.').reverse()[0]=='html')
         filename = path.join(process.cwd(),'views/pages',unescape(uri));
     else

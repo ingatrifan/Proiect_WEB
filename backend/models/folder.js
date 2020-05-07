@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const fileSchema = new Schema(
+const folderSchema = new Schema(
   {
     name: {
       type: String,
@@ -16,6 +16,7 @@ const fileSchema = new Schema(
   }
 );
 
-const File = model("folder", fileSchema);
 
-module.exports = File;
+const Folder = model("folders", folderSchema);
+
+module.exports = Folder;

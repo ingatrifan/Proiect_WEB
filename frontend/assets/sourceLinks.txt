@@ -8,3 +8,9 @@ https://developer.mozilla.org/en-US/docs/Web/CSS
 
 FONT API
 https://fonts.googleapis.com/css?family=Roboto&display=swap
+
+ROUTER
+https://dev.to/kodnificent/how-to-build-a-router-with-vanilla-javascript-2a18
+
+CSS IN NODE JS
+https://teamtreehouse.com/community/cant-get-css-files-to-load-or-javascript-to-work-in-nodejs-server

@@ -4,6 +4,7 @@ const formidable = require("formidable")
 
 exports.upload = async (req,res) => {
   try {
+    console.log("got here")
     const form = formidable({ multiples: true })
     form.parse(req, (err, fields, files) => {
       console.log(JSON.stringify({ fields, files }))

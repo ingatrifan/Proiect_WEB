@@ -20,6 +20,7 @@ class HTTPServer {
                     pageRenderer.pageRendering(req,res);
                 }
                 else {
+                    console.log("got here");
                     app.router.route(req, res);
                     res.end();
                 }

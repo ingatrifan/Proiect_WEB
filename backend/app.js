@@ -10,12 +10,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 //built in
-const {Router} = require('./routes/router');
+const { Router } = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
-const rendering = require('./routes/pageRendering');
-const controllers = require('./controllers/index');
 const models = require('./models/index');
-const router = new Router();
+const router = require('./routes')
 
 
 //configuration
@@ -45,14 +43,6 @@ async function connectDB(){
 }
 connectDB();
 
-
-const router = new Router();
-
-router.registerEndPoint('GET', '/ex', function (req, res) {
-    res.statusCode = 200
-    res.setHeader('Content-Type', 'application/json')
-    res.write(JSON.stringify({success: true, message: 'example ran successfully'}))
-});
 
 process.on("uncaughtException", (err) => {
   console.log("Caught error", err);

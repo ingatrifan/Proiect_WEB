@@ -6,12 +6,22 @@ var file ='C:/Users/krelo/Desktop/TW/krello/Proiect_WEB/backend/views/pages/main
 var myFile = fs.readFileSync(file,'utf-8');
 //GATHER DATA
 var data ={
-    "folders":
-        {"name":"folder_1","files":[{"name":"test","extension":"aif"},{"name":"test1","extension":"aif"},{"name":"test2","extension":"aif"},{"name":"test","extension":"aif"},{"name":"test2","extension":"asp"},{"name":"test2","extension":"doc"}]},
-
+    "folder":
+        {"files":[{"name":"1","extension":"aiff"},{"name":"12","extension":"aiff"},{"name":"123","extension":"aiff"},{"name":"1234","extension":"aiff"},{"name":"12345","extension":"asp"},{"name":"123456","extension":"doc"}]},
 };
+
+
+
 
 // COMPILE
 var ret =ejs.compile(myFile)({"data":data});
 
-fs.writeFileSync('test.html',ret);
+
+    for(f in data.folder.files){
+        console.log(f);
+        let op = data.folder.files;
+        console.log(op[f].name);
+    }
+
+
+fs.writeFileSync('../views/pages/test.html',ret);

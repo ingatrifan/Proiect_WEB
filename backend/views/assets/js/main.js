@@ -49,3 +49,8 @@ function outsideClick(e) {
     modal.style.display = 'none';
   }
 }
+
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+}

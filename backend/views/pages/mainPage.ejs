@@ -59,71 +59,22 @@
     <!-- MAIN CONTENT -->
   
     <div class="flex-container col-9">
-        <% for(f in data.folders)
-        {
-            
-            if(data.folders[f].name == "folder_1"){
-                let op = data.folders[f].files;
-                
-                for(a in op){
-    
-                  %>
-               <div class="flex-card col-2">
-                  <div class="flex-card__media">
-                      <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
-                      </div>
-                      <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">File.aif</h3>
-                  </div>
-                </div>
-                    <%                
-                }
-            }
-            
-        }
         
-        %>
-    
-            <div class="flex-card col-2">
-              <div class="flex-card__media">
-                <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
+        <%    for(f in data.folder.files){
+                    let op = data.folder.files;
+                        
+
+            %>
+            <div class="flex-card col-2" id= "<%=data.folder.files[f].name %>"  onClick="reply_click(this.id)">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/<%=data.folder.files[f].extension%>.png" alt = "img1">
+                    </div>
+                    <div class="flex-card__content">
+                  <h3 class="flex-card__content-title"><%=data.folder.files[f].name %>.<%=data.folder.files[f].extension%></h3>                      
+                </div>
               </div>
-              <div class="flex-card__content">
-                <h3 class="flex-card__content-title">File.aif</h3>
-              </div>
-            </div>
-            <div class="flex-card col-2">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/cpp.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Main.cpp</h3>
-                </div>
-            </div>
-            <div class="flex-card col-2">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Information.doc</h3>
-                </div>
-            </div>
-            <div class="flex-card col-2">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Classes.doc</h3>
-                </div>
-            </div>
-            <div class="flex-card col-2">
-            <div class="flex-card__media">
-                 <img src="../assets/images/icons/187640-file-types/png/asp.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Core.asp</h3>
-                </div>
-            </div>    
+        <% }%>
+            
     </div>
     <!-- END OF MAIN CONTENT -->
     <!-- MODAL WHEN UPLOAD IS PRESSED -->
@@ -147,6 +98,7 @@
         </div>
     </div>
     <!-- END OF MODAL -->
+    <script scr="../assets/js/mainPage.js"></script>
 
 
     <script type="text/javascript" src="../assets/js/main.js"></script>

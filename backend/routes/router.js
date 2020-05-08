@@ -60,7 +60,7 @@ class Router {
             this.registerEndPoint("OPTIONS",url, (req,res) => {
                 this.optionHandler(req,res);
             });
-        }
+        }console.log(url);
         console.log('Endpoint registered:', method, url);
     }
 

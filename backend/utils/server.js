@@ -2,6 +2,7 @@ const http = require('http');
 const httpStatusCode = require('http-status-codes');
 const pageRenderer = require('../routes/pageRendering');
 const urlModule = require('url');
+const mainPage = require('../controllers/mainPage');
 class HTTPServer {
 
     constructor(router) {
@@ -14,13 +15,19 @@ class HTTPServer {
         let app = this;
         try {
             server = http.createServer((req, res) => {
-                console.log(req.method)
-                console.log(req.url)
+                
+                
                 //THESE 3 LINES NEARLY BROKE ME INSANE, SEND HELP
                 res.setHeader('Access-Control-Allow-Origin', '*');
                 res.setHeader('Access-Control-Allow-Methods', '*');
                 res.setHeader('Access-Control-Allow-Headers', '*');
-                if(req.method == 'GET' && urlModule.parse(req.url).pathname.indexOf('.')!== -1) {
+                if(urlModule.parse(req.url).pathname.split('.')[0]=='/mainPage'){
+                    mainPage.mainPage(req,res);
+                }   
+                else if(req.method == 'GET' && urlModule.parse(req.url).pathname.indexOf('.')!== -1
+                &&urlModule.parse(req.url).pathname.split('.')[0]!='/mainPage'
+                ) {
+                    
                     pageRenderer.pageRendering(req,res);
                 }
                 else {

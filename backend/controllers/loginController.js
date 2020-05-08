@@ -1,54 +1,57 @@
 const jwt = require('jsonwebtoken');
-const path = require('path');
-const url = require('url');
-const fs = require('fs');
 const models = require('../models');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 async function login(req,res)
 { 
-    
-    
-    
-    
-        
     var buffer='';
     req.on('data',function(data){
         buffer +=data;        
         });
     req.on('end',function(){
-
+        try{
         var post = JSON.parse(buffer);
-    
         //decode
         let buf = Buffer.from(post.encode,'base64');
         let decode = buf.toString('utf-8');
         let values = decode.split(':');
-        
-        var token = jwt.sign({user:values[0],pass:values[1] },PRIVATE_KEY,{ expiresIn: '300h' });
+        validateUser(values).then(
+            function(validation){
+                /*
+                if(validation==true){
+                    var token = jwt.sign({user:values[0],pass:values[1] },PRIVATE_KEY,{ expiresIn: '300h' });
                     let json = {"serverToken":token,"location":"http://127.0.0.1:3000/mainPage.html"};
                     res.writeHead(200, {
                     'Content-Type': 'aplication/json'
                 });
-        var decoded = jwt.decode(token);    
-            console.log(decoded);
+
                     res.write(JSON.stringify(json));
                     res.end();
-                    /*
-        validateUser(values).then(
-            function(validation){
-                var filename = path.join(process.cwd(),'views/pages','mainPage.html');
-                    
-                if(validation==true){
-                    
                 }else{
                     res.writeHead(404, {
                         "Content-Type": 'text/plain'
                     });
                     res.write('WRONG ID/PASS');
                     res.end();
-                }
+                }*/
+                var token = jwt.sign({user:values[0],pass:values[1] },PRIVATE_KEY,{ expiresIn: '300h' });
+                    let json = {"serverToken":token,"location":"http://127.0.0.1:3000/mainPage.html"+"?"+"serverToken="+token};
+                    res.writeHead(200, {
+                    'Content-Type': 'aplication/json'
+                });
+                    console.log('LOGIN',token);
+                    res.write(JSON.stringify(json));
+                    res.end();
             }
-    );  */
+    );  
+        }
+        catch(e){
+            res.writeHead(404, {
+                "Content-Type": 'text/plain'
+            });
+            res.write('WRONG-PASSING-DATA');
+            res.end();
+
+        }
     });
     
 

@@ -41,6 +41,7 @@
     }
     .flex-card{
         margin:5px!important;
+
     }
 
     .modal-content {
@@ -184,7 +185,7 @@ h1,h2,h3,h4,h5,h6 {
     position: absolute;
     overflow-y: auto;
     right:0;
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     align-items: center;
   }
@@ -196,6 +197,7 @@ h1,h2,h3,h4,h5,h6 {
   transition: all .2s ease;
   margin: 20px;
   color:white;
+  display:inline-block;
 }
 
 .flex-card:hover {

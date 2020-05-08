@@ -1,13 +1,9 @@
-const  { Router } = require("./router")
-const router = new Router();
-const { uploadController } = require("../controllers")
+const auth = require('./auth');
+const {Router} = require('./router');
 
-process.on("uncaughtException", (err) => {
-    console.log("Caught error", err);
-});
+const router = new Router();;
+router.use('',auth.rout);
 
-router.registerEndPoint("POST","/upload",uploadController.upload)
-
-module.exports = {
+module.exports={
     router
 };

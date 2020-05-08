@@ -16,6 +16,10 @@ class HTTPServer {
             server = http.createServer((req, res) => {
                 console.log(req.method)
                 console.log(req.url)
+                //THESE 3 LINES NEARLY BROKE ME INSANE, SEND HELP
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Methods', '*');
+                res.setHeader('Access-Control-Allow-Headers', '*');
                 if(req.method == 'GET' && urlModule.parse(req.url).pathname.indexOf('.')!== -1) {
                     pageRenderer.pageRendering(req,res);
                 }

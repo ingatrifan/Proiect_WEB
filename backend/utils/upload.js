@@ -15,7 +15,7 @@ const dropbox = dropboxV2Api.authenticate({
 });
 var oAuth2Client;
 //GOOGLE DRIVE AUTH
-fs.readFile('/home/batman/Desktop/anul22/TWserver/Proiect_WEB/backend/controllers/credentials.json', (err, content) => {
+fs.readFile('../controllers/credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   const credentials =JSON.parse(content)
   const {client_secret, client_id, redirect_uris} = credentials.web;
@@ -23,6 +23,8 @@ fs.readFile('/home/batman/Desktop/anul22/TWserver/Proiect_WEB/backend/controller
       client_id, client_secret, redirect_uris[0]);
   oAuth2Client.setCredentials(GOOGLE_TOKEN)
 });
+
+
 
 exports.dropboxUpload =(file) =>{
     console.log("upload")

@@ -1,18 +1,28 @@
-function login (){
+
+
+
+function login (e){
     //get id and pass , must also do enc
     const url = 'http://127.0.0.1:3000/login';
     let id = document.getElementById('user_id');
     let pw = document.getElementById('user_pass');
+    console.log(id.value,pw.value);
+
+    let encodeString  = id.value +':'+pw.value;
+    //encoding
+    encodeString = btoa(encodeString);  
     let data = JSON.stringify(
         {
-            "user_id" :  id.value,
-            "user_pass" : pw.value
+            "encode": encodeString
         });
     postData(url,data,function(succ){
-        console.log('here');
-        console.log(succ);
-        //handler when receiving succes
+        var json = JSON.parse(succ.responseText);
+        localStorage.setItem('serverToken',json.serverToken);
+        console.log(localStorage.getItem('serverToken'));   
+        location = json.location;
+
     });
+    return false;
    }
 
 
@@ -23,12 +33,10 @@ function postData(url,data,succes){
     httpRequest.onreadystatechange= function(){
         if(httpRequest.readyState===httpRequest.DONE && httpRequest.status ==200)
         {
-            succes(httpRequest.responseText);
-            
+            succes(httpRequest);            
         } 
     };
-    httpRequest.setRequestHeader('LOGIN', 'LOGIN');
-    httpRequest.setRequestHeader('Content-Type', 'plaint/text');
+    httpRequest.setRequestHeader('Content-Type', 'text/plain');
     httpRequest.send(data);
 }
 

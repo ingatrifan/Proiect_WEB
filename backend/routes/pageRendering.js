@@ -13,6 +13,7 @@ const mimetypes = {
 
 pageRendering = async (req,res) => {
     var uri = url.parse(req.url).pathname;
+    console.log(req.url);
     var filename 
     if(uri.split('.').reverse()[0]=='html')
         filename = path.join(process.cwd(),'views/pages',unescape(uri));
@@ -37,6 +38,7 @@ pageRendering = async (req,res) => {
         res.writeHead(200,{'Content-Type':mimetype});
         var filestream = fs.createReadStream(filename);
         filestream.pipe(res);
+        
     }
     else if(loadFile.isDirectory()){
         res.writeHead(302, {

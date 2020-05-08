@@ -23,7 +23,7 @@ const fileSchema = new Schema(
       default:null
     },
     lastLength:{
-      type:Int32Array,
+      type:Number,
       defautl:null
 
     }

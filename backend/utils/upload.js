@@ -6,7 +6,7 @@ const {google} = require('googleapis');
 const mimeType = require('mime-types')
 
 const GOOGLE_TOKEN ={"access_token":"ya29.a0Ae4lvC3AKc0e6oSpc7bl6QihgLT4RRiKkBQTSS4EQ7JNGGF_yNBDy5lxenYX0lcD57NNLC6pRW51MEUwrxteaEfp_8Or8oflqCoElvQ5NOQGUz0zXLlYcb8RCEyeo7LJQRepnZC1bxfCQus_kpATVcAUGIMS58fBasg","refresh_token":"1//0cBvWYzXMWa2PCgYIARAAGAwSNwF-L9Ir1S7TqviunKP7mWPbge5KXq_2WTWgIzJJQ1ypBFR4av30_2VXBIkfvREA5876U0cIjnw","scope":"https://www.googleapis.com/auth/drive","token_type":"Bearer","expiry_date":1587661742331}
-const DROPBOX_TOKEN = "HJyKpgpHJ-AAAAAAAAAAJ5hUOVxo_UUdyofbXO5ae0tdZA4M4sWkieijeEBocJP3"
+const DROPBOX_TOKEN = "HJyKpgpHJ-AAAAAAAAAALQMubaw7a56qI53tJvy7X8k3EwrzYbh2k1vv769zgKOw"
 
 
 //DROPBOX AUTH
@@ -15,7 +15,8 @@ const dropbox = dropboxV2Api.authenticate({
 });
 var oAuth2Client;
 //GOOGLE DRIVE AUTH
-fs.readFile('/home/batman/Desktop/anul22/TWserver/Proiect_WEB/backend/controllers/credentials.json', (err, content) => {
+
+fs.readFile(process.cwd() + '/controllers/credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   const credentials =JSON.parse(content)
   const {client_secret, client_id, redirect_uris} = credentials.web;
@@ -60,6 +61,37 @@ exports.googleUpload= async(file)=> {
       }
     });
   }
+
+  //Temporary place for downloads so I can use the auth systems
+  exports.googleDownload = async(fileId,fileType) => {
+    const drive = google.drive({version: 'v3', auth: oAuth2Client});
+    let destination = fs.createWriteStream(`tmp/${fileId}.${fileType}`);
+    drive.files.get({
+      fileId: fileId,
+      alt: 'media'
+    }).on('end',() => {
+      console.log('Download complete...');
+    })
+      .on('error', (err) => {
+        console.log('Error during download...',err);
+      })
+      .pipe(destination);
+  }
+
+  exports.dropboxDownload = (file) => {
+    dropbox({
+      resource: 'files/download',
+      parameters: {
+        path: '/dropbox/path/paint.png'
+      }
+    }, (err, result, response) => {
+      console.error(err);
+      console.log('Download complete');
+    })
+    .pipe(fs.createWriteStream('./tmp/paint.png'));
+
+  }
+
 
 
 

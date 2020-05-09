@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const { Router } = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
-
+const { download } = require('./controllers/downloadController');
 
 
 //configuration
@@ -42,5 +42,10 @@ process.on("uncaughtException", (err) => {
   console.log("Caught error", err);
 });
 
+const router = new Router();
+
+router.registerEndPoint('GET','/download', download);
+
 const app = new HTTPServer(router);
+
 app.listen();

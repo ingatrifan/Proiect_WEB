@@ -6,3 +6,5 @@ exports.func =(req, res) =>{
     res.setHeader('Content-Type', 'application/json')
     res.write(JSON.stringify({success: true, message: 'example ran successfully'}))
 }
+
+exports.downloadController = require('./downloadController');

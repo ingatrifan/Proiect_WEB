@@ -16,13 +16,13 @@ async function login(req,res)
         let values = decode.split(':');
         validateUser(values).then(
             function(validation){
-                /*
+                console.log(validation);
                 if(validation==true){
                     var token = jwt.sign({user:values[0],pass:values[1] },PRIVATE_KEY,{ expiresIn: '300h' });
-                    let json = {"serverToken":token,"location":"http://127.0.0.1:3000/mainPage.html"};
+                    let json = {"serverToken":token,"location":"http://127.0.0.1:3000/mainPage.html"+"?"+"serverToken="+token};
                     res.writeHead(200, {
                     'Content-Type': 'aplication/json'
-                });
+            });
 
                     res.write(JSON.stringify(json));
                     res.end();
@@ -32,15 +32,8 @@ async function login(req,res)
                     });
                     res.write('WRONG ID/PASS');
                     res.end();
-                }*/
-                var token = jwt.sign({user:values[0],pass:values[1] },PRIVATE_KEY,{ expiresIn: '300h' });
-                    let json = {"serverToken":token,"location":"http://127.0.0.1:3000/mainPage.html"+"?"+"serverToken="+token};
-                    res.writeHead(200, {
-                    'Content-Type': 'aplication/json'
-                });
-                    console.log('LOGIN',token);
-                    res.write(JSON.stringify(json));
-                    res.end();
+                }
+                
             }
     );  
         }
@@ -59,7 +52,8 @@ async function login(req,res)
 
 async function validateUser(data){
     let user;
-    await models.User.findOne({email:data.user_id},
+    console.log(data);
+    await models.User.findOne({email:data[0]},
         function(err,doc){
             if(!err)
                 user = doc;

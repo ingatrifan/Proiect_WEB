@@ -52,11 +52,9 @@ catch(e){
 
 
 async function renderMainPage(token){
-    //
-    var dec = jwt.decode(token);
-    var values = dec.split(':');
-    //values[0]:id / values[1]:pw
-
+    //var dec = jwt.decode(token);
+    
+    //var values = dec;
     var mypath = 'C:/Users/krelo/Desktop/TW/krello/Proiect_WEB/backend/views/pages/mainPage.ejs';//INGA TEACHED ME  
     var myFile = fs.readFileSync(mypath,'utf-8');
     
@@ -66,10 +64,8 @@ async function renderMainPage(token){
     };
     var out =ejs.compile(myFile)({"data":data});
     fs.writeFileSync('./views/pages/dummy.html',out);
-    //other way didn't find
 
-    console.log(out);
 }
 module.exports={
-    mainPage   
+    mainPage
 }

@@ -18,7 +18,7 @@ function register(req,res)
         //check user data here
         UniqueId(post).then(
             function(validate){
-                
+                var body = post;
             if(validate== true){
                 var user = new models.User({
                     email : body.user_id,

@@ -1,7 +1,6 @@
 const loginController = require('./loginController');
 const registerController = require('./registerController');
-const uploadController = require('./uploadController');
-
+const fileController = require('./fileController')
 //exports.uploadController = require("./uploadController")
 
 exports.func =(req, res) =>{ 
@@ -13,5 +12,5 @@ exports.func =(req, res) =>{
 module.exports={
     loginController,
     registerController,
-    uploadController
+    fileController
 }

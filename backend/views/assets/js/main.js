@@ -48,7 +48,6 @@ function outsideClick(e) {
     modal.style.display = 'none';
   }
 }
-<<<<<<< HEAD
 
 function reply_click(clicked_id)
 {
@@ -80,7 +79,6 @@ function handleForm(event) {
 } 
 form.addEventListener('submit', handleForm);
 //action="upload" method="POST" enctype="multipart/form-data"
-=======
 //Click download
 function downloadFile(){
   const url = 'http://127.0.0.1:3000/download/?id=';
@@ -115,4 +113,3 @@ function postData(method,url,succes){
   httpRequest.send();
 }
 
->>>>>>> origin/master

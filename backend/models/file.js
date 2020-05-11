@@ -10,8 +10,8 @@ const fileSchema = new Schema(
       type: String,
       default:null
     },
-    location:{
-      type:String,
+    fragments:{
+      type:Array,
       default:null
     },
     lastLength:{

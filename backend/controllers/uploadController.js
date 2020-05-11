@@ -13,13 +13,8 @@ exports.upload = async (req,res) => {
     form.parse(req, async(err, fields, files) => {
 
       if (files.file){
-        var check = await addFileDB(files.file,fields.serverToken);
-        if(check){
-          cleanFiles.cleanTmp();  
-        }
-  
-  
-        }  
+        addFileDB(files.file,fields.serverToken);
+      }  
     });
     res.statusCode = HttpStatusCodes.OK
     res.setHeader('Content-Type', 'application/json')
@@ -34,11 +29,11 @@ exports.upload = async (req,res) => {
 
 
 const chunk_size = 10_000_000;
-function fragmentation(file,id_file){
-    
+async function fragmentation(file,file_id){
   var myfile = file;
   var size = myfile.length;
   var i =0 ;
+  var jsonArray =[];
   while(size>0){
       var chunk ;
       if(size>chunk_size){
@@ -48,15 +43,26 @@ function fragmentation(file,id_file){
       else{
           chunk = myfile.slice(i,i+size);
       }
-      fragment(chunk,id_file,Math.ceil((myfile.length-size)/chunk_size));
-
+     let frag=  fragment(chunk,file_id,Math.ceil((myfile.length-size)/chunk_size),size);
+      jsonArray.push(frag);
       size = size-chunk_size;
-  }
-  
+  } 
+  return jsonArray;
 };
-function fragment(chunk,id_file,number){
-  fs.writeFileSync("./tmp/"+id_file+"_"+number+".byte",chunk);
+function fragment(chunk,id_file,number,size){
+  fs.writeFileSync("./tmp/"+id_file.split('.')[0]+"_"+number+".byte",chunk);
   //update over here
+  let drive ;
+  if(number %3==0)
+    drive = "dropBox";
+  else 
+    drive ="google";
+  let mySize =chunk_size;
+  if(size<chunk_size)
+  {
+    mySize = size;
+  }
+  return {"fragment_id":id_file.split('.')[0]+"_"+number+".byte","location":drive,"size":mySize}; 
 }
 
 
@@ -76,13 +82,20 @@ async function addFileDB(file,token){
             }
      });
      if(user==null){
-        let insertFile = new File({
+        
+        cleanFiles.cleanTmp();  
+        
+        let file_tmp = fs.readFileSync(file.path);
+          
+          let location_array = await fragmentation(file_tmp,file.name);
+          console.log(location_array);
+          let insertFile = new File({
             id_file :file_id,
-            id_user:auth_values.user
+            id_user:auth_values.user,
+            fragments:location_array
         });
-        await insertFile.save(()=>{
-          console.log("INSERTED A FILE");
-        });
+        insertFile.save().then(()=>{console.log("inserted")});
+        console.log("INSERTED A FILE");
       return true;
      }
      return false;

@@ -7,12 +7,7 @@ const mongoose = require('mongoose');
 const  {Router}  = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
-<<<<<<< HEAD
-const routes= require('./routes/index');
-
-=======
 const index = require('./routes')
->>>>>>> origin/master
 
 
 //configuration
@@ -42,10 +37,6 @@ async function connectDB(){
 }
 connectDB();
 const router = new Router();
-<<<<<<< HEAD
-router.use('',routes.router);
-=======
 router.use('',index.router)
->>>>>>> origin/master
 const app = new HTTPServer(router);
 app.listen();

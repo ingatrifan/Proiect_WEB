@@ -106,6 +106,42 @@
                 </div>
               </div>
         
+            <div class="flex-card col-2" id= "MUSK"  onClick="reply_click(this.id)">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/jpg.png" alt = "img1">
+                    </div>
+                    <div class="flex-card__content">
+                  <h3 class="flex-card__content-title">MUSK.jpg</h3>                      
+                </div>
+              </div>
+        
+            <div class="flex-card col-2" id= "test"  onClick="reply_click(this.id)">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/jpg.png" alt = "img1">
+                    </div>
+                    <div class="flex-card__content">
+                  <h3 class="flex-card__content-title">test.jpg</h3>                      
+                </div>
+              </div>
+        
+            <div class="flex-card col-2" id= "test2"  onClick="reply_click(this.id)">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
+                    </div>
+                    <div class="flex-card__content">
+                  <h3 class="flex-card__content-title">test2.png</h3>                      
+                </div>
+              </div>
+        
+            <div class="flex-card col-2" id= "5"  onClick="reply_click(this.id)">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
+                    </div>
+                    <div class="flex-card__content">
+                  <h3 class="flex-card__content-title">5.png</h3>                      
+                </div>
+              </div>
+        
             
     </div>
     <!-- END OF MAIN CONTENT -->
@@ -117,21 +153,19 @@
             <h2>Add new file</h2>
           </div>
           <div class="modal-body">
-            <form action="upload" method="POST" enctype="multipart/form-data">
+            <form  id ="form_action">
                 <div>
                     <input type="text" name="name" id="name" placeholder="Title">
                 </div>
                 <div>
                     <input type="file" id="file" name="file">
                 </div>
-                <input type="submit" value = "Upload">
+                <input type="submit" value = "Upload" >  
             </form>
           </div>
         </div>
     </div>
     <!-- END OF MODAL -->
-    <script scr="../assets/js/mainPage.js"></script>
-
 
     <script type="text/javascript" src="../assets/js/main.js"></script>
 </body>

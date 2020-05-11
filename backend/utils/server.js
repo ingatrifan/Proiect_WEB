@@ -19,9 +19,9 @@ class HTTPServer {
                 res.setHeader('Access-Control-Allow-Origin', '*');  
                 res.setHeader('Access-Control-Allow-Methods', '*');
                 res.setHeader('Access-Control-Allow-Headers', '*');
-                console.log(req.url);
+            
                 if(urlModule.parse(req.url).pathname.split('?')[0]=='/mainPage.html'){
-                    console.log("INTO MAIN PAGE");
+                
                     mainPage.mainPage(req,res);
                 }   
                 else if(req.method == 'GET' && urlModule.parse(req.url).pathname.indexOf('.')!== -1

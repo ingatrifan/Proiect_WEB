@@ -1,28 +1,37 @@
-
+const jwt = require('jsonwebtoken');
+const cleanFiles = require('../utils/removingFiles');
 const HttpStatusCodes = require("http-status-codes");
 const uploadFuncs = require("../utils/upload")
 const formidable = require("formidable")
+const models = require('../models/index');
 const fs =require('fs');
-exports.upload = async (req,res) => {
+const PRIVATE_KEY = "SUPER_SECRET_KEY";
+exports.upload = async (req,res) => { 
+  console.log('UPLOAD');
   try {
     const form = new formidable.IncomingForm();
     form.parse(req, async(err, fields, files) => {
+      //const token = files.serverToken;
+      
+      
+      
       
       if (files.file){
-      //      
-        
-        
-      //
-        //console.log("uploading...");
-        ///console.log(typeof(files)+"here",files);
-        var file = fs.readFileSync(files.file.path); 
+          
+        var check = await addFileDB(files.file,fields.serverToken);
+        console.log(check,"value");
+        if(check){
+          cleanFiles.cleanTmp();  
+        }
+  
+        //fragmentation(file,files.file.name.split('.')[0]);
 
-        fragmentation(file,files.file.name.split('.')[0]);
-        //var myFile = fs.readFileSync('C:/Users/krelo/Desktop/TW/krello/Proiect_WEB/backend/controllers/index.js');
-        
 
-//        await uploadFuncs.dropboxUpload(myFile); 
-      } 
+
+        //        await uploadFuncs.dropboxUpload(myFile); 
+        }
+        
+      
   
     });
     res.statusCode = HttpStatusCodes.OK
@@ -62,4 +71,40 @@ function fragment(chunk,id_file,number){
   fs.writeFileSync("./tmp/"+id_file+"_"+number+".byte",chunk);
   //update over here
 }
-;
+
+
+async function addFileDB(file,token){
+  try{
+    
+      jwt.verify(token,PRIVATE_KEY);
+      let auth_values = jwt.decode(token,PRIVATE_KEY);
+      console.log(token,auth_values);
+      var file_id = file.name;
+      console.log("HERE");
+      let user =null;
+      const File = models.File;
+      
+      await File.findOne({id_file:file_id},
+        function(err,doc){
+            if(!err)  {
+                user = doc;
+                console.log(user);
+            }
+     });
+     console.log("HERE");
+     if(user==null){
+        let insertFile = new File({
+            id_file :file_id,
+            id_user:auth_values.user
+        });
+        await insertFile.save(()=>{
+          console.log("INSERTED A FILE");
+        });
+      return true;
+     }
+     return false;
+  }catch(e){
+    return false;
+  }
+}
+

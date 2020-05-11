@@ -7,3 +7,6 @@ function cleanTmp(){
     })
   };
   cleanTmp();
+  module.exports = {
+    cleanTmp
+  }

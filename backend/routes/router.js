@@ -11,7 +11,7 @@ class Router {
     }
 
     optionHandler(req,res) {
-        console.log('here');
+
       const headers = {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': '*',
@@ -85,9 +85,9 @@ class Router {
             let reqUrlString = req.url.split('?')[0];
             let pathName = urlModule.parse(reqUrlString, true, false).pathname;
             let method = req.method;
-            console.log(method,pathName);
+            
             let handler =   this.getHandler(method, pathName);
-            console.log(handler);
+            
             handler(req, res);
         } catch (err) {
             console.log(err);

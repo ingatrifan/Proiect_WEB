@@ -14,10 +14,6 @@ const fileSchema = new Schema(
       type:String,
       default:null
     },
-    extension:{
-      type:String,
-      default:null
-    },
     location:{
       type:String,
       default:null
@@ -25,7 +21,6 @@ const fileSchema = new Schema(
     lastLength:{
       type:Number,
       defautl:null
-
     }
   },
   {

@@ -48,11 +48,7 @@
             <button class="upload" id ="modal-btn">
                 Upload new file
             </button>
-            <ul class="folder-List">
-                <li><a href="#"><i class="fas fa-folder"></i>Folder1</a></li>
-                <li><a href="#"><i class="fas fa-folder"></i>Folder2</a></li>
-                <li><a href="#"><i class="fas fa-folder"></i>Folder3</a></li>
-            </ul>
+         
         </div>
     </div>
     <!-- END OF NORMAL SIDEBAR -->
@@ -61,86 +57,159 @@
     <div class="flex-container col-9">
         
         
-            <div class="flex-card col-2" id= "1"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">1.aiff</h3>                      
+            <div class="flex-card col-2"id = "1aiff</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">1.aiff</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "123"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">123.aiff</h3>                      
+            <div class="flex-card col-2"id = "123aiff</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">123.aiff</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "1234"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">1234.aiff</h3>                      
+            <div class="flex-card col-2"id = "1234aiff</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">1234.aiff</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "12345"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/asp.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">12345.asp</h3>                      
+            <div class="flex-card col-2"id = "12345asp</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/asp.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">12345.asp</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "123456"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">123456.doc</h3>                      
+            <div class="flex-card col-2"id = "123456doc</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">123456.doc</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "MUSK"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/jpg.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">MUSK.jpg</h3>                      
+            <div class="flex-card col-2"id = "MUSKjpg</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/jpg.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">MUSK.jpg</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "test"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/jpg.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">test.jpg</h3>                      
+            <div class="flex-card col-2"id = "testjpg</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/jpg.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">test.jpg</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "test2"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">test2.png</h3>                      
+            <div class="flex-card col-2"id = "test2png</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">test2.png</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
         
-            <div class="flex-card col-2" id= "5"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title">5.png</h3>                      
+            <div class="flex-card col-2"id = "5png</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">5.png</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
+
+        
+            <div class="flex-card col-2"id = "5png</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/png.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">5.png</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
+                </div>
+              </div>
+            </div>
+
+        
+            <div class="flex-card col-2"id = "testjs</div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/js.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title">test.js</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
+                </div>
+              </div>
+            </div>
+
         
             
     </div>

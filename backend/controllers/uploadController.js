@@ -11,28 +11,15 @@ exports.upload = async (req,res) => {
   try {
     const form = new formidable.IncomingForm();
     form.parse(req, async(err, fields, files) => {
-      //const token = files.serverToken;
-      
-      
-      
-      
+
       if (files.file){
-          
         var check = await addFileDB(files.file,fields.serverToken);
-        console.log(check,"value");
         if(check){
           cleanFiles.cleanTmp();  
         }
   
-        //fragmentation(file,files.file.name.split('.')[0]);
-
-
-
-        //        await uploadFuncs.dropboxUpload(myFile); 
-        }
-        
-      
   
+        }  
     });
     res.statusCode = HttpStatusCodes.OK
     res.setHeader('Content-Type', 'application/json')
@@ -78,9 +65,7 @@ async function addFileDB(file,token){
     
       jwt.verify(token,PRIVATE_KEY);
       let auth_values = jwt.decode(token,PRIVATE_KEY);
-      console.log(token,auth_values);
       var file_id = file.name;
-      console.log("HERE");
       let user =null;
       const File = models.File;
       
@@ -88,10 +73,8 @@ async function addFileDB(file,token){
         function(err,doc){
             if(!err)  {
                 user = doc;
-                console.log(user);
             }
      });
-     console.log("HERE");
      if(user==null){
         let insertFile = new File({
             id_file :file_id,

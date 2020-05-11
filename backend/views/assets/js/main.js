@@ -58,10 +58,8 @@ const form =document.getElementById('form_action');
 form.enctype="multipart/form-data"
 function handleForm(event) { 
   event.preventDefault(); 
-
   const formData = new FormData();
-  let files = document.querySelector('[type=file]');
-  
+  let files = document.querySelector('[type=file]');  
   let file = files.files[0];
   
   formData.append('file',file);
@@ -73,7 +71,9 @@ function handleForm(event) {
       body:formData
     }).then(response=>{
       //refresh page
-        location = location;
+      console.log("response");
+        location.reload(true);
+        
     });
 
 } 

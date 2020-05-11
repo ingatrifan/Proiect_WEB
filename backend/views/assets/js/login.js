@@ -3,7 +3,7 @@
 
 function login (e){
     //get id and pass , must also do enc
-    const url = 'http://127.0.0.1:3000/login';
+    const url = 'http://localhost:3000/login';
     let id = document.getElementById('user_id');
     let pw = document.getElementById('user_pass');
     console.log(id.value,pw.value);
@@ -18,7 +18,7 @@ function login (e){
     postData(url,data,function(succ){
         var json = JSON.parse(succ.responseText);
         localStorage.setItem('serverToken',json.serverToken);
-        console.log(localStorage.getItem('serverToken'));   
+        console.log(succ.responseText);
         location = json.location;
 
     });

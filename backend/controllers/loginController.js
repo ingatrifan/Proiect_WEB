@@ -8,18 +8,20 @@ async function login(req,res)
         buffer +=data;        
         });
     req.on('end',function(){
+        console.log(req.url);
         try{
         var post = JSON.parse(buffer);
         //decode
         let buf = Buffer.from(post.encode,'base64');
         let decode = buf.toString('utf-8');
         let values = decode.split(':');
+        console.log(values);
         validateUser(values).then(
             function(validation){
                 console.log(validation);
                 if(validation==true){
                     var token = jwt.sign({user:values[0],pass:values[1] },PRIVATE_KEY,{ expiresIn: '300h' });
-                    let json = {"serverToken":token,"location":"http://127.0.0.1:3000/mainPage.html"+"?"+"serverToken="+token};
+                    let json = {"serverToken":token,"location":"http://localhost:3000/mainPage.html"+"?"+"serverToken="+token};      
                     res.writeHead(200, {
                     'Content-Type': 'aplication/json'
             });

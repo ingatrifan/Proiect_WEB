@@ -213,7 +213,24 @@ h1,h2,h3,h4,h5,h6 {
   max-width: 100px;
   margin:auto;
 }
-
+.flex-card__actions{
+  display: none;
+}
+.flex-card:hover .flex-card__actions{
+  display: flex;
+}
+.flex-card__button{
+  height: 30px;
+  width:50%;
+}
+.button-delete{
+  background-color:#bb3737;
+  border:1px solid #bb3737;
+}
+.button-download{
+  background-color: #6363c3;
+  border:1px solid #6363c3;
+}
 
 .flex-card__content-title {
   width: 100%;

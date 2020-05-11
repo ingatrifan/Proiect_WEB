@@ -2,6 +2,7 @@ const loginController = require('./loginController');
 const registerController = require('./registerController');
 const uploadController = require('./uploadController');
 const tokenVerifier = require('./tokenVerifierController');
+const fileController = require('./fileController')
 
 //exports.uploadController = require("./uploadController")
 
@@ -15,5 +16,7 @@ module.exports={
     loginController,
     registerController,
     uploadController,
-    tokenVerifier
+    tokenVerifier,
+    fileController
+
 }

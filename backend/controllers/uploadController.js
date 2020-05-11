@@ -8,7 +8,7 @@ exports.upload = async (req,res) => {
     form.parse(req, async(err, fields, files) => {
       if (files.file){
         console.log("uploading...")
-        await uploadFuncs.dropboxUpload(files.file)       
+        await uploadFuncs.googleUpload(files.file)       
       } 
     });
     res.statusCode = HttpStatusCodes.OK

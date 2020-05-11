@@ -49,3 +49,37 @@ function outsideClick(e) {
     modal.style.display = 'none';
   }
 }
+//Click download
+function downloadFile(){
+  const url = 'http://127.0.0.1:3000/download/?id=';
+  const method = "GET"
+  postData(method,url,function(succ){
+      console.log(succ);
+      //handler when receiving succes
+  });
+}
+
+//CLICK DELETE
+function deleteFile(){
+  const url = 'http://127.0.0.1:3000/delete/?id=';
+  const method = "DELETE"
+  postData(method,url,function(succ){
+      console.log(succ);
+      //handler when receiving succes
+  });
+}
+function postData(method,url,succes){
+  // an encoding required
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.open(method,url,true);
+  httpRequest.onreadystatechange= function(){
+      if(httpRequest.readyState===httpRequest.DONE && httpRequest.status ==200)
+      {
+          succes(httpRequest.responseText);
+          
+      } 
+  };
+  httpRequest.setRequestHeader('Content-Type', 'plaint/text');
+  httpRequest.send();
+}
+

@@ -7,8 +7,7 @@ const mongoose = require('mongoose');
 const  {Router}  = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
-const auth= require('./routes/auth');
-
+const index = require('./routes')
 
 
 //configuration
@@ -38,6 +37,6 @@ async function connectDB(){
 }
 connectDB();
 const router = new Router();
-router.use('',auth.rout);
+router.use('',index.router)
 const app = new HTTPServer(router);
 app.listen();

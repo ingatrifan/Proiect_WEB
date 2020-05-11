@@ -1,11 +1,12 @@
 const dropboxV2Api = require('dropbox-v2-api');
 const querystring = require('querystring');
 const fs = require('fs');
+const path = require('path');
 const {google} = require('googleapis');
 const mimeType = require('mime-types')
-const path = require("path")
-const GOOGLE_TOKEN ={"access_token":"ya29.a0Ae4lvC3AKc0e6oSpc7bl6QihgLT4RRiKkBQTSS4EQ7JNGGF_yNBDy5lxenYX0lcD57NNLC6pRW51MEUwrxteaEfp_8Or8oflqCoElvQ5NOQGUz0zXLlYcb8RCEyeo7LJQRepnZC1bxfCQus_kpATVcAUGIMS58fBasg","refresh_token":"1//0cBvWYzXMWa2PCgYIARAAGAwSNwF-L9Ir1S7TqviunKP7mWPbge5KXq_2WTWgIzJJQ1ypBFR4av30_2VXBIkfvREA5876U0cIjnw","scope":"https://www.googleapis.com/auth/drive","token_type":"Bearer","expiry_date":1587661742331}
-const DROPBOX_TOKEN = "HJyKpgpHJ-AAAAAAAAAAJ5hUOVxo_UUdyofbXO5ae0tdZA4M4sWkieijeEBocJP3"
+const GOOGLE_TOKEN ={"access_token":"ya29.a0Ae4lvC3AKc0e6oSpc7bl6QihgLT4RRiKkBQTSS4EQ7JNGGF_yNBDy5lxenYX0lcD57NNLC6pRW51MEUwrxteaEfp_8Or8oflqCoElvQ5NOQGUz0zXLlYcb8RCEyeo7LJQRepnZC1bxfCQus_kpATVcAUGIMS58fBasg","refresh_token":"1//0cBvWYzXMWa2PCgYIARAAGAwSNwF-L9Ir1S7TqviunKP7mWPbge5KXq_2WTWgIzJJQ1ypBFR4av30_2VXBIkfvREA5876U0cIjnw","scope":"https://www.googleapis.com/auth/drive","token_type":"Bearer","expiry_date":1587661742331};
+const DROPBOX_TOKEN = "HJyKpgpHJ-AAAAAAAAAAMPpIdMZb21N4jqfNyGyaFCqt23QqxdN_p-SFPFp1whAD";
+
 
 
 //DROPBOX AUTH
@@ -22,6 +23,8 @@ fs.readFile(path.resolve(__dirname,'./credentials.json'), (err, content) => {
       client_id, client_secret, redirect_uris[0]);
   oAuth2Client.setCredentials(GOOGLE_TOKEN)
 });
+
+
 
 exports.dropboxUpload =(file) =>{
     console.log("upload")

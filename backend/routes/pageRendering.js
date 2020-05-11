@@ -37,6 +37,7 @@ pageRendering = async (req,res) => {
         res.writeHead(200,{'Content-Type':mimetype});
         var filestream = fs.createReadStream(filename);
         filestream.pipe(res);
+        
     }
     else if(loadFile.isDirectory()){
         res.writeHead(302, {

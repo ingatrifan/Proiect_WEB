@@ -6,16 +6,17 @@ const fileSchema = new Schema(
       type: String,
       default: null
     },
-    id_user:{
+    id_user :{
+      type: String,
+      default:null
+    },
+    location:{
       type:String,
       default:null
     },
-    fileName:{
-    type:String,
-    default:null},
-    extention:{
-      type:String,
-      default:null
+    lastLength:{
+      type:Number,
+      defautl:null
     }
   },
   {

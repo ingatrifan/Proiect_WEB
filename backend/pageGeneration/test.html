@@ -48,55 +48,20 @@
             <button class="upload" id ="modal-btn">
                 Upload new file
             </button>
+            <ul class="folder-List">
+                <li><a href="#"><i class="fas fa-folder"></i>Folder1</a></li>
+                <li><a href="#"><i class="fas fa-folder"></i>Folder2</a></li>
+                <li><a href="#"><i class="fas fa-folder"></i>Folder3</a></li>
+            </ul>
         </div>
     </div>
     <!-- END OF NORMAL SIDEBAR -->
     <!-- MAIN CONTENT -->
+  
     <div class="flex-container col-9">
-            <div class="flex-card col-2">
-              <div class="flex-card__media">
-                <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
-              </div>
-              <div class="flex-card__content">
-                <h3 class="flex-card__content-title">File.aif</h3>
-                <div class="flex-card__actions">
-                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
-                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
-                </div>
-              </div>
-            </div>
-            <div class="flex-card col-2">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/cpp.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Main.cpp</h3>
-                </div>
-            </div>
-            <div class="flex-card col-2">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Information.doc</h3>
-                </div>
-            </div>
-            <div class="flex-card col-2">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/doc.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Classes.doc</h3>
-                </div>
-            </div>
-            <div class="flex-card col-2">
-            <div class="flex-card__media">
-                 <img src="../assets/images/icons/187640-file-types/png/asp.png" alt = "img1">
-                </div>
-                <div class="flex-card__content">
-                    <h3 class="flex-card__content-title">Core.asp</h3>
-                </div>
-            </div>    
+        
+    
+            
     </div>
     <!-- END OF MAIN CONTENT -->
     <!-- MODAL WHEN UPLOAD IS PRESSED -->
@@ -107,13 +72,13 @@
             <h2>Add new file</h2>
           </div>
           <div class="modal-body">
-            <form action="upload" method="POST">
+            <form>
                 <div>
                     <input type="text" name="name" id="name" placeholder="Title">
                 </div>
                 <div>
                     <input type="file" id="file" name="file">
-                </div>  
+                </div>
                 <input type="submit" value = "Upload">
             </form>
           </div>

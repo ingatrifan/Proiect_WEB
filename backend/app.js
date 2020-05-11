@@ -27,7 +27,7 @@ async function connectDB(){
   await models.User.remove({},()=>console.log("Cleaning testing"));
   //adding test user 
   let b = new models.User({
-    email:'test@gmail.com',
+    email:'test',
     name :'test',
     password :'asdf'
   });

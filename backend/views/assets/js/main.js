@@ -6,7 +6,6 @@ const burger = document.getElementById("burger");
 const arrowBack = document.querySelector(".back-arrow");
 const bar = document.querySelector(".bar");
 const sidepart = document.querySelector(".sidepart");
-console.log(modalBtn);
 // Events
 modalBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click',closeModal);
@@ -49,6 +48,37 @@ function outsideClick(e) {
     modal.style.display = 'none';
   }
 }
+
+function reply_click(clicked_id)
+{
+    alert(clicked_id);
+}
+
+const form =document.getElementById('form_action');
+form.enctype="multipart/form-data"
+function handleForm(event) { 
+  event.preventDefault(); 
+
+  const formData = new FormData();
+  let files = document.querySelector('[type=file]');
+  
+  let file = files.files[0];
+  
+  formData.append('file',file);
+  formData.append('serverToken',localStorage.getItem('serverToken'));
+  const url = 'upload';
+  fetch(url,
+    {
+      method:'POST',
+      body:formData
+    }).then(response=>{
+      //refresh page
+        location = location;
+    });
+
+} 
+form.addEventListener('submit', handleForm);
+//action="upload" method="POST" enctype="multipart/form-data"
 //Click download
 function downloadFile(){
   const url = 'http://127.0.0.1:3000/download/?id=';

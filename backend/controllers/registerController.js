@@ -13,11 +13,12 @@ function register(req,res)
     });
 
     req.on('end',function(){
+        try{
         var post  = JSON.parse(buffer);
         //check user data here
         UniqueId(post).then(
             function(validate){
-                
+                var body = post;
             if(validate== true){
                 var user = new models.User({
                     email : body.user_id,
@@ -41,7 +42,15 @@ function register(req,res)
             }
         }
         );
-    })
+    }
+    catch(e){
+        res.writeHead(404, {
+            "Content-Type": 'text/plain'
+        });
+        res.write('Invalid JSON');
+        res.end();
+    }
+    });
 }
 async function UniqueId(data){
     let user;

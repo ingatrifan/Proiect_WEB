@@ -11,13 +11,18 @@ class Router {
     }
 
     optionHandler(req,res) {
+
       const headers = {
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS, POST, GET',
-        'Access-Control-Max-Age': 2592000, // 30 days
+        'Access-Control-Allow-Methods': '*',
         'Access-Control-Allow-Headers': '*'
       };
-      res.writeHead(204, headers);
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', '*');
+      res.setHeader('Access-Control-Allow-Headers', '*');
+      
+
+      res.writeHead(204,headers);
       res.end();
     }
 
@@ -56,6 +61,7 @@ class Router {
                 this.optionHandler(req,res);
             });
         }
+        
         console.log('Endpoint registered:', method, url);
     }
 
@@ -79,9 +85,9 @@ class Router {
             let reqUrlString = req.url.split('?')[0];
             let pathName = urlModule.parse(reqUrlString, true, false).pathname;
             let method = req.method;
-            console.log(method,pathName);
+            
             let handler =   this.getHandler(method, pathName);
-            console.log(handler);
+            
             handler(req, res);
         } catch (err) {
             console.log(err);

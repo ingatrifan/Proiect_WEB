@@ -15,12 +15,13 @@ class HTTPServer {
         let app = this  ;
         try {
             server = http.createServer((req, res) => {
-                console.log(req.url);
+                
                 //THESE 3 LINES NEARLY BROKE ME INSANE, SEND HELP
                 res.setHeader('Access-Control-Allow-Origin', '*');  
                 res.setHeader('Access-Control-Allow-Methods', '*');
                 res.setHeader('Access-Control-Allow-Headers', '*');
             
+                /*
                 if(urlModule.parse(req.url).pathname.split('?')[0]=='/mainPage.html'){    
                     mainPage.mainPage(req,res);
                 }   
@@ -31,7 +32,16 @@ class HTTPServer {
                 }
                 else {
                     app.router.route(req, res);
+                }*/
+                console.log(req.url,req.method);
+                if(req.method == 'GET' && urlModule.parse(req.url).pathname.indexOf('.')!== -1)
+                {
+                    pageRenderer.pageRendering(req,res);
                 }
+                else{
+                    app.router.route(req, res);
+                }
+                
             });
         } catch (err) {
             res.statusCode = httpStatusCode.INTERNAL_SERVER_ERROR;

@@ -23,12 +23,13 @@ const {credentials}=require('./credentials');
     curl.setOpt(Curl.option.HTTPHEADER,['Content-Type: application/x-www-form-urlencoded']);
     curl.setOpt(Curl.option.POSTFIELDS,querystring.stringify(dataToSend));
     curl.on('end', (statusCode, body) => {
-        console.log('Body received from httpbin:')
-        console.log(body)  
-        curl.close()
+        console.log('Body received from httpbin:');
+        console.log(body)  ;
+        curl.close();
       })      
-    curl.on('error', curl.close.bind(curl))
-    curl.perform()
+    curl.on('error', curl.close.bind(curl));
+    curl.perform();
+    return params.get('state');
 }
 module.exports = {
     dropbox

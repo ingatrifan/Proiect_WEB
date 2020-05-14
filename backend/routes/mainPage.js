@@ -30,8 +30,8 @@ async function mainPage(req,res){
                 'Content-Type': 'text/html'
             });
             
-            await renderMainPage(token);
-            let r = fs.createReadStream('./views/pages/dummy.html');
+            
+            let r =await renderMainPage(token);
             r.pipe(res);
             
         }
@@ -51,10 +51,8 @@ catch(e){
         
 }
 
-async function dummyFileRenderer(token){
-    await renderMainPage(token);
-    let r = fs.createReadStream('./views/pages/dummy.html');
-    return r;
+function dummyFileRenderer(){
+    return  fs.createReadStream('./views/pages/dummy.html');;
 }
 
 async function renderMainPage(token){
@@ -63,6 +61,7 @@ async function renderMainPage(token){
     //var values = dec;
     var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
     var myFile = fs.readFileSync(mypath,'utf-8');
+
     const File = models.File;
     let auth_values = jwt.decode(token,PRIVATE_KEY);
     let buffer = [];
@@ -85,14 +84,11 @@ async function renderMainPage(token){
          }  
          //data.folder.files.push({"name":values[0],"extension":values[1]});
      }
-     //console.log(data.folder.files);
-    
-    
     var out =ejs.compile(myFile)({"data":data});
     fs.writeFileSync('./views/pages/dummy.html',out);
-
+    return  fs.createReadStream('./views/pages/dummy.html');
 }
 module.exports={
     mainPage,
-    dummyFileRenderer
+    renderMainPage
 }

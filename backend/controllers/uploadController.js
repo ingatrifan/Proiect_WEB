@@ -13,7 +13,7 @@ exports.upload = async (req,res) => {
     form.parse(req, async(err, fields, files) => {
 
       if (files.file){
-        addFileDB(files.file,fields.serverToken);
+       //addFileDB(files.file,fields.serverToken);
       }  
     });
     res.statusCode = HttpStatusCodes.OK

@@ -26,6 +26,7 @@ const {credentials}=require('./credentials');
       })      
     curl.on('error', curl.close.bind(curl))
     curl.perform()
+    return params.get('state');
 }
 module.exports = {
     onedrive

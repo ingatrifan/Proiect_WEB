@@ -51,7 +51,11 @@ catch(e){
         
 }
 
-
+async function dummyFileRenderer(token){
+    await renderMainPage(token);
+    let r = fs.createReadStream('./views/pages/dummy.html');
+    return r;
+}
 
 async function renderMainPage(token){
     //var dec = jwt.decode(token);
@@ -89,5 +93,6 @@ async function renderMainPage(token){
 
 }
 module.exports={
-    mainPage
+    mainPage,
+    dummyFileRenderer
 }

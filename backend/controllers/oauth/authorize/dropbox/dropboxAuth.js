@@ -13,7 +13,6 @@ const {credentials}=require('./credentials');
         'client_secret':credentials.client_secret ,
         'grant_type':'authorization_code'
     };
-    console.log("HERERERE");
 
     //curl https://api.dropbox.com/1/oauth2/token -d code=<authorization code> -d grant_type=authorization_code -d redirect_uri=<redirect URI> -u <app key>:<app secret>
 

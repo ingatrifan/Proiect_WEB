@@ -13,7 +13,7 @@ const {credentials}=require('./credentials');
         'client_secret':credentials.client_secret ,
         'grant_type':'authorization_code'
     };
-    const url ='https://api.dropbox.com/1/oauth2/token';
+    const url ='https://login.live.com/oauth20_token.srf';
     const curl = new Curl();
     curl.setOpt(Curl.option.URL,url);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);

@@ -14,5 +14,3 @@ router.use('',oauthAuthorizeRouter.router)
 module.exports = {
     router
 };
-
-router.registerEndPoint('GET','/download',downloadController.download);

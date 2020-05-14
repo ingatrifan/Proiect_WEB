@@ -15,6 +15,7 @@ class HTTPServer {
         let app = this  ;
         try {
             server = http.createServer((req, res) => {
+                console.log(req.url);
                 //THESE 3 LINES NEARLY BROKE ME INSANE, SEND HELP
                 res.setHeader('Access-Control-Allow-Origin', '*');  
                 res.setHeader('Access-Control-Allow-Methods', '*');

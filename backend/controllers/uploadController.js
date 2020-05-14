@@ -1,3 +1,4 @@
+//PRETTY USELESS NOW, 
 const jwt = require('jsonwebtoken');
 const cleanFiles = require('../utils/removingFiles');
 const HttpStatusCodes = require("http-status-codes");
@@ -48,7 +49,7 @@ async function fragmentation(file,file_id){
       size = size-chunk_size;
   } 
   return jsonArray;
-};
+};  
 function fragment(chunk,id_file,number,size){
   fs.writeFileSync("./tmp/"+id_file.split('.')[0]+"_"+number+".byte",chunk);
   //update over here

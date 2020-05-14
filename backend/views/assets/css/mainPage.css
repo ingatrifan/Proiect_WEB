@@ -105,16 +105,33 @@ h1,h2,h3,h4,h5,h6 {
     text-decoration: none;
     cursor: pointer;
     color: white;
-    padding: 10px;
-    margin-bottom: 30px;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px!important;
 }
 .folder-List li{
     border-top :2px solid #8d6262;
-    padding: 10px;
     margin:0;
+    display: block;
+    font-size: 14px!important;
 }
+.folder-List li .upload{
+  font-size: 14px!important;
+}
+.folder-List li .dropbox .upload{
+  background-color:#007ee5;
+  border:2px solid #007ee5;
+}
+.folder-List li .drive .upload{
+  background-color:#F4B400;
+  border:2px solid #F4B400;
+
+}
+.folder-List li .onedrive .upload{
+  background-color:#7FBA00;
+  border:2px solid #7FBA00;
+
+}
+
 .options{
     /* background-image: url('../images/1.jpg'); */
     background-color: #8d6262;

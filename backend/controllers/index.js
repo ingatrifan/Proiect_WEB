@@ -1,5 +1,11 @@
+const loginController = require('./loginController');
+const registerController = require('./registerController');
+const uploadController = require('./uploadController');
+const tokenVerifier = require('./tokenVerifierController');
+const fileController = require('./fileController')
+const oAuthController = require('./oAuthController')
 
-exports.uploadController = require("./uploadController")
+//exports.uploadController = require("./uploadController")
 
 exports.func =(req, res) =>{ 
     res.statusCode = 200
@@ -7,4 +13,11 @@ exports.func =(req, res) =>{
     res.write(JSON.stringify({success: true, message: 'example ran successfully'}))
 }
 
-exports.downloadController = require('./downloadController');
+module.exports={
+    loginController,
+    registerController,
+    uploadController,
+    tokenVerifier,
+    fileController,
+    oAuthController
+}

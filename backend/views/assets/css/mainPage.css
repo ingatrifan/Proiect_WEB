@@ -41,6 +41,7 @@
     }
     .flex-card{
         margin:5px!important;
+
     }
 
     .modal-content {
@@ -104,16 +105,33 @@ h1,h2,h3,h4,h5,h6 {
     text-decoration: none;
     cursor: pointer;
     color: white;
-    padding: 10px;
-    margin-bottom: 30px;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 14px!important;
 }
 .folder-List li{
     border-top :2px solid #8d6262;
-    padding: 10px;
     margin:0;
+    display: block;
+    font-size: 14px!important;
 }
+.folder-List li .upload{
+  font-size: 14px!important;
+}
+.folder-List li .dropbox .upload{
+  background-color:#007ee5;
+  border:2px solid #007ee5;
+}
+.folder-List li .drive .upload{
+  background-color:#F4B400;
+  border:2px solid #F4B400;
+
+}
+.folder-List li .onedrive .upload{
+  background-color:#7FBA00;
+  border:2px solid #7FBA00;
+
+}
+
 .options{
     /* background-image: url('../images/1.jpg'); */
     background-color: #8d6262;
@@ -184,7 +202,7 @@ h1,h2,h3,h4,h5,h6 {
     position: absolute;
     overflow-y: auto;
     right:0;
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     align-items: center;
   }
@@ -196,6 +214,7 @@ h1,h2,h3,h4,h5,h6 {
   transition: all .2s ease;
   margin: 20px;
   color:white;
+  display:inline-block;
 }
 
 .flex-card:hover {
@@ -211,7 +230,24 @@ h1,h2,h3,h4,h5,h6 {
   max-width: 100px;
   margin:auto;
 }
-
+.flex-card__actions{
+  display: none;
+}
+.flex-card:hover .flex-card__actions{
+  display: flex;
+}
+.flex-card__button{
+  height: 30px;
+  width:50%;
+}
+.button-delete{
+  background-color:#bb3737;
+  border:1px solid #bb3737;
+}
+.button-download{
+  background-color: #6363c3;
+  border:1px solid #6363c3;
+}
 
 .flex-card__content-title {
   width: 100%;

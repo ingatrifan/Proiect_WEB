@@ -4,10 +4,10 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
 //built in
-const { Router } = require('./routes/router');
+const  {Router}  = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
-const { download } = require('./controllers/downloadController');
+const index = require('./routes')
 
 
 //configuration
@@ -27,7 +27,7 @@ async function connectDB(){
   await models.User.remove({},()=>console.log("Cleaning testing"));
   //adding test user 
   let b = new models.User({
-    email:'test@gmail.com',
+    email:'test',
     name :'test',
     password :'asdf'
   });
@@ -36,16 +36,8 @@ async function connectDB(){
   });
 }
 connectDB();
-
-
-process.on("uncaughtException", (err) => {
-  console.log("Caught error", err);
-});
-
 const router = new Router();
-
-router.registerEndPoint('GET','/download', download);
-
+router.use('',index.router)
 const app = new HTTPServer(router);
 
 app.listen();

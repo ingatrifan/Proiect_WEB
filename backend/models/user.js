@@ -13,6 +13,36 @@ const userSchema = new Schema(
     password: {
       required: true,
       type: String
+    },
+    googleAuth: {
+      accessToken:{
+        type:String,
+        default:null
+      },
+      refreshToken:{
+        type:String,
+        default:null
+      }
+    },
+    dropboxAuth: {
+      accessToken:{
+        type:String,
+        default:null
+      },
+      refreshToken:{
+        type:String,
+        default:null
+      }
+    },
+    oneDriveAuth: {
+      accessToken:{
+        type:String,
+        default:null
+      },
+      refreshToken:{
+        type:String,
+        default:null
+      }
     }
   },
   {

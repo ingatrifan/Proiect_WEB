@@ -49,9 +49,9 @@
                 Upload new file
             </button>
             <ul class="folder-List">
-                <li><a href="#"><i class="fas fa-folder"></i>Folder1</a></li>
-                <li><a href="#"><i class="fas fa-folder"></i>Folder2</a></li>
-                <li><a href="#"><i class="fas fa-folder"></i>Folder3</a></li>
+                <li><a class = "dropbox" href="https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=token&redirect_uri=http://localhost:3000/oauth/authorize/dropbox"><button class="upload">Connect dropbox</button></a></li>
+                <li><a class="drive" href="#"><button class="upload">Connect google drive</button></a></li>
+                <li><a class="onedrive" href="#"><button class="upload">Connect onedrive</button></a></li>
             </ul>
         </div>
     </div>
@@ -64,6 +64,10 @@
               </div>
               <div class="flex-card__content">
                 <h3 class="flex-card__content-title">File.aif</h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
+                </div>
               </div>
             </div>
             <div class="flex-card col-2">
@@ -108,13 +112,13 @@
             <h2>Add new file</h2>
           </div>
           <div class="modal-body">
-            <form>
+            <form action="upload" method="POST">
                 <div>
                     <input type="text" name="name" id="name" placeholder="Title">
                 </div>
                 <div>
                     <input type="file" id="file" name="file">
-                </div>
+                </div>  
                 <input type="submit" value = "Upload">
             </form>
           </div>

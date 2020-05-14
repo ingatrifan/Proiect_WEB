@@ -98,6 +98,21 @@ function deleteFile(){
       //handler when receiving succes
   });
 }
+//function GOOLE
+function googleAuth(){
+
+}
+//function ONEDRIVE
+function oneDriveAuth(){
+  
+}
+//function DROPBOX
+function dropboxAuth(){
+  let url = 'https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=token&redirect_uri=http://localhost:3000/oauth/authorize/dropbox'
+  url+='&state='+ localStorage.getItem('serverToken');
+  window.location.replace(url);
+}
+
 function postData(method,url,succes){
   // an encoding required
   var httpRequest = new XMLHttpRequest();

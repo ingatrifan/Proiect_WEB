@@ -34,7 +34,7 @@
     "http-status-codes": "^1.4.0",
     "jsonwebtoken": "^8.5.1",
     "mime-types": "^2.1.27",
-    "mongoose": "^5.9.12",
+    "mongoose": "^5.9.14",
     "onedrive-api": "^0.3.4",
     "open": "^7.0.3",
     "path": "^0.12.7",

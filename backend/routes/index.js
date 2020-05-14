@@ -9,7 +9,7 @@ process.on("uncaughtException", (err) => {
 });
 router.use('',fileRouter.router)
 router.use('',authRouter.rout)
-router.use('/auth',oauthAuthorizeRouter.router)
+router.use('',oauthAuthorizeRouter.router)
 
 module.exports = {
     router

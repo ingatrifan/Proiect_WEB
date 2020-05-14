@@ -58,10 +58,8 @@ const form =document.getElementById('form_action');
 form.enctype="multipart/form-data"
 function handleForm(event) { 
   event.preventDefault(); 
-
   const formData = new FormData();
-  let files = document.querySelector('[type=file]');
-  
+  let files = document.querySelector('[type=file]');  
   let file = files.files[0];
   
   formData.append('file',file);
@@ -73,7 +71,9 @@ function handleForm(event) {
       body:formData
     }).then(response=>{
       //refresh page
-        location = location;
+      console.log("response");
+        location.reload(true);
+        
     });
 
 } 
@@ -98,6 +98,22 @@ function deleteFile(){
       //handler when receiving succes
   });
 }
+//function GOOLE
+function googleAuth(){
+  let url = "https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=http%3A//localhost:3000/authorize/google&client_id=282450647382-g7epadv9ud6slg873pm75gmhinhqjsao.apps.googleusercontent.com"
+  window.location.replace(url);
+}
+//function ONEDRIVE
+function oneDriveAuth(){
+  
+}
+//function DROPBOX
+function dropboxAuth(){
+  let url = 'https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=code&redirect_uri=http://localhost:3000/authorize/dropbox'
+  url+='&state='+ localStorage.getItem('serverToken');
+  window.location.replace(url);
+}
+
 function postData(method,url,succes){
   // an encoding required
   var httpRequest = new XMLHttpRequest();

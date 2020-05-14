@@ -12,6 +12,11 @@ rout.registerEndPoint("POST","/register",(req,res)=>{
 rout.registerEndPoint("POST","/validateToken",(req,res)=>{
     auth.tokenVerifier.tokenVerify(req,res);
 });
+rout.registerEndPoint('GET','/googleAuth',(req,res)=>{
+    res.write('Hello there');
+    res.end();
+  });
+
 module.exports={
     rout
 };

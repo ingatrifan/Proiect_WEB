@@ -57,7 +57,7 @@ async function renderMainPage(token){
     //var dec = jwt.decode(token);
     
     //var values = dec;
-    var mypath = 'C:/Users/krelo/Desktop/TW/krello/Proiect_WEB/backend/views/pages/mainPage.ejs';//INGA TEACHED ME  
+    var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
     var myFile = fs.readFileSync(mypath,'utf-8');
     const File = models.File;
     let auth_values = jwt.decode(token,PRIVATE_KEY);

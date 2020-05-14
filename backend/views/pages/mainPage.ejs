@@ -65,14 +65,18 @@
                         
 
             %>
-            <div class="flex-card col-2" id= "<%=data.folder.files[f].name %>"  onClick="reply_click(this.id)">
-                <div class="flex-card__media">
-                    <img src="../assets/images/icons/187640-file-types/png/<%=data.folder.files[f].extension%>.png" alt = "img1">
-                    </div>
-                    <div class="flex-card__content">
-                  <h3 class="flex-card__content-title"><%=data.folder.files[f].name %>.<%=data.folder.files[f].extension%></h3>                      
+            <div class="flex-card col-2"id = "<%=data.folder.files[f].name+data.folder.files[f].extension%></div>"> 
+              <div class="flex-card__media">
+                <img src="../assets/images/icons/187640-file-types/png/<%=data.folder.files[f].extension%>.png" alt = "img1">
+              </div>
+              <div class="flex-card__content">
+                <h3 class="flex-card__content-title"><%=data.folder.files[f].name %>.<%=data.folder.files[f].extension%></h3>
+                <div class="flex-card__actions">
+                    <button onclick="deleteFile()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                    <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
                 </div>
               </div>
+            </div>
         <% }%>
             
     </div>
@@ -98,7 +102,7 @@
         </div>
     </div>
     <!-- END OF MODAL -->
-
+    <p>KILL ME PLEASE</p>>
     <script type="text/javascript" src="../assets/js/main.js"></script>
 </body>
 </html>

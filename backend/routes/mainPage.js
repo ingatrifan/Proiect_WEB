@@ -70,9 +70,8 @@ async function renderMainPage(token){
         "folder":
             {"files":[{"name":"1","extension":"aiff"},{"name":"123","extension":"aiff"},{"name":"1234","extension":"aiff"},{"name":"12345","extension":"asp"},{"name":"123456","extension":"doc"}]},
     };
-    console.log(buffer);
      for(let i =0 ;i<buffer.length;i++){
-         console.log(buffer[0]);
+         
          let values =buffer[0];
          for(let j =0; j<buffer[0].length;j++){
              let obj = buffer[0][j].id_file.split('.');

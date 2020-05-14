@@ -108,7 +108,7 @@ function oneDriveAuth(){
 }
 //function DROPBOX
 function dropboxAuth(){
-  let url = 'https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=token&redirect_uri=http://localhost:3000/oauth/authorize/dropbox'
+  let url = 'https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=code&redirect_uri=http://localhost:3000/authorize/dropbox'
   url+='&state='+ localStorage.getItem('serverToken');
   window.location.replace(url);
 }

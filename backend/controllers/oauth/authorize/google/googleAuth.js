@@ -58,15 +58,14 @@ async function revokeToken(token){
     curl.setOpt(Curl.option.URL,url);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
     curl.setOpt(Curl.option.HTTPHEADER,cntType);
-    curl.setOpt(Curl.option.POST,1);
+    curl.setOpt(Curl.option.CUSTOMREQUEST, "POST");
     curl.on('error', curl.close.bind(curl));
     curl.perform();
-
+    console.log("revoking");
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             curl.close()
-            console.log(statusCode);
-            //resolve(JSON.parse(body));
+            resolve(statusCode);
           })      
     });
 }

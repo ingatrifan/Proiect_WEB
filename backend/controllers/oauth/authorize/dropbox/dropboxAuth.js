@@ -18,18 +18,40 @@ const tokenURL ='https://api.dropbox.com/1/oauth2/token';
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
     curl.setOpt(Curl.option.HTTPHEADER,['Content-Type: application/x-www-form-urlencoded']);
     curl.setOpt(Curl.option.POSTFIELDS,querystring.stringify(dataToSend));
-    curl.on('end', (statusCode, body) => {
-        console.log('Body received from httpbin:');
-        console.log(body)  ;
-        curl.close();
-      })      
     curl.on('error', curl.close.bind(curl));
     curl.perform();
+    return new Promise((resolve,reject)=>{
+        curl.on('end', (statusCode, body) => {
+            curl.close()
+            resolve(JSON.parse(body));
+          })      
+    });
 }
-
- async function refreshAccessToken(req,res){
+//drop box din ce vad nu are refresh token call
+// https://www.dropboxforum.com/t5/Dropbox-API-Support-Feedback/API-v2-access-token-validity/td-p/215123
+ async function refreshAccessToken(token){
 
  }
+ async function revokeAccessToken(token){
+    const curl = new Curl();
+    const url='https://api.dropboxapi.com/2/auth/token/revoke';       
+    curl.setOpt(Curl.option.URL,url);
+    curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
+    curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+token]);
+    curl.setOpt(Curl.option.CUSTOMREQUEST, "POST");
+    curl.on('error', curl.close.bind(curl));
+    curl.perform();
+    console.log("revoking");
+    return new Promise((resolve,reject)=>{
+        curl.on('end', (statusCode, body) => {
+            curl.close()
+            resolve(statusCode);
+          })      
+    })
+ }
+
+
+
 module.exports = {
-    getAccessToken
+    getAccessToken,revokeAccessToken
 };

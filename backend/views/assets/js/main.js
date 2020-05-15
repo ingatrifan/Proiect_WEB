@@ -106,7 +106,7 @@ function googleAuth(){
 }
 //function ONEDRIVE
 function oneDriveAuth(){
-  let url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=ad5a607d-f539-4543-9ed5-fb74027213c7&response_type=code&redirect_uri=http://localhost:3000/authorize/onedrive&response_mode=query&scope=files.readwrite";
+  let url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=03f8e27d-7b57-4b58-a096-3887fc515d43&response_type=code&redirect_uri=http://localhost:3000/authorize/onedrive&response_mode=query&scope=openid offline_access Files.ReadWrite.All";
   url+='&state='+ localStorage.getItem('serverToken');
   window.location.replace(url);
 }

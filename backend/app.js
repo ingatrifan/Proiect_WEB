@@ -20,7 +20,7 @@ async function connectDB(){
     {
       useNewUrlParser:true,
       useUnifiedTopology:true
-  }).then(()=>console.log("Connected to DB")).catch((err)=>{
+  }).then(()=>{console.log("Connected to DB")}).catch((err)=>{
     console.log(err);
   })
   //Line command that should be deleted some day

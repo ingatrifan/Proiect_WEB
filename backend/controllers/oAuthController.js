@@ -1,21 +1,47 @@
 const url = require('url')
-const db = require('../models')
 const ObjectId = require('mongoose').Types.ObjectId
 const HttpStatusCodes = require("http-status-codes");
 const oAuth = require('./oauth/authorize/authIndex');
 const mainPage = require('../routes/mainPage');
 const myURL=require('url');
+const models= require('../models/index')
+const jwt = require('jsonwebtoken');
+const PRIVATE_KEY = "SUPER_SECRET_KEY";
 
 //TO DO, PUT THE ACCESSS , REFRESH TOKENS IN DB, 
 //EXCEPTIONS,  RELOADING THE PAGE, WHAT HAPPENS WITH THE CALLS
+
 exports.dropboxAuth = async(req,res) =>{
     let params =new URLSearchParams(myURL.parse(req.url).query);
-    let code = params.get('code');
     let svtoken = params.get('state');
-    let data = await oAuth.dropboxAuth.getAccessToken(code);
-    console.log(data);
+    try{
+        jwt.verify(svtoken,PRIVATE_KEY);
+    }   
+    catch(e){
+        res.writeHead(404,'NO ACCESS');
+        res.end();
+        return;
+    }
+    let auth_values = jwt.decode(svtoken,PRIVATE_KEY); 
+    let code = params.get('code');
+    models.User.findOne({email:auth_values.user},(err,user)=>{
+        if(!err){
+            console.log();
+            if(user.googleAuth.authorized!=false)
+            { 
+                oAuth.dropboxAuth.getAccessToken(code).then((data)=>{
+                    try{
+                        models.User.updateOne({email:auth_values.user},{dropboxAuth:{accessToken:data.access_token,refreshToken:data.refresh_token,authorized:true,lastAccessed:new Date()}}).then(console.log('success getting token'));
+                    }
+                    catch(e){
+                        res.writeHead(404,'Error logging In');
+                        res.end();return ;   
+                    }
+                });            
+            }
+    }
+    });
     //let resu= await oAuth.dropboxAuth.revokeAccessToken(data.access_token);
-
     await mainPage.renderMainPage(svtoken);
     let file = await mainPage.renderMainPage(svtoken);
     res.writeHead(200, {
@@ -25,11 +51,37 @@ exports.dropboxAuth = async(req,res) =>{
 }
 
 exports.googleAuth = async (req,res) =>{
+    
     let params =new URLSearchParams(myURL.parse(req.url).query);
-    let code = params.get('code');
+    
     let svtoken = params.get('state');
-    let data =await oAuth.googleAuth.getAccessToken(code);
-    console.log(data);
+    try{
+        jwt.verify(svtoken,PRIVATE_KEY);
+    }   
+    catch(e){
+        res.writeHead(404,'NO ACCESS');
+        res.end();
+        return;
+    } 
+    let auth_values = jwt.decode(svtoken,PRIVATE_KEY);
+    let code = params.get('code');
+    models.User.findOne({email:auth_values.user},(err,user)=>{
+        if(!err){
+            console.log();
+            if(user.googleAuth.authorized!=false)
+            { 
+                oAuth.googleAuth.getAccessToken(code).then((data)=>{
+                    try{
+                        models.User.updateOne({email:auth_values.user},{googleAuth:{accessToken:data.access_token,refreshToken:data.refresh_token,authorized:true,lastAccessed:new Date()}}).then(console.log('success getting token'));
+                    }
+                    catch(e){
+                        res.writeHead(404,'Error logging In');
+                        res.end();return ;   
+                    }
+                });            
+            }
+    }
+    });
     let file = await mainPage.renderMainPage(svtoken);
     res.writeHead(200, {
         'Content-Type': 'text/html'
@@ -38,15 +90,45 @@ exports.googleAuth = async (req,res) =>{
 }
 
 exports.oneDriveAuth = async(req,res) =>{
-    
-    
     let params =new URLSearchParams(myURL.parse(req.url).query);
-    let code = params.get('code');
     let svtoken = params.get('state');
-    let data = await oAuth.onedriveAuth.getAccessToken(code);
-    console.log(data);
-    let result = await oAuth.onedriveAuth.refreshAccesstoken(data.refresh_token);
-    console.log(result);
+    try{
+        jwt.verify(svtoken,PRIVATE_KEY);
+    }   
+    catch(e){
+        res.writeHead(404,'NO ACCESS');
+        res.end();
+        return;
+    } 
+    let auth_values = jwt.decode(svtoken,PRIVATE_KEY); 
+    let code = params.get('code');
+    models.User.findOne({email:auth_values.user},(err,user)=>{
+        if(!err){
+            console.log();
+            if(user.googleAuth.authorized!=false)
+            {   
+                
+                oAuth.onedriveAuth.getAccessToken(code).then((data)=>{
+                    console.log(data);
+                    if(data['error']){
+                    //
+                    
+                        //some error in here
+                        
+                    }else{
+                        try{
+                            models.User.updateOne({email:auth_values.user},{oneDriveAuth:{accessToken:data.access_token,refreshToken:data.refresh_token,authorized:true,lastAccessed:new Date()}}).then(console.log('success getting token'));
+                        }
+                        catch(e){
+                            res.writeHead(404,'Error logging In');
+                            res.end();return ;   
+                        }
+
+                }
+                });            
+            }
+    }
+    });
     let file = await mainPage.renderMainPage(svtoken);
     res.writeHead(200, {
         'Content-Type': 'text/html'

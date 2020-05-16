@@ -31,7 +31,7 @@ const {credentials}=require('./credentials');
     }
 
 
-    async function  refreshAccesstoken(refreshToken){
+async function  refreshAccesstoken(refreshToken){
         let dataToSend={  
             'client_id':credentials.client_id,
             'redirect_uri': credentials.redirect_uris,

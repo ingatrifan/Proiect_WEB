@@ -69,6 +69,31 @@ async function revokeToken(token){
           })      
     });
 }
+
+// asta doar la google drive am gasit
+async function checkToken(token){
+    const curl = new Curl();
+    const url='https://www.googleapis.com/oauth2/v1/tokeninfo?access_token='+token;       
+    curl.setOpt(Curl.option.URL,url);
+    curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
+    curl.setOpt(Curl.option.HTTPHEADER,cntType);
+    //curl.setOpt(Curl.option.CUSTOMREQUEST, "POST");
+    curl.on('error', curl.close.bind(curl));
+    curl.perform();
+    console.log("revoking");
+    return new Promise((resolve,reject)=>{
+        curl.on('end', (statusCode, body) => {
+            if(statusCode==200){
+                let value  =JSON.parse(body);
+                if(value['error']){
+                    resolve(false);
+                }
+                resolve(true);
+            }
+            resolve(false);
+          })      
+    });
+}
 module.exports = {
-    getAccessToken,refreshAccessToken,revokeToken
+    getAccessToken,refreshAccessToken,revokeToken,checkToken
 };

@@ -1,0 +1,1397 @@
+{
+ "kind": "drive#fileList",
+ "etag": "\"YnyRFq-EY7n6_TxC0dx8lVjUf_8\"",
+ "selfLink": "https://www.googleapis.com/drive/v2/files",
+ "incompleteSearch": false,
+ "items": [
+  {
+   "kind": "drive#file",
+   "id": "1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM",
+   "etag": "\"MTU4OTIyMzg0MzAwOQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM",
+   "webContentLink": "https://drive.google.com/uc?id=1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/jpeg",
+   "thumbnailLink": "https://lh3.googleusercontent.com/DI9tuvUiuEv5-yJcIplQmFdT60GlxlodgzPI-IUgLjVIll4X0g7vG4k1FSzNjcBLOtC2O7bI6aw=s220",
+   "title": "5.png",
+   "mimeType": "image/jpeg",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": true
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-11T19:04:03.009Z",
+   "modifiedDate": "2020-05-11T19:04:03.009Z",
+   "modifiedByMeDate": "2020-05-11T19:04:03.009Z",
+   "lastViewedByMeDate": "2020-05-15T20:09:37.395Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "2",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"NVBOdv5rsF2oK4rICjf1PgkQVxQ\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1w9ccjUBWWxi5tEB9RJOKfGf-CZ6dwXqM/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "5.png",
+   "fileExtension": "png",
+   "md5Checksum": "b38d3359ed9d10255ec196e61bf11b53",
+   "fileSize": "33255",
+   "quotaBytesUsed": "33255",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6dW1TUk9KSDY2NzVISi95ZFA2dUR2TGNWR1RJPQ",
+   "imageMediaMetadata": {
+    "width": 278,
+    "height": 280,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "15vLXozATq0Iihj_AejDeccVC2Un13VOQ",
+   "etag": "\"MTU4OTIyMzcxNTg5OQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/15vLXozATq0Iihj_AejDeccVC2Un13VOQ",
+   "webContentLink": "https://drive.google.com/uc?id=15vLXozATq0Iihj_AejDeccVC2Un13VOQ&export=download",
+   "alternateLink": "https://drive.google.com/file/d/15vLXozATq0Iihj_AejDeccVC2Un13VOQ/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/15vLXozATq0Iihj_AejDeccVC2Un13VOQ/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/jpeg",
+   "thumbnailLink": "https://lh3.googleusercontent.com/B3FnS1q2CAs6h25-42kWF68vQGMgSjgm6e4z4LCz0p7JsUnAT2OJUb2bOBgvpni9lNmTQzvAMFU=s220",
+   "title": "5.png",
+   "mimeType": "image/jpeg",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-11T19:01:55.899Z",
+   "modifiedDate": "2020-05-11T19:01:55.899Z",
+   "modifiedByMeDate": "2020-05-11T19:01:55.899Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/15vLXozATq0Iihj_AejDeccVC2Un13VOQ/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/15vLXozATq0Iihj_AejDeccVC2Un13VOQ?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"_JzCCYhY2GRwLauTdU1qGbe1mls\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/15vLXozATq0Iihj_AejDeccVC2Un13VOQ/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "5.png",
+   "fileExtension": "png",
+   "md5Checksum": "b38d3359ed9d10255ec196e61bf11b53",
+   "fileSize": "33255",
+   "quotaBytesUsed": "33255",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6WTJxaDlZVG9TUDBLc0o5bEVMUjBaNU9WY2hJPQ",
+   "imageMediaMetadata": {
+    "width": 278,
+    "height": 280,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY",
+   "etag": "\"MTU4OTIyMzcxNTUxMQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY",
+   "webContentLink": "https://drive.google.com/uc?id=11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY&export=download",
+   "alternateLink": "https://drive.google.com/file/d/11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/jpeg",
+   "thumbnailLink": "https://lh3.googleusercontent.com/GcsDHBw9xONwM6l2arGjl_Iv3IS3OvlMCBkmMJVppP4SRDOoDcBHz4SrQ_J6MH4dE16cpmYOyHs=s220",
+   "title": "5.png",
+   "mimeType": "image/jpeg",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-11T19:01:55.511Z",
+   "modifiedDate": "2020-05-11T19:01:55.511Z",
+   "modifiedByMeDate": "2020-05-11T19:01:55.511Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"2PJXFVMVoaCAIpBAcmjbTWHXrwQ\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/11P7cRMa5Oz7CWGJnK3cYoTDd59DEDwfY/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "5.png",
+   "fileExtension": "png",
+   "md5Checksum": "b38d3359ed9d10255ec196e61bf11b53",
+   "fileSize": "33255",
+   "quotaBytesUsed": "33255",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6ZThORGVVN3RBYmFweEFtZ3JjcmhUU1RkNHhNPQ",
+   "imageMediaMetadata": {
+    "width": 278,
+    "height": 280,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe",
+   "etag": "\"MTU4OTIyMzcxMjM4MQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe",
+   "webContentLink": "https://drive.google.com/uc?id=1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/jpeg",
+   "thumbnailLink": "https://lh3.googleusercontent.com/dKEDcgmRwCrCmE7HhuqdiMPAMVJ6rwxZ6nQFFozas5Bpy3APRW01J-HC6WiVXz7J8E5cARfF41c=s220",
+   "title": "5.png",
+   "mimeType": "image/jpeg",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-11T19:01:52.381Z",
+   "modifiedDate": "2020-05-11T19:01:52.381Z",
+   "modifiedByMeDate": "2020-05-11T19:01:52.381Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"1LjvaE0py_qvqtyzK5iu2Dm_3oU\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1lIv6G682JpuHZL2i3Sq0EW36ho2jPyWe/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "5.png",
+   "fileExtension": "png",
+   "md5Checksum": "b38d3359ed9d10255ec196e61bf11b53",
+   "fileSize": "33255",
+   "quotaBytesUsed": "33255",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6QlV0S054a1pwRHRRc2FBODlyaHNMYkZ5eDM0PQ",
+   "imageMediaMetadata": {
+    "width": 278,
+    "height": 280,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn",
+   "etag": "\"MTU4ODg3MzgwOTgxNw\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn",
+   "webContentLink": "https://drive.google.com/uc?id=1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/T6fZ_Nxyr7dChj2-e8cvtIcQ_onSCzMLnstBAIQU6W-n2YMbt4mdj8dtvCB7A3ch3vJPbUD-O-Q=s220",
+   "title": "paint.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": true
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-07T17:50:09.817Z",
+   "modifiedDate": "2020-05-07T17:50:09.817Z",
+   "modifiedByMeDate": "2020-05-07T17:50:09.817Z",
+   "lastViewedByMeDate": "2020-05-07T20:41:42.256Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "2",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"f18kp2lQ6ziI2-b9WLQa9CVX5RE\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1ZAtkAJDmLVa8-QTuPxfp8ekNy1iLmvOn/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "paint.png",
+   "fileExtension": "png",
+   "md5Checksum": "e6be3d40bd159931088e5668cf0f9664",
+   "fileSize": "247724",
+   "quotaBytesUsed": "247724",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6Zld0ajc5QWJtMGtwaTBpZEVoNURGN0U0NXI4PQ",
+   "imageMediaMetadata": {
+    "width": 800,
+    "height": 600,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL",
+   "etag": "\"MTU4ODg3MzYzNjk5OQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL",
+   "webContentLink": "https://drive.google.com/uc?id=1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/k4JAX-hMp_sLp1M4kptTMAlrGC7FMSs3yzP6iRg3E6e002HiabRzMCQmYsbaeM_ihjGlUJYoFBI=s220",
+   "title": "paint.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-07T17:47:16.999Z",
+   "modifiedDate": "2020-05-07T17:47:16.999Z",
+   "modifiedByMeDate": "2020-05-07T17:47:16.999Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"0CI7-Ldhl3knQeVc38GR1Is8VsQ\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1SjpwZ99nsgn3RYt-cDgM1tMolqceyzNL/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "paint.png",
+   "fileExtension": "png",
+   "md5Checksum": "e6be3d40bd159931088e5668cf0f9664",
+   "fileSize": "247724",
+   "quotaBytesUsed": "247724",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6NkFvTHpSSkNRZkN5cCtqNXRrVUtlajE4U3BJPQ",
+   "imageMediaMetadata": {
+    "width": 800,
+    "height": 600,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON",
+   "etag": "\"MTU4ODEwNTQwMTAwMA\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON",
+   "webContentLink": "https://drive.google.com/uc?id=1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/text/plain",
+   "thumbnailLink": "https://lh3.googleusercontent.com/pJVxK7sBmIApLD0wm6xyJ9cqivCImjWYXR2W7OYmdVteWRTb20d23M6ZzDSxG7ZSPORx3zDynvo=s220",
+   "title": "asdfasdfasdf.txt",
+   "mimeType": "text/plain",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": true
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-05-15T19:57:01.843Z",
+   "modifiedDate": "2020-04-28T20:23:21.000Z",
+   "modifiedByMeDate": "2020-04-28T20:23:21.000Z",
+   "lastViewedByMeDate": "2020-05-15T19:57:01.843Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "2",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"2w8QjkeeQ5O93h_gY-4VliTQkyc\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1a2bvwAGioYJT5tmHiRLL4WKEIFEiUNON/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "asdfasdfasdf.txt",
+   "fileExtension": "txt",
+   "md5Checksum": "4b3a90cd0b816f356baeead6f2ed240e",
+   "fileSize": "3627",
+   "quotaBytesUsed": "3627",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6bnlLNFVVYi84NnVZbnYvd2xPZDdjZGU3NHQ4PQ",
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb",
+   "etag": "\"MTU4NzcxODA1MTE0Ng\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb",
+   "webContentLink": "https://drive.google.com/uc?id=1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/m_i7xyqpnck6TBU1fSYsOfVEvOxBG3zve7T-Lz5hGCTBU5AiggsENd5oKpsuYTAFxZ2D_tT9W0o=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-24T08:47:31.146Z",
+   "modifiedDate": "2020-04-24T08:47:31.146Z",
+   "modifiedByMeDate": "2020-04-24T08:47:31.146Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"n50BiVpoBS5S3PJtUqK-67xla9M\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1ABIO1dHmNYyDKp7vP85QjpIg6VmgVYXb/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6bmNJTjBtYnpJaFQ4ejFRVFM3THhvenVnZnk0PQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1eiVjsh1s63JKykNluQaluCX8cOjwyMRa",
+   "etag": "\"MTU4NzcxNzkzNDQ2Mw\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1eiVjsh1s63JKykNluQaluCX8cOjwyMRa",
+   "webContentLink": "https://drive.google.com/uc?id=1eiVjsh1s63JKykNluQaluCX8cOjwyMRa&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1eiVjsh1s63JKykNluQaluCX8cOjwyMRa/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1eiVjsh1s63JKykNluQaluCX8cOjwyMRa/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/21u0p__Wt0fLEN0DK4BYQEKZ6NoLQX6Z0j5MI6trGGoBaizzJyncNDK0-5O1wA84EXKQfGoz7b8=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-24T08:45:34.463Z",
+   "modifiedDate": "2020-04-24T08:45:34.463Z",
+   "modifiedByMeDate": "2020-04-24T08:45:34.463Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1eiVjsh1s63JKykNluQaluCX8cOjwyMRa/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1eiVjsh1s63JKykNluQaluCX8cOjwyMRa?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"PRmX1Z-nXOtGr7QRSvm7GsH41b0\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1eiVjsh1s63JKykNluQaluCX8cOjwyMRa/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6WXVJSWNYSTVodWhtZlYzaG1Va3hEbHhqeGJFPQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW",
+   "etag": "\"MTU4NzY1OTQ4Nzg4Nw\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW",
+   "webContentLink": "https://drive.google.com/uc?id=1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/zrZWfH8sUrmY1Oy9IM8nrnKblgYM8Yx28zTWsPwPmEAOHCEUn1FSszb5-qMizL5frjFg8rFS1qw=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-23T16:31:27.887Z",
+   "modifiedDate": "2020-04-23T16:31:27.887Z",
+   "modifiedByMeDate": "2020-04-23T16:31:27.887Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"xgoVp5mo-AvB930DPoaRp-eID68\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1Pm9Egrohz2EBVlep2WpqwpTNlr7NzycW/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6Y3RzQmo4OCtSeGNOYXZXaHFmaTEyN1lHQnlRPQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1FVGk_JuHmieZpoueeiHwokMND6_gcUxH",
+   "etag": "\"MTU4NzY1OTQ0MDExMQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1FVGk_JuHmieZpoueeiHwokMND6_gcUxH",
+   "webContentLink": "https://drive.google.com/uc?id=1FVGk_JuHmieZpoueeiHwokMND6_gcUxH&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1FVGk_JuHmieZpoueeiHwokMND6_gcUxH/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1FVGk_JuHmieZpoueeiHwokMND6_gcUxH/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/4vGL9WwjTjCoJmXwh0BhJvv-YeLQzQWExItMq8T-dlOI_qVpeLUH444xp4etQkARrwqtmLKmf9o=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-23T16:30:40.111Z",
+   "modifiedDate": "2020-04-23T16:30:40.111Z",
+   "modifiedByMeDate": "2020-04-23T16:30:40.111Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1FVGk_JuHmieZpoueeiHwokMND6_gcUxH/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1FVGk_JuHmieZpoueeiHwokMND6_gcUxH?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"Zw18_hU4zM7QF-XCVFxA1b648tI\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1FVGk_JuHmieZpoueeiHwokMND6_gcUxH/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6d0MwdHdPT2JqNi8xMXo4S3I1TDB1V0V3cDg4PQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF",
+   "etag": "\"MTU4NzY1OTA0NTgwMw\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF",
+   "webContentLink": "https://drive.google.com/uc?id=1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/ZsoBWJ0948SwxI78R46HyyjpVFYvKKAC-taIMv45yFRVdU4Xua4o0v_oaBQWtT7-IE_AkmcMnqQ=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-23T16:24:05.803Z",
+   "modifiedDate": "2020-04-23T16:24:05.803Z",
+   "modifiedByMeDate": "2020-04-23T16:24:05.803Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"prOW-gTWizkLBWdMLIOvghOdSXM\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1ALaThgEDKMDWAIq-ajYB8R2i4Gv3s_zF/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6RFpYd0N3dG42UEJwZ082SWxHeFZCR3ZyVUdZPQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M",
+   "etag": "\"MTU4NzY1ODg5OTg1Mw\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M",
+   "webContentLink": "https://drive.google.com/uc?id=1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/B9sRF9W5XwBDGwGw4lmJ_D8YlQoDP9V4-_llG4VFORgut2R-UgzyZupeF6VQ-TpFkEGYsilp47U=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": true
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-23T16:21:39.853Z",
+   "modifiedDate": "2020-04-23T16:21:39.853Z",
+   "modifiedByMeDate": "2020-04-23T16:21:39.853Z",
+   "lastViewedByMeDate": "2020-05-07T20:41:37.721Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "3",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"ghvvlni2LO-6UVU0vvWnDH_oj7A\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1g1FFvXP8EyT7Gd1epqSXedniFczd2f0M/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6S2VYczBrWUI3czd0NVh0cllWM0gxeVFORGc0PQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U",
+   "etag": "\"MTU4NzY1ODg4NTMwMg\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U",
+   "webContentLink": "https://drive.google.com/uc?id=1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/FQxFFJDdNDql-oKt29pnrHcP4_MChNgo_JhRnZDmdN7k_KjokkhihTHCEVOwpUvnr8x7WAh-Ozs=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-23T16:21:25.302Z",
+   "modifiedDate": "2020-04-23T16:21:25.302Z",
+   "modifiedByMeDate": "2020-04-23T16:21:25.302Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"zwvRO57Hoa8JXJ2mSz41kXZ-OeE\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1a-jFasAJ9BA6igC4e_lIsiDbAcz8RQ2U/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6S3Bvb0FScFcyN0lPZHprbFlrcC9ici8zY0pnPQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY",
+   "etag": "\"MTU4NzY1ODgwOTM1Mw\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY",
+   "webContentLink": "https://drive.google.com/uc?id=1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY&export=download",
+   "alternateLink": "https://drive.google.com/file/d/1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY/view?usp=drivesdk",
+   "embedLink": "https://drive.google.com/file/d/1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY/preview?usp=drivesdk",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/image/png",
+   "thumbnailLink": "https://lh3.googleusercontent.com/soa_23mYSNJLS8dnnQl6ux_K5mfgTYcAfK918svYrKSJs8Mq88KHEsGExCWV1TVchYlNE89McOw=s220",
+   "title": "1.png",
+   "mimeType": "image/png",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": false
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-04-23T16:20:09.353Z",
+   "modifiedDate": "2020-04-23T16:20:09.353Z",
+   "modifiedByMeDate": "2020-04-23T16:20:09.353Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "version": "1",
+   "parents": [
+    {
+     "kind": "drive#parentReference",
+     "id": "0AFblRMKKJuG6Uk9PVA",
+     "selfLink": "https://www.googleapis.com/drive/v2/files/1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY/parents/0AFblRMKKJuG6Uk9PVA",
+     "parentLink": "https://www.googleapis.com/drive/v2/files/0AFblRMKKJuG6Uk9PVA",
+     "isRoot": true
+    }
+   ],
+   "downloadUrl": "https://www.googleapis.com/drive/v2/files/1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY?alt=media&source=downloadUrl",
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"nCT1PWiiqyEk0X2tEY_gFVS1BGI\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1cjhDUKLhE5VO76eLJdQJNpcAhx_MjKXY/permissions/me",
+    "role": "owner",
+    "type": "user"
+   },
+   "originalFilename": "1.png",
+   "fileExtension": "png",
+   "md5Checksum": "d4983f69975b6177a18e0af0f2e04356",
+   "fileSize": "183466",
+   "quotaBytesUsed": "183466",
+   "ownerNames": [
+    "Proiect TW"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Proiect TW",
+     "isAuthenticatedUser": true,
+     "permissionId": "14419727183608410402",
+     "emailAddress": "proiect.web2020@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Proiect TW",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Proiect TW",
+    "isAuthenticatedUser": true,
+    "permissionId": "14419727183608410402",
+    "emailAddress": "proiect.web2020@gmail.com"
+   },
+   "capabilities": {
+    "canCopy": true,
+    "canEdit": true
+   },
+   "editable": true,
+   "copyable": true,
+   "writersCanShare": true,
+   "shared": false,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "headRevisionId": "0B1blRMKKJuG6OXIzMnF0Wjl0bFpiUGNCd2pGOWozNU0xcWFFPQ",
+   "imageMediaMetadata": {
+    "width": 1366,
+    "height": 768,
+    "rotation": 0
+   },
+   "spaces": [
+    "drive"
+   ]
+  },
+  {
+   "kind": "drive#file",
+   "id": "1w_yNBayjiDvaHyVN-9X-2QL7QCHexrtU",
+   "etag": "\"MTU4NjI3MjU0NTM4OQ\"",
+   "selfLink": "https://www.googleapis.com/drive/v2/files/1w_yNBayjiDvaHyVN-9X-2QL7QCHexrtU",
+   "alternateLink": "https://drive.google.com/drive/folders/1w_yNBayjiDvaHyVN-9X-2QL7QCHexrtU",
+   "embedLink": "https://drive.google.com/embeddedfolderview?id=1w_yNBayjiDvaHyVN-9X-2QL7QCHexrtU",
+   "iconLink": "https://drive-thirdparty.googleusercontent.com/16/type/application/vnd.google-apps.folder+shared",
+   "title": "AIIT-2020-internal",
+   "mimeType": "application/vnd.google-apps.folder",
+   "labels": {
+    "starred": false,
+    "hidden": false,
+    "trashed": false,
+    "restricted": false,
+    "viewed": true
+   },
+   "copyRequiresWriterPermission": false,
+   "createdDate": "2020-02-25T07:52:21.668Z",
+   "modifiedDate": "2020-04-07T15:15:45.389Z",
+   "lastViewedByMeDate": "2020-05-07T17:48:24.417Z",
+   "markedViewedByMeDate": "1970-01-01T00:00:00.000Z",
+   "sharedWithMeDate": "2020-04-24T12:12:39.839Z",
+   "version": "2942",
+   "parents": [],
+   "userPermission": {
+    "kind": "drive#permission",
+    "etag": "\"vUrjq0JFYjqP3wkP00vkwvUXhP0\"",
+    "id": "me",
+    "selfLink": "https://www.googleapis.com/drive/v2/files/1w_yNBayjiDvaHyVN-9X-2QL7QCHexrtU/permissions/me",
+    "role": "reader",
+    "type": "user"
+   },
+   "quotaBytesUsed": "0",
+   "ownerNames": [
+    "Corina Forascu"
+   ],
+   "owners": [
+    {
+     "kind": "drive#user",
+     "displayName": "Corina Forascu",
+     "isAuthenticatedUser": false,
+     "permissionId": "08997946290883685802",
+     "emailAddress": "corina.forascu@gmail.com"
+    }
+   ],
+   "lastModifyingUserName": "Noris Filip",
+   "lastModifyingUser": {
+    "kind": "drive#user",
+    "displayName": "Noris Filip",
+    "picture": {
+     "url": "https://lh3.googleusercontent.com/a-/AOh14Gj2WDGkF-pX-g4g_PAVEanKd4gI3z72JI33wjjxZg=s64"
+    },
+    "isAuthenticatedUser": false,
+    "permissionId": "17849870779514916444"
+   },
+   "capabilities": {
+    "canCopy": false,
+    "canEdit": false
+   },
+   "editable": false,
+   "copyable": false,
+   "writersCanShare": true,
+   "shared": true,
+   "explicitlyTrashed": false,
+   "appDataContents": false,
+   "spaces": [
+    "drive"
+   ]
+  }
+ ]
+}

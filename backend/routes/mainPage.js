@@ -15,10 +15,7 @@ async function mainPage(req,res){
     
     if(myVar[0]!='serverToken')
     {
-        res.writeHead(404, {
-            'Content-Type': 'text/plain'
-        });    
-        res.write('INVALID URL');
+        res.writeHead(404, 'No Access');    
         res.end();
     }
     else{
@@ -29,18 +26,12 @@ async function mainPage(req,res){
             res.writeHead(200, {
                 'Content-Type': 'text/html'
             });
-            
-            
             let r =await renderMainPage(token);
             r.pipe(res);
             
         }
         catch(e){
-            res.writeHead(404, {
-                'Content-Type': 'text/plain'
-            });    
-            
-            res.write('NO AUTHENTIFICATION');
+            res.writeHead(404,'NO AUTHENTIFICATION' );    
             res.end();
         }
     }

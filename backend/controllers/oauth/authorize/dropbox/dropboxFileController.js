@@ -3,6 +3,7 @@ const myURL=require('url');
 const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
+const uploadFile = require('./upload');
 
 async function download (req,res){
 

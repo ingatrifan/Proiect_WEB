@@ -14,9 +14,7 @@ async function  download(accessToken,fileId,filePath){
    curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+accessToken]);
    const fileOut = fs.openSync(filePath, 'w+')
    curl.setOpt(Curl.option.WRITEFUNCTION, (buff, nmemb, size) => {
-    
       let written = 0
-
   if (fileOut) {
     written = fs.writeSync(fileOut, buff, 0, nmemb * size)
   } else {

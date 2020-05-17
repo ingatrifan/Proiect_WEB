@@ -10,7 +10,15 @@ const fileSchema = new Schema(
       type: String,
       default:null
     },
-    fragments:{
+    dropboxFragments:{
+      type:Array,
+      default:null
+    },
+    googleFragments:{
+      type:Array,
+      default:null
+    },
+    driveFragments:{
       type:Array,
       default:null
     },

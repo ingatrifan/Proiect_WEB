@@ -1,21 +1,30 @@
 const fs = require('fs');
-const myURL=require('url');
+const url=require('url');
 const querystring = require('querystring');
-const {Curl } = require('node-libcurl');
-const {credentials}=require('./credentials');
-const uploadFile = require('./upload');
+const fc = require('./upload');
+const db = require('../models')
 
-async function download (req,res){
+exports.download = async(req,res)=>{
 
 }
 
 
-async function upload (req,res){
-    
+exports.upload  = async(user,file,fileId) =>{
+    try {
+        let connUser = await db.User.findOne({email:user.email});
+        let accessTkn = connUser.dropboxAuth.accessToken;
+        let response = await fc.uploadFile(accessTkn,file);
+        let filePath = response["path lower"];
+        let dbFile = await db.File.find(fileId);
+        dbFile.dropboxFragments.push(filePath);
+        
+    } catch (error) {
+        
+    }
 }
 
 
-async function remove (req,res){
+exports.remove = async(req,res) =>{
     
 }
 

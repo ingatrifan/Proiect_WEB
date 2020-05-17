@@ -8,6 +8,7 @@ const fs =require('fs');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const fileIndex = require('./oauth/authorize/fileIndex');
 const path = require('path');
+
 exports.upload = async (req,res) => { 
   console.log('UPLOAD');
   let token;

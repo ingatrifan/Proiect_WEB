@@ -25,9 +25,56 @@ async function upload (accessToken, filePath){
       })*/
 }
 
-
-async function remove (req,res){
+async function download(accessToken, fileId, filePath) {
     
+    const download_url = `https://graph.microsoft.com/v1.0/me/drive/items/${fileId}`;
+
+    const curl = new Curl();
+    curl.setOpt(Curl.option.URL,download_url);
+    curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
+    curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+accessToken]);
+    curl.setOpt(Curl.option.HTTPGET);
+
+    const fileOut = fs.openSync(filePath,'w+')
+
+    curl.setOpt(Curl.option.WRITEFUNCTION, (buff, nmemb, size) => {
+        let written = 0
+    if (fileOut) {
+      written = fs.writeSync(fileOut, buff, 0, nmemb * size)
+    } else {
+      process.stdout.write(buff.toString())
+      written = size * nmemb
+    }
+  
+    return written
+    });
+
+    curl.perform()
+    curl.on('error', (e)=>{console.log(e);curl.close.bind(curl)})
+    return new Promise((response,reject)=>{
+        curl.on('end', (statusCode, body) => {
+        curl.close()
+        response(true);
+        });      
+    });
+}
+
+
+
+async function remove (accessToken, fileId) {
+    const curl = new Curl();
+    const delete_url = `https://graph.microsoft.com/v1.0/me/drive/items/${fileId}`;
+    curl.setOpt(Curl.option.URL,delete_url);
+    curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
+    curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+accessToken]);
+    curl.setOpt(Curl.option.CUSTOMREQUEST,'DELETE');
+    curl.perform();
+    return new Promise((resolve,reject)=>{
+        curl.on('end', (statusCode, body) => {
+            curl.close()
+            resolve(statusCode);
+          })      
+    })
 }
 
 module.exports ={

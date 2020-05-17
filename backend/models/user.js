@@ -23,14 +23,31 @@ const userSchema = new Schema(
         type:String,
         default:null
       }
+      ,authorized:{
+        type:Boolean,
+        default:null
+      },
+      lastAccessed:{
+        type:Date,
+        default:null
+      }
     },
     dropboxAuth: {
       accessToken:{
         type:String,
         default:null
       },
-      refreshToken:{
+      refreshToken:{// doesn't have refreh token
         type:String,
+        default:null
+      }
+      ,
+      authorized:{
+        type:Boolean,
+        default:null
+      },
+      lastAccessed:{
+        type:Date,
         default:null
       }
     },
@@ -41,6 +58,12 @@ const userSchema = new Schema(
       },
       refreshToken:{
         type:String,
+        default:null
+      },authorized:{
+        type:Boolean,
+        default:null
+      },lastAccessed:{
+        type:Date,
         default:null
       }
     }

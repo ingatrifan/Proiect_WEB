@@ -2,7 +2,6 @@ const path = require('path');
 const url = require('url');
 const fs = require('fs');
 const mimetypes = {
-    'html': 'text/html',
     'css': 'text/css',
     'js': 'text/javascript',
     'png': 'image/png',
@@ -13,11 +12,8 @@ const mimetypes = {
 
 pageRendering = async (req,res) => {
     var uri = url.parse(req.url).pathname;
-    var filename 
-    if(uri.split('.').reverse()[0]=='html')
-        filename = path.join(process.cwd(),'views/pages',unescape(uri));
-    else
-        filename = path.join(process.cwd(),'views',unescape(uri));
+    var filename ;
+    filename = path.join(process.cwd(),'views',unescape(uri));
     var loadFile;
     try{
         loadFile =fs.lstatSync(filename);

@@ -1,29 +1,75 @@
+//PRETTY USELESS NOW, 
 const jwt = require('jsonwebtoken');
 const cleanFiles = require('../utils/removingFiles');
 const HttpStatusCodes = require("http-status-codes");
-const uploadFuncs = require("../utils/upload")
 const formidable = require("formidable")
 const models = require('../models/index');
 const fs =require('fs');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
+const fileIndex = require('./oauth/authorize/fileIndex');
+const path = require('path');
 exports.upload = async (req,res) => { 
   console.log('UPLOAD');
+  let token;
   try {
     const form = new formidable.IncomingForm();
     form.parse(req, async(err, fields, files) => {
 
       if (files.file){
-        addFileDB(files.file,fields.serverToken);
-      }  
-    });
-    res.statusCode = HttpStatusCodes.OK
+        token = fields.serverToken;
+        try{
+          jwt.verify(token,PRIVATE_KEY);
+        }
+        catch(e){
+          res.statusCode = HttpStatusCodes.OK
+          res.setHeader('Content-Type', 'application/json')
+           res.end(JSON.stringify({success: false, message: 'Verification was denied'}));
+           return;   
+        }
+        let auth_values = jwt.decode(token,PRIVATE_KEY);
+        //testing purposes
+        //let b= fs.readFileSync(files.file.path);
+        try{
+          //fs.writeFileSync('./tmp/test.txt',b);
+        }
+        catch(e){
+          console.log(e);
+        }
+        await models.User.findOne({email:auth_values.user},(err,user)=>{
+          if(!err){
+            //must check here if all the 3 accounts are active
+            
+            let accessToken = user.oneDriveAuth.accessToken;
+            
+            let filePath = path.join(process.cwd(),'TEST_1.png',);
+            fileIndex.onedriveFileController.upload(accessToken,filePath).then(respnse=>{
+              
+            });
+          }
+        });
+
+
+        res.statusCode = HttpStatusCodes.OK
+        res.setHeader('Content-Type', 'application/json')
+        console.log()
+        //res.write(JSON.stringify({"s uccess": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}))
+        res.end(JSON.stringify({"success": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}));
+        return ;
+      } else{
+        res.statusCode = HttpStatusCodes.OK
     res.setHeader('Content-Type', 'application/json')
-    return res.write(JSON.stringify({success: true, message: 'Successfully upload'}))
+    console.log()
+    //res.write(JSON.stringify({"s uccess": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}))
+    res.end(JSON.stringify({"success": false, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Something bad happened'}));
+    return ;
+      } 
+    });
   } catch (error) {
     console.error(error)
     res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR
     res.setHeader('Content-Type', 'application/json')
-    return res.end(JSON.stringify({success: false, message: 'Something bad happend'}))
+    res.end(JSON.stringify({"success": false, "message": 'Something bad happend'}))
+    return ;
   }
 }
 
@@ -48,7 +94,7 @@ async function fragmentation(file,file_id){
       size = size-chunk_size;
   } 
   return jsonArray;
-};
+};  
 function fragment(chunk,id_file,number,size){
   fs.writeFileSync("./tmp/"+id_file.split('.')[0]+"_"+number+".byte",chunk);
   //update over here
@@ -68,8 +114,6 @@ function fragment(chunk,id_file,number,size){
 
 async function addFileDB(file,token){
   try{
-    
-      jwt.verify(token,PRIVATE_KEY);
       let auth_values = jwt.decode(token,PRIVATE_KEY);
       var file_id = file.name;
       let user =null;

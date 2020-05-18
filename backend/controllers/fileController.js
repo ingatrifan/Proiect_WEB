@@ -7,7 +7,7 @@ const formidable = require("formidable")
 const uploadController = require('./uploadController');
 
 exports.upload = async (req,res) => {
-  return uploadController.upload(req,res);
+   uploadController.upload(req,res);
 }
 
 

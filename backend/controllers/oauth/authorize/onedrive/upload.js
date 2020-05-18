@@ -25,25 +25,16 @@ async function uploadFile(accessToken, filePath,SESION_UPLOADURL){
     curl.on('error', function (error, errorCode) {
 
         fs.closeSync(fd)
-        //fs.unlinkSync(filePath)
         curl.close();
       })
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             fs.closeSync(fd)
-            //fs.unlinkSync(filePath)
             console.log('SUCCESS');
-            // the same for the `Curl` instance, always close it when you don't need it anymore.
             curl.close();
           })      
-    })
-    
-});
-
-
-}
-
-
+    }) 
+});}
 async function uploadSession(accessToken,filename){
     let dataToSend={
         'item':{

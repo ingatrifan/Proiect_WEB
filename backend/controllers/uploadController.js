@@ -1,13 +1,13 @@
 //PRETTY USELESS NOW, 
-const jwt = require('jsonwebtoken');
 const cleanFiles = require('../utils/removingFiles');
 const HttpStatusCodes = require("http-status-codes");
 const formidable = require("formidable")
 const models = require('../models/index');
 const fs =require('fs');
-const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const fileIndex = require('./oauth/authorize/fileIndex');
 const path = require('path');
+const validation = require('../utils/checkValidation');
+
 exports.upload = async (req,res) => { 
   console.log('UPLOAD');
   let token;
@@ -17,38 +17,18 @@ exports.upload = async (req,res) => {
 
       if (files.file){
         token = fields.serverToken;
-        try{
-          jwt.verify(token,PRIVATE_KEY);
-        }
-        catch(e){
-          res.statusCode = HttpStatusCodes.OK
-          res.setHeader('Content-Type', 'application/json')
-           res.end(JSON.stringify({success: false, message: 'Verification was denied'}));
-           return;   
-        }
+        if(validation.checkValidation(token,res)==false)
+          return;
         let auth_values = jwt.decode(token,PRIVATE_KEY);
-        //testing purposes
-        //let b= fs.readFileSync(files.file.path);
-        try{
-          //fs.writeFileSync('./tmp/test.txt',b);
-        }
-        catch(e){
-          console.log(e);
-        }
+        
         await models.User.findOne({email:auth_values.user},(err,user)=>{
           if(!err){
-            //must check here if all the 3 accounts are active
-            
-            let accessToken = user.oneDriveAuth.accessToken;
-            
-            let filePath = path.join(process.cwd(),'TEST_1.png',);
-            fileIndex.onedriveFileController.upload(accessToken,filePath).then(respnse=>{
-              
+            let accessToken = user.googleAuth.accessToken;
+            let filePath = path.join(process.cwd(),'TEST_1.png');
+            fileIndex.googleFileController.upload(accessToken,filePath).then(response=>{
             });
           }
         });
-
-
         res.statusCode = HttpStatusCodes.OK
         res.setHeader('Content-Type', 'application/json')
         console.log()

@@ -1,7 +1,3 @@
-
-
-
-
 const credentials = 
 {"client_id":"282450647382-g7epadv9ud6slg873pm75gmhinhqjsao.apps.googleusercontent.com",
 "project_id":"tw2020-1587653034327","auth_uri":"https://accounts.google.com/o/oauth2/auth",

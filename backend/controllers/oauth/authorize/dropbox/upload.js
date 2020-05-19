@@ -1,27 +1,9 @@
 const request = require('request')
 const fs = require('fs');
+//here are start append and finish session for upload
+const upload = require('./utilityFunctions');
 
-const uploadFile = async (accessToken,file) =>{
-    try {
-        request.post(
-            ' https://content.dropboxapi.com/2/files/upload',
-            {
-                headers:{
-                    Authorization: 'Bearer '+accessToken ,
-                    "Dropbox-API-Arg": "{\"path\": \"/stol/"+file.name+"\",\"mode\": \"add\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}",
-                    "Content-Type": "application/octet-stream"
-                },
-                body:fs.createReadStream(file.path)
-            } , function resp(err,httprs,body){
-                if(err) console.log(err); else 
-                console.log(body);
-                return body;
-            })
-    } catch (error) {
-        console.log(error)
-        return error;
-    }
-}
+
 const downloadFile = async (accessToken,filePath) =>{
     try {
         request.post(
@@ -65,5 +47,5 @@ const deleteFile = async(accessToken,file) =>{
 }
 
 module.exports = {
-    uploadFile,downloadFile,deleteFile
+    upload,downloadFile,deleteFile
 }

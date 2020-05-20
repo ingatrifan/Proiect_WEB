@@ -5,34 +5,35 @@ const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 const UPLOAD_URL='https://graph.microsoft.com/v1.0/me/drive';
-
-async function uploadFile(accessToken, filePath,SESION_UPLOADURL){
-    let stats= fs.statSync(filePath);
-    console.log(SESION_UPLOADURL);
-    size = stats['size'];
-    fs.open(filePath,'r+',(err,fd)=>{
-    const curl = new Curl();
-    curl.setOpt(Curl.option.URL,SESION_UPLOADURL);
-    curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
-    curl.setOpt(Curl.option.UPLOAD, true)
-    curl.setOpt(Curl.option.HTTPHEADER,["Authorization: Bearer "+accessToken,
-    'Content-Length: '+size,
-    'Content-Range: bytes 0-'+size-1+'/'+size
-]);
-    curl.setOpt(Curl.option.READDATA, fd)
-    curl.setOpt(Curl.option.CUSTOMREQUEST,'PUT')
-    curl.perform()
-    curl.on('error', function (error, errorCode) {
-
-        fs.closeSync(fd)
-        curl.close();
-      })
+async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset){
+    let filePath = fragment.filePath;
+    let accessToken=fragment.token;
+    let contentRange ='bytes '+start +"-"+end+"/"+fileSize;
     return new Promise((resolve,reject)=>{
-        curl.on('end', (statusCode, body) => {
+        fs.open(filePath,'r+',(err,fd)=>{
+        const curl = new Curl();
+        curl.setOpt(Curl.option.URL,SESION_UPLOADURL);
+        curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
+        curl.setOpt(Curl.option.HTTPHEADER,[    
+            'Content-Length: '+numBytes,
+            'Content-Range: '+contentRange
+        ]);
+        let buff = new Buffer.alloc(numBytes);
+        fs.readSync(fd,buff,0,buff.length,offset);
+        curl.setOpt(Curl.option.POSTFIELDS,buff.toString());
+        curl.setOpt(Curl.option.CUSTOMREQUEST,'PUT')    
+        curl.perform()
+        curl.on('error', function (error, errorCode) {
+                console.log(error);
             fs.closeSync(fd)
-            console.log('SUCCESS');
             curl.close();
-          })      
+        })
+        
+            curl.on('end', (statusCode, body) => {
+                fs.closeSync(fd)
+                resolve(body);
+                curl.close();
+            })      
     }) 
 });}
 async function uploadSession(accessToken,filename){
@@ -47,7 +48,6 @@ async function uploadSession(accessToken,filename){
     const curl = new Curl();
     curl.setOpt(Curl.option.URL,UPLOAD_URL+'/root:/Stol/'+filename+':/createUploadSession');
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
-
     curl.setOpt(Curl.option.HTTPHEADER,["Authorization: Bearer "+accessToken,'Content-Type: application/x-www-form-urlencoded']);
     curl.setOpt(Curl.option.POSTFIELDS,querystring.stringify(dataToSend));
     curl.perform()
@@ -58,9 +58,7 @@ async function uploadSession(accessToken,filename){
             resolve(JSON.parse(body));
           })      
     })
-
 }
-
 module.exports={
     uploadFile,uploadSession
 }

@@ -9,7 +9,7 @@ const {credentials}=require('./credentials');
 
 async function getDriverInfo(accessToken){
 const curl = new Curl();
-    const url='https://www.googleapis.com/drive/v2/files';       
+    const url='https://www.googleapis.com/drive/v3/about?fields=storageQuota';       
     curl.setOpt(Curl.option.URL,url);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
     curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+accessToken]);
@@ -20,7 +20,7 @@ const curl = new Curl();
         curl.on('end', (statusCode, body) => {
             curl.close()
             //resolve(JSON.parse(body));
-            resolve(body);
+            resolve(JSON.parse(body));
           })      
     })
 

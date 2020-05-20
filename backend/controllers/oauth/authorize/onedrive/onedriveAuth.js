@@ -5,7 +5,7 @@ const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 
  async function  getAccessToken(code){
-     console.log(code);
+
     let dataToSend={
         'code':code,
         'client_id':credentials.client_id,

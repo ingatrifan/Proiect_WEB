@@ -1,5 +1,4 @@
 //PRETTY USELESS NOW, 
-const cleanFiles = require('../utils/removingFiles');
 const HttpStatusCodes = require("http-status-codes");
 const formidable = require("formidable")
 const models = require('../models/index');
@@ -7,7 +6,11 @@ const fs =require('fs');
 const fileIndex = require('./oauth/authorize/fileIndex');
 const path = require('path');
 const validation = require('../utils/checkValidation');
-
+const fragmentation = require('../utils/fragmentation');
+const jwt = require('jsonwebtoken');
+const PRIVATE_KEY = "SUPER_SECRET_KEY";
+const utilities = require('./oauth/authorize/utilityIndex');
+const uniq = require('uniqid');
 exports.upload = async (req,res) => { 
   console.log('UPLOAD');
   let token;
@@ -19,27 +22,37 @@ exports.upload = async (req,res) => {
         token = fields.serverToken;
         if(validation.checkValidation(token,res)==false)
           return;
+
         let auth_values = jwt.decode(token,PRIVATE_KEY);
         
         await models.User.findOne({email:auth_values.user},(err,user)=>{
           if(!err){
-            let accessToken = user.googleAuth.accessToken;
-            let filePath = path.join(process.cwd(),'TEST_1.png');
-            fileIndex.googleFileController.upload(accessToken,filePath).then(response=>{
+            let tokens=[];
+            tokens.push({info:user.googleAuth});
+            tokens.push({info:user.dropboxAuth});
+            tokens.push({info:user.oneDriveAuth});
+            let filepath=files.file.path;
+            console.log(files.file);
+            getSizes(tokens).then(sizes=>{
+              fragmentation.fragmentation(filepath,auth_values.user,sizes).then(fragments=>
+                {
+                  parseUpload(fragments).then(fragments=>{
+                    let fileModel = new models.File({id_user:auth_values.user,fileName:files.file.name,id_file:uniq(),fragments:fragments});
+                    fileModel.save().then(console.log("savedFile"));
+                  });
+                })
             });
+            
           }
         });
-        res.statusCode = HttpStatusCodes.OK
-        res.setHeader('Content-Type', 'application/json')
-        console.log()
-        //res.write(JSON.stringify({"s uccess": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}))
+        res.statusCode = HttpStatusCodes.OK;
+        res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({"success": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}));
         return ;
       } else{
         res.statusCode = HttpStatusCodes.OK
     res.setHeader('Content-Type', 'application/json')
-    console.log()
-    //res.write(JSON.stringify({"s uccess": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}))
+    
     res.end(JSON.stringify({"success": false, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Something bad happened'}));
     return ;
       } 
@@ -52,79 +65,52 @@ exports.upload = async (req,res) => {
     return ;
   }
 }
+async function getSizes(tokens){
+  let sizeTokens=[];
+  let googleTok =tokens[0].info.accessToken//google
+  let dropTok = tokens[1].info.accessToken//drop
+  let oneTok =tokens[2].info.accessToken//one
+  let size;
 
-
-const chunk_size = 10_000_000;
-async function fragmentation(file,file_id){
-  var myfile = file;
-  var size = myfile.length;
-  var i =0 ;
-  var jsonArray =[];
-  while(size>0){
-      var chunk ;
-      if(size>chunk_size){
-          chunk = myfile.slice(i,i+chunk_size);
-          i=i+chunk_size;
-      }
-      else{
-          chunk = myfile.slice(i,i+size);
-      }
-     let frag=  fragment(chunk,file_id,Math.ceil((myfile.length-size)/chunk_size),size);
-      jsonArray.push(frag);
-      size = size-chunk_size;
+  if(tokens[0].info.authorized){
+    let data= await utilities.google.getDriverInfo(googleTok);    
+    size =data.storageQuota.limit-data.storageQuota.usage; 
+    sizeTokens.push({size:size,authorized:true,token:googleTok});
+  }else{
+    sizeTokens.push({size:0,authorized:false,token:googleTok});
   } 
-  return jsonArray;
-};  
-function fragment(chunk,id_file,number,size){
-  fs.writeFileSync("./tmp/"+id_file.split('.')[0]+"_"+number+".byte",chunk);
-  //update over here
-  let drive ;
-  if(number %3==0)
-    drive = "dropBox";
-  else 
-    drive ="google";
-  let mySize =chunk_size;
-  if(size<chunk_size)
-  {
-    mySize = size;
+
+  if(tokens[1].info.authorized){
+    let data =await utilities.dropbox.getDriverInfo(dropTok);
+    size = data.allocation.allocated-data.used;
+    sizeTokens.push({size:size,authorized:true,token:dropTok});
+
+  }else{
+    sizeTokens.push({size:0,authorized:false,token:dropTok});
   }
-  return {"fragment_id":id_file.split('.')[0]+"_"+number+".byte","location":drive,"size":mySize}; 
+
+  if(tokens[2].info.authorized){
+    let data= await utilities.onedrive.getDriverInfo(oneTok);
+    size =data.quota.total-data.quota.used;
+    sizeTokens.push({size:size,authorized:true,token:oneTok});
+  }else{
+    sizeTokens.push({size:0,authorized:false,token:oneTok});
+  }
+return sizeTokens;
 }
-
-
-async function addFileDB(file,token){
-  try{
-      let auth_values = jwt.decode(token,PRIVATE_KEY);
-      var file_id = file.name;
-      let user =null;
-      const File = models.File;
-      
-      await File.findOne({id_file:file_id},
-        function(err,doc){
-            if(!err)  {
-                user = doc;
-            }
-     });
-     if(user==null){
-        
-        cleanFiles.cleanTmp();  
-        
-        let file_tmp = fs.readFileSync(file.path);
-          
-          let location_array = await fragmentation(file_tmp,file.name);
-          console.log(location_array);
-          let insertFile = new File({
-            id_file :file_id,
-            id_user:auth_values.user,
-            fragments:location_array
-        });
-        insertFile.save().then(()=>{console.log("inserted")});
-        console.log("INSERTED A FILE");
-      return true;
-     }
-     return false;
-  }catch(e){
-    return false;
+////idea on  upload https://stackoverflow.com/questions/47708226/how-upload-large-files-to-onedrive-using-php-curl
+// cuz no documentation for js :(
+async function parseUpload(fragments){
+  for( i in fragments){
+    if(fragments[i].name=='onedrive'){
+      let onedriveFileData = await fileIndex.onedriveFileController.upload(fragments[0]);
+      fragments[i].idFile=onedriveFileData.id;
+    }
+    else if(fragments[i].name=='dropbox'){
+      //fileIndex.dropboxFileController.upload();
+    }
+    else if(fragments[i].name=='google'){
+      //fileIndex.googleFileController.upload(fragments[1]);
+    }
   }
 }
-

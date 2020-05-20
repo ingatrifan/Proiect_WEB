@@ -60,8 +60,6 @@ async function uploadFile(accessToken, filePath,SESION_UPLOADURL){
         }); 
     })
 }
-
-
 module.exports={
  uploadSession,   uploadFile
-}
+} 

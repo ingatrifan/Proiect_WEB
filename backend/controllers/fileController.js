@@ -9,8 +9,6 @@ const uploadController = require('./uploadController');
 exports.upload = async (req,res) => {
    uploadController.upload(req,res);
 }
-
-
 exports.delete= async(req,res) =>{
     try {
         const queryObject = url.parse(req.url,true).query

@@ -74,7 +74,7 @@ exports.googleAuth = async (req,res) =>{
     let code = params.get('code');
     models.User.findOne({email:auth_values.user},(err,user)=>{
         if(!err){
-            console.log();
+
             if(user.googleAuth.authorized!=false)
             { 
                 
@@ -119,12 +119,10 @@ exports.oneDriveAuth = async(req,res) =>{
     let code = params.get('code');
     models.User.findOne({email:auth_values.user},(err,user)=>{
         if(!err){
-            console.log(user);
             if(user.oneDriveAuth.authorized!=false)
             {   
                 
                 oAuth.onedriveAuth.getAccessToken(code).then((data)=>{
-                    console.log(data);
                     if(data['error']){
                     //     
                         console.log('error at data' );

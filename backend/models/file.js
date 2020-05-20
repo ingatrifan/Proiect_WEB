@@ -6,6 +6,10 @@ const fileSchema = new Schema(
       type: String,
       default: null
     },
+    fileName:{
+      type:String,
+      default:null
+    },
     id_user :{
       type: String,
       default:null

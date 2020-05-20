@@ -65,17 +65,13 @@ async function renderMainPage(token){
             {"files":[{"name":"1","extension":"aiff"},{"name":"123","extension":"aiff"},{"name":"1234","extension":"aiff"},{"name":"12345","extension":"asp"},{"name":"123456","extension":"doc"}]},
     };
      for(let i =0 ;i<buffer.length;i++){
-         
          let values =buffer[0];
          for(let j =0; j<buffer[0].length;j++){
-             let obj = buffer[0][j].id_file.split('.');
-            
+             let obj = buffer[0][j].fileName.split('.');
              data.folder.files.push({"name":obj[0],"extension":obj[1]});
-             
          }  
-         //data.folder.files.push({"name":values[0],"extension":values[1]});
      }
-    var out =ejs.compile(myFile)({"data":data});
+    var out = await ejs.compile(myFile)({"data":data});
     fs.writeFileSync('./views/pages/dummy.html',out);
     return  fs.createReadStream('./views/pages/dummy.html');
 }

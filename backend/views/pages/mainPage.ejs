@@ -65,9 +65,9 @@
                         
 
             %>
-            <div class="flex-card col-2"id = "<%=data.folder.files[f].name+data.folder.files[f].extension%></div>"> 
+            <div class="flex-card col-2"> 
               <div class="flex-card__media">
-                <img src="../assets/images/icons/187640-file-types/png/<%=data.folder.files[f].extension%>.png" alt = "img1">
+                <img src="../assets/images/icons/187640-file-types/png/<%=data.folder.files[f].extension%>.png" alt = "img1" id = "<%=data.folder.files[f].idFile%>">
               </div>
               <div class="flex-card__content">
                 <h3 class="flex-card__content-title"><%=data.folder.files[f].name %>.<%=data.folder.files[f].extension%></h3>

@@ -1,5 +1,3 @@
-
-
 const url = require('url');
 const fs = require('fs');
 const ejs =require('ejs');
@@ -60,15 +58,17 @@ async function renderMainPage(token){
         if(!err)
         buffer.push(files);
      } );
-     var data ={
+    data = {
         "folder":
-            {"files":[{"name":"1","extension":"aiff"},{"name":"123","extension":"aiff"},{"name":"1234","extension":"aiff"},{"name":"12345","extension":"asp"},{"name":"123456","extension":"doc"}]},
-    };
+        {
+            "files":[]
+        }
+    }
      for(let i =0 ;i<buffer.length;i++){
          let values =buffer[0];
          for(let j =0; j<buffer[0].length;j++){
              let obj = buffer[0][j].fileName.split('.');
-             data.folder.files.push({"name":obj[0],"extension":obj[1]});
+             data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":buffer[0][j].id_file});
          }  
      }
     var out = await ejs.compile(myFile)({"data":data});

@@ -23,7 +23,6 @@ const curl = new Curl();
             resolve(JSON.parse(body));
           })      
     })
-
 }
 
 async function createFolderSession(accessToken){

@@ -6,9 +6,9 @@ const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 const UPLOAD_URL='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable';
 
-async function uploadSession(accessToken,folder_id){
+async function uploadSession(accessToken,folder_id,fileName){
 //      check the mettadata stuff
-    let data='{"name": "TEST_1.png", "mimeType": "image/png", "parents": "['+folder_id+']" }';
+    let data='{"name": '+fileName+', "mimeType": "application/octet-stream", "parents": "['+folder_id+']" }';
     const curl = new Curl();
     curl.setOpt(Curl.option.URL,UPLOAD_URL);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);

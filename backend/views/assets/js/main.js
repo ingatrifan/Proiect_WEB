@@ -84,17 +84,32 @@ function handleForm(event) {
 form.addEventListener('submit', handleForm);
 //action="upload" method="POST" enctype="multipart/form-data"
 //Click download
-function downloadFile(){
-  const url = 'http://127.0.0.1:3000/download/?id=';
-  const method = "GET"
-  postData(method,url,function(succ){
-      console.log(succ);
-      //handler when receiving succes
-  });
+//https://stackoverflow.com/questions/3749231/download-file-using-javascript-jquery
+function downloadFile(element){
+  const method = "GET";
+  const token = localStorage.getItem('serverToken');
+  const id = element.id;
+  const url = 'http://127.0.0.1:3000/download?serverToken='+token+'&idFile='+id;
+  fetch(url)
+  .then(resp=>resp.blob())
+  .then(blob=>{
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    // the filename you want
+    a.download = 'client.txt';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    alert('your file has downloaded!');
+  
+  }).catch(()=>allert)
+
 }
 
 //CLICK DELETE
-function deleteFile(){
+function deleteFile(element){
   const url = 'http://127.0.0.1:3000/delete/?id=';
   const method = "DELETE"
   postData(method,url,function(succ){

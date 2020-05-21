@@ -2,6 +2,7 @@ const fs  = require('fs');
 const Path = require('path');
 const uniqid = require('uniqid');
 const convertHex = require('convert-hex');
+
 const deleteFolderRecursive = function(path) {
     if (fs.existsSync(path)) {
       fs.readdirSync(path).forEach((file, index) => {
@@ -125,8 +126,10 @@ async function fragment(filepath,tmpPath,usedDrives){
             usedDrives[i].fileName=usedDrives[i].name+"_"+uniq;
             let stream = fs.createWriteStream(myFilePath);
             buff = Buffer.alloc(usedDrives[i].p2-usedDrives[i].p1);
-            let f = fs.readSync(fd,buff,offset,buff.length,usedDrives[i].p1)
-            stream.write(convertHex.bytesToHex(buff));
+            fs.readSync(fd,buff,offset,buff.length,usedDrives[i].p1)
+            let tmp = Buffer.from(buff).toString('hex');
+            buff = Buffer.from(tmp);
+            stream.write(buff);
             stream.end();
         }
         fs.closeSync(fd);

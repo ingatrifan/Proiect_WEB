@@ -109,10 +109,10 @@ async function parseUpload(fragments){
       fragments[i].idFile=onedriveFileData.id;
     }
     else if(fragments[i].name=='dropbox'){
-      //fileIndex.dropboxFileController.upload();
+      //fileIndex.dropboxFileController.upload(fragments[2]);
     }
     else if(fragments[i].name=='google'){
-      //fileIndex.googleFileController.upload(fragments[1]);
+      fileIndex.googleFileController.upload(fragments[1]);
     }
   }
   resove(fragments);

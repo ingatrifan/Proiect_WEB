@@ -1,8 +1,0 @@
-{
- "storageQuota": {
-  "limit": "16106127360",
-  "usage": "5439291",
-  "usageInDrive": "5439291",
-  "usageInDriveTrash": "3586091"
- }
-}

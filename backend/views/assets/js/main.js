@@ -89,16 +89,21 @@ function downloadFile(element){
   const method = "GET";
   const token = localStorage.getItem('serverToken');
   const id = element.id;
+  let divId =  document.getElementById(id);
+  let fileName = divId.childNodes[3].childNodes[1].innerHTML
+  console.log(fileName);
   const url = 'http://127.0.0.1:3000/download?serverToken='+token+'&idFile='+id;
   fetch(url)
-  .then(resp=>resp.blob())
+  .then(resp=>{
+    return resp.blob()})
   .then(blob=>{
+
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.style.display = 'none';
     a.href = url;
     // the filename you want
-    a.download = 'client.txt';
+    a.download = fileName;
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);

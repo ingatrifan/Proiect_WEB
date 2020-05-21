@@ -19,7 +19,6 @@ async function donwload(req,res){
     let auth_values =jwt.decode(token,PRIVATE_KEY);
     //TO DO : validez accesstoken-urile 
     //TO DO : validez file-urirle
-    //
     let tokens =[];
     await models.User.findOne({user:auth_values.user_id},(err,user)=>{
         if(user.oneDriveAuth)
@@ -34,7 +33,7 @@ async function donwload(req,res){
         parseDownload(fragments,tokens,auth_values.user).then(fragments=>{
             refragmentation.refragmentation(fragments,auth_values.user,file.fileName).then(fileOut=>{
                 let stream  = fs.createReadStream(fileOut);
-                console.log(fileOut);
+                res.write(file.fileName);
                 stream.pipe(res);
             })
         });
@@ -43,7 +42,7 @@ async function donwload(req,res){
 
 
 
-async function parseDownload(fragments,tokens,id_user){
+async function parseDownload(fragments,tokens,id_user){ 
     let fragmentData=[];
     return new Promise(async (resolve)=>{
     for( i in fragments){

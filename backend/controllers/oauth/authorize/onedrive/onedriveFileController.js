@@ -82,8 +82,8 @@ return new Promise((resolve,reject)=>{
 }
 
 
-async function remove (req,res){
-       
+async function remove (accessToken, fileId){
+  const url =`https://graph.microsoft.com/v1.0/me/drive/items/${fileId}`; 
 }
 
 module.exports ={

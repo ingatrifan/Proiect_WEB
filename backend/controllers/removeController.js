@@ -23,10 +23,9 @@ async function remove(req,res){
         await models.File.findOne({id_user:auth_values.user,id_file:idFile}, (err,file)=>{
 
             if(!err){
-                console.log(file);
                 //skip validate tokens TO DO
                 let fragments= file.fragments;
-                parseUpload().then(async ()=>{
+                parseUpload(fragments).then(async ()=>{
                     await models.File.remove({id_user:auth_values.user,id_file:idFile}).then(()=>{
                         res.statusCode = HttpStatusCodes.OK;
                         res.setHeader('Content-Type', 'application/json');
@@ -51,9 +50,7 @@ async function parseUpload(fragments){
     for (i in fragments){
         let accesstoken = fragments[i].token;
         let idFile = fragments[i].idFile;
-        if(fragments.name=='onedrive'){
-
-            
+        if(fragments[i].name=='onedrive'){
             let status =await fileIndex.onedriveFileController.remove(accesstoken,idFile);
             console.log('status',status);
         }else if(fragments[i].name=='google'){

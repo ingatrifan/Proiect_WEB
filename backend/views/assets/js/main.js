@@ -125,8 +125,9 @@ function deleteFile(element){
   }
   postData(method,url,data,function(buff){
     if(buff.readyState===buff.DONE && buff.status ==200){
-      let body = JSON.parse(data.buff )
-      window.location=body.location; 
+      let body = JSON.parse(buff.responseText )
+        window.location.reload(body.location);
+        
     }
       //handler when receiving succes
   });
@@ -154,7 +155,7 @@ function postData(method,url,data,success){
   // an encoding required
   var httpRequest = new XMLHttpRequest();
   httpRequest.open(method,url,true);
-  httpRequest.onreadystatechange= success(httpRequest);
+  httpRequest.onreadystatechange= function(){success(httpRequest)};
   httpRequest.setRequestHeader('Content-Type', 'aplication/json');
   httpRequest.send(JSON.stringify(data));
 }

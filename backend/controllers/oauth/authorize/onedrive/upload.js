@@ -5,9 +5,10 @@ const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 const UPLOAD_URL='https://graph.microsoft.com/v1.0/me/drive';
+
 async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset){
     let filePath = fragment.filePath;
-    let accessToken=fragment.token;
+    let accessToken=fragment.accessToken;
     let contentRange ='bytes '+start +"-"+end+"/"+fileSize;
     return new Promise((resolve,reject)=>{
         fs.open(filePath,'r+',(err,fd)=>{
@@ -31,6 +32,7 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
         
             curl.on('end', (statusCode, body) => {
                 fs.closeSync(fd)
+                console.log('SUCCESS',body,statusCode);
                 resolve(body);
                 curl.close();
             })      

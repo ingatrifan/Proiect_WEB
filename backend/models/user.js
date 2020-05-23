@@ -15,6 +15,10 @@ const userSchema = new Schema(
       type: String
     },
     googleAuth: {
+      folderId:{
+        type:String,
+        default:null
+      },
       accessToken:{
         type:String,
         default:null

@@ -1,19 +1,23 @@
 const fs = require('fs');
+const request = require('request');
 const utility= require('./utilityFunctions');
 const myURL=require('url');
 const querystring = require('querystring');
-const {Curl } = require('node-libcurl');
+const {Curl ,CurlHttpVersion} = require('node-libcurl');
 const {credentials}=require('./credentials');
 const UPLOAD_URL='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable';
 
 async function uploadSession(accessToken,folder_id,fileName){
-//      check the mettadata stuff
-    let data='{"name": '+fileName+', "mimeType": "application/octet-stream", "parents": "['+folder_id+']" }';
+    return new Promise((resolve,reject)=>{
+//      check the mettadata stuff : DONE
+    let data='{"title": "'+fileName+'","name":"'+fileName+'", "mimeType": "application/octet-stream", "parents": ["'+folder_id+'"] }';
+    //verry important to put quotes in parrents array
     const curl = new Curl();
     curl.setOpt(Curl.option.URL,UPLOAD_URL);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
     curl.setOpt(Curl.option.HEADER,true);
     curl.setOpt(Curl.option.POSTFIELDS,data);
+    curl.setOpt(Curl.option.HTTP_VERSION,CurlHttpVersion.V1_1);
     curl.setOpt(Curl.option.HTTPHEADER,["Authorization: Bearer "+accessToken,'Content-Type: application/json; charset=UTF-8',
         'Content-Length: '+data.length
         ]);
@@ -21,45 +25,58 @@ async function uploadSession(accessToken,folder_id,fileName){
 
     curl.perform()
     curl.on('error', curl.close.bind(curl))
-    return new Promise((resolve,reject)=>{
+    
         curl.on('end', (statusCode, body) => {
             curl.close()
             resolve(body);
           })      
     })
 }
-async function uploadFile(accessToken, filePath,SESION_UPLOADURL){
-    let stats= fs.statSync(filePath);
-    console.log(SESION_UPLOADURL);
-    size = stats['size'];
+async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset){
+    let filePath = fragment.filePath;
+    let accessToken=fragment.accessToken;
+    let contentRange ='bytes '+start +"-"+end+"/"+fileSize;
+    return new Promise((resolve,reject)=>{
     fs.open(filePath,'r+',(err,fd)=>{
     const curl = new Curl();
     curl.setOpt(Curl.option.URL,SESION_UPLOADURL);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
-    curl.setOpt(Curl.option.UPLOAD, true)
+    //curl.setOpt(Curl.option.);
     curl.setOpt(Curl.option.HTTPHEADER,[
         "Authorization: Bearer "+accessToken,
-        'Content-Length: '+size,
-        'Content-Range: bytes 0-'+size-1+'/'+size,
+        'Content-Length: '+numBytes,
+        'Content-Range:'+contentRange,
         'Content-Type: application/octet-stream']);
-    curl.setOpt(Curl.option.READDATA, fd)
+    let buff = new Buffer.alloc(numBytes);
+    fs.readSync(fd,buff,0,buff.length,offset);
+    curl.setOpt(Curl.option.POSTFIELDS,buff.toString());
+    curl.setOpt(Curl.option.HTTP_VERSION,CurlHttpVersion.V1_1);
     curl.setOpt(Curl.option.CUSTOMREQUEST,'PUT')
     curl.perform()
     curl.on('error', function (error, errorCode) {
-
+        console.log('ERROR HAPPENING',error);
+        reject('nothing');
         fs.closeSync(fd)
         curl.close();
       })
-    return new Promise((resolve,reject)=>{
-        curl.on('end', (statusCode, body) => {
+        curl.on('end', (statusCode, body,more) => {
             fs.closeSync(fd)
-            console.log('SUCCESS');
-            console.log(body);
             curl.close();
-              })      
-        }); 
-    })
+            if(statusCode==308)//get range
+            {
+                let range = more[0].range.split('=')[1].split('-');
+                resolve({statusCode:statusCode,range:range});
+            }
+            if(statusCode==200||statusCode==201){
+                resolve({statusCode:statusCode,body:body});
+            }
+            else resolve({statusCode});
+            
+              });
+        })
+    });
 }
+
 module.exports={
  uploadSession,   uploadFile
 } 

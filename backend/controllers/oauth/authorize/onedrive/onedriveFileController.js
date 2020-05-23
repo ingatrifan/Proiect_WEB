@@ -8,13 +8,13 @@ const uploadFile = require('./upload');
 const downloadFile = require('./download');
 const removeFile=require('./remove');
 //same as upload basically
-async function download (token,fragment,id_user){
+async function download (fragment,id_user){
     return new Promise(async (resolve)=>{
         
-    await utils.getFileData(token,fragment.idFile).then( async(data)=>
+    await utils.getFileData(fragment.accessToken,fragment.idFile).then( async(data)=>
         {
             let donwloadUrl = data['@microsoft.graph.downloadUrl'];
-            let fragSize=10_000_000;
+            let fragSize=1_000_000;
             let fileSize = data['size'];
             let numFragements =Math.ceil(fileSize/fragSize);
             let bytesRemaining= fileSize;
@@ -45,14 +45,16 @@ async function download (token,fragment,id_user){
 async function upload (fragment){
 
 return new Promise((resolve,reject)=>{
-    uploadFile.uploadSession(fragment.token,fragment.fileName)
+    uploadFile.uploadSession(fragment.accessToken,fragment.fileName)
     .then(async (session)=>{
         //console.log("FRAGMENTATION");
-        let fragSize=10_000_000;
+        let fragSize=1_000_000;
         let fileSize = fs.lstatSync(fragment.filePath)['size'];
+        
         let numFragements =Math.ceil(fileSize/fragSize);
         let bytesRemaining= fileSize;
         let i =0;
+        console.log(i,numFragements,fileSize);
         while(i<numFragements){
             let chunkSize= fragSize;
             let numBytes= fragSize;
@@ -66,7 +68,7 @@ return new Promise((resolve,reject)=>{
             }
             let data =  await uploadFile.uploadFile(fragment,session.uploadUrl,numBytes,start,end,fileSize,chunkSize,offset);
             if(i==numFragements-1){
-                console.log(JSON.parse(data));
+                //console.log(JSON.parse(data));
                 resolve(JSON.parse(data));    
             }
             i++;

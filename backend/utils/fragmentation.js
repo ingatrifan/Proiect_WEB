@@ -73,8 +73,9 @@ async function fragmentation(filepath,id_user,sizes){
         filePath:"",//p1,p2 folositi pentru a determinat din ce pozitie va incepe sa citeasca din fisier
         p1: 0,
         p2:0,
-        token:sizes[2].token,
+        accessToken:sizes[2].token,
         refreshToken:sizes[2].refreshToken,
+        lastAccessed: sizes[2].lastAccessed,
         fileName:"",
         idFile:""
     }   
@@ -86,8 +87,9 @@ async function fragmentation(filepath,id_user,sizes){
         filePath:"",
         p1:0 ,
         p2:0,
-        token:sizes[1].token,
+        accessToken:sizes[1].token,
         refreshToken:sizes[1].refreshToken,
+        lastAccessed: sizes[1].lastAccessed,
         fileName:"",
         idFile:""
     }
@@ -99,10 +101,12 @@ async function fragmentation(filepath,id_user,sizes){
         filePath:"",
         p1: 0,
         p2:0,
-        token:sizes[0].token,
+        accessToken:sizes[0].token,
         refreshToken:sizes[0].refreshToken,
+        lastAccessed: sizes[0].lastAccessed,
         fileName:"",
-        idFile:""
+        idFile:"",
+        folderId:sizes[0].folderId
     }
     let driveData =[];
     driveData.push(one,dropbox,google)

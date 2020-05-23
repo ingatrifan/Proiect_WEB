@@ -10,23 +10,44 @@ async function download (req,res){
 }
 
 
-async function upload (accessToken,filepath){
-    utility.getDriverInfo(accessToken).then(res=>{
-        //console.log(res);
-        
-        fs.writeFileSync('./out.txt',res)
-    });
-    utility.createFolder().then(res=>console.log(res));///NOTE : this must be created once the user logged with his account, and
-    // and the id must be stored in database
-
-    uploadFile.uploadSession(accessToken,folder_id).then((data)=>{
+async function upload (fragment){
+    return new Promise((resolve,reject)=>{
+    uploadFile.uploadSession(fragment.accessToken,fragment.folderId,fragment.fileName).then(async (data)=>{
         let location = 'https'+data.split('\r')[3].split('https')[1];
-        
-        uploadFile.uploadFile(accessToken,filepath,location).then(data=>{
-            
-        })
+        let fragSize=2000000;//cam 2mb per chunk
+        let fileSize = fs.lstatSync(fragment.filePath)['size'];
+        let bytesRemaining= fileSize;
+        let chunkSize= fragSize;
+        let start = 0;
+        let offset=0;
+        var check =true;
+        while(check){
+            if(offset+fragSize<=fileSize){
+                chunkSize=fragSize
+            }else{
+                chunkSize=fileSize-offset;
+            }
+            try
+            {
+                let end = start +chunkSize-1;
+                let data =  await uploadFile.uploadFile(fragment,location,chunkSize,start,end,fileSize,chunkSize,offset);
+                i++;
+                bytesRemaining = bytesRemaining - chunkSize;
+                if(data.statusCode==308){
+                    start = data.range[1];
+                    start ++;
+                    offset=start;
+                }else if(data.statusCode==200|| data.statusCode==201){
+                    check=false;
+                    resolve(JSON.parse(data.body));
+                }
+            }catch(e){
+                console.log(e,i);
+            }
+        }
     }
     );
+});
 }
 
 

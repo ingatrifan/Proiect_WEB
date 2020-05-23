@@ -69,7 +69,6 @@ async function renderMainPage(token){
                 data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":listFiles[i].id_file});
             }
             
-            console.log(data);
         
             var out = await ejs.compile(myFile)({"data":data});
             fs.writeFileSync('./views/pages/dummy.html',out);

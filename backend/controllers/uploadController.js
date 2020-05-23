@@ -30,7 +30,6 @@ exports.upload = async (req,res) => {
             tokens.push({info:user.dropboxAuth});
             tokens.push({info:user.oneDriveAuth});
             let filepath=files.file.path;
-            console.log(files.file);
             //getsize of files -> fragmenting files -> getting the path to fragments ->uploading on drives-> inserting to db
             getSizes(tokens).then(sizes=>{
               fragmentation.fragmentation(filepath,auth_values.user,sizes)
@@ -74,25 +73,38 @@ async function getSizes(tokens){
   if(tokens[0].info.authorized){
     let data= await utilities.google.getDriverInfo(googleTok);    
     size =data.storageQuota.limit-data.storageQuota.usage; 
-    sizeTokens.push({size:size,authorized:true,token:googleTok,refreshToken:tokens[0].info.refreshToken});
+    sizeTokens.push({size:size,
+      authorized:true,
+      token:googleTok,
+      refreshToken:tokens[0].info.refreshToken,
+      lastAccessed: tokens[0].info.lastAccessed,
+      folderId:tokens[0].info.folderId
+    });
   }else{
-    sizeTokens.push({size:0,authorized:false,token:googleTok,refreshToken:tokens[0].info.refreshToken});
+    sizeTokens.push({size:0,authorized:false,token:googleTok,refreshToken:tokens[0].info.refreshToken,
+      lastAccessed: tokens[0].info.lastAccessed,
+      folderId:tokens[0].info.folderId
+    });
   } 
 
   if(tokens[1].info.authorized){
     let data =await utilities.dropbox.getDriverInfo(dropTok);
     size = data.allocation.allocated-data.used;
-    sizeTokens.push({size:size,authorized:true,token:dropTok,refreshToken:tokens[1].info.refreshToken});
+    sizeTokens.push({size:size,authorized:true,token:dropTok,refreshToken:tokens[1].info.refreshToken,
+      lastAccessed: tokens[1].info.lastAccessed});
   }else{
-    sizeTokens.push({size:0,authorized:false,token:dropTok,refreshToken:tokens[1].info.refreshToken});
+    sizeTokens.push({size:0,authorized:false,token:dropTok,refreshToken:tokens[1].info.refreshToken,
+      lastAccessed: tokens[1].info.lastAccessed});
   }
 
   if(tokens[2].info.authorized){
     let data= await utilities.onedrive.getDriverInfo(oneTok);
     size =data.quota.total-data.quota.used;
-    sizeTokens.push({size:size,authorized:true,token:oneTok,refreshToken:tokens[2].info.refreshToken});
+    sizeTokens.push({size:size,authorized:true,token:oneTok,refreshToken:tokens[2].info.refreshToken,
+      lastAccessed: tokens[2].info.lastAccessed});
   }else{
-    sizeTokens.push({size:0,authorized:false,token:oneTok,refreshToken:tokens[2].info.refreshToken});
+    sizeTokens.push({size:0,authorized:false,token:oneTok,refreshToken:tokens[2].info.refreshToken,
+      lastAccessed: tokens[2].info.lastAccessed});
   }
 return sizeTokens;
 }
@@ -102,14 +114,17 @@ async function parseUpload(fragments){
   return new Promise(async (resove,reject)=>{
   for( i in fragments){
     if(fragments[i].name=='onedrive'){
-      let onedriveFileData = await fileIndex.onedriveFileController.upload(fragments[0]);
+      let onedriveFileData = await fileIndex.onedriveFileController.upload(fragments[i]);
       fragments[i].idFile=onedriveFileData.id;
     }
     else if(fragments[i].name=='dropbox'){
-      //fileIndex.dropboxFileController.upload(fragments[2]);
+      //fileIndex.dropboxFileController.upload(fragments[i]);
     }
     else if(fragments[i].name=='google'){
-      fileIndex.googleFileController.upload(fragments[1]);
+      //check FOLDER STOL first 
+      fragments[i].folderId =await  utilities.google.findOrCreateStolFolder(fragments[i].accessToken);
+      let googleDriveData = await fileIndex.googleFileController.upload(fragments[i]);
+      fragments[i].idFile = googleDriveData.id;
     }
   }
   resove(fragments);

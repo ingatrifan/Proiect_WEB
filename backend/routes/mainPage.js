@@ -18,7 +18,6 @@ async function mainPage(req,res){
     }
     else{
         var token = myVar[1];
-        console.log('MAIN-PAGE',token);
         try{
             jwt.verify(token,PRIVATE_KEY);
             res.writeHead(200, {
@@ -48,32 +47,38 @@ async function renderMainPage(token){
     //var dec = jwt.decode(token);
     
     //var values = dec;
-    var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
-    var myFile = fs.readFileSync(mypath,'utf-8');
+    return new Promise(async (resolve)=>{
+        var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
+        var myFile = fs.readFileSync(mypath,'utf-8');
 
-    const File = models.File;
-    let auth_values = jwt.decode(token,PRIVATE_KEY);
-    let buffer = [];
-    await File.find({id_user:auth_values.user},(err,files)=>{
-        if(!err)
-        buffer.push(files);
-     } );
-    data = {
-        "folder":
-        {
-            "files":[]
-        }
-    }
-     for(let i =0 ;i<buffer.length;i++){
-         let values =buffer[0];
-         for(let j =0; j<buffer[0].length;j++){
-             let obj = buffer[0][j].fileName.split('.');
-             data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":buffer[0][j].id_file});
-         }  
-     }
-    var out = await ejs.compile(myFile)({"data":data});
-    fs.writeFileSync('./views/pages/dummy.html',out);
-    return  fs.createReadStream('./views/pages/dummy.html');
+        const File = models.File;
+        let auth_values = jwt.decode(token,PRIVATE_KEY);
+    
+        await File.find({id_user:auth_values.user},(err,files)=>{
+            if(!err){
+            }
+        } ).then(async (listFiles)=>{
+            data = {
+                "folder":
+                {
+                    "files":[]
+                }
+            }
+            for ( i in listFiles){
+                let obj =listFiles[i].fileName.split('.');
+                data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":listFiles[i].id_file});
+            }
+            
+            console.log(data);
+        
+            var out = await ejs.compile(myFile)({"data":data});
+            fs.writeFileSync('./views/pages/dummy.html',out);
+            
+            let stream = fs.createReadStream('./views/pages/dummy.html');
+            resolve(stream);
+        });
+    });
+    
 }
 module.exports={
     mainPage,

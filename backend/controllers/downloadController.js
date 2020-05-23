@@ -1,14 +1,12 @@
 const models = require('../models/index');
 const fs =require('fs');
 const fileIndex = require('./oauth/authorize/fileIndex');
-const path = require('path');
 const validation = require('../utils/checkValidation');
 const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
-const utilities = require('./oauth/authorize/utilityIndex');
-const uniq = require('uniqid');
 const url = require('url');
 const refragmentation = require('../utils/refregmentation');
+
 async function donwload(req,res){
     let uri = url.parse(req.url).query;
     let values = uri.split('&');
@@ -28,6 +26,8 @@ async function donwload(req,res){
         if(user.dropboxAuth)
             tokens.push(user.dropboxAuth);  else tokens.push({});
     });
+    //fetch the file info from db -> check tokens(TO DO  )->validate files(TO DO)  ->fetch data
+    //NOT COMPLETE
     await models.File.findOne({id_user:auth_values.user,id_file:idFile},(err,file)=>{
         let fragments = file.fragments;
         parseDownload(fragments,tokens,auth_values.user).then(fragments=>{

@@ -74,6 +74,7 @@ async function fragmentation(filepath,id_user,sizes){
         p1: 0,
         p2:0,
         token:sizes[2].token,
+        refreshToken:sizes[2].refreshToken,
         fileName:"",
         idFile:""
     }   
@@ -86,6 +87,7 @@ async function fragmentation(filepath,id_user,sizes){
         p1:0 ,
         p2:0,
         token:sizes[1].token,
+        refreshToken:sizes[1].refreshToken,
         fileName:"",
         idFile:""
     }
@@ -98,6 +100,7 @@ async function fragmentation(filepath,id_user,sizes){
         p1: 0,
         p2:0,
         token:sizes[0].token,
+        refreshToken:sizes[0].refreshToken,
         fileName:"",
         idFile:""
     }

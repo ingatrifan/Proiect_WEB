@@ -18,7 +18,7 @@ function bin2string(array){
 let a = 'ABC';
 let b = Buffer.from(a).toString('hex');
 let c = Buffer.from(b);
-let d = c.toString()
+let d = c.toString();
 
 let e = Buffer.from(d,'hex').toString();
 console.log(e);

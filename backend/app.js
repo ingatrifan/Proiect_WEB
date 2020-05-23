@@ -25,7 +25,7 @@ async function connectDB(){
   })
   //Line command that should be deleted some day
   await models.User.remove({},()=>console.log("Cleaning users"));
-  await models.File.remove({},()=>console.log("Cleaning files"));
+  //await models.File.remove({},()=>console.log("Cleaning files"));
   //adding test user 
   let b = new models.User({
     email:'test',

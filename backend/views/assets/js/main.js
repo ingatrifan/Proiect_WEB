@@ -115,10 +115,19 @@ function downloadFile(element){
 
 //CLICK DELETE
 function deleteFile(element){
-  const url = 'http://127.0.0.1:3000/delete/?id=';
+  const url = 'http://127.0.0.1:3000/delete';
   const method = "DELETE"
-  postData(method,url,function(succ){
-      console.log(succ);
+  let fileId = element.id;
+  let svtoken = window.localStorage.getItem('serverToken');
+  let data={
+    idFile:fileId,
+    serverToken:svtoken
+  }
+  postData(method,url,data,function(buff){
+    if(buff.readyState===buff.DONE && buff.status ==200){
+      let body = JSON.parse(data.buff )
+      window.location=body.location; 
+    }
       //handler when receiving succes
   });
 }
@@ -141,18 +150,12 @@ function dropboxAuth(){
   window.location.replace(url);
 }
 
-function postData(method,url,succes){
+function postData(method,url,data,success){
   // an encoding required
   var httpRequest = new XMLHttpRequest();
   httpRequest.open(method,url,true);
-  httpRequest.onreadystatechange= function(){
-      if(httpRequest.readyState===httpRequest.DONE && httpRequest.status ==200)
-      {
-          succes(httpRequest.responseText);
-          
-      } 
-  };
-  httpRequest.setRequestHeader('Content-Type', 'plaint/text');
-  httpRequest.send();
+  httpRequest.onreadystatechange= success(httpRequest);
+  httpRequest.setRequestHeader('Content-Type', 'aplication/json');
+  httpRequest.send(JSON.stringify(data));
 }
 

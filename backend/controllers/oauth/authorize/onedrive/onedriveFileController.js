@@ -3,9 +3,10 @@ const myURL=require('url');
 const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
-const uploadFile = require('./upload');
 const utils = require('./utilityFunctions');
+const uploadFile = require('./upload');
 const downloadFile = require('./download');
+const removeFile=require('./remove');
 //same as upload basically
 async function download (token,fragment,id_user){
     return new Promise(async (resolve)=>{
@@ -13,8 +14,6 @@ async function download (token,fragment,id_user){
     await utils.getFileData(token,fragment.idFile).then( async(data)=>
         {
             let donwloadUrl = data['@microsoft.graph.downloadUrl'];
-            console.log('HERERE',data);
-
             let fragSize=10_000_000;
             let fileSize = data['size'];
             let numFragements =Math.ceil(fileSize/fragSize);
@@ -33,8 +32,6 @@ async function download (token,fragment,id_user){
             }
             let tmpPath = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end);
             if(i==numFragements-1){
-                //console.log(JSON.parse(data));
-               //resolve(JSON.parse(data));    
                resolve({filePath:tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
             }
             i++;
@@ -76,14 +73,12 @@ return new Promise((resolve,reject)=>{
             bytesRemaining = bytesRemaining - chunkSize;
             }
         })
-    
-
     });
 }
 
-
-async function remove (req,res){
-       
+async function remove (accessToken,fileId){
+    return new Promise (async resolve=>{
+        resolve(await removeFile.remove(accessToken,fileId))});
 }
 
 module.exports ={

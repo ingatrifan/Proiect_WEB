@@ -35,7 +35,7 @@ exports.upload = async (req,res) => {
               fragmentation.fragmentation(filepath,auth_values.user,sizes)
                 .then(fragments=>
                 {
-                  parseUpload(fragments).then(fragments=>{
+                  parseUpload(fragments,auth_values.user).then(fragments=>{
                     let fileModel = new models.File({id_user:auth_values.user,fileName:files.file.name,id_file:uniq(),fragments:fragments});
                     fileModel.save().then(console.log("savedFile"));
                   });
@@ -110,20 +110,25 @@ return sizeTokens;
 }
 ////idea on  upload https://stackoverflow.com/questions/47708226/how-upload-large-files-to-onedrive-using-php-curl
 // cuz no documentation for js :(
-async function parseUpload(fragments){
+async function parseUpload(fragments,idUser){
+  
   return new Promise(async (resove,reject)=>{
-  for( i in fragments){
+    
+   for(let i =0 ;i<fragments.length;i++){
     if(fragments[i].name=='onedrive'){
-      let onedriveFileData = await fileIndex.onedriveFileController.upload(fragments[i]);
+      let onedriveFileData = await fileIndex.onedriveFileController.upload(fragments[i],idUser);
       fragments[i].idFile=onedriveFileData.id;
     }
     else if(fragments[i].name=='dropbox'){
       //fileIndex.dropboxFileController.upload(fragments[i]);
     }
     else if(fragments[i].name=='google'){
-      //check FOLDER STOL first 
-      fragments[i].folderId =await  utilities.google.findOrCreateStolFolder(fragments[i].accessToken);
-      let googleDriveData = await fileIndex.googleFileController.upload(fragments[i]);
+      //check FOLDER STOL first
+      console.log('STEP_1',i);
+      fragments[i].folderId =await utilities.google.findOrCreateStolFolder(fragments[i].accessToken);
+
+      console.log('STEP_2',i);
+      let googleDriveData = await fileIndex.googleFileController.upload(fragments[i],idUser);
       fragments[i].idFile = googleDriveData.id;
     }
   }

@@ -55,7 +55,6 @@ async function createThatFolder(accessToken, filePath,SESION_UPLOADURL){
     return new Promise((resolve,reject)=>{
     filePath=process.cwd()+"/empty.txt";
     let stats= fs.statSync(filePath);
-    console.log(SESION_UPLOADURL);
     size = stats['size'];
     fs.open(filePath,'r+',(err,fd)=>{
     const curl = new Curl();
@@ -88,7 +87,7 @@ async function createThatFolder(accessToken, filePath,SESION_UPLOADURL){
 }
 
 async function createFolder(accessToken){
-    return new Promise((resolve,rej)=>{
+    return new Promise(async (resolve,rej)=>{
     createFolderSession(accessToken).then(data=>{
         let location = 'https'+data.split('\r')[3].split('https')[1];
         createThatFolder(accessToken,"",location).then(data=>
@@ -99,10 +98,26 @@ async function createFolder(accessToken){
 });
 
 }
-
+async function getFileData(accessToken,idFile){//basically as one bellow but has a field
+    return new Promise( async (resolve)=>{
+        const curl = new Curl();
+        const url='https://www.googleapis.com/drive/v3/files/'+idFile+'?fields=*';       
+        curl.setOpt(Curl.option.URL,url);
+        curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
+        curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+accessToken]);
+        curl.setOpt(Curl.option.CUSTOMREQUEST, "GET");
+        curl.on('error', curl.close.bind(curl));
+        curl.perform();
+            curl.on('end', (statusCode, body) => {
+                curl.close()
+                let result ={body: body,statusCode:statusCode}
+                resolve(result);
+              })      
+        })
+}
 async function checkFileById(accessToken,idFile){//basically for folder id 
 
-    return new Promise((resolve)=>{
+    return new Promise( async (resolve)=>{
     const curl = new Curl();
     const url='https://www.googleapis.com/drive/v3/files/'+idFile;       
     curl.setOpt(Curl.option.URL,url);
@@ -113,15 +128,15 @@ async function checkFileById(accessToken,idFile){//basically for folder id
     curl.perform();
         curl.on('end', (statusCode, body) => {
             curl.close()
-            let result ={body: body,statusCode:status}
-            resolve(JSON.parse(result));
+            let result ={body: body,statusCode:statusCode}
+            resolve(result);
           })      
     })
 }
 
 async function listFiles(accessToken){//basically for folder id 
 
-    return new Promise((resolve)=>{
+    return new Promise( async (resolve)=>{
     const curl = new Curl();
     const url='https://www.googleapis.com/drive/v3/files';       
     curl.setOpt(Curl.option.URL,url);
@@ -138,28 +153,30 @@ async function listFiles(accessToken){//basically for folder id
     })
 }
 async function findFolderByName(accessToken,folderName){
+    return new Promise(async resolve=>{
     let fileData =await  listFiles(accessToken);
     let files = fileData.files;
     for(i in files){
-        console.log(files[i]);
         if(files[i].mimeType=='application/vnd.google-apps.folder'&&files[i].name==folderName){
-            return files[i].id;
+            resolve(files[i].id);
         }
     }
-    return false;
+    resolve(false);
+});
 }
 
 async function findOrCreateStolFolder(accessToken){
     return new Promise(async (resolve)=>{
-        let folderId;
-        let response = await googleUtility.findFolderByName(accessToken,'STOL');
+        let folderId= '';
+        let response = await findFolderByName(accessToken,'STOL');
         if(response==false)
-            folderId=await googleUtility.createFolder(accessToken);
+
+            folderId=await createFolder(accessToken);
         else
             folderId=response;
             resolve(folderId);
     });
 }
 module.exports={
-    getDriverInfo,createFolder,checkFileById,findFolderByName,findOrCreateStolFolder
+    getDriverInfo,createFolder,checkFileById,findFolderByName,findOrCreateStolFolder,listFiles,getFileData
 }

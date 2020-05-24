@@ -50,7 +50,7 @@ async function download (fragment,id_user){
 }
 
 //idea : https://stackoverflow.com/questions/47708226/how-upload-large-files-to-onedrive-using-php-curl
-async function upload (fragment){
+async function upload (fragment,idUser){
 
 return new Promise((resolve,reject)=>{
     uploadFile.uploadSession(fragment.accessToken,fragment.fileName)
@@ -74,7 +74,7 @@ return new Promise((resolve,reject)=>{
                 numBytes=bytesRemaining;
                 end =fileSize-1;
             }
-            let data =  await uploadFile.uploadFile(fragment,session.uploadUrl,numBytes,start,end,fileSize,chunkSize,offset);
+            let data =  await uploadFile.uploadFile(fragment,session.uploadUrl,numBytes,start,end,fileSize,chunkSize,offset,idUser);
             if(i==numFragements-1){
                 //console.log(JSON.parse(data));
                 console.log(data);

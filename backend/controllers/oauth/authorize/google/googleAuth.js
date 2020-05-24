@@ -8,6 +8,7 @@ const cntType =['Content-Type: application/x-www-form-urlencoded'];
  async function  getAccessToken(code){
     let dataToSend={
         'code':code,
+        'scope':'https://www.googleapis.com/auth/drive',
         'client_id':credentials.client_id,
         'redirect_uri': credentials.redirect_uris,    
         'client_secret':credentials.client_secret ,

@@ -6,6 +6,7 @@ const querystring = require('querystring');
 const {Curl ,CurlHttpVersion} = require('node-libcurl');
 const {credentials}=require('./credentials');
 const UPLOAD_URL='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable';
+const path = require('path');
 
 async function uploadSession(accessToken,folder_id,fileName){
     return new Promise((resolve,reject)=>{
@@ -32,12 +33,12 @@ async function uploadSession(accessToken,folder_id,fileName){
           })      
     })
 }
-async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset){
+async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset,idUser){
     let filePath = fragment.filePath;
     let accessToken=fragment.accessToken;
     let contentRange ='bytes '+start +"-"+end+"/"+fileSize;
-    return new Promise((resolve,reject)=>{
-    fs.open(filePath,'r+',(err,fd)=>{
+    return new Promise(async (resolve,reject)=>{
+    fs.open(filePath,'r+', async (err,fd)=>{
     const curl = new Curl();
     curl.setOpt(Curl.option.URL,SESION_UPLOADURL);
     curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
@@ -49,7 +50,12 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
         'Content-Type: application/octet-stream']);
     let buff = new Buffer.alloc(numBytes);
     fs.readSync(fd,buff,0,buff.length,offset);
-    curl.setOpt(Curl.option.POSTFIELDS,buff.toString());
+    let tmp = path.join(process.cwd(),'tmp',idUser,'fake_tmp.gz');
+    await fs.writeFileSync(tmp,buff,);
+    var myfd = await fs.openSync(tmp,'r');
+    //very important
+    curl.setOpt(Curl.option.UPLOAD, true)
+    curl.setOpt(Curl.option.READDATA, myfd)
     curl.setOpt(Curl.option.HTTP_VERSION,CurlHttpVersion.V1_1);
     curl.setOpt(Curl.option.CUSTOMREQUEST,'PUT')
     curl.perform()
@@ -59,9 +65,11 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
         fs.closeSync(fd)
         curl.close();
       })
-        curl.on('end', (statusCode, body,more) => {
-            fs.closeSync(fd)
+        curl.on('end', async  (statusCode, body,more) => {
             curl.close();
+            await fs.closeSync(fd)
+            await fs.closeSync(myfd);
+            await fs.unlinkSync(tmp);
             if(statusCode==308)//get range
             {
                 let range = more[0].range.split('=')[1].split('-');

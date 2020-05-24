@@ -6,18 +6,49 @@ const {credentials}=require('./credentials');
 const uploadFile = require('./upload');
 const downloadFile = require('./download');
 const utility = require('./utilityFunctions');
+const path  = require('path');
 async function download (fragment,id_user){
     return new Promise(async(resolve)=>{
+        let data = await utility.getFileData(fragment.accessToken,fragment.idFile)
+        let fileInfo =JSON.parse(data.body);
+        let fileSize= fileInfo.size;
 
-        await downloadFile.download(fragment.accessToken,fragment.idFile,id_user,fragment.fileName,start);
+        let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
+        var fileOut = fs.openSync(tempPath,'w');
+        let fragSize = 1_000_000;
+        let chunkSize ;
+        let offset=0;
+        while(offset!=fileSize){
+            if(offset+fragSize<=fileSize){
+                chunkSize=fragSize
+            }else{
+                chunkSize=fileSize-offset;
+            }
+            let start = offset;
+            let end = offset+chunkSize-1;
+            console.log(offset,start,end);
+            await downloadFile.download(fragment.accessToken,fragment.idFile,id_user,fragment.idFile,start,end,fileOut);
+            offset = offset+chunkSize;
+            console.log(offset,chunkSize);
+        }
+        await fs.closeSync(fileOut);
+        resolve({filePath:tempPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+        /*
+        var fileOut = fs.openSync(tempPath,'w');
+        let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
+        
+        while(){
+            
 
+        }
+*/
 
     });
 
 }
 
 
-async function upload (fragment){
+async function upload (fragment,idUser){
     return new Promise((resolve,reject)=>{
     uploadFile.uploadSession(fragment.accessToken,fragment.folderId,fragment.fileName).then(async (data)=>{
         let location = 'https'+data.split('\r')[3].split('https')[1];
@@ -37,7 +68,7 @@ async function upload (fragment){
             try
             {
                 let end = start +chunkSize-1;
-                let data =  await uploadFile.uploadFile(fragment,location,chunkSize,start,end,fileSize,chunkSize,offset);
+                let data =  await uploadFile.uploadFile(fragment,location,chunkSize,start,end,fileSize,chunkSize,offset,idUser);
                 i++;
                 bytesRemaining = bytesRemaining - chunkSize;
                 if(data.statusCode==308){

@@ -7,7 +7,7 @@ const {credentials}=require('./credentials');
 const path = require('path');
 const UPLOAD_URL='https://graph.microsoft.com/v1.0/me/drive';
 
-async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset){
+async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset,idUser){
     let filePath = fragment.filePath;
     let accessToken=fragment.accessToken;
     let contentRange ='bytes '+start +"-"+end+"/"+fileSize;
@@ -23,7 +23,7 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
 
         let buff = new Buffer.alloc(numBytes);
         fs.readSync(fd,buff,0,buff.length,offset);
-        let tmp = path.join(process.cwd(),'tmp','test','fake.gz');
+        let tmp = path.join(process.cwd(),'tmp',idUser,'fake_tmp.gz');
         await fs.writeFileSync(tmp,buff,);
         let myfd = await fs.openSync(tmp,'r');
         

@@ -42,6 +42,8 @@ async function parseDownload(fragments,id_user){
             fragmentData.push(fragment);
         }else if(fragments[i].name=='google'){
             let fragment = await fileIndex.googleFileController.download(fragments[i],id_user);
+            fragmentData.push(fragment);
+
         }else if(fragments[i].name=='dropbox'){
             //TODO
         }

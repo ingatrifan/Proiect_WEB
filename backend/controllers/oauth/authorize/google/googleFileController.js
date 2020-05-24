@@ -4,9 +4,16 @@ const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 const uploadFile = require('./upload');
+const downloadFile = require('./download');
 const utility = require('./utilityFunctions');
-async function download (req,res){
-    
+async function download (fragment,id_user){
+    return new Promise(async(resolve)=>{
+
+        await downloadFile.download(fragment.accessToken,fragment.idFile,id_user,fragment.fileName,start);
+
+
+    });
+
 }
 
 

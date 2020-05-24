@@ -10,6 +10,8 @@ async function refragmentation(fragments,usedId,fileName){
     for(i in fragments){
         let content= await fs.readFileSync(fragments[i].filePath);
         let buff = Buffer.from(content);
+        //buff =buff.toString();
+        //buff=Buffer.from(buff,'hex').toString();
         await fs.writeSync(fileOut,buff,0,buff.length,fragments[i].p1) ;
     }
     await fs.closeSync(fileOut);

@@ -25,7 +25,6 @@ async function donwload(req,res){
         parseDownload(fragments,auth_values.user).then(fragments=>{
             refragmentation.refragmentation(fragments,auth_values.user,file.fileName).then(fileOut=>{
                 let stream  = fs.createReadStream(fileOut);
-                res.write(file.fileName);
                 stream.pipe(res);
             })
         });
@@ -42,7 +41,7 @@ async function parseDownload(fragments,id_user){
             let fragment = await fileIndex.onedriveFileController.download(fragments[i],id_user);
             fragmentData.push(fragment);
         }else if(fragments[i].name=='google'){
-            //TODO 
+            let fragment = await fileIndex.googleFileController.download(fragments[i],id_user);
         }else if(fragments[i].name=='dropbox'){
             //TODO
         }

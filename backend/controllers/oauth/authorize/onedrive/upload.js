@@ -4,14 +4,15 @@ const myURL=require('url');
 const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
+const path = require('path');
 const UPLOAD_URL='https://graph.microsoft.com/v1.0/me/drive';
 
 async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,chunkSize,offset){
     let filePath = fragment.filePath;
     let accessToken=fragment.accessToken;
     let contentRange ='bytes '+start +"-"+end+"/"+fileSize;
-    return new Promise((resolve,reject)=>{
-        fs.open(filePath,'r+',(err,fd)=>{
+    return new Promise(async (resolve,reject)=>{
+        fs.open(filePath,'r+',async (err,fd)=>{
         const curl = new Curl();
         curl.setOpt(Curl.option.URL,SESION_UPLOADURL);
         curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
@@ -19,9 +20,17 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
             'Content-Length: '+numBytes,
             'Content-Range: '+contentRange
         ]);
+
         let buff = new Buffer.alloc(numBytes);
         fs.readSync(fd,buff,0,buff.length,offset);
-        curl.setOpt(Curl.option.POSTFIELDS,buff.toString());
+        let tmp = path.join(process.cwd(),'tmp','test','fake.gz');
+        await fs.writeFileSync(tmp,buff,);
+        let myfd = await fs.openSync(tmp,'r');
+        
+        //curl.setOpt(Curl.option.POSTFIELDS,buff);
+        curl.setOpt(Curl.option.UPLOAD, true)
+        curl.setOpt(Curl.option.READDATA, myfd)
+
         curl.setOpt(Curl.option.CUSTOMREQUEST,'PUT')    
         curl.perform()
         curl.on('error', function (error, errorCode) {
@@ -30,10 +39,13 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
             curl.close();
         })
         
-            curl.on('end', (statusCode, body) => {
-                fs.closeSync(fd)
+            curl.on('end', async (statusCode, body) => {
+                await fs.closeSync(fd)
+                await fs.closeSync(myfd);
+                await fs.unlinkSync(tmp);
                 console.log('SUCCESS',body,statusCode);
                 resolve(body);
+                
                 curl.close();
             })      
     }) 
@@ -57,6 +69,7 @@ async function uploadSession(accessToken,filename){
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             curl.close()
+            console.log(body);
             resolve(JSON.parse(body));
           })      
     })

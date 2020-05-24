@@ -15,13 +15,12 @@ async function  download(accessToken,fileId,filePath){
    const fileOut = fs.openSync(filePath, 'w+')
    curl.setOpt(Curl.option.WRITEFUNCTION, (buff, nmemb, size) => {
       let written = 0
-  if (fileOut) {
-    written = fs.writeSync(fileOut, buff, 0, nmemb * size)
-  } else {
-    process.stdout.write(buff.toString())
-    written = size * nmemb
+      if (fileOut) {
+        written = fs.writeSync(fileOut, buff, 0, nmemb * size)
+      } else {
+        process.stdout.write(buff.toString())
+        written = size * nmemb
   }
-
   return written
   })
    curl.perform()

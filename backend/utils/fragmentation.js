@@ -134,8 +134,8 @@ async function fragment(filepath,tmpPath,usedDrives){
             let stream = fs.createWriteStream(myFilePath);
             buff = Buffer.alloc(usedDrives[i].p2-usedDrives[i].p1);
             fs.readSync(fd,buff,offset,buff.length,usedDrives[i].p1)
-            let tmp = Buffer.from(buff).toString('hex');
-            buff = Buffer.from(tmp);
+            //let tmp = Buffer.from(buff).toString('hex');
+            //buff = Buffer.from(tmp);
             stream.write(buff);
             stream.end();
         }

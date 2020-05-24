@@ -7,10 +7,11 @@ const utils = require('./utilityFunctions');
 const uploadFile = require('./upload');
 const downloadFile = require('./download');
 const removeFile=require('./remove');
+const path = require('path');
 //same as upload basically
 async function download (fragment,id_user){
     return new Promise(async (resolve)=>{
-        
+        //bug la downloadat sau uploadat , nu este aceasi fila neaparat
     await utils.getFileData(fragment.accessToken,fragment.idFile).then( async(data)=>
         {
             let donwloadUrl = data['@microsoft.graph.downloadUrl'];
@@ -19,20 +20,27 @@ async function download (fragment,id_user){
             let numFragements =Math.ceil(fileSize/fragSize);
             let bytesRemaining= fileSize;
             let i =0;
+            var position=0;
+            let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
+            var fileOut = fs.openSync(tempPath,'w');
         while(i<numFragements){
+            console.log(i);
             let chunkSize= fragSize;
             let numBytes= fragSize;
             let start = i*fragSize;
             let end =i*fragSize+ chunkSize-1;
-            let offset=i*fragSize;
+            
             if(bytesRemaining<chunkSize){
                 chunkSize=numBytes;
                 numBytes=bytesRemaining;
                 end =fileSize-1;
             }
-            let tmpPath = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end);
+            let data = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end,position,fileOut);
+            position=data.position;
+            console.log('poss',position);
             if(i==numFragements-1){
-               resolve({filePath:tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+                fs.closeSync(fileOut);
+               resolve({filePath:data.tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
             }
             i++;
             bytesRemaining = bytesRemaining - chunkSize;
@@ -69,6 +77,7 @@ return new Promise((resolve,reject)=>{
             let data =  await uploadFile.uploadFile(fragment,session.uploadUrl,numBytes,start,end,fileSize,chunkSize,offset);
             if(i==numFragements-1){
                 //console.log(JSON.parse(data));
+                console.log(data);
                 resolve(JSON.parse(data));    
             }
             i++;

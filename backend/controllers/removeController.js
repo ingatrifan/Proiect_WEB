@@ -48,14 +48,16 @@ async function remove(req,res){
 async function parseUpload(fragments){
 
     for (i in fragments){
-        let accesstoken = fragments[i].token;
+        let accesstoken = fragments[i].accessToken;
         let idFile = fragments[i].idFile;
         if(fragments[i].name=='onedrive'){
             let status =await fileIndex.onedriveFileController.remove(accesstoken,idFile);
             console.log('status',status);
         }else if(fragments[i].name=='google'){
+            console.log(accesstoken,idFile);
+            let status = await fileIndex.googleFileController.remove(accesstoken,idFile);
+            console.log(status);
             
-
         }else if(fragments[i].name=='dropbox'){
             
         }

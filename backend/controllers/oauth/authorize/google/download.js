@@ -1,9 +1,6 @@
-
-
 const fs = require('fs');
 const {Curl } = require('node-libcurl');
 const path= require('path');
-const convertHex = require('convert-hex');
 
 async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
     return new Promise((response,reject)=>{

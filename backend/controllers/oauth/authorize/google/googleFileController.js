@@ -5,6 +5,7 @@ const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 const uploadFile = require('./upload');
 const downloadFile = require('./download');
+const removeFile=require('./remove');
 const utility = require('./utilityFunctions');
 const path  = require('path');
 async function download (fragment,id_user){
@@ -89,10 +90,10 @@ async function upload (fragment,idUser){
 }
 
 
-async function remove (req,res){
-    
+async function remove (accessToken,fileId){
+    return new Promise (async resolve=>{
+        resolve(await removeFile.remove(accessToken,fileId))});
 }
-
 module.exports ={
     download,upload,remove
 }

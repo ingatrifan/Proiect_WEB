@@ -1,9 +1,4 @@
-const fs = require('fs');
-const utility= require('./utilityFunctions');
-const myURL=require('url');
-const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
-const {credentials}=require('./credentials');
 
 async function remove (accessToken,fileId){
   return new Promise((resolve,reject)=> {

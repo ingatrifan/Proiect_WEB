@@ -4,6 +4,7 @@
 /*Setting body margin to 0 so content fills the page*/
 body {
     margin: 0;
+    padding: 0;
 }
 
 /*Main container styling: font,display and colors*/

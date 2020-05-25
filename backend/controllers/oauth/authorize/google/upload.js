@@ -2,6 +2,7 @@
 const {Curl ,CurlHttpVersion} = require('node-libcurl');
 const UPLOAD_URL='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable';
 const path = require('path');
+const fs = require('fs');
 
 async function uploadSession(accessToken,folder_id,fileName){
     return new Promise((resolve,reject)=>{

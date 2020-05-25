@@ -73,7 +73,9 @@ async function fragmentation(filepath,id_user,sizes){
         filePath:"",//p1,p2 folositi pentru a determinat din ce pozitie va incepe sa citeasca din fisier
         p1: 0,
         p2:0,
-        token:sizes[2].token,
+        accessToken:sizes[2].token,
+        refreshToken:sizes[2].refreshToken,
+        lastAccessed: sizes[2].lastAccessed,
         fileName:"",
         idFile:""
     }   
@@ -85,7 +87,9 @@ async function fragmentation(filepath,id_user,sizes){
         filePath:"",
         p1:0 ,
         p2:0,
-        token:sizes[1].token,
+        accessToken:sizes[1].token,
+        refreshToken:sizes[1].refreshToken,
+        lastAccessed: sizes[1].lastAccessed,
         fileName:"",
         idFile:""
     }
@@ -95,15 +99,17 @@ async function fragmentation(filepath,id_user,sizes){
         available:sizes[0].authorized,
         update:0,
         filePath:"",
-        p1: 0,
+        p1:0,
         p2:0,
-        token:sizes[0].token,
+        accessToken:sizes[0].token,
+        refreshToken:sizes[0].refreshToken,
+        lastAccessed: sizes[0].lastAccessed,
         fileName:"",
-        idFile:""
+        idFile:"",
+        folderId:sizes[0].folderId
     }
     let driveData =[];
     driveData.push(one,dropbox,google)
-    console.log(filepath);
     fileSize=fs.statSync(filepath)['size'];
     let usedDrives= findStorage(driveData,fileSize);
     let pos=0;
@@ -111,32 +117,39 @@ async function fragmentation(filepath,id_user,sizes){
         usedDrives[i].p1=pos;
         pos +=usedDrives[i].update;
         usedDrives[i].p2=pos;
-    
     }
-    return await fragment(filepath,tmpPath,usedDrives);      
+    let res = await fragment(filepath,tmpPath,usedDrives);      
+    return new Promise(resolve=>resolve(res));
 }
 async function fragment(filepath,tmpPath,usedDrives){
+    return new Promise(async (res)=>{
     let offset=0;
     let buff;
      let fd  = fs.openSync(filepath,"r");
-        for(i in usedDrives){
+     var stream;
+        for(let i=0;i<usedDrives.length;i++){
             let uniq = uniqid();
-            let myFilePath = Path.join(tmpPath,usedDrives[i].name+"_"+uniq);
+            let firtName= 'stolFile';
+            let myFilePath = Path.join(firtName+"_"+uniq);
             usedDrives[i].filePath=myFilePath;
-            usedDrives[i].fileName=usedDrives[i].name+"_"+uniq;
-            let stream = fs.createWriteStream(myFilePath);
-            buff = Buffer.alloc(usedDrives[i].p2-usedDrives[i].p1);
-            fs.readSync(fd,buff,offset,buff.length,usedDrives[i].p1)
-            let tmp = Buffer.from(buff).toString('hex');
-            buff = Buffer.from(tmp);
-            stream.write(buff);
-            stream.end();
+            usedDrives[i].fileName=firtName+"_"+uniq;
+            await createFragment(myFilePath,usedDrives,i,fd);
         }
         fs.closeSync(fd);
-    return new Promise((res)=>res(usedDrives));
+        res(usedDrives);
+    });
 }
  //fragmentation("./important.txt","test");
 
+ async function createFragment(myFilePath,usedDrives,i,fd){
+     return new Promise( async (resolve)=>{
+        let stream = fs.createWriteStream(myFilePath);
+        buff = Buffer.alloc(usedDrives[i].p2-usedDrives[i].p1);
+        fs.readSync(fd,buff,0,buff.length,usedDrives[i].p1)
+        stream.write(buff);
+        stream.end(()=>{resolve('ended')})
+     });
+ }
 module.exports={
     fragmentation,deleteFolderRecursive
 }

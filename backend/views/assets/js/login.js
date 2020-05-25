@@ -20,7 +20,6 @@ function login (e){
         localStorage.setItem('serverToken',json.serverToken);
         console.log(succ.responseText);
         location = json.location;
-
     });
     return false;
    }

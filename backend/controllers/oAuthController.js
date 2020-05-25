@@ -7,6 +7,7 @@ const myURL=require('url');
 const models= require('../models/index')
 const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
+const googleUtility= require('./oauth/authorize/google/utilityFunctions');
 //TO DO, PUT THE ACCESSS , REFRESH TOKENS IN DB, 
 //EXCEPTIONS,  RELOADING THE PAGE, WHAT HAPPENS WITH THE CALLS
 
@@ -78,7 +79,7 @@ exports.googleAuth = async (req,res) =>{
             if(user.googleAuth.authorized!=false)
             { 
                 
-                oAuth.googleAuth.getAccessToken(code).then((data)=>{
+                oAuth.googleAuth.getAccessToken(code).then(async (data)=>{
                     if(data['error']){
                         //
                         
@@ -86,11 +87,17 @@ exports.googleAuth = async (req,res) =>{
                             console.log('error at data' );
                         }else{
                     try{
-                        models.User.updateOne({email:auth_values.user},{googleAuth:{accessToken:data.access_token,refreshToken:data.refresh_token,authorized:true,lastAccessed:new Date()}}).then(console.log('success getting token'));
+                        //get the folder id  or createa folder 
+                        let accessToken = data.access_token;
+                        let folderId = await googleUtility.findOrCreateStolFolder(accessToken);
+                        await models.User.updateOne({email:auth_values.user},{googleAuth:{folderId:folderId,accessToken:data.access_token,refreshToken:data.refresh_token,authorized:true,lastAccessed:new Date()}}).then(console.log('success getting token'));
                     }
                     catch(e){
+                        console.log(e);
                         res.writeHead(404,'Error logging In');
-                        res.end();return ;   
+                        
+                        res.end();
+                        return ;   
                     }
                 }
                 });            

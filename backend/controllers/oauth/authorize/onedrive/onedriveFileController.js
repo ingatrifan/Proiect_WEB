@@ -3,39 +3,44 @@ const myURL=require('url');
 const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
-const uploadFile = require('./upload');
 const utils = require('./utilityFunctions');
+const uploadFile = require('./upload');
 const downloadFile = require('./download');
+const removeFile=require('./remove');
+const path = require('path');
 //same as upload basically
-async function download (token,fragment,id_user){
+async function download (fragment,id_user){
     return new Promise(async (resolve)=>{
-        
-    await utils.getFileData(token,fragment.idFile).then( async(data)=>
+        //bug la downloadat sau uploadat , nu este aceasi fila neaparat
+    await utils.getFileData(fragment.accessToken,fragment.idFile).then( async(data)=>
         {
             let donwloadUrl = data['@microsoft.graph.downloadUrl'];
-            console.log('HERERE',data);
-
-            let fragSize=10_000_000;
+            let fragSize=1_000_000;
             let fileSize = data['size'];
             let numFragements =Math.ceil(fileSize/fragSize);
             let bytesRemaining= fileSize;
             let i =0;
+            var position=0;
+            let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
+            var fileOut = fs.openSync(tempPath,'w');
         while(i<numFragements){
+            console.log(i);
             let chunkSize= fragSize;
             let numBytes= fragSize;
             let start = i*fragSize;
             let end =i*fragSize+ chunkSize-1;
-            let offset=i*fragSize;
+            
             if(bytesRemaining<chunkSize){
                 chunkSize=numBytes;
                 numBytes=bytesRemaining;
                 end =fileSize-1;
             }
-            let tmpPath = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end);
+            let data = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end,position,fileOut);
+            position=data.position;
+            console.log('poss',position);
             if(i==numFragements-1){
-                //console.log(JSON.parse(data));
-               //resolve(JSON.parse(data));    
-               resolve({filePath:tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+                fs.closeSync(fileOut);
+               resolve({filePath:data.tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
             }
             i++;
             bytesRemaining = bytesRemaining - chunkSize;
@@ -45,17 +50,19 @@ async function download (token,fragment,id_user){
 }
 
 //idea : https://stackoverflow.com/questions/47708226/how-upload-large-files-to-onedrive-using-php-curl
-async function upload (fragment){
+async function upload (fragment,idUser){
 
 return new Promise((resolve,reject)=>{
-    uploadFile.uploadSession(fragment.token,fragment.fileName)
+    uploadFile.uploadSession(fragment.accessToken,fragment.fileName)
     .then(async (session)=>{
         //console.log("FRAGMENTATION");
-        let fragSize=10_000_000;
+        let fragSize=1_000_000;
         let fileSize = fs.lstatSync(fragment.filePath)['size'];
+        
         let numFragements =Math.ceil(fileSize/fragSize);
         let bytesRemaining= fileSize;
         let i =0;
+        console.log(i,numFragements,fileSize);
         while(i<numFragements){
             let chunkSize= fragSize;
             let numBytes= fragSize;
@@ -67,23 +74,22 @@ return new Promise((resolve,reject)=>{
                 numBytes=bytesRemaining;
                 end =fileSize-1;
             }
-            let data =  await uploadFile.uploadFile(fragment,session.uploadUrl,numBytes,start,end,fileSize,chunkSize,offset);
+            let data =  await uploadFile.uploadFile(fragment,session.uploadUrl,numBytes,start,end,fileSize,chunkSize,offset,idUser);
             if(i==numFragements-1){
-                console.log(JSON.parse(data));
+                //console.log(JSON.parse(data));
+                console.log(data);
                 resolve(JSON.parse(data));    
             }
             i++;
             bytesRemaining = bytesRemaining - chunkSize;
             }
         })
-    
-
     });
 }
 
-
-async function remove (accessToken, fileId){
-  const url =`https://graph.microsoft.com/v1.0/me/drive/items/${fileId}`; 
+async function remove (accessToken,fileId){
+    return new Promise (async resolve=>{
+        resolve(await removeFile.remove(accessToken,fileId))});
 }
 
 module.exports ={

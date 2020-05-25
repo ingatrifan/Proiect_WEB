@@ -7,7 +7,7 @@ process.on("uncaughtException", (err) => {
 });
 
 router.registerEndPoint("POST","/upload",fileController.upload)
-router.registerEndPoint('DELETE','/delete', fileController.delete)
+router.registerEndPoint('DELETE','/delete', fileController.remove)
 router.registerEndPoint('GET','/download',fileController.download)
 
 module.exports = {

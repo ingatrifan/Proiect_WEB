@@ -4,52 +4,84 @@ const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
 const {credentials}=require('./credentials');
 const uploadFile = require('./upload');
+const downloadFile = require('./download');
+const removeFile=require('./remove');
 const utility = require('./utilityFunctions');
-async function download (req,res){
-    
+const path  = require('path');
+async function download (fragment,id_user){
+    return new Promise(async(resolve)=>{
+        let data = await utility.getFileData(fragment.accessToken,fragment.idFile)
+        let fileInfo =JSON.parse(data.body);
+        let fileSize= fileInfo.size;
+        let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
+        var fileOut = fs.openSync(tempPath,'w');
+        let fragSize = 1_000_000;
+        let chunkSize ;
+        let offset=0;
+        while(offset!=fileSize){
+            if(offset+fragSize<=fileSize){
+                chunkSize=fragSize
+            }else{
+                chunkSize=fileSize-offset;
+            }
+            let start = offset;
+            let end = offset+chunkSize-1;
+            console.log(offset,start,end);
+            await downloadFile.download(fragment.accessToken,fragment.idFile,id_user,fragment.idFile,start,end,fileOut);
+            offset = offset+chunkSize;
+            console.log(offset,chunkSize);
+        }
+        await fs.closeSync(fileOut);
+        resolve({filePath:tempPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+    });
+
 }
 
 
-async function upload (accessToken,filepath){
-    utility.getDriverInfo(accessToken).then(res=>{
-        //console.log(res);
-        
-        fs.writeFileSync('./out.txt',res)
-    });
-    utility.createFolder().then(res=>console.log(res));///NOTE : this must be created once the user logged with his account, and
-    // and the id must be stored in database
-
-    uploadFile.uploadSession(accessToken,folder_id).then((data)=>{
+async function upload (fragment,idUser){
+    return new Promise((resolve,reject)=>{
+    uploadFile.uploadSession(fragment.accessToken,fragment.folderId,fragment.fileName).then(async (data)=>{
         let location = 'https'+data.split('\r')[3].split('https')[1];
-        
-        uploadFile.uploadFile(accessToken,filepath,location).then(data=>{
-            
-        })
+        let fragSize=2000000;//cam 2mb per chunk
+        let fileSize = fs.lstatSync(fragment.filePath)['size'];
+        let bytesRemaining= fileSize;
+        let chunkSize= fragSize;
+        let start = 0;
+        let offset=0;
+        var check =true;
+        while(check){
+            if(offset+fragSize<=fileSize){
+                chunkSize=fragSize
+            }else{
+                chunkSize=fileSize-offset;
+            }
+            try
+            {
+                let end = start +chunkSize-1;
+                let data =  await uploadFile.uploadFile(fragment,location,chunkSize,start,end,fileSize,chunkSize,offset,idUser);
+                i++;
+                if(data.statusCode==308){
+                    start = data.range[1];
+                    start ++;
+                    offset=start;
+                }else if(data.statusCode==200|| data.statusCode==201){
+                    check=false;
+                    resolve(JSON.parse(data.body));
+                }
+            }catch(e){
+                console.log(e,i);
+            }
+        }
     }
     );
+});
 }
 
 
 async function remove (accessToken,fileId){
-  const url = `https://www.googleapis.com/drive/v3/files/${fileId}`;
-  const curl = new Curl();
-  curl.setOpt(Curl,Option.URL,url);
-  curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
-  curl.setOpt(Curl.option.HTTPHEADER,['Authorization: Bearer '+accessToken]);
-  curl.setOpt(Curl.option.CUSTOMREQUEST,'DELETE');
-  curl.on('error', curl.close.bind(curl));
-  curl.perform();
-
-  return new Promise((resolve,reject)=> {
-    curl.on('end', (statusCode,body) => {
-      if(statusCode!== 204) {
-        console.log('Error while trying to delete the file...[googledrive]')
-      }
-      curl.close();
-    });
-  });
+    return new Promise (async resolve=>{
+        resolve(await removeFile.remove(accessToken,fileId))});
 }
-
 module.exports ={
     download,upload,remove
 }

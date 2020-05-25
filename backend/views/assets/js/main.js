@@ -6,6 +6,9 @@ const burger = document.getElementById("burger");
 const arrowBack = document.querySelector(".back-arrow");
 const bar = document.querySelector(".bar");
 const sidepart = document.querySelector(".sidepart");
+const headerRight = document.getElementsByClassName('header-right')[0];
+const collapseButton = document.getElementById('collapse-header');
+const expandButton = document.getElementById('expand-header');
 // Events
 modalBtn.addEventListener('click', openModal);
 closeBtn.addEventListener('click',closeModal);
@@ -20,6 +23,18 @@ function resize() {
     } else {
         bar.style.display = 'inline-block';
         sidepart.style.display = 'none';
+    }
+
+    //for header
+    if (window.innerWidth >500 ){
+      collapseButton.style.display = 'none';
+      expandButton.style.display = 'none';
+      headerRight.style.display = 'block';
+    }
+    else {
+      expandButton.style.display = 'block';
+      headerRight.style.display = 'none';
+      collapseButton.style.display = 'none';
     }
   }
   

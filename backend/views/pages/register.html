@@ -9,19 +9,25 @@
     <link rel="stylesheet" href="../assets/css/footer.css">
     <title>Thunder</title>
     <link rel="shortcut icon" href="../assets/images/title-icon.svg">
+    <script type="text/javascript" src="../assets/js/header.js"></script>
+    <script src="../assets/js/register.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/d6976534fe.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <!--Header-->
     <div class="header">
-            <div class="header-left">
-                <a href="http://localhost:3000/landingPage" class="project-name">STOL - Modern Cloud Storage</a>
-            </div>
-            <div class="header-right">
-                <a href="http://localhost:3000/about" class="about-us">About us</a>
-                <a href="http://localhost:3000/register" class="account-button">Register</a>
-                <a href="http://localhost:3000/login" class="account-button">Log in</a>
-            </div>
-        </div>
+      <div class="header-left">
+          <a href="http://localhost:3000/landingPage" class="project-name">STOL - Modern Cloud Storage</a>
+          <a id ="expand-header" onclick="toggleHeader(false)"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+          <a id ="collapse-header" onclick="toggleHeader(true)"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+      </div>
+      <div class="header-right">
+          <a href="http://localhost:3000/about" class="about-us">About us</a>
+          <a href="http://localhost:3000/register" class="account-button">Register</a>
+          <a href="http://localhost:3000/login" class="account-button">Log in</a>
+      </div>
+    </div>
     <!--End of Header--> 
     <div class="login-page">
         <div class="form">
@@ -32,8 +38,6 @@
             <input type="password" id = "user_pass1" placeholder="password"/>
             <input type="password" id = "user_pass2" placeholder="password"/>
             <button onclick=register()>create</button>
-            <script src="../assets/js/register.js"></script>
-
             <p class="message">Already registered? <a href="http://localhost:3000/login">Sign In</a></p>    
             </form>        
         </div>

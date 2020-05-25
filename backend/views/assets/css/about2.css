@@ -1,0 +1,28 @@
+body {
+  background-color: #393232;
+  color: #fff;
+  margin:0;   
+}
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}

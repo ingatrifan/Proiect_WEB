@@ -1,10 +1,5 @@
-const fs = require('fs');
-const request = require('request');
-const utility= require('./utilityFunctions');
-const myURL=require('url');
-const querystring = require('querystring');
+
 const {Curl ,CurlHttpVersion} = require('node-libcurl');
-const {credentials}=require('./credentials');
 const UPLOAD_URL='https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable';
 const path = require('path');
 
@@ -50,8 +45,8 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
         'Content-Type: application/octet-stream']);
     let buff = new Buffer.alloc(numBytes);
     fs.readSync(fd,buff,0,buff.length,offset);
-    let tmp = path.join(process.cwd(),'tmp',idUser,'fake_tmp.gz');
-    await fs.writeFileSync(tmp,buff,);
+    let tmp = path.join(process.cwd(),'tmp',idUser,'fake_tmp');
+    await fs.writeFileSync(tmp,buff);
     var myfd = await fs.openSync(tmp,'r');
     //very important
     curl.setOpt(Curl.option.UPLOAD, true)

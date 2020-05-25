@@ -56,15 +56,13 @@ async function parseUpload(fragments){
         }else if(fragments[i].name=='google'){
             console.log(accesstoken,idFile);
             let status = await fileIndex.googleFileController.remove(accesstoken,idFile);
+            
+            
+        }else if(fragments[i].name=='dropbox'){   
+            let status = await fileIndex.dropboxFileController.remove(accesstoken,idFile);
             console.log(status);
-            
-        }else if(fragments[i].name=='dropbox'){
-            
         }
-
     }
-
-
 }
 
 module.exports={

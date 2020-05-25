@@ -66,7 +66,6 @@ async function UniqueId(data){
     return false;
 }
 
-
 module.exports={
     register
 };

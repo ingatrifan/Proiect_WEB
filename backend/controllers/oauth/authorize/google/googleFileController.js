@@ -13,7 +13,6 @@ async function download (fragment,id_user){
         let data = await utility.getFileData(fragment.accessToken,fragment.idFile)
         let fileInfo =JSON.parse(data.body);
         let fileSize= fileInfo.size;
-
         let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
         var fileOut = fs.openSync(tempPath,'w');
         let fragSize = 1_000_000;
@@ -34,16 +33,6 @@ async function download (fragment,id_user){
         }
         await fs.closeSync(fileOut);
         resolve({filePath:tempPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
-        /*
-        var fileOut = fs.openSync(tempPath,'w');
-        let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
-        
-        while(){
-            
-
-        }
-*/
-
     });
 
 }
@@ -71,7 +60,6 @@ async function upload (fragment,idUser){
                 let end = start +chunkSize-1;
                 let data =  await uploadFile.uploadFile(fragment,location,chunkSize,start,end,fileSize,chunkSize,offset,idUser);
                 i++;
-                bytesRemaining = bytesRemaining - chunkSize;
                 if(data.statusCode==308){
                     start = data.range[1];
                     start ++;

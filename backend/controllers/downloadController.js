@@ -36,7 +36,7 @@ async function donwload(req,res){
 async function parseDownload(fragments,id_user){ 
     let fragmentData=[];
     return new Promise(async (resolve)=>{
-    for( i in fragments){
+    for(let  i=0;i<fragments.length;i++){
         if(fragments[i].name=='onedrive'){
             let fragment = await fileIndex.onedriveFileController.download(fragments[i],id_user);
             fragmentData.push(fragment);
@@ -45,7 +45,8 @@ async function parseDownload(fragments,id_user){
             fragmentData.push(fragment);
 
         }else if(fragments[i].name=='dropbox'){
-            //TODO
+            let fragment= await fileIndex.dropboxFileController.download(fragments[i],id_user);
+            fragmentData.push(fragment);
         }
     }
     resolve(fragmentData);

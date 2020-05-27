@@ -1,5 +1,5 @@
 
-//libs
+//libs  
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
@@ -39,5 +39,5 @@ await models.User.remove({},()=>console.log("Cleaning users"));
 connectDB();
 const router = new Router();
 router.use('',index.router)
-const app = new HTTPServer(router);
+const app = new HTTPServer(router,config.PORT);
 app.listen();

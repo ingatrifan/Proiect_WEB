@@ -6,8 +6,8 @@ const credentials =
 "project_id":"tw2020-1587653034327",
 "token_uri":"https://oauth2.googleapis.com/token",
 "client_secret":"A0e1_mG8wU.t1OBDK6~DOXKLyL1HUJD1-T",
-"redirect_uris":"http://localhost:3000/authorize/onedrive",
-"javascript_origins":["http://localhost:3000"]};
+"redirect_uris":"http://localhost/authorize/onedrive",
+"javascript_origins":["http://localhost"]};
 
 module.exports={
     credentials

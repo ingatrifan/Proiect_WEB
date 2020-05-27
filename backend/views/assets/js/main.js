@@ -64,7 +64,7 @@ function handleForm(event) {
   
   formData.append('file',file);
   formData.append('serverToken',localStorage.getItem('serverToken'));
-  const url = 'http://localhost:3000/upload';
+  const url = 'http://'+window.location.host+'/upload';
   fetch(url,
     {
       method:'POST',
@@ -92,7 +92,7 @@ function downloadFile(element){
   let divId =  document.getElementById(id);
   let fileName = divId.childNodes[3].childNodes[1].innerHTML
   console.log(fileName);
-  const url = 'http://127.0.0.1:3000/download?serverToken='+token+'&idFile='+id;
+  const url = 'http://'+window.location.host+'/download?serverToken='+token+'&idFile='+id;
   fetch(url)
   .then(resp=>{
     return resp.blob()})
@@ -115,7 +115,7 @@ function downloadFile(element){
 
 //CLICK DELETE
 function deleteFile(element){
-  const url = 'http://127.0.0.1:3000/delete';
+  const url = 'http://'+window.location.host+'/delete';
   const method = "DELETE"
   let fileId = element.id;
   let svtoken = window.localStorage.getItem('serverToken');
@@ -129,24 +129,25 @@ function deleteFile(element){
         window.location.reload(body.location);
         
     }
-      //handler when receiving succes
   });
 }
 //function GOOLE
 function googleAuth(){
-  let url = "https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=http%3A//localhost:3000/authorize/google&client_id=282450647382-g7epadv9ud6slg873pm75gmhinhqjsao.apps.googleusercontent.com"
+  let url ='https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=http%3A//localhost/authorize/google&client_id=282450647382-g7epadv9ud6slg873pm75gmhinhqjsao.apps.googleusercontent.com';
+  
   url+='&state='+ localStorage.getItem('serverToken');
+  console.log(url);
   window.location.replace(url);
 }
 //function ONEDRIVE
 function oneDriveAuth(){
-  let url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=03f8e27d-7b57-4b58-a096-3887fc515d43&response_type=code&redirect_uri=http://localhost:3000/authorize/onedrive&response_mode=query&scope=openid offline_access Files.ReadWrite.All";
+  let url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=03f8e27d-7b57-4b58-a096-3887fc515d43&response_type=code&redirect_uri=http://localhost/authorize/onedrive&response_mode=query&scope=openid offline_access Files.ReadWrite.All";
   url+='&state='+ localStorage.getItem('serverToken');
   window.location.replace(url);
 }
 //function DROPBOX
 function dropboxAuth(){
-  let url = 'https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=code&redirect_uri=http://localhost:3000/authorize/dropbox'
+  let url = 'https://www.dropbox.com/oauth2/authorize?client_id=zfxu0qci4k2cofb&response_type=code&redirect_uri=http://localhost/authorize/dropbox'
   url+='&state='+ localStorage.getItem('serverToken');
   window.location.replace(url);
 }

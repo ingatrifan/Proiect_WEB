@@ -3,10 +3,9 @@
 
 function login (e){
     //get id and pass , must also do enc
-    const url = 'http://localhost:3000/login';
+    const url = 'http://'+window.location.host+'/login';
     let id = document.getElementById('user_id');
     let pw = document.getElementById('user_pass');
-    console.log(id.value,pw.value);
 
     let encodeString  = id.value +':'+pw.value;
     //encoding

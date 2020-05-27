@@ -1,12 +1,13 @@
-const models = require('../models/index');
-const fs =require('fs');
+const refragmentation = require('../utils/refregmentation');
 const fileIndex = require('./oauth/authorize/fileIndex');
 const validation = require('../utils/checkValidation');
+const models = require('../models/index');
+const fs =require('fs');
 const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const url = require('url');
-const refragmentation = require('../utils/refregmentation');
-
+const path =require('path');
+const fragmentation= require('../utils/fragmentation');
 async function donwload(req,res){
     let uri = url.parse(req.url).query;
     let values = uri.split('&');
@@ -18,14 +19,24 @@ async function donwload(req,res){
     //TO DO : validez accesstoken-urile 
     //TO DO : validez file-urirle
     //fetch the file info from db -> check tokens(TO DO  )->validate files(TO DO)  ->fetch data
-    //NOT COMPLETE
+    //NOT COMPLETElet tmpPath= Path.join(process.cwd(),'tmp',id_user);
+    let tmpPath= path.join(process.cwd(),'tmp',auth_values.user);
+    try{
+        await fs.mkdirSync(tmpPath);    
+    }
+    catch(e){}
     
     await models.File.findOne({id_user:auth_values.user,id_file:idFile},(err,file)=>{
         let fragments = file.fragments;
         parseDownload(fragments,auth_values.user).then(fragments=>{
             refragmentation.refragmentation(fragments,auth_values.user,file.fileName).then(fileOut=>{
+
                 let stream  = fs.createReadStream(fileOut);
                 stream.pipe(res);
+                let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
+                //fragmentation.deleteFolderRecursive(cleanPath);
+
+
             })
         });
     });

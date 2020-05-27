@@ -1,3 +1,4 @@
+//bcrypt
 const jwt = require('jsonwebtoken');
 const models = require('../models');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";

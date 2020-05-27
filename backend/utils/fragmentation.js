@@ -3,17 +3,20 @@ const Path = require('path');
 const uniqid = require('uniqid');
 
 const deleteFolderRecursive = function(path) {
-    if (fs.existsSync(path)) {
-      fs.readdirSync(path).forEach((file, index) => {
-        const curPath = Path.join(path, file);
-        if (fs.lstatSync(curPath).isDirectory()) { // recurse
-          deleteFolderRecursive(curPath);
-        } else { 
-          fs.unlinkSync(curPath);
+    try{
+        if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach((file, index) => {
+            const curPath = Path.join(path, file);
+            if (fs.lstatSync(curPath).isDirectory()) { // recurse
+            deleteFolderRecursive(curPath);
+            } else { 
+            fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
         }
-      });
-      fs.rmdirSync(path);
-    }
+        }
+    catch(e){}
   };
 
  function findStorage(driveData,fileSize){
@@ -66,9 +69,7 @@ const deleteFolderRecursive = function(path) {
   }
 async function fragmentation(filepath,id_user,sizes){   
     
-    try{
-        fs.mkdirSync(tmpPath);
-    }catch(e){}
+    
     let one = {
         name:"onedrive",
         capacity:sizes[2].size,
@@ -116,6 +117,10 @@ async function fragmentation(filepath,id_user,sizes){
     driveData.push(one,dropbox,google)
     fileSize=fs.statSync(filepath)['size'];
     let tmpPath= Path.join(process.cwd(),'tmp',id_user);
+    try{
+        await fs.mkdirSync(tmpPath);    
+    }
+    catch(e){}
     let usedDrives= findStorage(driveData,fileSize);
     let pos=0;
     for(i in usedDrives){

@@ -1,4 +1,3 @@
-//PRETTY USELESS NOW, 
 const HttpStatusCodes = require("http-status-codes");
 const formidable = require("formidable")
 const models = require('../models/index');
@@ -9,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const utilities = require('./oauth/authorize/utilityIndex');
 const uniq = require('uniqid');
-const fs = require('fs');
+const path = require('path');
 exports.upload = async (req,res) => { 
   console.log('UPLOAD');
   let token;
@@ -42,7 +41,9 @@ exports.upload = async (req,res) => {
                       
 
                       //clean up 
-                      //fragmentation.deleteFolderRecursive();
+                      console.log("saved");
+                      let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
+                      fragmentation.deleteFolderRecursive(cleanPath);
                       res.statusCode = HttpStatusCodes.OK;
                       res.setHeader('Content-Type', 'application/json');
                       res.end(JSON.stringify({"success": true, "location":'http://localhost/mainPage?serverToken='+token,"message": 'Successfully upload'}));

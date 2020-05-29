@@ -15,7 +15,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
         curl.setOpt(Curl.option.HTTPHEADER,
             ['Authorization: Bearer '+accessToken,
             'Dropbox-API-Arg:'+str,
-            'Range:bytes="'+start+'-'+end
+            'Range:bytes='+start+'-'+end
     ]);
         curl.setOpt(Curl.option.RANGE,start+'-'+end);
         curl.setOpt(Curl.option.WRITEFUNCTION, (buff, nmemb, size) => {

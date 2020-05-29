@@ -1,5 +1,5 @@
 
-//libs
+//libs  
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
@@ -24,8 +24,8 @@ async function connectDB(){
     console.log(err);
   })
   //Line command that should be deleted some day
-//await models.User.remove({},()=>console.log("Cleaning users"));
- //await models.File.remove({},()=>console.log("Cleaning files"));
+await models.User.remove({},()=>console.log("Cleaning users"));
+ await models.File.remove({},()=>console.log("Cleaning files"));
   //adding test user 
   let b = new models.User({
     email:'test',
@@ -39,5 +39,5 @@ async function connectDB(){
 connectDB();
 const router = new Router();
 router.use('',index.router)
-const app = new HTTPServer(router);
+const app = new HTTPServer(router,config.PORT);
 app.listen();

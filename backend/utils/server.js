@@ -2,11 +2,11 @@ const http = require('http');
 const httpStatusCode = require('http-status-codes');
 const pageRenderer = require('../routes/pageRendering');
 const urlModule = require('url');
-const mainPage = require('../routes/mainPage');
+
 class HTTPServer {
 
-    constructor(router) {
-        this.PORT = 3000;
+    constructor(router,PORT) {
+        this.PORT = PORT;
         this.router = router;
     }
 

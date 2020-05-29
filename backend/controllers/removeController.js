@@ -4,7 +4,10 @@ const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const fileIndex = require('./oauth/authorize/fileIndex');
 const models = require('../models/index');
 const HttpStatusCodes = require("http-status-codes");
+const findIP= require('../utils/findIp');
+
 async function remove(req,res){
+    let host = findIP.getIP(req.headers.host);
     let buffer='';
     req.on('data',(data)=>{
         buffer+=data;
@@ -29,7 +32,7 @@ async function remove(req,res){
                     await models.File.remove({id_user:auth_values.user,id_file:idFile}).then(()=>{
                         res.statusCode = HttpStatusCodes.OK;
                         res.setHeader('Content-Type', 'application/json');
-                        res.end(JSON.stringify({"success": true, "location":'http://localhost:3000/mainPage?serverToken='+serverToken,"message": 'Successfully upload'}));
+                        res.end(JSON.stringify({"success": true, "location":'http://'+host+'/mainPage'+'?'+'serverToken='+serverToken,"message": 'Successfully upload'}));
                     });
                     
                 })
@@ -46,7 +49,6 @@ async function remove(req,res){
 
 
 async function parseUpload(fragments){
-
     for (i in fragments){
         let accesstoken = fragments[i].accessToken;
         let idFile = fragments[i].idFile;
@@ -56,8 +58,6 @@ async function parseUpload(fragments){
         }else if(fragments[i].name=='google'){
             console.log(accesstoken,idFile);
             let status = await fileIndex.googleFileController.remove(accesstoken,idFile);
-            
-            
         }else if(fragments[i].name=='dropbox'){   
             let status = await fileIndex.dropboxFileController.remove(accesstoken,idFile);
             console.log(status);

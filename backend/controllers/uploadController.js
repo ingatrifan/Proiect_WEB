@@ -1,4 +1,3 @@
-//PRETTY USELESS NOW, 
 const HttpStatusCodes = require("http-status-codes");
 const formidable = require("formidable")
 const models = require('../models/index');
@@ -9,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const utilities = require('./oauth/authorize/utilityIndex');
 const uniq = require('uniqid');
-const fs = require('fs');
+const path = require('path');
 exports.upload = async (req,res) => { 
   console.log('UPLOAD');
   let token;
@@ -24,7 +23,7 @@ exports.upload = async (req,res) => {
 
         let auth_values = jwt.decode(token,PRIVATE_KEY);
       //TO DO VALIDEZ ACCESSTOKEN-URILE   
-        await models.User.findOne({email:auth_values.user},(err,user)=>{
+        await models.User.findOne({email:auth_values.user},async (err,user)=>{
           if(!err){
             let tokens=[];
             tokens.push({info:user.googleAuth});
@@ -38,21 +37,30 @@ exports.upload = async (req,res) => {
                 {
                   parseUpload(fragments,auth_values.user).then(fragments=>{
                     let fileModel = new models.File({id_user:auth_values.user,fileName:files.file.name,id_file:uniq(),fragments:fragments});
-                    fileModel.save().then(console.log("savedFile"));
+                    fileModel.save().then(()=>{
+                      
+
+                      //clean up 
+                      console.log("saved");
+                      let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
+                      fragmentation.deleteFolderRecursive(cleanPath);
+                      res.statusCode = HttpStatusCodes.OK;
+                      res.setHeader('Content-Type', 'application/json');
+                      res.end(JSON.stringify({"success": true, "location":'http://localhost/mainPage?serverToken='+token,"message": 'Successfully upload'}));
+                    });
+                    
+                    return ;
                   });
                 })
             });
             
           }
         });
-        res.statusCode = HttpStatusCodes.OK;
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({"success": true, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Successfully upload'}));
-        return ;
+        
       } else{
         res.statusCode = HttpStatusCodes.BAD_REQUEST;
     res.setHeader('Content-Type', 'application/json')
-    res.end(JSON.stringify({"success": false, "location":'http://localhost:3000/mainPage?serverToken='+token,"message": 'Something bad happened'}));
+    res.end(JSON.stringify({"success": false, "location":'http://localhost/mainPage?serverToken='+token,"message": 'Something bad happened'}));
     return ;
       } 
     });

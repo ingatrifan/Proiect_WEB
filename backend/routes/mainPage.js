@@ -39,9 +39,6 @@ catch(e){
         
 }
 
-function dummyFileRenderer(){
-    return  fs.createReadStream('./views/pages/dummy.html');;
-}
 
 async function renderMainPage(token){
     //var dec = jwt.decode(token);

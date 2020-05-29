@@ -4,8 +4,8 @@ const credentials =
 "token_uri":"https://oauth2.googleapis.com/token",
 "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
 "client_secret":"9c7KXi0iUi-eV7DDLk1TnBII",
-"redirect_uris":"http://localhost:3000/authorize/google",
-"javascript_origins":["http://localhost:3000"]};
+"redirect_uris":"http://localhost/authorize/google",
+"javascript_origins":["http://localhost"]};
 
 module.exports={
     credentials

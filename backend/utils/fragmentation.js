@@ -1,20 +1,22 @@
 const fs  = require('fs');
 const Path = require('path');
 const uniqid = require('uniqid');
-const convertHex = require('convert-hex');
 
 const deleteFolderRecursive = function(path) {
-    if (fs.existsSync(path)) {
-      fs.readdirSync(path).forEach((file, index) => {
-        const curPath = Path.join(path, file);
-        if (fs.lstatSync(curPath).isDirectory()) { // recurse
-          deleteFolderRecursive(curPath);
-        } else { 
-          fs.unlinkSync(curPath);
+    try{
+        if (fs.existsSync(path)) {
+        fs.readdirSync(path).forEach((file, index) => {
+            const curPath = Path.join(path, file);
+            if (fs.lstatSync(curPath).isDirectory()) { // recurse
+            deleteFolderRecursive(curPath);
+            } else { 
+            fs.unlinkSync(curPath);
+            }
+        });
+        fs.rmdirSync(path);
         }
-      });
-      fs.rmdirSync(path);
-    }
+        }
+    catch(e){}
   };
 
  function findStorage(driveData,fileSize){
@@ -30,18 +32,24 @@ const deleteFolderRecursive = function(path) {
         
         usedDrive.sort((a,b)=>a.capacity-b.capacity);
         let len = usedDrive.length;
-        if(len==1){
-                usedDrive[0].update = fileSize;
-        }else{
+        console.log('FILESIZE',fileSize);
+        if(len==1)
+            usedDrive[0].update = fileSize;
+
+        else if(len==2){
+            if(fileSize/len<usedDrive[0].capacity){
+                usedDrive.forEach((data)=>{data.update=fileSize/len});
+            }
+            else{
+                fileSize= fileSize-usedDrive[0].capacity;
+                usedDrive[0].update=usedDrive[0].capacity;   
+                update[1].update= fileSize;
+            }
+        }else if(len==3){
             if(fileSize/len<usedDrive[0].capacity){
                 usedDrive.forEach((data)=>{data.update=fileSize/3});
             }else{
-                if(len==2){
-                    fileSize=fileSize-usedDrive[0].capacity;
-                    usedDrive[0].update=usedDrive[0].capacity;
-                    usedDrive[1].update=fileSize;
-                }else{
-                    fileSize= fileSize-usedDrive[0].capacity;
+                fileSize= fileSize-usedDrive[0].capacity;
                     usedDrive[0].update=usedDrive[0].capacity;
                     if(fileSize<usedDrive[1].capacity){
                         usedDrive[2].update=fileSize/2;
@@ -50,21 +58,18 @@ const deleteFolderRecursive = function(path) {
                         fileSize=fileSize-usedDrive[1].capacity;
                         usedDrive[2].update=fileSize;
                         usedDrive[1].update=usedDrive[1].capacity;
-                    }
-                }
+                    }   
             }
-    }
+        }
         usedDrive.forEach((data)=>{
             data.update=Math.ceil(data.update);
         })
+        console.log(usedDrive);
         return  usedDrive;
   }
 async function fragmentation(filepath,id_user,sizes){   
     
-    let tmpPath= Path.join(process.cwd(),'tmp',id_user);
-    try{
-        fs.mkdirSync(tmpPath);
-    }catch(e){}
+    
     let one = {
         name:"onedrive",
         capacity:sizes[2].size,
@@ -111,6 +116,11 @@ async function fragmentation(filepath,id_user,sizes){
     let driveData =[];
     driveData.push(one,dropbox,google)
     fileSize=fs.statSync(filepath)['size'];
+    let tmpPath= Path.join(process.cwd(),'tmp',id_user);
+    try{
+        await fs.mkdirSync(tmpPath);    
+    }
+    catch(e){}
     let usedDrives= findStorage(driveData,fileSize);
     let pos=0;
     for(i in usedDrives){
@@ -130,7 +140,7 @@ async function fragment(filepath,tmpPath,usedDrives){
         for(let i=0;i<usedDrives.length;i++){
             let uniq = uniqid();
             let firtName= 'stolFile';
-            let myFilePath = Path.join(firtName+"_"+uniq);
+            let myFilePath = Path.join(tmpPath,firtName+"_"+uniq);
             usedDrives[i].filePath=myFilePath;
             usedDrives[i].fileName=firtName+"_"+uniq;
             await createFragment(myFilePath,usedDrives,i,fd);
@@ -139,7 +149,6 @@ async function fragment(filepath,tmpPath,usedDrives){
         res(usedDrives);
     });
 }
- //fragmentation("./important.txt","test");
 
  async function createFragment(myFilePath,usedDrives,i,fd){
      return new Promise( async (resolve)=>{

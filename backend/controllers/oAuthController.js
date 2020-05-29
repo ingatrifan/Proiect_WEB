@@ -1,6 +1,3 @@
-const url = require('url')
-const ObjectId = require('mongoose').Types.ObjectId
-const HttpStatusCodes = require("http-status-codes");
 const oAuth = require('./oauth/authorize/authIndex');
 const mainPage = require('../routes/mainPage');
 const myURL=require('url');
@@ -8,10 +5,13 @@ const models= require('../models/index')
 const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const googleUtility= require('./oauth/authorize/google/utilityFunctions');
+
+
 //TO DO, PUT THE ACCESSS , REFRESH TOKENS IN DB, 
 //EXCEPTIONS,  RELOADING THE PAGE, WHAT HAPPENS WITH THE CALLS
 
 exports.dropboxAuth = async(req,res) =>{
+    const findIP= require('../utils/findIp');
     let params =new URLSearchParams(myURL.parse(req.url).query);
     let svtoken = params.get('state');
     try{

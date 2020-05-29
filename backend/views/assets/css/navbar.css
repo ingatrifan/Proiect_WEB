@@ -1,0 +1,41 @@
+:root {
+    --main-color: #89ff79;
+}
+.navbar{
+    width:100%;
+    z-index: 1;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  nav ul {
+    margin: 0 auto;
+    display: flex;
+    width: 90%;
+    /* text-align: center; */
+  }
+  nav ul li {
+    list-style: none;
+    display: inline-block;
+  }
+  nav ul li.logo {
+    margin-left:0;
+    margin-right: auto;
+  }
+  nav ul li a {
+    display: block;
+    text-decoration: none;
+    padding: 20px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: #fff;
+    transition: background-color 0.5s ease;
+  }
+  nav ul li a:hover{
+    color: var(--main-color);
+  }
+  @media only screen and (max-width: 600px) {
+    nav ul li a {
+      padding: 10px 7px;
+    }
+  }

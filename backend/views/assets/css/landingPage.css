@@ -1,71 +1,83 @@
-/*Importing font family*/
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
-/*Setting body margin to 0 so content fills the page*/
-body {
+:root {
+    --main-color: #89ff79;
+}
+/* v1 - #79beff */
+/* v2 - #ff7979*/
+/* v3 - #89ff79 */
+*{
     margin: 0;
+    padding: 0;
+    font-family: "montserrat",sans-serif;
+}
+.landing-page{
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+.landing-page::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/background3.jpg) no-repeat;
+  background-size: cover;
+  opacity: .3;
+  animation: anim 25s linear infinite;
+}
+@keyframes anim {
+  50%{
+    transform: scale(2);
+  }
+  100%{
+    transform: scale(1);
+  }
 }
 
-/*Main container styling: font,display and colors*/
-.main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #393232;
-    color: whitesmoke;
-    font-family: "Roboto", sans-serif;
-    padding-bottom: 20px;
+.page-content{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  padding: 0 40px;
+  box-sizing: border-box;
 }
-
-/*Header sizings*/
-h1 {font-size: 40px;}
-h2 {font-size: 32px;}
-h3 {font-size: 26px;}
-h4 {font-size: 20px;}
-
-/*Paragraph font sizing, alignment and margins*/
-p {
-    font-size: 20px;
-    text-align: center;
-    margin: 1em 10px;
+.page-content h1{
+  color: var(--main-color);
+  text-transform: uppercase;
+  font-size: 50px;
+  font-weight: 900;
+  margin-bottom: 20px;
 }
-
-/*Anchor text styling*/
- a {
-    text-decoration: none;
-    color: #FFA34D;
+.page-content p{
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 18px;
 }
-
-/*Anchor hover styling*/
-.main-container a:hover {
-    text-decoration: underline;
-    color: #DF4500;
+.page-content a{
+  display: inline-block;
+  text-decoration: none;
+  color: var(--main-color);;
+  border: 2px solid var(--main-color);;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  transition: 0.4s linear;
 }
-
-
-/*Styling for the Use the app button*/
-.button-container a:hover {
-    text-decoration: none;
-    color: whitesmoke;
+.page-content a:hover{
+  color: #fff;
+  background: var(--main-color);;
 }
-
-.start-button {
-    display: block;
-    height: 25px;
-    width: 200px;
-    padding: 12px;
-    border-radius: 12px;
-    color: whitesmoke;
-    background-color: #FFA34D;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 20px;
+.text{
+  padding: 10px;
+  text-align: justify;
 }
-
-.start-button:hover {
-    color: whitesmoke;
-    background-color: #DF4500;
+.text div{
+  margin-bottom: 6px;
 }
-
-

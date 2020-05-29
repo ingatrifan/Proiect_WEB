@@ -1,87 +1,164 @@
-* ,:after,:before{
-box-sizing: border-box; 
+:root {
+    --main-color: #89ff79;
+    --second-color: pink;
 }
-div{
-    display: block;
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "montserrat",sans-serif;
 }
-img{
+.first{
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: gray;
+}
+
+.first .content{
+    margin-top: 100px;
+    padding-right: 3%;
+    width:100%;
+    color:white;
+    text-align: right;
+    font-size: 9vw;
+    text-transform: uppercase;  
+    position: absolute;
+    bottom: 0;
+    color:whitesmoke;
+}
+
+
+.second{
+    width: 100%;
+    min-height: 500px;
+    /* height: 500px; */
+    background: url(../images/background2.jpg) no-repeat;
+    background-size: cover;
+    display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.second .calitati{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width:20%;
+    text-align: center;
+    align-content: center;
+}
+
+.second .calitati .img {
     width:150px;
+    text-align: center;
     height: 150px;
     border-radius:50%;
+    background-color:rgb(245, 241, 241);
+    position: relative;
+    margin: 0 auto;
 }
-body{
-    background-color: #393232;
-    color: #fff;
-    margin:0;   
+.second .calitati i{
+    color:var(--second-color);
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+.second .calitati .text{
+    margin-top:20px;
+    color:gray;
 }
-.container{
+.third{
     width: 100%;
-    margin: 5rem auto;
-}
-
-/* For mobile phones: */
-.sub-row{
-    flex-basis: 0;
-    flex-grow: 1;
-    max-width: 100%;
-    padding-left:3rem;
+    height: 60px;
     text-align: center;
+    background-color: rgb(31, 30, 30);     
 }
-@media only screen and (min-width: 992px) {
- 
-    .container {
-        max-width: 960px;
-    }
+.third p{
+    color:white;
+    font-size:25px;
+    text-transform: uppercase;  
+    padding: 20px;
+}
+.fourth{
+    width: 100%;
+    min-height: 500px;
+    text-align: center;
+    background: url(../images/gray.jpg) no-repeat;
+    background-size: cover;  
+    position: relative;
+    display: flex;
+}
+.fourth .text{
+    text-align: center;
+    width:50%;
+    position: relative;
+    color: gray;
+}
+.fourth .text div{
+    width:70%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+.fourth .text div h3{
+    color:var(--second-color);
+    padding: 15px;
+}
+.fourth .text div p{
+    padding-top:10px;
+    font-size: 30px;
+}
+.fourth .foto{
+    text-align: center;
+    width:50%;
+}
+.fourth .foto img{
+    width: 350px;
+}
+.sp{
+    padding-top: 30px;
 }
 @media only screen and (max-width: 600px) {
-   .row{
-       display:block;
-   }
-   .sub-row{
-    padding-top:40px;
-    padding-left: 0!important;
-   }
-   .container{
-       text-align:center;
-   }
-}
-.mt-text{
-    margin-top: 1rem
-}
-.quote{
-    width:90%;
-    margin:16px auto;
-    font-size:1.15rem;
-    font-weight: 300;
-}
-.quote:before{
-    content: open-quote;
-}
-.quote:after{
-    content: close-quote;
-}
-p,cite{
-    font-family: 'Roboto', sans-serif;
-}
-cite{
-    font-weight: bold;
-}
+    .second .calitati{
+        width:100%;
+        
+    }
+    .second .calitati .text{
+        width:50%;
+        margin:20px auto;
+        /* padding-bottom: 20px; */
+    }
+    .second{
+        display: block;
+    }
+    .fourth{
+        display: block;
+        height: auto;
+    }
+    .fourth .foto{
+        width:100%;
+    }
+    .fourth .text{
+        width:100%;
+    }
+    .fourth .text div {
+        width:70%;
+        position: relative;
+        margin:0 auto;
+        transform: none;
+        padding-bottom: 30px;
+        top: 0;
+        left:0;
 
+    }
 
-img{
-    -webkit-box-shadow: 0px 0px 26px -9px rgba(0,0,0,0.75);
--moz-box-shadow: 0px 0px 26px -9px rgba(0,0,0,0.75);
-box-shadow: 0px 0px 26px -9px rgba(0,0,0,0.75);
-
-}
-img:hover{
-    -webkit-box-shadow: 0px 0px 26px 7px rgba(161,32,45,1);
-    -moz-box-shadow: 0px 0px 26px 7px rgba(161,32,45,1);
-    box-shadow: 0px 0px 20px 7px #ccc;
+   
 }

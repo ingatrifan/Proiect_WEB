@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/mainPage1.css">
+		<link rel="stylesheet" href="../assets/css/uploadModal.css">
+		<link href="//db.onlinewebfonts.com/c/0b6986b36b7d81188f996e58f2ec0643?family=Sharp+Grotesk+DB+Cyr+Medium+22" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/d6976534fe.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar">
+            <nav>
+                <ul>
+                    <li class="logo"><a href="/">STOL - Modern Cloud Storage</a></li>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                </ul>
+                
+            </nav>
+        </div>
+    <div class="up">
+        <div class="image">
+           <img onclick="openConnectModal()" src="../assets/images/inga.jpg" alt=""> 
+        </div>
+        <div class="search-space">
+            <div class="search">
+                <input type="text" placeholder="Are you lookingfor something?">
+            </div>
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+    <div class="down">
+        <div class="left-side">
+            <div class="add">
+                <button id ="modal-btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="flex-card col-2">
+                <div class="flex-card__media">
+                    <img src="../assets/images/icons/187640-file-types/png/aiff.png" alt = "img1">
+                </div>
+                <div class="flex-card__content">
+                    <h3 class="flex-card__content-title">File.aif</h3>
+                    <div class="flex-card__actions">
+                        <button onclick="openDeleteModal()" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+                        <button onclick="downloadFile()" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL WHEN UPLOAD IS PRESSED -->
+    <div id="my-modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <span onclick="closeModals()" class="close">&times;</span>
+              </div>
+              <div class="modal-body">
+                <i class="fas fa-cloud-download-alt"></i>
+                <div id="drop-area">
+                    <form class="my-form" id ="form_action">
+                        <p>Upload some files!</p>
+                        <input type="file" id="file" onchange="handleFiles(this.files)">
+                        <label class="button" for="file">Select files</label>
+                        <p id="error-msg"></p>
+                        <progress id="progress-bar" max=100 value=0></progress>
+                        <!-- <input type="submit" value = "Upload"> -->
+                    </form>
+                </div>
+                
+              </div>
+            </div>
+        </div>
+    <!-- END OF MODAL -->
+    <!-- MODAL WHEN profile  IS PRESSED -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span onclick="closeModals()" class="close">&times;</span>
+          </div>
+          <div class="modal-body">
+              <p>Connect your accounts</p>
+                <div class="google-btn">
+                    <div class="google-icon-wrapper">
+                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                    </div>
+                    <p class="btn-text" onClick="googleAuth()"><b>Connect Google</b></p>
+                </div>
+              <button onClick="oneDriveAuth()" class="button-connect">
+								<div class="box">
+										<i class="fab fa-windows"></i>
+								</div>
+                  <span>Connect Onedrive</span> 
+                </button>
+              <button onClick="dropboxAuth()" class="button-connect">
+								<div class="box">
+										<i class="fab fa-dropbox"></i>
+								</div>
+								<p>Connect Dropbox</p>   
+            </button>
+          </div>
+        </div>
+    </div>
+<!-- END OF MODAL -->
+ <!-- MODAL WHEN UPLOAD IS PRESSED -->
+ <div id="delete-modal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span onclick="closeModals()" class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to delete this file?</p>
+				<div class="action-buttons">
+					<button onclick="deleteFile()" class="delete">Delete</button>
+					<button onclick="closeModals()" class="cancel">Cancel</button>
+				</div>
+			</div>
+		</div>
+</div>
+<!-- END OF MODAL -->
+    <script type="text/javascript" src="../assets/js/main.js"></script>
+    <script type="text/javascript" src="../assets/js/dragAndDrop.js"></script>
+</body>
+</html>

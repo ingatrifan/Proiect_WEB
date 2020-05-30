@@ -15,7 +15,10 @@
     left: 0;
     top: 0;
     right: 0;
-    background-color: gray;
+    color: pink;
+    /* background-color: gray; */
+    background: url(../images/gray.jpg) no-repeat;
+    background-size: cover;  
 }
 
 .first .content{
@@ -28,7 +31,7 @@
     text-transform: uppercase;  
     position: absolute;
     bottom: 0;
-    color:whitesmoke;
+    color:pink;
 }
 
 

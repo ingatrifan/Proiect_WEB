@@ -1,14 +1,14 @@
 // Get DOM Elements
 const modal = document.querySelector('#my-modal');
+const profileModal = document.querySelector('#profile-modal')
 const modalBtn = document.querySelector("#modal-btn");
-const closeBtn = document.querySelector('.close');
+const deleteModal = document.getElementById('delete-modal')
 const burger = document.getElementById("burger");
 const arrowBack = document.querySelector(".back-arrow");
 const bar = document.querySelector(".bar");
 const sidepart = document.querySelector(".sidepart");
 // Events
 modalBtn.addEventListener('click', openModal);
-closeBtn.addEventListener('click',closeModal);
 window.addEventListener('click',outsideClick);
 burger.addEventListener('click',openSidepart);
 arrowBack.addEventListener('click',back);
@@ -36,16 +36,30 @@ function back(){
 function openModal() {
   modal.style.display = 'block';
 }
+function openConnectModal(){
+  profileModal.style.display = 'block';
+}
+function openDeleteModal(){
+  deleteModal.style.display = 'block';
+}
 
 // Close
-function closeModal() {
+function closeModals() {
   modal.style.display = 'none';
+  profileModal.style.display = 'none';
+  deleteModal.style.display = 'none';
 }
 
 // Close If Outside Click
 function outsideClick(e) {
   if (e.target == modal) {
     modal.style.display = 'none';
+  }
+  if ( e.target == profileModal){
+    profileModal.style.display = 'none';
+  }
+  if (e.target == deleteModal){
+    deleteModal.style.display = 'none';
   }
 }
 

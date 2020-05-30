@@ -1,0 +1,130 @@
+body{
+  margin:0;
+  background: url(../images/photo-of-woodpile-1787035.jpg) no-repeat;
+  background-size: cover;
+}
+.up{
+    padding-top: 55px;
+    display: flex;
+}
+.up .image img{
+    width:100px;
+    border-radius: 50%;
+    padding:10px;
+}
+.up .search{
+    margin-left:50px;
+    width:50%;
+    line-height: 110px;
+    height: 30px;
+}
+.up .search-space{
+    width:100%;
+    display: flex;
+}
+.up .search input{
+    margin: auto;
+    width:100%;
+    height: 100%;
+    min-width: 100px;
+    background-color: rgba(7, 7, 7,0.3);
+    border:1px solid wheat;
+    border-radius:10px;
+    color:wheat;
+}
+.up  i{
+    margin-left:10px;
+    font-size: 30px;
+    color:wheat;
+    line-height: 110px;
+}
+.down{
+    display: flex;
+}
+.left-side{
+    width:10%;
+}
+.left-side .add button{
+    width:70px;
+    height: 70px;
+    background-color:white 0.2;
+    border-radius:50%;
+    border:none;
+    margin:0 auto;
+}
+.left-side .add button i{
+    font-size: 50px;
+    background: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.flex-card {
+    background: none;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all .2s ease;
+    margin: 20px;
+    color:white;
+    display:inline-block;
+}
+
+.flex-card:hover {
+    box-shadow: 0px 5px 10px #ccc; 
+}
+
+.flex-card__media img {
+    display: block;
+    max-width: 100%;
+    margin:auto;
+}
+.flex-card__media{
+    max-width: 100px;
+    margin:auto;
+}
+.flex-card__actions{
+    display: none;
+}
+.flex-card:hover .flex-card__actions{
+    display: flex;
+}
+.flex-card__button{
+    height: 30px;
+    width:50%;
+}
+.button-delete{
+    background-color:#bb3737;
+    border:1px solid #bb3737;
+}
+.button-download{
+    background-color: #6363c3;
+    border:1px solid #6363c3;
+}
+
+.flex-card__content-title {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    margin: 5px auto;
+}
+
+@media only screen and (max-width: 490px) {
+    .up{
+        display: block;
+    }
+    .up .search{
+        margin-left: 0px!important;
+        line-height: normal!important;
+    }
+    .up .search-space{
+        margin-bottom: 20px;
+    }
+    .up i{
+        line-height: normal!important;
+    }
+    .down{
+        display: block;
+    }
+}
+
+  

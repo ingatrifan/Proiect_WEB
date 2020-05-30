@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const HttpStatusCodes = require("http-status-codes")
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 
 function checkValidation(token,res){

@@ -50,12 +50,11 @@ exports.dropboxAuth = async(req,res) =>{
     }
     });
     //let resu= await oAuth.dropboxAuth.revokeAccessToken(data.access_token);
-    await mainPage.renderMainPage(svtoken);
-    let file = await mainPage.renderMainPage(svtoken);
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
+    res.writeHead(302, {
+      'Location': 'http://localhost/mainPage'
     });
-    file.pipe(res);
+    res.end();
+    
 }
 
 exports.googleAuth = async (req,res) =>{
@@ -104,11 +103,10 @@ exports.googleAuth = async (req,res) =>{
             }
     }
     });
-    let file = await mainPage.renderMainPage(svtoken);
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
+    res.writeHead(302, {
+      'Location': 'http://localhost/mainPage'
     });
-    file.pipe(res);
+    res.end();
 }
 
 exports.oneDriveAuth = async(req,res) =>{
@@ -150,9 +148,8 @@ exports.oneDriveAuth = async(req,res) =>{
             }
     }
     });
-    let file = await mainPage.renderMainPage(svtoken);
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
+    res.writeHead(302, {
+      'Location': 'http://localhost/mainPage'
     });
-    file.pipe(res);
+    res.end();
 }

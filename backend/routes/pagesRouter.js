@@ -14,7 +14,8 @@ rout.registerEndPoint('GET','/login',(req,res)=>{
 });
 
 rout.registerEndPoint('GET','/mainPage',(req,res)=>{
-    mainPage.mainPage(req,res);
+    //mainPage.mainPage(req,res);
+    pageHTML.renderLogin(req,res);
 });
 
 rout.registerEndPoint('GET','/',(req,res)=>{//landing page here
@@ -24,6 +25,11 @@ rout.registerEndPoint('GET','/',(req,res)=>{//landing page here
 rout.registerEndPoint('GET','/about',(req,res)=>{
     pageHTML.renderLogin(req,res);//cuz it's pretty much the same also
 });
+
+rout.registerEndPoint('GET','/fileList',(req,res) => {
+  mainPage.mainPage(req,res);
+});
+
 module.exports={
     rout
 };

@@ -5,8 +5,12 @@
   font-family: "Roboto", sans-serif;
   padding: 25px;
   overflow: auto;
-  max-height: 100vh;
+  min-height: 88vh;
+  background-image: url('../images/bg-dash.png');
+  overflow-x: auto;
+  padding: 25px;
 }
+
 
 table {
   width: 85%;
@@ -18,7 +22,27 @@ table {
   border: 1px solid black;
 }
 
+.table-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+#search-input {
+  border: 0;
+  border-bottom: 1px solid black;
+  height: 25px;
+  width: 500px;
+  text-align: center;
+  background: none;
+  align-self: center;
+}
+
+#search-input {
+  outline: none;
+}
 
 td {
   margin: 0 20px;
@@ -55,3 +79,12 @@ thead tr th{
   border-collapse:separate; 
   border-spacing:5px 5px;
 } 
+
+@media only screen and (max-width: 700px) {
+  #search-input {
+    width: 90%;
+  }
+  .table-container {
+    align-items: flex-start;
+  }
+}

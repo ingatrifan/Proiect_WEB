@@ -16,6 +16,8 @@ window.addEventListener('click',outsideClick);
 burger.addEventListener('click',openSidepart);
 arrowBack.addEventListener('click',back);
 window.onresize = resize;
+window.onload = getFileInfo;
+
 function resize() {
     if (window.innerWidth >730 ){
         bar.style.display = 'none';
@@ -128,6 +130,35 @@ function downloadFile(element){
 
 }
 
+function getFileInfo() {
+  const token = localStorage.getItem('serverToken');
+  let filesDiv = document.getElementById('main-content');
+  const url = `http://localhost/fileList?serverToken=${token}`;
+  fetch(url)
+  .then(response =>response.json())
+  .then(json => {
+    let htmlContent = '';
+    for(f in json.folder.files) {
+      let fileContent = `
+      <div class="flex-card col-2" id = "${json.folder.files[f].idFile}" > 
+        <div class="flex-card__media">
+          <img src="../assets/images/icons/187640-file-types/png/${json.folder.files[f].extension}.png" alt = "img1" >
+        </div>
+        <div class="flex-card__content">
+          <h3 class="flex-card__content-title">${json.folder.files[f].name}.${json.folder.files[f].extension}</h3>
+          <div class="flex-card__actions">
+              <button id = "${json.folder.files[f].idFile}" onclick="deleteFile(this)" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
+              <button id = "${json.folder.files[f].idFile}" onclick="downloadFile(this)" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
+          </div>
+        </div>
+    </div>
+    `
+    htmlContent += fileContent;
+    }
+    filesDiv.innerHTML = htmlContent;
+  })
+}
+
 //CLICK DELETE
 function deleteFile(element){
   const url = 'http://'+window.location.host+'/delete';
@@ -167,7 +198,7 @@ function dropboxAuth(){
   window.location.replace(url);
 }
 
-function postData(method,url,data,success){
+function postData(method,url,data,success) {
   // an encoding required
   var httpRequest = new XMLHttpRequest();
   httpRequest.open(method,url,true);

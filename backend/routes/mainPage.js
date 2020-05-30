@@ -16,27 +16,28 @@ async function mainPage(req,res){
         res.writeHead(404, 'No Access');    
         res.end();
     }
-    else{
+    else {
         var token = myVar[1];
         try{
             jwt.verify(token,PRIVATE_KEY);
+            let r =await renderMainPage(token).then((data)=> {
+            let json = JSON.stringify(data)
             res.writeHead(200, {
-                'Content-Type': 'text/html'
+              'Content-Type': 'application/json',
+              'content-length': Buffer.byteLength(json)
             });
-            let r =await renderMainPage(token);
-            r.pipe(res);
-            
+            res.end(json);
+            });
         }
-        catch(e){
+        catch(e) {
             res.writeHead(404,'NO AUTHENTIFICATION' );    
             res.end();
         }
     }
-}
-catch(e){
-    
-}
-        
+} 
+  catch(e){
+    res.end();
+  }       
 }
 
 
@@ -65,16 +66,10 @@ async function renderMainPage(token){
                 let obj =listFiles[i].fileName.split('.');
                 data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":listFiles[i].id_file});
             }
-            
-        
-            var out = await ejs.compile(myFile)({"data":data});
-            fs.writeFileSync('./views/pages/dummy.html',out);
-            
-            let stream = fs.createReadStream('./views/pages/dummy.html');
-            resolve(stream);
+            console.log(data);
+            resolve(data);
         });
-    });
-    
+    }); 
 }
 module.exports={
     mainPage,

@@ -85,9 +85,7 @@ class Router {
             let reqUrlString = req.url.split('?')[0];
             let pathName = urlModule.parse(reqUrlString, true, false).pathname;
             let method = req.method;
-            
             let handler =   this.getHandler(method, pathName);
-            
             handler(req, res);
         } catch (err) {
             console.log(err);

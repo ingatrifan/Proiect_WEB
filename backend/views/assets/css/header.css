@@ -60,10 +60,21 @@
     .header a {
         display: block;
         text-align: center;
+        align-content: center;
+        justify-content: center;
     }
 
+    #expand-header {
+      display: block;
+    }
+
+    #collapse-header {
+      display: none;
+    }
+    
     .header-right {
         float: none;
+        display: none;
         margin-right: 0px;
     }
 
@@ -78,5 +89,15 @@
     .header-right .account-button {
         margin: 20px 15px;
     }
+}
+
+@media screen and (min-width: 500px ) {
+  #collapse-header {
+    display: none;
+  }
+  
+  #expand-header {
+    display: none;
+  }
 }
 

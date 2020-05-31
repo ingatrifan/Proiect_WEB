@@ -1,3 +1,7 @@
+html,body {
+  height: 100%;
+}
+
 .main-container {
   display: flex;
   flex-direction: column;
@@ -5,7 +9,7 @@
   font-family: "Roboto", sans-serif;
   padding: 25px;
   overflow: auto;
-  min-height: 88vh;
+  height: 100%;
   background-image: url('../images/bg-dash.png');
   overflow-x: auto;
   padding: 25px;

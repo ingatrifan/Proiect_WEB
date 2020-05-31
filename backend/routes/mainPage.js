@@ -1,6 +1,5 @@
 const url = require('url');
 const fs = require('fs');
-const ejs =require('ejs');
 const jwt = require('jsonwebtoken');
 const models = require('../models/index');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";

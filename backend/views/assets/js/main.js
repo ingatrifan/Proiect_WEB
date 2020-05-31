@@ -10,7 +10,7 @@ const deleteFileBtn = document.getElementById('deleteFileBtn');
 // Events
 modalBtn.addEventListener('click', openModal);
 window.addEventListener('click',outsideClick);
-window.onload = getFileInfo;
+window.onload = getFileInfo();
 
   
 function openModal() {

@@ -30,7 +30,8 @@ await models.User.remove({},()=>console.log("Cleaning users"));
   let b = new models.User({
     email:'test',
     name :'test',
-    password :'asdf'
+    password :'asdf',
+    isAdmin: true
   });
   b.save(function(){
     console.log("inserted test rat");

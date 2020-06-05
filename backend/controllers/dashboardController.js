@@ -1,5 +1,9 @@
 const models = require('../models/index');
 const utilities = require('./oauth/authorize/utilityIndex');
+const jwt = require('jsonwebtoken');
+const PRIVATE_KEY = 'SUPER_SECRET_KEY';
+const url = require('url');
+const validation = require('../utils/checkValidation');
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
@@ -14,59 +18,81 @@ function formatBytes(bytes, decimals = 2) {
 }
 
 exports.dashboardInfoController = async (req,res) => {
-  let resultJson = [];
-  await models.User.find(async(err,users) => {
-    if(!err) {
-
-      for(let i = 0; i < users.length; i++) {
-        let userData = {};
-        userData['email'] = users[i].email;
-        if(users[i].googleAuth.authorized) {
-          let userToken = users[i].googleAuth.accessToken;
-          let data= await utilities.google.getDriverInfo(userToken);
-          if(data.error) {
-            userData['google'] = -1;
-          }else {
-            userData['google'] = `${formatBytes(data.storageQuota.usage)} / ${formatBytes(data.storageQuota.limit)}`;
-          }
-        }else {
-          userData['google'] = -1;
+  let uri = url.parse(req.url).query;
+  let values = uri.split('=');
+  let token = values[1];
+  if(validation.checkValidation(token,res) == false) {
+    return;
+  }
+  else {
+    let auth_values = jwt.decode(token,PRIVATE_KEY);
+    await models.User.findOne({email: auth_values.user},async(err,user)=> {
+      if(!err) {
+        if(!user.isAdmin) {
+          res.setHeader('Content-Type', 'application/json');
+          let resultJson = {'error': 'error'};
+          res.end(JSON.stringify(resultJson));
+          return;
         }
+        else {
+          let resultJson = [];
+          await models.User.find(async(err,users) => {
+            if(!err) {
 
-        if(users[i].dropboxAuth.authorized) {
-          let userToken = users[i].dropboxAuth.accessToken;
-          let data= await utilities.dropbox.getDriverInfo(userToken);
-          //useless, solve later with everyone
-          if(data.error) {
-            userData['dropbox'] = -1;
-          }else {
-            userData['dropbox'] = `${formatBytes(data.used)} / ${formatBytes(data.allocation.allocated)}`;
-          }
-        }else {
-          userData['dropbox'] = -1;
+              for(let i = 0; i < users.length; i++) {
+                let userData = {};
+                userData['email'] = users[i].email;
+                userData['admin'] = users[i].isAdmin;
+                if(users[i].googleAuth.authorized) {
+                  let userToken = users[i].googleAuth.accessToken;
+                  let data= await utilities.google.getDriverInfo(userToken);
+                  if(data.error) {
+                    userData['google'] = -1;
+                  }else {
+                    userData['google'] = `${formatBytes(data.storageQuota.usage)} / ${formatBytes(data.storageQuota.limit)}`;
+                  }
+                }else {
+                  userData['google'] = -1;
+                }
+
+                if(users[i].dropboxAuth.authorized) {
+                  let userToken = users[i].dropboxAuth.accessToken;
+                  let data= await utilities.dropbox.getDriverInfo(userToken);
+                  //useless, solve later with everyone
+                  if(data.error) {
+                    userData['dropbox'] = -1;
+                  }else {
+                    userData['dropbox'] = `${formatBytes(data.used)} / ${formatBytes(data.allocation.allocated)}`;
+                  }
+                }else {
+                  userData['dropbox'] = -1;
+                }
+
+                if(users[i].oneDriveAuth.authorized) {
+                  let userToken = users[i].oneDriveAuth.accessToken;
+                  let data= await utilities.onedrive.getDriverInfo(userToken);
+                  //useless, solve later with everyone
+                  if(data.error) {
+                    userData['onedrive'] = -1;
+                  }else {
+                    userData['onedrive'] = `${formatBytes(data.quota.used)} / ${formatBytes(data.quota.total)}`;
+                  }
+                }else {
+                  userData['onedrive'] = -1;
+                }
+
+                resultJson.push(userData);
+              }
+
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify(resultJson));
+            } else {
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({"success": false, "message": 'Error retrieving info from database'}));
+            }
+          });
         }
-
-        if(users[i].oneDriveAuth.authorized) {
-          let userToken = users[i].oneDriveAuth.accessToken;
-          let data= await utilities.onedrive.getDriverInfo(userToken);
-          //useless, solve later with everyone
-          if(data.error) {
-            userData['onedrive'] = -1;
-          }else {
-            userData['onedrive'] = `${formatBytes(data.quota.used)} / ${formatBytes(data.quota.total)}`;
-          }
-        }else {
-          userData['onedrive'] = -1;
-        }
-
-        resultJson.push(userData);
       }
-
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify(resultJson));
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify({"success": false, "message": 'Error retrieving info from database'}));
-    }
-  });
+    })
+  }
 };

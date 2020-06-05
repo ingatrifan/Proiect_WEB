@@ -26,6 +26,10 @@ table {
   border: 1px solid black;
 }
 
+.selected {
+  background-color: gray;
+}
+
 .table-container {
   width: 100%;
   height: auto;
@@ -57,6 +61,11 @@ td {
 tr {
   height: 50px;
   border: 1px solid black;
+  transition: 0.3s;
+}
+
+tbody tr:hover {
+  background-color: gray;
 }
 
 th {

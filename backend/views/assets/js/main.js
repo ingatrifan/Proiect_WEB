@@ -3,14 +3,13 @@ const modal = document.querySelector('#my-modal');
 const profileModal = document.querySelector('#profile-modal')
 const modalBtn = document.querySelector("#modal-btn");
 const deleteModal = document.getElementById('delete-modal')
-const headerRight = document.getElementsByClassName('header-right')[0];
-const collapseButton = document.getElementById('collapse-header');
-const expandButton = document.getElementById('expand-header');
 const deleteFileBtn = document.getElementById('deleteFileBtn');
+const searchInput = document.getElementById("search");
+
 // Events
 modalBtn.addEventListener('click', openModal);
 window.addEventListener('click',outsideClick);
-window.onload = getFileInfo;
+window.onload = getFileInfo();
 
   
 function openModal() {
@@ -44,39 +43,36 @@ function outsideClick(e) {
   }
 }
 
-function reply_click(clicked_id)
-{
-    alert(clicked_id);
-}
 
-const form =document.getElementById('form_action');
-form.enctype="multipart/form-data"
-function handleForm(event) { 
-  event.preventDefault(); 
-  const formData = new FormData();
-  let files = document.querySelector('[type=file]');  
-  let file = files.files[0];
+
+// const form =document.getElementById('form_action');
+// form.enctype="multipart/form-data"
+// function handleForm(event) { 
+//   event.preventDefault(); 
+//   const formData = new FormData();
+//   let files = document.querySelector('[type=file]');  
+//   let file = files.files[0];
   
-  formData.append('file',file);
-  formData.append('serverToken',localStorage.getItem('serverToken'));
-  const url = 'http://'+window.location.host+'/upload';
-  fetch(url,
-    {
-      method:'POST',
-      body:formData
-    }).then(response=>
-      //refresh 
-      response.json()
-       // location.reload(true);
+//   formData.append('file',file);
+//   formData.append('serverToken',localStorage.getItem('serverToken'));
+//   const url = 'http://'+window.location.host+'/upload';
+//   fetch(url,
+//     {
+//       method:'POST',
+//       body:formData
+//     }).then(response=>
+//       //refresh 
+//       response.json()
+//        // location.reload(true);
       
-    ).then((data)=>{
-      if(data.success==true){
-        window.location=data.location;
-      }
-    });
+//     ).then((data)=>{
+//       if(data.success==true){
+//         window.location=data.location;
+//       }
+//     });
 
-} 
-form.addEventListener('submit', handleForm);
+// } 
+// form.addEventListener('submit', handleForm);
 //action="upload" method="POST" enctype="multipart/form-data"
 //Click download
 //https://stackoverflow.com/questions/3749231/download-file-using-javascript-jquery
@@ -111,19 +107,21 @@ function downloadFile(element){
 function getFileInfo() {
   const token = localStorage.getItem('serverToken');
   let filesDiv = document.getElementById('main-content');
-  const url = `http://localhost/fileList?serverToken=${token}`;
+  let url = `http://localhost/fileList?serverToken=${token}`;
+  if (searchInput.value.length > 0)url+=`&search=${searchInput.value}`;
+  console.log(url)
   fetch(url)
   .then(response =>response.json())
   .then(json => {
     let htmlContent = '';
-    for(f in json.folder.files) {
+    for(let f in json.folder.files) {
       let fileContent = `
       <div class="flex-card col-2" id = "${json.folder.files[f].idFile}" > 
         <div class="flex-card__media">
           <img src="../assets/images/icons/187640-file-types/png/${json.folder.files[f].extension}.png" alt = "img1" >
         </div>
         <div class="flex-card__content">
-          <h3 class="flex-card__content-title">${json.folder.files[f].name}.${json.folder.files[f].extension}</h3>
+          <h3 id = "${json.folder.files[f].idFile}" class="flex-card__content-title">${json.folder.files[f].name}.${json.folder.files[f].extension}</h3>
           <div class="flex-card__actions">
               <button id = "${json.folder.files[f].idFile}" onclick="openDeleteModal(this)" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
               <button id = "${json.folder.files[f].idFile}" onclick="downloadFile(this)" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>
@@ -184,4 +182,5 @@ function postData(method,url,data,success) {
   httpRequest.setRequestHeader('Content-Type', 'aplication/json');
   httpRequest.send(JSON.stringify(data));
 }
+
 

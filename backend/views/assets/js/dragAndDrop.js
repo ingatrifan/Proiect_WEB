@@ -29,10 +29,6 @@ function initializeProgress(numfiles) {
     dropArea.addEventListener(eventName, preventDefaults, false)
   })
   
-  function preventDefaults (e) {
-    e.preventDefault()
-    e.stopPropagation()
-  }
   ;['dragenter', 'dragover'].forEach(eventName => {
     dropArea.addEventListener(eventName, highlight, false)
   })
@@ -63,9 +59,8 @@ function initializeProgress(numfiles) {
 
   }
   function uploadFile(file) { 
-    event.preventDefault(); 
+    // event.preventDefault(); 
     const formData = new FormData();
-    let files = document.querySelector('[type=file]');  
     
     formData.append('file',file);
     formData.append('serverToken',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsInBhc3MiOiJhc2RmIiwiaWF0IjoxNTkwODM1MDg0LCJleHAiOjE1OTE5MTUwODR9.eEscFE738JxclWSlzfINC2a7NmfLzr_8b6ktOhc63SQ");
@@ -89,5 +84,5 @@ function initializeProgress(numfiles) {
           errorMsg.style = "display:block"
         }
       });
-  
-  }           
+  } 
+

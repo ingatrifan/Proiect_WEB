@@ -1,15 +1,17 @@
 const url = require('url');
 const fs = require('fs');
-const ejs =require('ejs');
 const jwt = require('jsonwebtoken');
 const models = require('../models/index');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
-
+const { escapeRegexSearch } = require('../utils/helper')
 async function mainPage(req,res){
     try{
         var uri = url.parse(req.url).query;
         var values =uri.split('&')[0];
+        let searchParams = uri.split('&')[1];
         var myVar= values.split('=');
+        let searchTerm ='';
+        if (searchParams)searchTerm = searchParams.split('=')[1];
     
     if(myVar[0]!='serverToken')
     {
@@ -20,7 +22,7 @@ async function mainPage(req,res){
         var token = myVar[1];
         try{
             jwt.verify(token,PRIVATE_KEY);
-            let r =await renderMainPage(token).then((data)=> {
+            let r = await renderMainPage(token,searchTerm).then((data)=> {
             let json = JSON.stringify(data)
             res.writeHead(200, {
               'Content-Type': 'application/json',
@@ -41,7 +43,7 @@ async function mainPage(req,res){
 }
 
 
-async function renderMainPage(token){
+async function renderMainPage(token,search){
     //var dec = jwt.decode(token);
     
     //var values = dec;
@@ -51,7 +53,24 @@ async function renderMainPage(token){
 
         const File = models.File;
         let auth_values = jwt.decode(token,PRIVATE_KEY);
-    
+        if(search.length>0){
+            let regex = escapeRegexSearch(search);
+            File.find({$or : [{fileName:regex}]}, (err,files) =>{
+                if (err)console.error(err);
+                data = {
+                    "folder":
+                    {
+                        "files":[]
+                    }
+                }
+                for ( i in files){
+                    let obj =files[i].fileName.split('.');
+                    data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":files[i].id_file});
+                }
+                console.log(data);
+                resolve(data);
+            });
+        } else 
         await File.find({id_user:auth_values.user},(err,files)=>{
             if(!err){
             }

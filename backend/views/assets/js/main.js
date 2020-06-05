@@ -4,6 +4,8 @@ const profileModal = document.querySelector('#profile-modal')
 const modalBtn = document.querySelector("#modal-btn");
 const deleteModal = document.getElementById('delete-modal')
 const deleteFileBtn = document.getElementById('deleteFileBtn');
+const searchInput = document.getElementById("search");
+
 // Events
 modalBtn.addEventListener('click', openModal);
 window.addEventListener('click',outsideClick);
@@ -105,7 +107,9 @@ function downloadFile(element){
 function getFileInfo() {
   const token = localStorage.getItem('serverToken');
   let filesDiv = document.getElementById('main-content');
-  const url = `http://localhost/fileList?serverToken=${token}`;
+  let url = `http://localhost/fileList?serverToken=${token}`;
+  if (searchInput.value.length > 0)url+=`&search=${searchInput.value}`;
+  console.log(url)
   fetch(url)
   .then(response =>response.json())
   .then(json => {
@@ -178,3 +182,5 @@ function postData(method,url,data,success) {
   httpRequest.setRequestHeader('Content-Type', 'aplication/json');
   httpRequest.send(JSON.stringify(data));
 }
+
+

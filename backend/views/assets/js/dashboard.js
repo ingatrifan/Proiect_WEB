@@ -1,5 +1,4 @@
 
-
 const searchTable = () => {
   const searchInput = document.getElementById('search-input');
   const filter = searchInput.value.toUpperCase();
@@ -92,6 +91,38 @@ const getCSVTable = ()=> {
   URL.revokeObjectURL(blobUrl);
 };
 
+const verifiyAdmin = async()=> {
+  return new Promise((resolve) => {
+    let token = localStorage.getItem('serverToken');
+    if(!token) {
+      resolve(false);
+
+    } else {
+      const url = `http://localhost/verifyAdmin?serverToken=${token}`;
+      fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        if(json.error) {
+          resolve(false);
+        }
+        else {
+          if(json.admin != true) {
+            resolve(false);
+          }
+        }
+        resolve(true);
+      })
+    }
+  });
+}
+
 window.onload = async()=> {
-  await populateTable();
+  let isAdmin = await verifiyAdmin();
+
+  if(isAdmin) {
+    await populateTable();
+  }
+  else {
+    window.location.replace("/");
+  }
 } 

@@ -16,9 +16,34 @@ function register(){
         });
     postData(url,data,function(succ){
         console.log(succ);
-        window.location('http://'+window.location.host+'/login')
+        window.location.replace('http://'+window.location.host+'/login')
     });
 }
+
+function isEmailValid(email) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function validateEmailField() {
+  let emailElement = document.getElementById('user_id');
+  let errorMsg = document.getElementById('error');
+  if (isEmailValid(emailElement.value)) {
+    errorMsg.classList.add('invisible');
+  } else {
+    if(emailElement.value != '') {
+      errorMsg.classList.remove('invisible');
+    }
+    else {
+      errorMsg.classList.add('invisible');
+    }
+  }
+}
+
 
 
 function postData(url,data,succes){

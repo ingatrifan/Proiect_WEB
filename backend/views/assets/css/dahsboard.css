@@ -1,3 +1,11 @@
+:root {
+  --main-color: #89ff79;
+  --second-color: #000;
+  --third-color: gray;
+  --accent-color: rgb(31, 30, 30);
+  --white-accent: rgb(245, 241, 241);
+}
+
 html,body {
   height: 100%;
 }
@@ -10,9 +18,11 @@ html,body {
   padding: 25px;
   overflow: auto;
   height: 100%;
-  background-image: url('../images/bg-dash.png');
+  background-image: url('../images/bg.jpg');
+  background-size: cover;
   overflow-x: auto;
   padding: 25px;
+  color: var(--white-accent);
 }
 
 
@@ -23,11 +33,11 @@ table {
   border-spacing: 0;
   border-collapse: separate;
   border-radius: 6px;
-  border: 1px solid black;
+  border: 1px solid var(--white-accent);
 }
 
 .selected {
-  background-color: gray;
+  background-color: var(--third-color);
 }
 
 .table-container {
@@ -40,7 +50,7 @@ table {
 
 #search-input {
   border: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--white-accent);
   height: 25px;
   width: 500px;
   text-align: center;
@@ -50,22 +60,23 @@ table {
 
 #search-input {
   outline: none;
+  color: var(--white-accent);
 }
 
 td {
   margin: 0 20px;
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--white-accent);
 }
 
 tr {
   height: 50px;
-  border: 1px solid black;
+  border: 1px solid var(--white-accent);
   transition: 0.3s;
 }
 
 tbody tr:hover {
-  background-color: gray;
+  background-color: var(--third-color);
   cursor: pointer;
 }
 
@@ -89,7 +100,7 @@ table tr:last-child td {
 }
 
 thead tr th{
-  border-bottom: 1px solid black; 
+  border-bottom: 1px solid var(--white-accent); 
   border-collapse:separate; 
   border-spacing:5px 5px;
 } 

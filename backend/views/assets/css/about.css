@@ -1,6 +1,9 @@
 :root {
     --main-color: #89ff79;
-    --second-color: pink;
+    --second-color: #000;
+    --third-color: gray;
+    --accent-color: rgb(31, 30, 30);
+    --white-accent: rgb(245, 241, 241);
 }
 *{
     margin: 0;
@@ -15,9 +18,8 @@
     left: 0;
     top: 0;
     right: 0;
-    color: pink;
-    /* background-color: gray; */
-    background: url(../images/gray.jpg) no-repeat;
+    color: var(--main-color);
+    background-color:black; 
     background-size: cover;  
 }
 
@@ -25,13 +27,12 @@
     margin-top: 100px;
     padding-right: 3%;
     width:100%;
-    color:white;
     text-align: right;
     font-size: 9vw;
     text-transform: uppercase;  
     position: absolute;
     bottom: 0;
-    color:pink;
+    color: var(--main-color);
 }
 
 
@@ -39,9 +40,8 @@
     width: 100%;
     min-height: 500px;
     /* height: 500px; */
-    background: url(../images/background2.jpg) no-repeat;
     background-size: cover;
-    display: flex;
+    background-color: var(--second-color);
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -59,7 +59,7 @@
     text-align: center;
     height: 150px;
     border-radius:50%;
-    background-color:rgb(245, 241, 241);
+    background-color: var(--white-accent);
     position: relative;
     margin: 0 auto;
 }
@@ -73,26 +73,29 @@
 }
 .second .calitati .text{
     margin-top:20px;
-    color:gray;
+    color: var(--third-color);
 }
 .third{
     width: 100%;
     height: 60px;
     text-align: center;
-    background-color: rgb(31, 30, 30);     
+    background-color: var(--accent-color);     
 }
 .third p{
-    color:white;
+    color: var(--white-accent);
     font-size:25px;
     text-transform: uppercase;  
     padding: 20px;
+}
+
+.portrait-container {
+  background: url('../images/bg.jpg') no-repeat;
+  background-size: cover;
 }
 .fourth{
     width: 100%;
     min-height: 500px;
     text-align: center;
-    background: url(../images/gray.jpg) no-repeat;
-    background-size: cover;  
     position: relative;
     display: flex;
 }
@@ -100,7 +103,7 @@
     text-align: center;
     width:50%;
     position: relative;
-    color: gray;
+    color: var(--third-color);
 }
 .fourth .text div{
     width:70%;
@@ -112,7 +115,7 @@
 
 }
 .fourth .text div h3{
-    color:var(--second-color);
+    color:var(--main-color);
     padding: 15px;
 }
 .fourth .text div p{

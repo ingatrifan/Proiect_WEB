@@ -30,13 +30,13 @@
     <div class="login-page">
         <div class="form">
             <form>
-
-            <input type="text" id="user_name" placeholder="name"/>
-            <input type="email" id ="user_id" placeholder="email address"/>
-            <input type="password" id = "user_pass1" placeholder="password"/>
-            <input type="password" id = "user_pass2" placeholder="password"/>
-            <button onclick=register()>create</button>
-            <p class="message">Already registered? <a href="/login">Sign In</a></p>    
+              <p id="error" class="invisible">Email not valid!</p>
+              <input type="text" id="user_name" placeholder="name"/>
+              <input type="email" id ="user_id" placeholder="email address" onfocusout="validateEmailField()"/>
+              <input type="password" id = "user_pass1" placeholder="password"/>
+              <input type="password" id = "user_pass2" placeholder="password"/>
+              <button onclick=register()>create</button>
+              <p class="message">Already registered? <a href="/login">Sign In</a></p>    
             </form>        
         </div>
     </div>

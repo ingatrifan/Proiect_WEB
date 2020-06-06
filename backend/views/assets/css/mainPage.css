@@ -1,6 +1,14 @@
+:root {
+  --main-color: #89ff79;
+  --second-color: #000;
+  --third-color: gray;
+  --accent-color: rgb(31, 30, 30);
+  --white-accent: rgb(245, 241, 241);
+}
+
 body{
   margin:0;
-  background: url(../images/photo-of-woodpile-1787035.jpg);
+  background: url(../images/bg.jpg);
   background-size: cover;
 }
 .up{

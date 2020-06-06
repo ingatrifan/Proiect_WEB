@@ -43,14 +43,10 @@ async function mainPage(req,res){
 }
 
 
-<<<<<<< HEAD
-async function renderMainPage(token){
-=======
 async function renderMainPage(token,search){
     //var dec = jwt.decode(token);
     
     //var values = dec;
->>>>>>> 9cb74704f5c5c7f4096811d2adf8402f01621fa8
     return new Promise(async (resolve)=>{
         var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
         var myFile = fs.readFileSync(mypath,'utf-8');

@@ -43,7 +43,7 @@ const populateTable = async () => {
       table.innerHTML = tablebody;
 
       //adding on click to rows
-      const rows = table.getElementsByTagName("tr");
+      const rows = table.getElementsByTagName('tr');
       for(let i = 0; i < rows.length; i++) {
         rows[i].onclick = ()=> {
           if(rows[i].classList.contains('selected')) {
@@ -54,9 +54,44 @@ const populateTable = async () => {
           }
         }
       }
+
     }
   });
 };
+
+const getCSVTable = ()=> {
+  const table = document.getElementById('users-table');
+  const rows = table.getElementsByTagName('tr');
+  const lines = [];
+  lines.push('E-mail,Admin,Google,Dropbox,OneDrive');
+
+  for(let i = 0; i < rows.length; i++) {
+    if(rows[i].classList.contains('selected')) {
+      let currentLine = '';
+      let cells = rows[i].getElementsByTagName('td')
+
+      for(let j = 0; j < rows[i].cells.length - 1; j++) {
+        let value = cells[j].textContent || cells[j].innerText;
+        currentLine += value;
+        currentLine += (j < (rows[i].cells.length - 2)) ? "," : "";
+      }
+      lines.push(currentLine);
+    }
+  }
+
+  let csvString = lines.join('\n');
+  console.log(csvString);
+  const csvBlob = new Blob([csvString],{ type: 'text/csv' });
+  const blobUrl = URL.createObjectURL(csvBlob);
+  const anchorElement = document.createElement('a');
+
+  anchorElement.href = blobUrl;
+  let today = new Date();
+  anchorElement.download = `users-table-${today}.csv`;
+  anchorElement.click();
+  URL.revokeObjectURL(blobUrl);
+};
+
 window.onload = async()=> {
   await populateTable();
 } 

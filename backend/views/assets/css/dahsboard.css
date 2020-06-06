@@ -66,6 +66,7 @@ tr {
 
 tbody tr:hover {
   background-color: gray;
+  cursor: pointer;
 }
 
 th {

@@ -1,6 +1,5 @@
 const url = require('url');
 const fs = require('fs');
-const ejs =require('ejs');
 const jwt = require('jsonwebtoken');
 const models = require('../models/index');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
@@ -42,9 +41,6 @@ async function mainPage(req,res){
 
 
 async function renderMainPage(token){
-    //var dec = jwt.decode(token);
-    
-    //var values = dec;
     return new Promise(async (resolve)=>{
         var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
         var myFile = fs.readFileSync(mypath,'utf-8');

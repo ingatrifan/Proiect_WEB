@@ -15,7 +15,7 @@ rout.registerEndPoint('GET','/login',(req,res)=>{
 
 rout.registerEndPoint('GET','/mainPage',(req,res)=>{
     //mainPage.mainPage(req,res);
-    pageHTML.renderLogin(req,res);
+     pageHTML.renderLogin(req,res);
 });
 
 rout.registerEndPoint('GET','/',(req,res)=>{//landing page here

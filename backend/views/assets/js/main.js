@@ -9,8 +9,9 @@ const expandButton = document.getElementById('expand-header');
 const deleteFileBtn = document.getElementById('deleteFileBtn');
 // Events
 modalBtn.addEventListener('click', openModal);
+window.onload = getFileInfo();
 window.addEventListener('click',outsideClick);
-window.onload = getFileInfo;
+
 
   
 function openModal() {
@@ -56,7 +57,6 @@ function handleForm(event) {
   const formData = new FormData();
   let files = document.querySelector('[type=file]');  
   let file = files.files[0];
-  
   formData.append('file',file);
   formData.append('serverToken',localStorage.getItem('serverToken'));
   const url = 'http://'+window.location.host+'/upload';

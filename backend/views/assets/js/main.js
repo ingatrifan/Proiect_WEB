@@ -44,38 +44,6 @@ function outsideClick(e) {
   }
 }
 
-
-
-// const form =document.getElementById('form_action');
-// form.enctype="multipart/form-data"
-// function handleForm(event) { 
-//   event.preventDefault(); 
-//   const formData = new FormData();
-//   let files = document.querySelector('[type=file]');  
-//   let file = files.files[0];
-  
-//   formData.append('file',file);
-//   formData.append('serverToken',localStorage.getItem('serverToken'));
-//   const url = 'http://'+window.location.host+'/upload';
-//   fetch(url,
-//     {
-//       method:'POST',
-//       body:formData
-//     }).then(response=>
-//       //refresh 
-//       response.json()
-//        // location.reload(true);
-      
-//     ).then((data)=>{
-//       if(data.success==true){
-//         window.location=data.location;
-//       }
-//     });
-
-// } 
-// form.addEventListener('submit', handleForm);
-//action="upload" method="POST" enctype="multipart/form-data"
-//Click download
 //https://stackoverflow.com/questions/3749231/download-file-using-javascript-jquery
 function downloadFile(element){
   const method = "GET";

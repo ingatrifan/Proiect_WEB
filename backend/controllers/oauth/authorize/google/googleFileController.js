@@ -1,8 +1,5 @@
 const fs = require('fs');
-const myURL=require('url');
-const querystring = require('querystring');
 const {Curl } = require('node-libcurl');
-const {credentials}=require('./credentials');
 const uploadFile = require('./upload');
 const downloadFile = require('./download');
 const removeFile=require('./remove');
@@ -44,7 +41,6 @@ async function upload (fragment,idUser){
         let location = 'https'+data.split('\r')[3].split('https')[1];
         let fragSize=2000000;//cam 2mb per chunk
         let fileSize = fs.lstatSync(fragment.filePath)['size'];
-        let bytesRemaining= fileSize;
         let chunkSize= fragSize;
         let start = 0;
         let offset=0;

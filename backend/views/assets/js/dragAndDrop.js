@@ -72,6 +72,7 @@ function initializeProgress(numfiles) {
       }).then(response=>
         //refresh 
         response.json()
+        
          // location.reload(true);
         
       ).then((data)=>{
@@ -80,7 +81,7 @@ function initializeProgress(numfiles) {
         //   window.location=data.location;
         } else{
           // console.log(errorMsg)
-          errorMsg.innerHTML = "Something is wrong with one of your files, please refresh and retry";
+          errorMsg.innerHTML = data.message;
           errorMsg.style = "display:block"
         }
       });

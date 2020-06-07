@@ -43,7 +43,6 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
                 await fs.closeSync(fd)
                 await fs.closeSync(myfd);
                 await fs.unlinkSync(tmp);
-                console.log('SUCCESS',body,statusCode);
                 resolve(body);
                 
                 curl.close();
@@ -69,7 +68,6 @@ async function uploadSession(accessToken,filename){
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             curl.close()
-            console.log(body);
             resolve(JSON.parse(body));
           })      
     })

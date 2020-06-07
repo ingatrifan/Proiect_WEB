@@ -16,8 +16,8 @@ function login (e){
         });
     postData(url,data,function(succ){
         var json = JSON.parse(succ.responseText);
+        console.log(json)
         localStorage.setItem('serverToken',json.serverToken);
-        console.log(succ.responseText);
         location = json.location;
     });
     return false;
@@ -60,7 +60,6 @@ function resetPass(){
     });
     return;
 }
-
 
 function postData(url,data,succes){
     // an encoding required

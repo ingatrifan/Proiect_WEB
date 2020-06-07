@@ -8,6 +8,8 @@ const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const url = require('url');
 const path =require('path');
 const fragmentation= require('../utils/fragmentation');
+const HttpStatusCodes = require('http-status-codes');
+
 async function donwload(req,res){
     let uri = url.parse(req.url).query;
     let values = uri.split('&');
@@ -19,7 +21,7 @@ async function donwload(req,res){
     //TO DO : validez accesstoken-urile 
     //TO DO : validez file-urirle
     //fetch the file info from db -> check tokens(TO DO  )->validate files(TO DO)  ->fetch data
-    //NOT COMPLETElet tmpPath= Path.join(process.cwd(),'tmp',id_user);
+    //NOT COMPLETE
     let tmpPath= path.join(process.cwd(),'tmp',auth_values.user);
     try{
         await fs.mkdirSync(tmpPath);    
@@ -33,13 +35,18 @@ async function donwload(req,res){
 
                 let stream  = fs.createReadStream(fileOut);
                 stream.pipe(res);
-                let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
-                //fragmentation.deleteFolderRecursive(cleanPath);
-
-
+                stream.on('close',()=>{
+                    let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
+                    fragmentation.deleteFolderRecursive(cleanPath);
+                    console.log('Finished downloading, now cleaning ');
+                })
             })
         });
-    });
+    }).catch((e)=>{
+        res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({"success": false,"message": 'Erorr in download'}));
+    })
 }
 
 
@@ -51,7 +58,7 @@ async function parseDownload(fragments,id_user){
         if(fragments[i].name=='onedrive'){
             let fragment = await fileIndex.onedriveFileController.download(fragments[i],id_user);
             fragmentData.push(fragment);
-        }else if(fragments[i].name=='google'){
+        }else if(fragments[i].name=='google'){ 
             let fragment = await fileIndex.googleFileController.download(fragments[i],id_user);
             fragmentData.push(fragment);
 

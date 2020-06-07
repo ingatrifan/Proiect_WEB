@@ -7,12 +7,12 @@ function checkValidation(token,res){
         jwt.verify(token,PRIVATE_KEY);
       }
       catch(e){
-         res.statusCode = HttpStatusCodes.OK
-         res.setHeader('Content-Type', 'application/json')
-         res.end(JSON.stringify({success: false, message: 'Verification was denied'}));
+         res.writeHead(HttpStatusCodes.MOVED_TEMPORARILY, {
+            'Location': 'http://localhost/mainPage'
+          });
+          res.end();
          return false;
       }
-
       return true;
 }
 module.exports={

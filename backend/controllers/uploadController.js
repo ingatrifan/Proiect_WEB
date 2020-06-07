@@ -1,5 +1,4 @@
 const HttpStatusCodes = require("http-status-codes");
-const formidable = require("formidable")
 const models = require('../models/index');
 const fileIndex = require('./oauth/authorize/fileIndex');
 const validation = require('../utils/checkValidation');
@@ -8,67 +7,53 @@ const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const utilities = require('./oauth/authorize/utilityIndex');
 const uniq = require('uniqid');
+const parser = require('../utils/multipartParser');
 const path = require('path');
+const fs = require('fs');
 exports.upload = async (req,res) => { 
-  console.log('UPLOAD');
-  let token;
   try {
-    const form = new formidable.IncomingForm();
-    form.parse(req, async(err, fields, files) => {
+    let params = await parser.multiPartParse(req,res);  
+      let token = params.serverToken.split('\r\n')[2];
+      if(validation.checkValidation(token,res)==false)
+        return;
 
-      if (files.file){
-        token = fields.serverToken;
-        if(validation.checkValidation(token,res)==false)
-          return;
-
-        let auth_values = jwt.decode(token,PRIVATE_KEY);
-      //TO DO VALIDEZ ACCESSTOKEN-URILE   
-        await models.User.findOne({email:auth_values.user},async (err,user)=>{
-          if(!err){
-            let tokens=[];
-            tokens.push({info:user.googleAuth});
-            tokens.push({info:user.dropboxAuth});
-            tokens.push({info:user.oneDriveAuth});
-            let filepath=files.file.path;
-            //getsize of files -> fragmenting files -> getting the path to fragments ->uploading on drives-> inserting to db
-            getSizes(tokens).then(sizes=>{
-              fragmentation.fragmentation(filepath,auth_values.user,sizes)
-                .then(fragments=>
-                {
-                  parseUpload(fragments,auth_values.user).then(fragments=>{
-                    let fileModel = new models.File({id_user:auth_values.user,fileName:files.file.name,id_file:uniq(),fragments:fragments});
-                    fileModel.save().then(()=>{
-                      
-
-                      //clean up 
-                      console.log("saved");
-                      let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
-                      fragmentation.deleteFolderRecursive(cleanPath);
-                      res.statusCode = HttpStatusCodes.OK;
-                      res.setHeader('Content-Type', 'application/json');
-                      res.end(JSON.stringify({"success": true, "location":'http://localhost/mainPage?serverToken='+token,"message": 'Successfully upload'}));
-                    });
-                    
-                    return ;
+    let auth_values = jwt.decode(token,PRIVATE_KEY);
+    
+    //TO DO VALIDEZ ACCESSTOKEN-URILE: 
+      await models.User.findOne({email:auth_values.user},async (err,user)=>{
+        if(!err){
+          let tokens=[];
+          if(checkUserDriveAccounts(res,user)==false) 
+            return
+          user = await utilities.tokenRefresher.refreshTokens(user);
+          tokens.push({info:user.googleAuth});
+          tokens.push({info:user.dropboxAuth});
+          tokens.push({info:user.oneDriveAuth});
+          let filepath=params.filePath;
+          //getsize of files -> fragmenting files -> getting the path to fragments ->uploading on drives-> inserting to db + deleting
+          getSizes(tokens).then(sizes=>{
+            fragmentation.fragmentation(filepath,auth_values.user,sizes)
+              .then(fragments=>
+              {
+                parseUpload(fragments,auth_values.user).then(fragments=>{
+                  let fileModel = new models.File({id_user:auth_values.user,fileName:params.fileName,id_file:uniq(),fragments:fragments});
+                  fileModel.save().then(()=>{
+                    cleanUp(params.filePath,auth_values.user);
+                    res.statusCode = HttpStatusCodes.OK;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.end(JSON.stringify({"success": true,"message": 'Successfully upload'}));
                   });
-                })
-            });
-            
-          }
-        });
-        
-      } else{
-        res.statusCode = HttpStatusCodes.BAD_REQUEST;
-    res.setHeader('Content-Type', 'application/json')
-    res.end(JSON.stringify({"success": false, "location":'http://localhost/mainPage?serverToken='+token,"message": 'Something bad happened'}));
-    return ;
-      } 
-    });
-  } catch (error) {
+                  return ;
+                });
+              })
+          });
+        }
+      });
+  }catch (error) {
     console.error(error)
     res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR
     res.setHeader('Content-Type', 'application/json')
-    res.end(JSON.stringify({"success": false, "message": 'Something bad happend'}))
+    res.end(JSON.stringify({"success": false, "message": 'Upload Failed'}))
     return ;
   }
 }
@@ -131,7 +116,6 @@ async function parseUpload(fragments,idUser){
     }
     else if(fragments[i].name=='dropbox'){
       let dropboxFileData = await fileIndex.dropboxFileController.upload(fragments[i],idUser);
-      console.log(dropboxFileData);
       fragments[i].idFile=dropboxFileData.id;
     }
     else if(fragments[i].name=='google'){
@@ -144,3 +128,20 @@ async function parseUpload(fragments,idUser){
   resove(fragments);
 });
 }
+
+
+function checkUserDriveAccounts(res,user){
+  if(user.googleAuth.accessToken==null&&user.dropboxAuth.accessToken==null&&user.oneDriveAuth.accessToken==null){
+    res.statusCode = HttpStatusCodes.BAD_REQUEST;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({"success": false, "message": 'You must set at least an account'}));
+    return false;
+  }
+return true;
+}
+function cleanUp(originalFilePath,userId){
+  fs.unlinkSync(originalFilePath);
+  let userFolderPath = path.join(process.cwd(),'tmp',userId);
+  fragmentation.deleteFolderRecursive(userFolderPath);
+}
+

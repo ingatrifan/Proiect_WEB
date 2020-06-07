@@ -32,7 +32,6 @@ const deleteFolderRecursive = function(path) {
         
         usedDrive.sort((a,b)=>a.capacity-b.capacity);
         let len = usedDrive.length;
-        console.log('FILESIZE',fileSize);
         if(len==1)
             usedDrive[0].update = fileSize;
 
@@ -64,7 +63,6 @@ const deleteFolderRecursive = function(path) {
         usedDrive.forEach((data)=>{
             data.update=Math.ceil(data.update);
         })
-        console.log(usedDrive);
         return  usedDrive;
   }
 async function fragmentation(filepath,id_user,sizes){   

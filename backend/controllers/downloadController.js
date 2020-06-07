@@ -19,8 +19,7 @@ async function donwload(req,res){
     if(validation.checkValidation(token,res)==false)
         return  
     let auth_values =jwt.decode(token,PRIVATE_KEY);
-    //TO DO : validez accesstoken-urile 
-    //TO DO : validez file-urirle
+
     //fetch the file info from db -> check tokens(TO DO  )->validate files(TO DO)  ->fetch data
     //NOT COMPLETE
     let tmpPath= path.join(process.cwd(),'tmp',auth_values.user);

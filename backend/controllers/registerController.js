@@ -14,7 +14,6 @@ function register(req,res)
     req.on('end',function(){
         try{
         var post  = JSON.parse(buffer);
-        //check user data here
         UniqueId(post).then(
             async function(validate){
                 var body = post;

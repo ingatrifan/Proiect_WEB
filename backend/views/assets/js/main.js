@@ -8,9 +8,14 @@ const searchInput = document.getElementById("search");
 
 // Events
 modalBtn.addEventListener('click', openModal);
-window.onload = getFileInfo();
 window.addEventListener('click',outsideClick);
-window.onload = getFileInfo();
+window.onload=initMainPage();
+
+function initMainPage(){
+  verifyToken();
+  getFileInfo();
+}
+
 
   
 function openModal() {
@@ -30,7 +35,6 @@ function closeModals() {
   profileModal.style.display = 'none';
   deleteModal.style.display = 'none';
 }
-
 // Close If Outside Click
 function outsideClick(e) {
   if (e.target == modal) {
@@ -51,7 +55,6 @@ function downloadFile(element){
   const id = element.id;
   let divId =  document.getElementById(id);
   let fileName = divId.childNodes[3].childNodes[1].innerHTML
-  console.log(fileName);
   const url = 'http://'+window.location.host+'/download?serverToken='+token+'&idFile='+id;
   fetch(url)
   .then(resp=>{
@@ -78,7 +81,6 @@ function getFileInfo() {
   let filesDiv = document.getElementById('main-content');
   let url = `http://localhost/fileList?serverToken=${token}`;
   if (searchInput.value.length > 0)url+=`&search=${searchInput.value}`;
-  console.log(url)
   fetch(url)
   .then(response =>response.json())
   .then(json => {
@@ -127,7 +129,6 @@ function googleAuth(){
   let url ='https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=http%3A//localhost/authorize/google&client_id=282450647382-g7epadv9ud6slg873pm75gmhinhqjsao.apps.googleusercontent.com';
   
   url+='&state='+ localStorage.getItem('serverToken');
-  console.log(url);
   window.location.replace(url);
 }
 //function ONEDRIVE
@@ -152,4 +153,19 @@ function postData(method,url,data,success) {
   httpRequest.send(JSON.stringify(data));
 }
 
+
+
+function verifyToken(){
+  const url = 'http://'+window.location.host+'/validateToken';
+  let data = {serverToken:localStorage.getItem('serverToken')};
+  postData('POST',url,data,(dataServer)=>{
+      if(dataServer.readyState===dataServer.DONE && dataServer.status ==200)
+      {
+        let body = JSON.parse(dataServer.responseText);
+      }
+      else if(dataServer.status ==401){
+        window.location.replace('http://'+window.location.host+'/login');
+      }
+  });
+}
 

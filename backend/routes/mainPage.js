@@ -67,7 +67,6 @@ async function renderMainPage(token,search){
                     let obj =files[i].fileName.split('.');
                     data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":files[i].id_file});
                 }
-                console.log(data);
                 resolve(data);
             });
         } else 
@@ -85,7 +84,6 @@ async function renderMainPage(token,search){
                 let obj =listFiles[i].fileName.split('.');
                 data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":listFiles[i].id_file});
             }
-            console.log(data);
             resolve(data);
         });
     }); 

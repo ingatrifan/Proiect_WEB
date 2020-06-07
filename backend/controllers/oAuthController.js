@@ -26,7 +26,7 @@ exports.dropboxAuth = async(req,res) =>{
     let code = params.get('code');
     models.User.findOne({email:auth_values.user},(err,user)=>{
         if(!err){
-            console.log();
+            
             if(user.dropboxAuth.authorized!=false)
             { 
                 oAuth.dropboxAuth.getAccessToken(code).then((data)=>{

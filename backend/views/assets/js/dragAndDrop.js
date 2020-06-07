@@ -63,7 +63,7 @@ function initializeProgress(numfiles) {
     const formData = new FormData();
     
     formData.append('file',file);
-    formData.append('serverToken',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsInBhc3MiOiJhc2RmIiwiaWF0IjoxNTkwODM1MDg0LCJleHAiOjE1OTE5MTUwODR9.eEscFE738JxclWSlzfINC2a7NmfLzr_8b6ktOhc63SQ");
+    formData.append('serverToken',localStorage.getItem('serverToken'));
     const url = 'http://'+window.location.host+'/upload';
     fetch(url,
       {

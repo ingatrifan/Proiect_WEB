@@ -22,9 +22,7 @@ async function login(req,res)
         validateUser(values).then(
             function(validation){
                 if(validation==true){
-                    console.log(validation);
                     var token = jwt.sign({user:values[0] },PRIVATE_KEY,{ expiresIn: '300h' });
-                    console.log(token);
                     let json = {"serverToken":token,"location":'http://'+host+'/mainPage'+'?'+'serverToken='+token};      
                     res.statusCode = httpSttatusCode.OK;
                     res.setHeader('Content-Type', 'application/json');

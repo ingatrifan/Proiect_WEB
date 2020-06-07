@@ -25,7 +25,7 @@ exports.upload = async (req,res) => {
           let tokens=[];
           if(checkUserDriveAccounts(res,user)==false) 
             return
-          utilities.tokenRefresher(user);      
+          user = await utilities.tokenRefresher.refreshTokens(user);
           tokens.push({info:user.googleAuth});
           tokens.push({info:user.dropboxAuth});
           tokens.push({info:user.oneDriveAuth});
@@ -142,7 +142,6 @@ return true;
 function cleanUp(originalFilePath,userId){
   fs.unlinkSync(originalFilePath);
   let userFolderPath = path.join(process.cwd(),'tmp',userId);
-  console.log(userFolderPath)
   fragmentation.deleteFolderRecursive(userFolderPath);
 }
 

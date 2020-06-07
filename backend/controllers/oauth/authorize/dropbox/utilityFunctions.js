@@ -17,7 +17,6 @@ async function getDriverInfo(accessToken){
             curl.on('end', (statusCode, body) => {
                 curl.close()
                 //resolve(JSON.parse(body));
-                console.log(body);
                 resolve(JSON.parse(body));
               })      
         })
@@ -31,7 +30,6 @@ async function getFileData(accessToken,idFile){
             "include_deleted": false,
             "include_has_explicit_shared_members": false
         }`;
-        console.log(data);
         const curl = new Curl();
         const url='https://api.dropboxapi.com/2/files/get_metadata'
         curl.setOpt(Curl.option.URL,url);

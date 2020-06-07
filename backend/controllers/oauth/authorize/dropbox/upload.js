@@ -49,7 +49,6 @@ exports.finishSession =async(accessToken,sessionId,offset,fileName,filePath)=>{
     return new Promise((resolve,reject)=>{
     try {
         let str = "{\"session_id\": \""+sessionId+"\",\"offset\": "+offset+"},\"commit\": {\"path\": \"/stol/"+fileName+"\",\"mode\": \"add\",\"autorename\": false,\"mute\": false,\"strict_conflict\": false}}"
-        console.log(str)
         request.post(
             'https://content.dropboxapi.com/2/files/upload_session/finish',
             {

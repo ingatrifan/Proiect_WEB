@@ -12,11 +12,7 @@ async function download(fragment,id_user){
     return new Promise( resolve=>{
     utility.getFileData(fragment.accessToken,fragment.idFile).then( async data=>
     {
-        console.log(data);
-        console.log(JSON.parse(data.body).size);
         let fileSize = JSON.parse(data.body)['size'];
-        console.log('fileSize ',fileSize);
-        //console.log(fragment);
 
         let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile.split(':')[1]);
         var fileOut = fs.openSync(tempPath,'w');

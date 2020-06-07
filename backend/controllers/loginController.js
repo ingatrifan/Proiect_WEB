@@ -30,10 +30,9 @@ async function login(req,res)
                 }else{
                     res.statusCode = httpSttatusCode.FORBIDDEN;
                     res.setHeader('Content-Type', 'application/json');
-                    res.end(JSON.stringify({"success": false,"message": 'Wrong ID or passsword'}));
+                    res.end(JSON.stringify({"success": false,"message": 'Wrong username or passsword, or account is not confirmed'}));
                 }
-            }
-    ).catch(e=>{throw e;});  
+            }).catch(e=>{throw e;});  
         }
         catch(e){
             res.statusCode = httpSttatusCode.INTERNAL_SERVER_ERROR;
@@ -51,7 +50,7 @@ async function validateUser(data){
                 if(!err)
                 {
                     console.log(doc);
-                    if(doc==null)
+                    if(doc==null || !doc.confirmed)
                         resolve(false);
                     else{
                         const match =await bcrypt.compare(data[1],doc.password)  ;

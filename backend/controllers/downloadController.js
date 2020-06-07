@@ -9,6 +9,7 @@ const url = require('url');
 const path =require('path');
 const fragmentation= require('../utils/fragmentation');
 const HttpStatusCodes = require('http-status-codes');
+const utilities = require('./oauth/authorize/utilityIndex');
 
 async function donwload(req,res){
     let uri = url.parse(req.url).query;
@@ -30,6 +31,7 @@ async function donwload(req,res){
     
     await models.File.findOne({id_user:auth_values.user,id_file:idFile},(err,file)=>{
         let fragments = file.fragments;
+        utilities.tokenRefresher.refreshTokens(fragments);
         parseDownload(fragments,auth_values.user).then(fragments=>{
             refragmentation.refragmentation(fragments,auth_values.user,file.fileName).then(fileOut=>{
 

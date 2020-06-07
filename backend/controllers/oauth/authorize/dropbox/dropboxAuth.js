@@ -41,7 +41,6 @@ const tokenURL ='https://api.dropbox.com/1/oauth2/token';
     curl.setOpt(Curl.option.CUSTOMREQUEST, "POST");
     curl.on('error', curl.close.bind(curl));
     curl.perform();
-    console.log("revoking");
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             curl.close()

@@ -32,7 +32,7 @@ async function refreshTokens(dataType){//can be an user or an folder
         return dataType;
     }else{
         let currDate =  new Date().getTime();
-
+        console.log(dataType);
 
         
         return dataType;

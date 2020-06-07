@@ -62,7 +62,6 @@ async function revokeToken(token){
     curl.setOpt(Curl.option.CUSTOMREQUEST, "POST");
     curl.on('error', curl.close.bind(curl));
     curl.perform();
-    console.log("revoking");
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             curl.close()
@@ -81,7 +80,6 @@ async function checkToken(token){
     //curl.setOpt(Curl.option.CUSTOMREQUEST, "POST");
     curl.on('error', curl.close.bind(curl));
     curl.perform();
-    console.log("revoking");
     return new Promise((resolve,reject)=>{
         curl.on('end', (statusCode, body) => {
             if(statusCode==200){

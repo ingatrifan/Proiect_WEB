@@ -69,7 +69,7 @@ async function upload (fragment,idUser){
             }
         }
     }
-    );
+);
 });
 }
 

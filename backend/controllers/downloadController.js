@@ -8,6 +8,8 @@ const PRIVATE_KEY = "SUPER_SECRET_KEY";
 const url = require('url');
 const path =require('path');
 const fragmentation= require('../utils/fragmentation');
+const HttpStatusCodes = require('http-status-codes');
+
 async function donwload(req,res){
     let uri = url.parse(req.url).query;
     let values = uri.split('&');
@@ -38,11 +40,13 @@ async function donwload(req,res){
                     fragmentation.deleteFolderRecursive(cleanPath);
                     console.log('Finished downloading, now cleaning ');
                 })
-                
-            
             })
         });
-    });
+    }).catch((e)=>{
+        res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({"success": false,"message": 'Erorr in download'}));
+    })
 }
 
 

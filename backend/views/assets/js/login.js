@@ -22,6 +22,44 @@ function login (e){
     });
     return false;
    }
+function forgotPass(){
+    const url = 'http://'+window.location.host+'/forgot';
+    let email = document.getElementById('email');
+
+    let data = JSON.stringify(
+        {
+            "email": email.value
+        });
+    postData(url,data,function(succ){
+        location.replace('http://'+window.location.host+'/')
+    });
+    return;
+}
+function resetPass(){
+    const url = 'http://'+window.location.host+'/reset';
+    let pass = document.getElementById('password');
+    let repPass = document.getElementById('repPassword');
+    let errorMsg = document.getElementById('errorMsg')
+    if (pass.value != repPass.value){
+        errorMsg.innerHTML = 'Password do not match';
+        errorMsg.style.color = 'red';
+        return;
+    }
+    let currentUrl = window.location.href;
+    let parser = document.createElement('a');
+    parser.href = currentUrl;
+    let resetToken = parser.search.split('=');
+    console.log(resetToken[1])
+    let data = JSON.stringify(
+        {
+            "token": resetToken[1],
+            "password": pass.value
+        });
+    postData(url,data,function(succ){
+        location.replace('http://'+window.location.host+'/')
+    });
+    return;
+}
 
 
 function postData(url,data,succes){

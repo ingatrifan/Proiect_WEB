@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    email: {
+    email:{
       required: true,
       type: String
     },
@@ -13,6 +13,10 @@ const userSchema = new Schema(
     password: {
       required: true,
       type: String
+    },
+    confirmed:{
+      type:Boolean,
+      default:false
     },
     googleAuth: {
       folderId:{

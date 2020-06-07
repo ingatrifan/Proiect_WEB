@@ -1,4 +1,7 @@
 const models = require('../models/index');
+const mailSender = require('../utils/mailSender')
+const jwt = require('jsonwebtoken');
+const CONFIRM_SECRET = 'Our project is the best, ahahaha';
 //general structure here,
 //check if this shit code is right
 //add details to register interaction
@@ -26,6 +29,8 @@ function register(req,res)
                     password : body.user_pass 
                 });
                 user.save(()=>console.log("Inserted a user"));
+                const token = jwt.sign({email:body.user_id},CONFIRM_SECRET,{ expiresIn: '7d'});
+                mailSender.sendMail('hello',user,token);
                 //finalize
                 res.writeHead(200, {
                     "Content-Type": 'text/plain'

@@ -5,7 +5,7 @@ const tokenVerifier = require('./tokenVerifierController');
 const fileController = require('./fileController')
 const oAuthController = require('./oAuthController')
 const forgotController = require('./forgotController')
-const verfiyExistingTokenController = require('./verifyExistingTokensController')
+const  verfiyExistingTokenController = require('./verifyExistingTokensController')
 //exports.uploadController = require("./uploadController")
 
 exports.func =(req, res) =>{ 

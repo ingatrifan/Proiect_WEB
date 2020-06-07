@@ -27,7 +27,8 @@ const populateTable = async () => {
   .then(json => {
     if(!json.error) {
       const table = document.getElementById('users-table');
-      const deleteCell = '<td class="delete"><i class="fas fa-user-times"></i></td>'
+      const deleteCell = '<td class="delete"><i class="fas fa-user-times"></i></td>';
+      const cantDeleteCell ="<td>Can't delete admin!</td>";
         let tablebody = ''
       for(let i = 0; i <json.length; i++) {
         let row ='<tr>';
@@ -36,7 +37,13 @@ const populateTable = async () => {
         let google = `<td>${json[i].google == -1 ? 'Not connected' : json[i].google}</td>`;
         let dropbox = `<td>${json[i].dropbox == -1 ? 'Not connected' : json[i].dropbox}</td>`;
         let onedrive = `<td>${json[i].onedrive == -1 ? 'Not connected' : json[i].onedrive}</td>`;
-        row = row + email + admin + google + dropbox + onedrive + deleteCell + '</tr>';
+        let files = `<td>${json[i].numberOfFiles}</td>`;
+        if(!json[i].admin) {
+          row = row + email + admin + google + dropbox + onedrive + files + deleteCell + '</tr>';
+        }
+        else {
+          row = row + email + admin + google + dropbox + onedrive + files + cantDeleteCell + '</tr>';
+        }
         tablebody += row;
       }
       table.innerHTML = tablebody;
@@ -62,7 +69,7 @@ const getCSVTable = ()=> {
   const table = document.getElementById('users-table');
   const rows = table.getElementsByTagName('tr');
   const lines = [];
-  lines.push('E-mail,Admin,Google,Dropbox,OneDrive');
+  lines.push('E-mail,Admin,Google,Dropbox,OneDrive,Number of files');
 
   for(let i = 0; i < rows.length; i++) {
     if(rows[i].classList.contains('selected')) {
@@ -125,4 +132,4 @@ window.onload = async()=> {
   else {
     window.location.replace("/");
   }
-} 
+}

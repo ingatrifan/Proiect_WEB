@@ -27,7 +27,7 @@ rout.registerEndPoint('GET','/googleAuth',(req,res)=>{
     res.end();
   });
 
-rout.registerEndPoint('GET','/verifyExistingTokens', verify.verifyExistingTokensController);
+rout.registerEndPoint('GET','/verifyExistingTokens',verify.verifyExistingTokensController);
 
 module.exports={
     rout

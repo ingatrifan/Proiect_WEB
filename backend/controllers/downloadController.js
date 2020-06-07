@@ -29,15 +29,15 @@ async function donwload(req,res){
     }
     catch(e){}
     
-    await models.File.findOne({id_user:auth_values.user,id_file:idFile},(err,file)=>{
+    await models.File.findOne({id_user:auth_values.user,id_file:idFile},async (err,file)=>{
+        
+        file =await  utilities.tokenRefresher.refreshTokens(file);
         let fragments = file.fragments;
-        utilities.tokenRefresher.refreshTokens(fragments);
         parseDownload(fragments,auth_values.user).then(fragments=>{
             refragmentation.refragmentation(fragments,auth_values.user,file.fileName).then(fileOut=>{
-
                 let stream  = fs.createReadStream(fileOut);
                 stream.pipe(res);
-                stream.on('close',()=>{
+                stream.on('close',()=>{ 
                     let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
                     fragmentation.deleteFolderRecursive(cleanPath);
                     console.log('Finished downloading, now cleaning ');

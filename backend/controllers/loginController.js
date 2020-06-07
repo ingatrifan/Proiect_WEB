@@ -21,20 +21,21 @@ async function login(req,res)
         let host = findIP.getIP(req.headers.host);
         validateUser(values).then(
             function(validation){
-                console.log(validation);
                 if(validation==true){
+                    console.log(validation);
                     var token = jwt.sign({user:values[0] },PRIVATE_KEY,{ expiresIn: '300h' });
+                    console.log(token);
                     let json = {"serverToken":token,"location":'http://'+host+'/mainPage'+'?'+'serverToken='+token};      
-                    res.statusCode = httpSttatusCode.BAD_REQUEST;
+                    res.statusCode = httpSttatusCode.OK;
                     res.setHeader('Content-Type', 'application/json');
-                    res.end(json);
+                    res.end(JSON.stringify(json));
                 }else{
                     res.statusCode = httpSttatusCode.FORBIDDEN;
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify({"success": false,"message": 'Wrong ID or passsword'}));
                 }
             }
-    );  
+    ).catch(e=>{throw e;});  
         }
         catch(e){
             res.statusCode = httpSttatusCode.INTERNAL_SERVER_ERROR;
@@ -54,11 +55,13 @@ async function validateUser(data){
                     console.log(doc);
                     if(doc==null)
                         resolve(false);
-                    const match =await bcrypt.compare(data[1],doc.password)  ;
-                    if(match)
-                        resolve(true);
-                    else 
-                    resolve(false);
+                    else{
+                        const match =await bcrypt.compare(data[1],doc.password)  ;
+                        if(match)
+                            resolve(true);
+                        else 
+                        resolve(false);
+                    }
                 }
                 else
                     reject(err);

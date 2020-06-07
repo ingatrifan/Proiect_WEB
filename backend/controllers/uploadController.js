@@ -25,6 +25,7 @@ exports.upload = async (req,res) => {
           let tokens=[];
           if(checkUserDriveAccounts(res,user)==false) 
             return
+          utilities.tokenRefresher(user);      
           tokens.push({info:user.googleAuth});
           tokens.push({info:user.dropboxAuth});
           tokens.push({info:user.oneDriveAuth});

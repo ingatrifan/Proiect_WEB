@@ -29,7 +29,7 @@ function register(req,res)
             else{
                 res.statusCode = httpSttatusCode.BAD_REQUEST;
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({"success": false,"message": 'Invalid Email'}));
+                res.end(JSON.stringify({"success": false,"message": 'An existing user with same email'}));
             }
         }
         );
@@ -48,9 +48,9 @@ async function UniqueId(data){
             {
                 if(doc == null)
                     resolve(true);
-            else 
+                 else 
                 resolve(false)
-            }
+                 }
             else
                 reject(err);
         });

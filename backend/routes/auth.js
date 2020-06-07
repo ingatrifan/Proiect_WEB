@@ -1,5 +1,6 @@
 const auth = require('../controllers/index');
 const router = require('./router');
+const verify = require('../controllers/verifyExistingTokensController')
 
 const rout = new router.Router();
 rout.registerEndPoint("POST","/login",(req,res)=>{
@@ -25,6 +26,8 @@ rout.registerEndPoint('GET','/googleAuth',(req,res)=>{
     res.write('Hello there');
     res.end();
   });
+
+rout.registerEndPoint('GET','/verifyExistingTokens', verify.verifyExistingTokensController);
 
 module.exports={
     rout

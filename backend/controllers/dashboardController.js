@@ -16,6 +16,13 @@ function formatBytes(bytes, decimals = 2) {
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
+async function getNumberOfFile(user){
+ return new Promise(async (resolve)=>{
+    models.File.count({id_user:user},function(err,count){
+      resolve(count);
+    })
+  });
+}
 
 exports.dashboardInfoController = async (req,res) => {
   let uri = url.parse(req.url).query;
@@ -42,6 +49,7 @@ exports.dashboardInfoController = async (req,res) => {
                   let userData = {};
                   userData['email'] = users[i].email;
                   userData['admin'] = users[i].isAdmin;
+                  userData['numberOfFiles']=await getNumberOfFile(users[i].email);
                   if(users[i].googleAuth.authorized) {
                     let userToken = users[i].googleAuth.accessToken;
                     let data= await utilities.google.getDriverInfo(userToken);
@@ -84,6 +92,7 @@ exports.dashboardInfoController = async (req,res) => {
                 }
 
                 res.setHeader('Content-Type', 'application/json');
+                console.log(resultJson);
                 res.end(JSON.stringify(resultJson));
               } else {
                 res.setHeader('Content-Type', 'application/json');

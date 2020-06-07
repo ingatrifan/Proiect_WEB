@@ -23,14 +23,17 @@ async function login(req,res)
             function(validation){
                 if(validation==true){
                     var token = jwt.sign({user:values[0] },PRIVATE_KEY,{ expiresIn: '300h' });
-                    let json = {"serverToken":token,"location":'http://'+host+'/mainPage'+'?'+'serverToken='+token};      
+                    let json = {
+                        "serverToken":token,
+                        "location":'http://'+host+'/mainPage'+'?'+'serverToken='+token
+                    };      
                     res.statusCode = httpSttatusCode.OK;
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify(json));
                 }else{
                     res.statusCode = httpSttatusCode.FORBIDDEN;
                     res.setHeader('Content-Type', 'application/json');
-                    res.end(JSON.stringify({"success": false,"message": 'Wrong username or passsword, or account is not confirmed'}));
+                    res.end(JSON.stringify({"success": false,"message": 'Wrong email or passsword, or account is not confirmed'}));
                 }
             }).catch(e=>{throw e;});  
         }

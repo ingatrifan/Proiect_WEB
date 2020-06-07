@@ -20,21 +20,21 @@ function register(req,res)
                 var body = post;
             if(validate== true){
                 var user = new models.User({
-                    email : body.user_id,
-                    name : body.user_name,
-                    password :await bcrypt.hash( body.user_pass ,saltRounds).then(hash=>{return new Promise(resolve=>{resolve(hash)})})
+                    email : body.email,
+                    name : body.name,
+                    password :await bcrypt.hash( body.password ,saltRounds).then(hash=>{return new Promise(resolve=>{resolve(hash)})})
                 });
                 user.save(()=>console.log("Inserted a user"));
-                const token = jwt.sign({email:body.user_id},CONFIRM_SECRET,{ expiresIn: '7d'});
+                const token = jwt.sign({email:body.email},CONFIRM_SECRET,{ expiresIn: '7d'});
                 mailSender.sendMail('hello',user,token);
-                res.statusCode = httpSttatusCode.BAD_REQUEST;   
+                res.statusCode = httpSttatusCode.CREATED;   
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({"success": false,"message": 'Successfull Register'}));
+                res.end(JSON.stringify({"success": true,"message": 'Successfull Register'}));
             }
             else{
-                res.statusCode = httpSttatusCode.BAD_REQUEST;
+                res.statusCode = httpSttatusCode.CONFLICT;
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({"success": false,"message": 'An existing user with same email'}));
+                res.end(JSON.stringify({"success": false,"message": 'There already exists an user with this email'}));
             }
         }
         );
@@ -48,7 +48,7 @@ function register(req,res)
 }
 async function UniqueId(data){
     return new Promise((resolve,reject)=>{
-         models.User.findOne({email:data.user_id},function(err,doc){
+         models.User.findOne({email:data.email},function(err,doc){
             if(!err)
             {
                 if(doc == null)

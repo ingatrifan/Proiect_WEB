@@ -1,35 +1,29 @@
+const errorMsg = document.getElementById('errorMsg');
 
-
-
-function login (e){
-    //get id and pass , must also do enc
+function login(e){
     const url = 'http://'+window.location.host+'/login';
-    let id = document.getElementById('user_id');
-    let pw = document.getElementById('user_pass');
+    let email = document.getElementById('email');
+    let pw = document.getElementById('password');
 
-    let encodeString  = id.value +':'+pw.value;
-    //encoding
+    let encodeString  = email.value +':'+pw.value;
     encodeString = btoa(encodeString);  
-    let data = JSON.stringify(
-        {
-            "encode": encodeString
-        });
+    let data = JSON.stringify({
+        "encode": encodeString
+    });
     postData(url,data,function(succ){
         var json = JSON.parse(succ.responseText);
-        console.log(json)
         localStorage.setItem('serverToken',json.serverToken);
         location = json.location;
     });
-    return false;
-   }
+    return;
+}
+
 function forgotPass(){
     const url = 'http://'+window.location.host+'/forgot';
     let email = document.getElementById('email');
-
-    let data = JSON.stringify(
-        {
+    let data = JSON.stringify({
             "email": email.value
-        });
+    });
     postData(url,data,function(succ){
         location.replace('http://'+window.location.host+'/')
     });
@@ -39,7 +33,6 @@ function resetPass(){
     const url = 'http://'+window.location.host+'/reset';
     let pass = document.getElementById('password');
     let repPass = document.getElementById('repPassword');
-    let errorMsg = document.getElementById('errorMsg')
     if (pass.value != repPass.value){
         errorMsg.innerHTML = 'Password do not match';
         errorMsg.style.color = 'red';
@@ -69,6 +62,12 @@ function postData(url,data,succes){
         if(httpRequest.readyState===httpRequest.DONE && httpRequest.status ==200)
         {
             succes(httpRequest);            
+        } 
+        if(httpRequest.readyState===httpRequest.DONE && httpRequest.status !=200)
+        {
+            message = JSON.parse(httpRequest.responseText)
+            errorMsg.innerHTML =  message.message;
+            errorMsg.style.color = "red";          
         } 
     };
     httpRequest.setRequestHeader('Content-Type', 'text/plain');

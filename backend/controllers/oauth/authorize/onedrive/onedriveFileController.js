@@ -1,13 +1,10 @@
 const fs = require('fs');
-const myURL=require('url');
-const querystring = require('querystring');
-const {Curl } = require('node-libcurl');
-const {credentials}=require('./credentials');
 const utils = require('./utilityFunctions');
 const uploadFile = require('./upload');
 const downloadFile = require('./download');
 const removeFile=require('./remove');
 const path = require('path');
+const crypto =require('crypto');
 //same as upload basically
 async function download (fragment,id_user){
     return new Promise(async (resolve)=>{
@@ -20,6 +17,7 @@ async function download (fragment,id_user){
             let numFragements =Math.ceil(fileSize/fragSize);
             let bytesRemaining= fileSize;
             let i =0;
+            let hash = crypto.createHash('sha256');
             var position=0;
             let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile);
             var fileOut = fs.openSync(tempPath,'w');
@@ -35,12 +33,17 @@ async function download (fragment,id_user){
                 numBytes=bytesRemaining;
                 end =fileSize-1;
             }
-            let data = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end,position,fileOut);
+            let data = await downloadFile.downloadFile(donwloadUrl,id_user,fragment.idFile,start,end,position,fileOut,hash);
+            hash =data.hash;
             position=data.position;
-            console.log('poss',position);
             if(i==numFragements-1){
                 fs.closeSync(fileOut);
-               resolve({filePath:data.tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+                if(hash.digest('hex')==fragment.hash){
+                    resolve({filePath:data.tmpPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+                }
+                else{
+                    resolve(false);
+                }
             }
             i++;
             bytesRemaining = bytesRemaining - chunkSize;

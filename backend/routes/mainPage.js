@@ -78,7 +78,8 @@ async function renderMainPage(token,search){
             }
             for ( i in listFiles){
                 let obj =listFiles[i].fileName.split('.');
-                data.folder.files.push({"name":obj[0],"extension":obj[1],"idFile":listFiles[i].id_file});
+                let extension = inExtenstionList(obj[1]);
+                data.folder.files.push({"name":obj[0],"extension":extension,"idFile":listFiles[i].id_file});
             }
             resolve(data);
         });
@@ -87,4 +88,16 @@ async function renderMainPage(token,search){
 module.exports={
     mainPage,
     renderMainPage
+}
+const extensionList=[
+    "aac","ai","aiff","asp","avi","bmp","c","cpp","css","dat","dmg","doc","docs","dot","dotx","dwg","dxf","eps","exe","flv","git","h","html",
+"ics","iso,","jar","java","jpg","js","key","m4v","mid","mov","mp3","mp4","mgg","odp","ods","odt","otp","ots","ott","pdf","php","png","pps",
+"ppt","psd","py","qt","rar","rb","rtf","sql","tga","tgz","tiff","txt","wav","xls","xlsx","xml","yml","zip"];
+function inExtenstionList(extension){
+    for(let i= 0 ;i<extensionList.length;i++){
+        if(extension==extensionList[i]){
+            return extension;
+        }
+    }
+    return "default";
 }

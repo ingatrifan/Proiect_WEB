@@ -24,14 +24,16 @@ async function connectDB(){
     console.log(err);
   })
   //Line command that should be deleted some day
-//await models.User.remove({},()=>console.log("Cleaning users"));
+await models.User.remove({},()=>console.log("Cleaning users"));
  //await models.File.remove({},()=>console.log("Cleaning files"));
   //adding test user 
   let b = new models.User({
     email:'test@mailinator.com',
     name :'test',
-    password :await bcrypt.hash('asdf',10)
+    password :await bcrypt.hash('asdf',10).then(data=>{return data})
+    ,confirmed:true
   });
+  console.log(b);
   b.save(function(){
     console.log("inserted test rat");
   });

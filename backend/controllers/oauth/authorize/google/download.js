@@ -2,7 +2,7 @@ const fs = require('fs');
 const {Curl } = require('node-libcurl');
 const path= require('path');
 
-async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
+async function  download(accessToken,fileId,userId,fileName,start,end,fileOut,hash){
     return new Promise((response,reject)=>{
         let tempPath = path.join(process.cwd(),'tmp',userId,fileName);
         const url ='https://www.googleapis.com/drive/v2/files/'+fileId+'?alt=media';
@@ -15,6 +15,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
             let written = 0;
             if (fileOut) {
                 written = fs.writeSync(fileOut, buff, 0, nmemb * size)
+                hash.update(buff);
             } else {
                 process.stdout.write(buff.toString())
                 written = size * nmemb
@@ -28,7 +29,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
         
         curl.on('end', (statusCode, body) => {
             curl.close()
-            response({tmpPath:tempPath});
+            response({tmpPath:tempPath,hash:hash});
   })
 })
 

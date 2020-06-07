@@ -1,19 +1,16 @@
 const fs = require('fs');
-const myURL=require('url');
-const querystring = require('querystring');
-const {Curl } = require('node-libcurl');
-const {credentials}=require('./credentials');
 const uploadFile = require('./upload');
 const downloadFile = require('./download');
 const path= require('path');
 const utility= require('./utilityFunctions');
 const removeFile = require('./remove');
+const crypto = require('crypto');
 async function download(fragment,id_user){
     return new Promise( resolve=>{
     utility.getFileData(fragment.accessToken,fragment.idFile).then( async data=>
     {
         let fileSize = JSON.parse(data.body)['size'];
-
+        let hash = crypto.createHash('sha256');
         let tempPath = path.join(process.cwd(),'tmp',id_user,fragment.idFile.split(':')[1]);
         var fileOut = fs.openSync(tempPath,'w');
         let fragSize = 1_000_000;
@@ -30,12 +27,17 @@ async function download(fragment,id_user){
             let start = offset;
             let end = offset+chunkSize-1;
             console.log(offset,start,end);
-            await downloadFile.download(fragment.accessToken,fragment.idFile,id_user,fragment.idFile,start,end,fileOut);
+            let data = await downloadFile.download(fragment.accessToken,fragment.idFile,id_user,fragment.idFile,start,end,fileOut,hash);
+            hash = data.hash;
             offset = offset+chunkSize;
             console.log(offset,chunkSize);
         }
         await fs.closeSync(fileOut);
-        resolve({filePath:tempPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+
+         if(hash.digest('hex')==fragment.hash){
+            resolve({filePath:tempPath,order:{p1:fragment.p1,p2:fragment.p2},name:fragment.name});
+         }
+         resolve(false);
 
     });
     });

@@ -20,8 +20,8 @@ async function donwload(req,res){
         return  
     let auth_values =jwt.decode(token,PRIVATE_KEY);
 
-    //fetch the file info from db -> check tokens(TO DO  )->validate files(TO DO)  ->fetch data
-    //NOT COMPLETE
+    //fetch the file info from db -> check tokens(DONE  )->validate files(DONE)  ->fetch data
+
     let tmpPath= path.join(process.cwd(),'tmp',auth_values.user);
     try{
         await fs.mkdirSync(tmpPath);    
@@ -29,18 +29,36 @@ async function donwload(req,res){
     catch(e){}
     
     await models.File.findOne({id_user:auth_values.user,id_file:idFile},async (err,file)=>{
-        
+        if(file==null){
+
+            res.statusCode = HttpStatusCodes.BAD_REQUEST;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({"success": false,"message": 'FileId not found or userId'}));
+            return ;
+        }
         file =await  utilities.tokenRefresher.refreshTokens(file);
+        
         let fragments = file.fragments;
+        let filesStatus = await utilities.validateFiles.validateFiles(file,utilities);
+        if(filesStatus==false){
+            res.statusCode = HttpStatusCodes.NOT_FOUND;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({"success": false,"message": 'File deleted from drive '}));
+            return;
+        }
         parseDownload(fragments,auth_values.user).then(fragments=>{
             refragmentation.refragmentation(fragments,auth_values.user,file.fileName).then(fileOut=>{
                 let stream  = fs.createReadStream(fileOut);
+                res.statusCode = HttpStatusCodes.OK;
                 stream.pipe(res);
                 stream.on('close',()=>{ 
                     let cleanPath =  path.join(process.cwd(),'tmp',auth_values.user);
                     fragmentation.deleteFolderRecursive(cleanPath);
-                    console.log('Finished downloading, now cleaning ');
                 })
+            }).catch(e=>{
+                res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({"success": false,"message": 'File corrupted or modifier, deleting it'}));
             })
         });
     }).catch((e)=>{
@@ -54,17 +72,25 @@ async function donwload(req,res){
 
 async function parseDownload(fragments,id_user){ 
     let fragmentData=[];
-    return new Promise(async (resolve)=>{
+    return new Promise(async (resolve,reject)=>{
     for(let  i=0;i<fragments.length;i++){
         if(fragments[i].name=='onedrive'){
             let fragment = await fileIndex.onedriveFileController.download(fragments[i],id_user);
+            if(fragment==false)
+                reject(false);
+            
             fragmentData.push(fragment);
         }else if(fragments[i].name=='google'){ 
             let fragment = await fileIndex.googleFileController.download(fragments[i],id_user);
+            if(fragment==false)
+                reject(false)
+            
             fragmentData.push(fragment);
 
         }else if(fragments[i].name=='dropbox'){
             let fragment= await fileIndex.dropboxFileController.download(fragments[i],id_user);
+            if(fragment==false)
+                reject(false);
             fragmentData.push(fragment);
         }
     }

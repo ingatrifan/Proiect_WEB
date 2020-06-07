@@ -1,7 +1,7 @@
 const fs  = require('fs');
 const Path = require('path');
 const uniqid = require('uniqid');
-
+const crypto = require('crypto');
 const deleteFolderRecursive = function(path) {
     try{
         if (fs.existsSync(path)) {
@@ -32,7 +32,6 @@ const deleteFolderRecursive = function(path) {
         
         usedDrive.sort((a,b)=>a.capacity-b.capacity);
         let len = usedDrive.length;
-        console.log('FILESIZE',fileSize);
         if(len==1)
             usedDrive[0].update = fileSize;
 
@@ -64,7 +63,6 @@ const deleteFolderRecursive = function(path) {
         usedDrive.forEach((data)=>{
             data.update=Math.ceil(data.update);
         })
-        console.log(usedDrive);
         return  usedDrive;
   }
 async function fragmentation(filepath,id_user,sizes){   
@@ -82,7 +80,8 @@ async function fragmentation(filepath,id_user,sizes){
         refreshToken:sizes[2].refreshToken,
         lastAccessed: sizes[2].lastAccessed,
         fileName:"",
-        idFile:""
+        idFile:"",
+        hash:""
     }   
     let dropbox = {
         name:"dropbox",
@@ -96,7 +95,8 @@ async function fragmentation(filepath,id_user,sizes){
         refreshToken:sizes[1].refreshToken,
         lastAccessed: sizes[1].lastAccessed,
         fileName:"",
-        idFile:""
+        idFile:"",
+        hash:""
     }
     let google = {
         name:"google",
@@ -111,7 +111,8 @@ async function fragmentation(filepath,id_user,sizes){
         lastAccessed: sizes[0].lastAccessed,
         fileName:"",
         idFile:"",
-        folderId:sizes[0].folderId
+        folderId:sizes[0].folderId,
+        hash:""
     }
     let driveData =[];
     driveData.push(one,dropbox,google)
@@ -143,7 +144,7 @@ async function fragment(filepath,tmpPath,usedDrives){
             let myFilePath = Path.join(tmpPath,firtName+"_"+uniq);
             usedDrives[i].filePath=myFilePath;
             usedDrives[i].fileName=firtName+"_"+uniq;
-            await createFragment(myFilePath,usedDrives,i,fd);
+            usedDrives[i].hash=  await createFragment(myFilePath,usedDrives,i,fd);
         }
         fs.closeSync(fd);
         res(usedDrives);
@@ -151,12 +152,14 @@ async function fragment(filepath,tmpPath,usedDrives){
 }
 
  async function createFragment(myFilePath,usedDrives,i,fd){
+    const hash = crypto.createHash('sha256');
      return new Promise( async (resolve)=>{
         let stream = fs.createWriteStream(myFilePath);
         buff = Buffer.alloc(usedDrives[i].p2-usedDrives[i].p1);
         fs.readSync(fd,buff,0,buff.length,usedDrives[i].p1)
+        hash.update(buff);
         stream.write(buff);
-        stream.end(()=>{resolve('ended')})
+        stream.end(()=>{resolve(hash.digest('hex'))})
      });
  }
 module.exports={

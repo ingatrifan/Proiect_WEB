@@ -8,7 +8,7 @@ const  {Router}  = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
 const index = require('./routes')
-
+const bcrypt= require('bcrypt');
 
 //configuration
 const config =dotenv.config({
@@ -28,11 +28,12 @@ await models.User.remove({},()=>console.log("Cleaning users"));
  //await models.File.remove({},()=>console.log("Cleaning files"));
   //adding test user 
   let b = new models.User({
-    email:'test',
+    email:'test@mailinator.com',
     name :'test',
-    password :'asdf',
-    isAdmin: true
+    password :await bcrypt.hash('asdf',10).then(data=>{return data})
+    ,confirmed:true
   });
+  console.log(b);
   b.save(function(){
     console.log("inserted test rat");
   });

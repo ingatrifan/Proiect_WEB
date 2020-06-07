@@ -5,6 +5,7 @@ const fileIndex = require('./oauth/authorize/fileIndex');
 const models = require('../models/index');
 const HttpStatusCodes = require("http-status-codes");
 const findIP= require('../utils/findIp');
+const utilities = require('./oauth/authorize/utilityIndex');
 
 async function remove(req,res){
     let host = findIP.getIP(req.headers.host);
@@ -13,8 +14,6 @@ async function remove(req,res){
         buffer+=data;
     })
     req.on('end',async()=>{
-        console.log('removing');
-        console.log(buffer);
         var data =JSON.parse(buffer);
         let serverToken = data.serverToken;
         let idFile = data.idFile;
@@ -22,25 +21,25 @@ async function remove(req,res){
              return
             //find file db -> validate tokens ->remove file 
         var auth_values = jwt.decode(serverToken,PRIVATE_KEY);
-        console.log(idFile,auth_values.user);
-        await models.File.findOne({id_user:auth_values.user,id_file:idFile}, (err,file)=>{
+        await models.File.findOne({id_user:auth_values.user,id_file:idFile},async (err,file)=>{
 
             if(!err){
                 //skip validate tokens TO DO
+                file = await utilities.tokenRefresher.refreshTokens(file);
                 let fragments= file.fragments;
                 parseUpload(fragments).then(async ()=>{
                     await models.File.remove({id_user:auth_values.user,id_file:idFile}).then(()=>{
                         res.statusCode = HttpStatusCodes.OK;
                         res.setHeader('Content-Type', 'application/json');
-                        res.end(JSON.stringify({"success": true, "location":'http://'+host+'/mainPage'+'?'+'serverToken='+serverToken,"message": 'Successfully upload'}));
+                        res.end(JSON.stringify({"success": true,"message": 'Successfully upload'}));
                     });
                     
                 })
-                
-                
             }
             else{
-
+                res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+                        res.setHeader('Content-Type', 'application/json');
+                        res.end(JSON.stringify({"success": true, "message": 'Error in removing file'}));
             }
         });
 

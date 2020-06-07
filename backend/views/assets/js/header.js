@@ -14,7 +14,6 @@
 //   }
 // }
 const togleLogo = () =>{
-  console.log("here");
   if (window.screen.width <440){
     document.getElementById('logo').innerHTML = "STOL"
   } else document.getElementById('logo').innerHTML = "STOL - MODERN CLOUD STORAGE";

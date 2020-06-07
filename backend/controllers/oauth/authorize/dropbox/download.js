@@ -2,14 +2,13 @@ const fs = require('fs');
 const {Curl } = require('node-libcurl');
 const path= require('path');
 const request=require('request');
-async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
-    console.log(fileId);
+const crypto = require('crypto');
+async function  download(accessToken,fileId,userId,fileName,start,end,fileOut,hash){
     return new Promise((response,reject)=>{
         let tempPath = path.join(process.cwd(),'tmp',userId,fileName);
         const url ='https://content.dropboxapi.com/2/files/download';
         const curl = new Curl();
         let str = '{"path" : "'+fileId+'"}';
-        console.log(str);
         curl.setOpt(Curl.option.URL,url);
         curl.setOpt(Curl.option.SSL_VERIFYPEER,false);
         curl.setOpt(Curl.option.HTTPHEADER,
@@ -22,6 +21,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
             let written = 0;
             if (fileOut) {
                 written = fs.writeSync(fileOut, buff, 0, nmemb * size)
+                hash.update(buff)
             } else {
                 
                 process.stdout.write(buff.toString())
@@ -35,8 +35,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
         
         curl.on('end', (statusCode, body) => {
             curl.close()
-            console.log(body,statusCode,'DOWNLOAD');
-            response({tmpPath:tempPath});
+            response({tmpPath:tempPath,hash:hash});
   })
 })
 
@@ -54,7 +53,6 @@ const downloadFileInga = async (accessToken,filePath) =>{
                 }
             } , function resp(err,httprs,body){
                 if(err) console.log(err); else 
-                console.log(body);
                 //return body;
                 resolve('ended');
             })

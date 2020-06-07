@@ -29,10 +29,6 @@ function initializeProgress(numfiles) {
     dropArea.addEventListener(eventName, preventDefaults, false)
   })
   
-  function preventDefaults (e) {
-    e.preventDefault()
-    e.stopPropagation()
-  }
   ;['dragenter', 'dragover'].forEach(eventName => {
     dropArea.addEventListener(eventName, highlight, false)
   })
@@ -63,12 +59,11 @@ function initializeProgress(numfiles) {
 
   }
   function uploadFile(file) { 
-    event.preventDefault(); 
+    // event.preventDefault(); 
     const formData = new FormData();
-    let files = document.querySelector('[type=file]');  
     
     formData.append('file',file);
-    formData.append('serverToken',"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoidGVzdCIsInBhc3MiOiJhc2RmIiwiaWF0IjoxNTkwODM1MDg0LCJleHAiOjE1OTE5MTUwODR9.eEscFE738JxclWSlzfINC2a7NmfLzr_8b6ktOhc63SQ");
+    formData.append('serverToken',localStorage.getItem('serverToken'));
     const url = 'http://'+window.location.host+'/upload';
     fetch(url,
       {
@@ -77,6 +72,7 @@ function initializeProgress(numfiles) {
       }).then(response=>
         //refresh 
         response.json()
+        
          // location.reload(true);
         
       ).then((data)=>{
@@ -85,9 +81,9 @@ function initializeProgress(numfiles) {
         //   window.location=data.location;
         } else{
           // console.log(errorMsg)
-          errorMsg.innerHTML = "Something is wrong with one of your files, please refresh and retry";
+          errorMsg.innerHTML = data.message;
           errorMsg.style = "display:block"
         }
       });
-  
-  }           
+  } 
+

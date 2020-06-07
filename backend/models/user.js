@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    email: {
+    email:{
       required: true,
       type: String
     },
@@ -17,6 +17,10 @@ const userSchema = new Schema(
     isAdmin: {
       type: Boolean,
       default: false
+    },
+    confirmed:{
+      type:Boolean,
+      default:false
     },
     googleAuth: {
       folderId:{

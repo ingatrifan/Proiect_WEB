@@ -73,18 +73,4 @@ body {
   text-decoration: none;
 }
 
-.invisible {
-  display: none;
-}
-
-#error {
-  color: red;
-  font-size: 12px;
-  margin: 0;
-  padding: 0;
-}
-
-.error-border {
-  border: 1px solid red;
-}
 

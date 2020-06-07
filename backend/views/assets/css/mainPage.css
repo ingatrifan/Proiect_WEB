@@ -51,6 +51,9 @@ body{
 }
 .left-side{
     width:10%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 50px;
 }
 .left-side .add button{
     width:70px;
@@ -120,6 +123,7 @@ body{
 @media only screen and (max-width: 490px) {
     .up{
         display: block;
+        padding-top: 120px;
     }
     .up .search{
         margin-left: 0px!important;
@@ -133,6 +137,9 @@ body{
     }
     .down{
         display: block;
+    }
+    .left-side {
+      margin-left: 0;
     }
 }
 

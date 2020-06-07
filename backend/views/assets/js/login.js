@@ -1,6 +1,4 @@
 
-
-
 function login (e){
     //get id and pass , must also do enc
     const url = 'http://'+window.location.host+'/login';
@@ -23,32 +21,7 @@ function login (e){
     return false;
    }
 
-  function validateEmailField() {
-    let emailElement = document.getElementById('user_id');
-    let errorMsg = document.getElementById('error');
-    if (isEmailValid(emailElement.value)) {
-      errorMsg.classList.add('invisible');
-    } else {
-      if(emailElement.value != '') {
-        errorMsg.classList.remove('invisible');
-      }
-      else {
-        errorMsg.classList.add('invisible');
-      }
-    }
-  }
-  
-  function isEmailValid(email) {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      return true;
-    }
-    else {
-      return false;
-    }
-  }
-
-
-function postData(url,data,succes){
+  function postData(url,data,succes){
     // an encoding required
     var httpRequest = new XMLHttpRequest();
     httpRequest.open('POST',url,true);

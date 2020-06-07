@@ -14,6 +14,10 @@ const userSchema = new Schema(
       required: true,
       type: String
     },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
     confirmed:{
       type:Boolean,
       default:false

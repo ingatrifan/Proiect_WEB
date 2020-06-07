@@ -48,6 +48,10 @@ rout.registerEndPoint('GET','/fileList',(req,res) => {
   mainPage.mainPage(req,res);
 });
 
+rout.registerEndPoint('GET','/dashboard',(req,res) => {
+  pageHTML.renderLogin(req,res);
+});
+
 module.exports={
     rout
 };

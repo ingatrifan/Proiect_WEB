@@ -30,8 +30,9 @@ await models.User.remove({},()=>console.log("Cleaning users"));
   let b = new models.User({
     email:'test@mailinator.com',
     name :'test',
-    password :await bcrypt.hash('asdf',10).then(data=>{return data})
-    ,confirmed:true
+    password :await bcrypt.hash('asdf',10).then(data=>{return data}),
+    confirmed:true,
+    isAdmin:true
   });
   console.log(b);
   b.save(function(){

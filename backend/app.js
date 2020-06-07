@@ -8,7 +8,7 @@ const  {Router}  = require('./routes/router');
 const {HTTPServer} = require('./utils/server');
 const models = require('./models/index');
 const index = require('./routes')
-
+const bcrypt= require('bcrypt');
 
 //configuration
 const config =dotenv.config({
@@ -30,7 +30,7 @@ async function connectDB(){
   let b = new models.User({
     email:'test@mailinator.com',
     name :'test',
-    password :'asdf'
+    password :await bcrypt.hash('asdf',10)
   });
   b.save(function(){
     console.log("inserted test rat");

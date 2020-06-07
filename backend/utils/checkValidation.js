@@ -4,7 +4,7 @@ const PRIVATE_KEY = "SUPER_SECRET_KEY";
 
 function checkValidation(token,res){
     try{
-        jwt.verify(token+'s',PRIVATE_KEY);
+        jwt.verify(token,PRIVATE_KEY);
       }
       catch(e){
         res.statusCode = HttpStatusCodes.BAD_REQUEST;

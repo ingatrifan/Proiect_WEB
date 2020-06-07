@@ -44,11 +44,8 @@ async function mainPage(req,res){
 
 
 async function renderMainPage(token,search){
-    //var dec = jwt.decode(token);
-    
-    //var values = dec;
     return new Promise(async (resolve)=>{
-        var mypath = './views/pages/mainPage.ejs';//INGA TEACHED ME  
+        var mypath = './views/pages/mainPage.ejs';
         var myFile = fs.readFileSync(mypath,'utf-8');
 
         const File = models.File;

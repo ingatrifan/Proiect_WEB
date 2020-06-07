@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const httpStatusCode= require('http-status-codes');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
 async function tokenVerify(req,res){
-    console.log('sdfsdf');
     var buffer ='';
     req.on('data',function(data){
         buffer +=data;        
@@ -16,29 +15,22 @@ async function tokenVerify(req,res){
         
         try{
             jwt.verify(token,PRIVATE_KEY);
-            res.writeHead(httpStatusCode.OK, {
-                'Content-Type': 'aplication/json'
-            });
-            let succes={'success':true};
-            res.write(JSON.stringify(succes));
+            res.statusCode = httpStatusCode.OK;   
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({"success": true,"message": 'Success Getting Token'}));
         }
         catch(e){
-            res.writeHead(httpStatusCode.UNAUTHORIZED, {
-                'Content-Type': 'aplication/json'
-            });    
-            let succes={'success':false};
-            res.write(JSON.stringify(succes));
+            res.statusCode = httpStatusCode.UNAUTHORIZED;   
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({"success": false,"message": 'Unathorized user'}));
         }
 
     }
     catch(e){
-        res.writeHead(httpStatusCode.UNAUTHORIZED, {
-            'Content-Type': 'aplication/json'
-        });    
-        let succes={'success':false};
-        res.write(JSON.stringify(succes));
+        res.statusCode = httpStatusCode.UNAUTHORIZED;   
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({"success": false,"message": 'Unathorized user'}));
     }
-        res.end();
     });
     };
 module.exports={

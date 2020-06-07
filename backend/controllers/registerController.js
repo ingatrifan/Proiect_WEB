@@ -1,4 +1,7 @@
 const models = require('../models/index');
+const mailSender = require('../utils/mailSender')
+const jwt = require('jsonwebtoken');
+const CONFIRM_SECRET = 'Our project is the best, ahahaha';
 const httpSttatusCode =require('http-status-codes');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -22,6 +25,8 @@ function register(req,res)
                     password :await bcrypt.hash( body.user_pass ,saltRounds).then(hash=>{return new Promise(resolve=>{resolve(hash)})})
                 });
                 user.save(()=>console.log("Inserted a user"));
+                const token = jwt.sign({email:body.user_id},CONFIRM_SECRET,{ expiresIn: '7d'});
+                mailSender.sendMail('hello',user,token);
                 res.statusCode = httpSttatusCode.BAD_REQUEST;   
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify({"success": false,"message": 'Successfull Register'}));

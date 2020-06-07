@@ -28,7 +28,7 @@ async function connectDB(){
  //await models.File.remove({},()=>console.log("Cleaning files"));
   //adding test user 
   let b = new models.User({
-    email:'test',
+    email:'test@mailinator.com',
     name :'test',
     password :'asdf'
   });

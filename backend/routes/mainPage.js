@@ -58,8 +58,7 @@ async function renderMainPage(token,search){
             File.find({$or : [{fileName:regex}]}, (err,files) =>{
                 if (err)console.error(err);
                 data = {
-                    "folder":
-                    {
+                    "folder":{
                         "files":[]
                     }
                 }

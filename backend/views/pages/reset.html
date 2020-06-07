@@ -28,11 +28,10 @@
     <div class="login-page">
         <div class="form">
             <form >
-            <input id ="user_id" type="text" placeholder="username"/>
-            <input id = "user_pass"  type="password" placeholder="password"/>
-            <button id= "button_login" onclick=login() type="button">login</button>
-            <p class="message">Not registered? <a href="/register">Create an account</a></p>
-            <p class="message"><a href="/forgot">Forgot password?</a></p>
+            <p class="message" id ="errorMsg"></p>
+            <input id = "password"  type="password" placeholder="password"/>
+            <input id = "repPassword"  type="password" placeholder="password"/>
+            <button  onclick=resetPass() type="button">Reset</button>
             </form>
         </div>
     </div>

@@ -4,7 +4,7 @@ const uploadController = require('./uploadController');
 const tokenVerifier = require('./tokenVerifierController');
 const fileController = require('./fileController')
 const oAuthController = require('./oAuthController')
-
+const forgotController = require('./forgotController')
 //exports.uploadController = require("./uploadController")
 
 exports.func =(req, res) =>{ 
@@ -19,5 +19,6 @@ module.exports={
     uploadController,
     tokenVerifier,
     fileController,
-    oAuthController
+    oAuthController,
+    forgotController
 }

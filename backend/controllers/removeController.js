@@ -26,12 +26,11 @@ async function remove(req,res){
                 let files = await models.File.find({folder:data.idFile})
                 //skip validate tokens TO DO
                 if (files.length>0){
-                    console.log(files)
                     res.statusCode = HttpStatusCodes.UNAUTHORIZED;
                     res.setHeader('Content-Type', 'application/json');
                     return res.end(JSON.stringify({"success": true,"message": 'You cannot remove this folder, first delete files'}));
                 }
-                if (!data.id_file){
+                if (!file.id_file){
                     await models.File.findByIdAndRemove({_id:data.idFile});
                     res.statusCode = HttpStatusCodes.OK;
                     res.setHeader('Content-Type', 'application/json');

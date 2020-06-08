@@ -51,8 +51,7 @@ async function renderMainPage(token,search,parent){
         } 
         if (!parent)parent = null;
         await File.find({id_user:auth_values.user,folder:parent},(err,files)=>{
-            if(!err){
-            }
+            if(!err){}
         }).then(async (listFiles)=>{
             console.log(listFiles)
             data = {
@@ -65,7 +64,7 @@ async function renderMainPage(token,search,parent){
                 if(obj[1]==null)obj[1]="folder";
                 let extension = inExtenstionList(obj[1]);
                 let fileId = extension=="folder"?listFiles[i].id:listFiles[i].id_file;
-                data.folder.files.push({"name":obj[0],"extension":extension,"idFile": fileId});
+                data.folder.files.push({"name":listFiles[i].fileName,"extension":extension,"idFile": fileId});
             }
             resolve(data);
         });

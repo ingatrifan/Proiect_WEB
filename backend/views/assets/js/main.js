@@ -133,7 +133,7 @@ function getFileInfo(){
           <img src="../assets/images/icons/187640-file-types/png/${json.folder.files[f].extension}.png" alt = "img1" >
         </div>
         <div class="flex-card__content">
-          <h3 id = "${json.folder.files[f].idFile}" class="flex-card__content-title">${json.folder.files[f].name}.${json.folder.files[f].extension}</h3>
+          <h3 id = "${json.folder.files[f].idFile}" class="flex-card__content-title">${json.folder.files[f].name}</h3>
           <div class="flex-card__actions">
               <button id = "${json.folder.files[f].idFile}" onclick="openDeleteModal(this)" class="flex-card__button button-delete"><i class="fas fa-trash-alt"></i></button>
               <button id = "${json.folder.files[f].idFile}" onclick="downloadFile(this)" class="flex-card__button button-download"><i class="fas fa-cloud-download-alt"></i></button>

@@ -137,6 +137,9 @@
         width:100%;
         
     }
+    .first .content {
+      text-align: center;
+    }
     .second .calitati .text{
         width:50%;
         margin:20px auto;
@@ -167,4 +170,27 @@
     }
 
    
+}
+
+.scholarly-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  padding-bottom: 20px;
+}
+
+.scholarly-links a {
+  padding: 10px;
+  color: white;
+  background-color: var(--main-color);
+  border-radius: 12px;
+  text-decoration: none;
+  width: 200px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.scholarly-links a:hover {
+  background-color: green;
 }

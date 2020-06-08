@@ -14,6 +14,7 @@ window.onload=initMainPage();
 function initMainPage(){
   verifyToken();
   getFileInfo();
+  toggleBackArrow();
 }
 
 
@@ -67,7 +68,6 @@ function downloadFile(element){
   .then(resp=>{
     return resp.blob()})
   .then(blob=>{
-
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.style.display = 'none';
@@ -92,7 +92,7 @@ function createFolder(){
   .then(response => window.location.reload())
 }
 function openFolder(id){
-  let url = window.location.href;
+  let url = 'http://localhost/mainPage';
   url += '?parent='+id;
   window.location.replace(url);
 }
@@ -146,6 +146,31 @@ function getFileInfo(){
     filesDiv.innerHTML = htmlContent;
   })
 }
+
+function toggleBackArrow(){
+  let currentUrl = window.location.href;
+  let parent = currentUrl.split('=')[1];
+  if (parent)
+    document.getElementById('back-arrow').style.display = "block";
+  else 
+  document.getElementById('back-arrow').style.display = "none";
+}
+function navigateBack(){
+  let currentUrl = window.location.href;
+  let parent = currentUrl.split('=')[1];
+  let url = `http://localhost/folderParent?parent=${parent}`
+  fetch(url)
+  .then(response => response.json())
+  .then((response)=>{
+    console.log(response.message)
+    if(response.message!=="null"){
+      window.location.replace('http://'+window.location.host+'/mainPage?parent='+response.message)
+    } else {
+      window.location.replace('http://'+window.location.host+'/mainPage');
+    }
+  })
+}
+
 
 //CLICK DELETE
 function deleteFile(element){

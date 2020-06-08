@@ -11,6 +11,11 @@ body{
   background: url(../images/bg.jpg);
   background-size: cover;
 }
+#back-arrow{
+    color:white;
+    font-size:30px;
+    display: none;
+}
 .form-input input{
     width:100%;
     height: 30px;

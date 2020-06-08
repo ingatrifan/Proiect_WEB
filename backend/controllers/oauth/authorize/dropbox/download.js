@@ -2,7 +2,6 @@ const fs = require('fs');
 const {Curl } = require('node-libcurl');
 const path= require('path');
 const request=require('request');
-const crypto = require('crypto');
 async function  download(accessToken,fileId,userId,fileName,start,end,fileOut,hash){
     return new Promise((response,reject)=>{
         let tempPath = path.join(process.cwd(),'tmp',userId,fileName);

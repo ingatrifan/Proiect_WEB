@@ -11,8 +11,14 @@ body{
   background: url(../images/bg.jpg);
   background-size: cover;
 }
+.form-input input{
+    width:100%;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
 .up{
-    padding-top: 55px;
+    padding-top: 84px;
     display: flex;
 }
 .up .image img{
@@ -23,7 +29,7 @@ body{
 .up .search{
     margin-left:50px;
     width:50%;
-    line-height: 110px;
+    line-height: 70px;
     height: 30px;
 }
 .up .search-space{
@@ -40,17 +46,16 @@ body{
     border-radius:10px;
     color:wheat;
 }
-.up  i{
+.up .search-space i{
     margin-left:10px;
     font-size: 30px;
     color:wheat;
-    line-height: 110px;
+    line-height: 70px;
 }
 .down{
     display: flex;
 }
 .left-side{
-    width:10%;
     display: flex;
     flex-direction: row;
     margin: 50px;

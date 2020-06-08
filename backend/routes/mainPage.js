@@ -1,56 +1,39 @@
 const url = require('url');
-const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const models = require('../models/index');
 const PRIVATE_KEY = "SUPER_SECRET_KEY";
-const { escapeRegexSearch } = require('../utils/helper')
+const { escapeRegexSearch } = require('../utils/helper');
+
 async function mainPage(req,res){
     try{
-        var uri = url.parse(req.url).query;
-        var values =uri.split('&')[0];
-        let searchParams = uri.split('&')[1];
-        var myVar= values.split('=');
-        let searchTerm ='';
-        if (searchParams)searchTerm = searchParams.split('=')[1];
-    
-    if(myVar[0]!='serverToken')
-    {
-        res.writeHead(404, 'No Access');    
-        res.end();
-    }
-    else {
-        var token = myVar[1];
+        let {serverToken,search,parent} = url.parse(req.url, true).query;
         try{
-            jwt.verify(token,PRIVATE_KEY);
-            let r = await renderMainPage(token,searchTerm).then((data)=> {
-            let json = JSON.stringify(data)
-            res.writeHead(200, {
-              'Content-Type': 'application/json',
-              'content-length': Buffer.byteLength(json)
-            });
-            res.end(json);
+            jwt.verify(serverToken,PRIVATE_KEY);
+            let r = await renderMainPage(serverToken,search,parent).then((data)=> {
+                let json = JSON.stringify(data)
+                res.writeHead(200,{
+                    'Content-Type': 'application/json',
+                    'content-length': Buffer.byteLength(json)
+                });
+                return res.end(json);
             });
         }
         catch(e) {
             res.writeHead(404,'NO AUTHENTIFICATION' );    
-            res.end();
+            return res.end();
         }
-    }
-} 
-  catch(e){
-    res.end();
-  }       
+    } 
+    catch(e){
+        res.end();
+    }       
 }
 
 
-async function renderMainPage(token,search){
+async function renderMainPage(token,search,parent){
     return new Promise(async (resolve)=>{
-        var mypath = './views/pages/mainPage.ejs';
-        var myFile = fs.readFileSync(mypath,'utf-8');
-
         const File = models.File;
         let auth_values = jwt.decode(token,PRIVATE_KEY);
-        if(search.length>0){
+        if(search &&search.length>0){
             let regex = escapeRegexSearch(search);
             File.find({$or : [{fileName:regex}]}, (err,files) =>{
                 if (err)console.error(err);
@@ -65,21 +48,23 @@ async function renderMainPage(token,search){
                 }
                 resolve(data);
             });
-        } else 
-        await File.find({id_user:auth_values.user},(err,files)=>{
-            if(!err){
-            }
-        } ).then(async (listFiles)=>{
+        } 
+        if (!parent)parent = null;
+        await File.find({id_user:auth_values.user,folder:parent},(err,files)=>{
+            if(!err){}
+        }).then(async (listFiles)=>{
+            console.log(listFiles)
             data = {
-                "folder":
-                {
+                "folder":{
                     "files":[]
                 }
             }
-            for ( i in listFiles){
+            for (i in listFiles){
                 let obj =listFiles[i].fileName.split('.');
+                if(obj[1]==null)obj[1]="folder";
                 let extension = inExtenstionList(obj[1]);
-                data.folder.files.push({"name":obj[0],"extension":extension,"idFile":listFiles[i].id_file});
+                let fileId = extension=="folder"?listFiles[i].id:listFiles[i].id_file;
+                data.folder.files.push({"name":listFiles[i].fileName,"extension":extension,"idFile": fileId});
             }
             resolve(data);
         });
@@ -90,7 +75,7 @@ module.exports={
     renderMainPage
 }
 const extensionList=[
-    "aac","ai","aiff","asp","avi","bmp","c","cpp","css","dat","dmg","doc","docs","dot","dotx","dwg","dxf","eps","exe","flv","git","h","html",
+ "folder","aac","ai","aiff","asp","avi","bmp","c","cpp","css","dat","dmg","doc","docs","dot","dotx","dwg","dxf","eps","exe","flv","git","h","html",
 "ics","iso,","jar","java","jpg","js","key","m4v","mid","mov","mp3","mp4","mgg","odp","ods","odt","otp","ots","ott","pdf","php","png","pps",
 "ppt","psd","py","qt","rar","rb","rtf","sql","tga","tgz","tiff","txt","wav","xls","xlsx","xml","yml","zip"];
 function inExtenstionList(extension){

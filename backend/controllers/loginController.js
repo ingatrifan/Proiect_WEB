@@ -25,7 +25,7 @@ async function login(req,res)
                     var token = jwt.sign({user:values[0] },PRIVATE_KEY,{ expiresIn: '300h' });
                     let json = {
                         "serverToken":token,
-                        "location":'http://'+host+'/mainPage'+'?'+'serverToken='+token
+                        "location":'http://'+host+'/mainPage'
                     };      
                     res.statusCode = httpSttatusCode.OK;
                     res.setHeader('Content-Type', 'application/json');

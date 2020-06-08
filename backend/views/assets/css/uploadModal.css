@@ -40,7 +40,7 @@ p {
     background: #ccc;
     cursor: pointer;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: none;
     color:black!important;
 }
 .button:hover {

@@ -63,8 +63,7 @@ class MultiPartParser {
         var nextPos;
         var  endState=false;
         while(endState==false){ 
-            
-            pos = buffer.toString().indexOf(this.boundry,pos);
+            pos = buffer.indexOf(Buffer.from(this.boundry),pos);
             if(pos!=-1){
                 pos = pos +this.boundry.length;  
             }
@@ -72,18 +71,19 @@ class MultiPartParser {
             if(buffer.toString().substring(pos,pos+2)=='--'){//end case
                 return;
             }
-            if((nextPos=buffer.toString().indexOf(this.boundry,pos))==-1){//get pos,nextPos interval
+            if((nextPos=buffer.indexOf(Buffer.from(this.boundry),pos))==-1){//get pos,nextPos interval
                 nextPos = buffer.length;
             }
             else
-                nextPos = nextPos-4;//(len("\r\n--") substring
+                nextPos = nextPos-4;
         
             let dataHeader=0;
             if(pos!=-1){
-                 dataHeader=  this.parseHeader(buffer.toString().substring(pos,nextPos),pos);
+                 dataHeader=  this.parseHeader(buffer.slice(pos,nextPos));
                 this.header = dataHeader.header;
                 pos = pos +dataHeader.pos;
             }
+            
             
             if(this.header=='file'){
                 if(this.fileName=='')
@@ -95,9 +95,12 @@ class MultiPartParser {
                     data
                 }
                 this.sum+=nextPos-start;    
+                console.log('ON GOING SUM',this.sum);
                 this.stream.write(buffer.slice(start,nextPos));
-                if(buffer.toString().indexOf(this.boundry,pos)==-1)
+                if(buffer.indexOf(Buffer.from(this.boundry),pos)==-1)
                     endState = true;
+
+                    //buffer.indexOf(Buffer.from(this.boundry,pos))
                     
             }else if(this.header=='serverToken'){
                 this.serverToken = dataHeader.serverToken;
@@ -107,11 +110,13 @@ class MultiPartParser {
                 this.stream.write(buffer.slice(0,endPos))
                 endState=true;  
                 this.sum+=endPos;
+                console.log('END SUM',this.sum);
             }
         }
     }
     
     parseHeader(buffer){
+        console.log(buffer.toString());
         let body = buffer.toString().split('name')[1];
         let contentName = body.split('"')[1];
         let fileName;
@@ -132,6 +137,8 @@ class MultiPartParser {
             return -1;
     }
 }
+
+
 
 module.exports ={
     multiPartParse,MultiPartParser

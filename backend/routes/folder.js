@@ -9,9 +9,10 @@ process.on("uncaughtException", (err) => {
 router.registerEndPoint("GET","/createFolder",(req,res)=>{
     folderController.createFolder(req,res)
 });
+router.registerEndPoint("GET","/folderParent",(req,res)=>{
+    folderController.getFolderParent(req,res)
+});
 
-// router.registerEndPoint('DELETE','/delete', fileController.remove)
-// router.registerEndPoint('GET','/download',fileController.download)
 
 module.exports = {
     router

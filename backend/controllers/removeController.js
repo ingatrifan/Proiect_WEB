@@ -21,16 +21,16 @@ async function remove(req,res){
              return
             //find file db -> validate tokens ->remove file 
         var auth_values = jwt.decode(serverToken,PRIVATE_KEY);
+        
         await models.File.findOne({id_user:auth_values.user,id_file:idFile},async (err,file)=>{
             if(!err){
                 let files = await models.File.find({folder:data.idFile})
-                //skip validate tokens TO DO
                 if (files.length>0){
                     res.statusCode = HttpStatusCodes.UNAUTHORIZED;
                     res.setHeader('Content-Type', 'application/json');
                     return res.end(JSON.stringify({"success": true,"message": 'You cannot remove this folder, first delete files'}));
                 }
-                if (!file.id_file){
+                if (file.id_file == file._id){
                     await models.File.findByIdAndRemove({_id:data.idFile});
                     res.statusCode = HttpStatusCodes.OK;
                     res.setHeader('Content-Type', 'application/json');

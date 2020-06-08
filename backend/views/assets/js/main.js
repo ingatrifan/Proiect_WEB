@@ -92,17 +92,20 @@ function createFolder(){
   .then(response => window.location.reload())
 }
 function openFolder(id){
-  console.log("opening folder")
   let url = window.location.href;
   url += '?parent='+id;
   window.location.replace(url);
 }
+function deleteFolder(id){
+  openDeleteModal({id});
+  return false;
+}
+
 function getFileInfo(){
   const token = localStorage.getItem('serverToken');
   let filesDiv = document.getElementById('main-content');
   let currentUrl = window.location.href;
   let parent = currentUrl.split('=')[1];
-  console.log(parent)
   let url = `http://localhost/fileList?serverToken=${token}`;
   if (searchInput.value.length > 0)url+=`&search=${searchInput.value}`;
   if(parent)url+=`&parent=${parent}`;
@@ -114,7 +117,7 @@ function getFileInfo(){
       let fileContent;
       if (json.folder.files[f].extension == "folder"){
         fileContent =`
-          <div class="flex-card col-2" onclick="openFolder('${json.folder.files[f].idFile}')" id = "${json.folder.files[f].idFile}" > 
+          <div class="flex-card col-2" onclick="openFolder('${json.folder.files[f].idFile}')" oncontextmenu="return deleteFolder('${json.folder.files[f].idFile}')"> 
             <div class="flex-card__media">
               <img src="../assets/images/icons/187640-file-types/png/${json.folder.files[f].extension}.png" alt = "img1" >
             </div>
@@ -157,8 +160,11 @@ function deleteFile(element){
   postData(method,url,data,function(buff){
     if(buff.readyState===buff.DONE && buff.status ==200){
       let body = JSON.parse(buff.responseText )
-        window.location.reload(body.location);
-        
+        window.location.reload(body.location);     
+    } else if(buff.readyState===buff.DONE && buff.status !=200){
+      let data =JSON.parse(buff.responseText);
+      document.getElementById('errorMsg').innerHTML = data.message;
+      document.getElementById('errorMsg').style = "color:red;font-size:12px;";
     }
   });
 }

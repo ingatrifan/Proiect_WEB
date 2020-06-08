@@ -1,13 +1,11 @@
 // Get DOM Elements
 const modal = document.querySelector('#my-modal');
 const profileModal = document.querySelector('#profile-modal')
-const modalBtn = document.querySelector("#modal-btn");
 const deleteModal = document.getElementById('delete-modal')
 const deleteFileBtn = document.getElementById('deleteFileBtn');
 const searchInput = document.getElementById("search");
 const createFolderModal = document.getElementById('createFolderModal');
 // Events
-modalBtn.addEventListener('click', openModal);
 window.addEventListener('click',outsideClick);
 window.onload=initMainPage();
 

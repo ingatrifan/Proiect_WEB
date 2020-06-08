@@ -32,17 +32,17 @@
         </div>
         <div class="left-side">
             <div class="add">
-                <button id ="modal-btn">
+                <button onclick="openModal()">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
             <div class="add">
-                <button id ="modal-btn">
+                <button>
                     <i class="fas fa-folder" onclick="openCreateFolder()"></i>
                 </button>
             </div>
             <div class="add">
-              <button id ="modal-btn">
+              <button>
                   <i class="fa fa-user" onclick="openConnectModal()"></i>
               </button>
           </div>
@@ -89,22 +89,22 @@
               <p>Connect your accounts</p>
                 <div class="google-btn">
                     <div class="google-icon-wrapper">
-                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="googleicon"/>
                     </div>
                     <p class="btn-text" onClick="googleAuth()"><b>Connect Google</b></p>
                 </div>
-              <button onClick="oneDriveAuth()" class="button-connect">
+              <div onClick="oneDriveAuth()" class="button-connect">
                 <div class="box">
                         <i class="fab fa-windows"></i>
                 </div>
                 <span>Connect Onedrive</span> 
-                </button>
-              <button onClick="dropboxAuth()" class="button-connect">
+              </div>
+              <div onClick="dropboxAuth()" class="button-connect">
                 <div class="box">
                         <i class="fab fa-dropbox"></i>
                 </div>
                 <p>Connect Dropbox</p>   
-            </button>
+              </div>
             <p id="connected"></p>
           </div>
         </div>

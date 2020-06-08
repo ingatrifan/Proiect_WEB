@@ -15,9 +15,11 @@ rout.registerEndPoint('GET','/register',(req,res)=>{
 rout.registerEndPoint('GET','/login',(req,res)=>{
     pageHTML.renderPage(req,res);
 });
+
 rout.registerEndPoint('GET','/forgot',(req,res)=>{
     pageHTML.renderPage(req,res);
-})
+});
+
 rout.registerEndPoint('GET','/reset',(req,res)=>{
     let resetToken = url.parse(req.url,true).query.token;
     console.log(resetToken)
@@ -29,7 +31,7 @@ rout.registerEndPoint('GET','/reset',(req,res)=>{
         res.write('Token is expired or invalid');
         res.end();
     }
-})
+});
 
 rout.registerEndPoint('GET','/mainPage',(req,res)=>{
     //mainPage.mainPage(req,res);

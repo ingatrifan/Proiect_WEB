@@ -20,8 +20,7 @@
                     <li><a href="/about">About us</a></li>
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
-                </ul>
-                
+                </ul>      
             </nav>
         </div>
     <div class="up">
@@ -40,6 +39,11 @@
             <div class="add">
                 <button id ="modal-btn">
                     <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="create-folder">
+                <button onclick="openCreateFolder()" id ="folderCreation">
+                    New folder
                 </button>
             </div>
         </div>
@@ -85,23 +89,23 @@
                     <p class="btn-text" onClick="googleAuth()"><b>Connect Google</b></p>
                 </div>
               <button onClick="oneDriveAuth()" class="button-connect">
-								<div class="box">
-										<i class="fab fa-windows"></i>
-								</div>
-                  <span>Connect Onedrive</span> 
+                <div class="box">
+                        <i class="fab fa-windows"></i>
+                </div>
+                <span>Connect Onedrive</span> 
                 </button>
               <button onClick="dropboxAuth()" class="button-connect">
-								<div class="box">
-										<i class="fab fa-dropbox"></i>
-								</div>
-								<p>Connect Dropbox</p>   
+                <div class="box">
+                        <i class="fab fa-dropbox"></i>
+                </div>
+                <p>Connect Dropbox</p>   
             </button>
           </div>
         </div>
     </div>
 <!-- END OF MODAL -->
  <!-- MODAL WHEN UPLOAD IS PRESSED -->
- <div id="delete-modal" class="modal">
+<div id="delete-modal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">
 				<span onclick="closeModals()" class="close">&times;</span>
@@ -110,6 +114,25 @@
 				<p>Are you sure you want to delete this file?</p>
 				<div class="action-buttons">
 					<button id="deleteFileBtn" onclick="deleteFile()" class="delete">Delete</button>
+					<button onclick="closeModals()" class="cancel">Cancel</button>
+				</div>
+			</div>
+		</div>
+</div>
+<!-- END OF MODAL -->
+ <!-- MODAL WHEN CREATE FOLDER IS PRESSED -->
+<div id="createFolderModal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span onclick="closeModals()" class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+                <p>Create folder</p>
+                <div class = "form-input">
+                    <input type="text" placeholder="Name" id="fileName">
+                </div> 
+				<div class="action-buttons">
+					<button id="createFolderBtn" onclick="createFolder()" class="delete">Create</button>
 					<button onclick="closeModals()" class="cancel">Cancel</button>
 				</div>
 			</div>

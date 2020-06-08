@@ -3,6 +3,12 @@ body{
   background: url(../images/photo-of-woodpile-1787035.jpg);
   background-size: cover;
 }
+.form-input input{
+    width:100%;
+    height: 30px;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
 .up{
     padding-top: 55px;
     display: flex;

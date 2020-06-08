@@ -5,12 +5,11 @@ const modalBtn = document.querySelector("#modal-btn");
 const deleteModal = document.getElementById('delete-modal')
 const deleteFileBtn = document.getElementById('deleteFileBtn');
 const searchInput = document.getElementById("search");
-
+const createFolderModal = document.getElementById('createFolderModal');
 // Events
 modalBtn.addEventListener('click', openModal);
 window.onload = getFileInfo();
 window.addEventListener('click',outsideClick);
-window.onload = getFileInfo();
 
   
 function openModal() {
@@ -18,6 +17,9 @@ function openModal() {
 }
 function openConnectModal(){
   profileModal.style.display = 'block';
+}
+function openCreateFolder(){
+  createFolderModal.style.display = "block";
 }
 function openDeleteModal(element){
   deleteModal.style.display = 'block';
@@ -29,6 +31,7 @@ function closeModals() {
   modal.style.display = 'none';
   profileModal.style.display = 'none';
   deleteModal.style.display = 'none';
+  createFolderModal.style.display = 'none'
 }
 
 // Close If Outside Click
@@ -41,6 +44,9 @@ function outsideClick(e) {
   }
   if (e.target == deleteModal){
     deleteModal.style.display = 'none';
+  }
+  if(e.target == createFolderModal){
+    createFolderModal.style.display = 'none'
   }
 }
 
@@ -71,6 +77,13 @@ function downloadFile(element){
   
   }).catch(()=>allert)
 
+}
+function createFolder(){
+  fileName = document.getElementById('fileName').value;
+  const token = localStorage.getItem('serverToken');
+  let url = `http://localhost/fileList?serverToken=${token}&fileName=${fileName}`;
+  fetch(url)
+  .then(response => window.location.reload())
 }
 
 function getFileInfo() {

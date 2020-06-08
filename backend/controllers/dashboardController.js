@@ -127,11 +127,12 @@ exports.deleteUser = async(req,res) => {
                   res.end(JSON.stringify({"success": false, "message": 'Delete failed, cant delete admin'}));
                 }
                 else {
-                  await models.User.remove({email: toDelete}, (err)=> {
+                  await models.User.remove({email: toDelete},async (err)=> {
                     if(!err) {
                       res.statusCode = HttpStatusCodes.NO_CONTENT;
                       res.setHeader('Content-Type', 'application/json');
                       res.end(JSON.stringify({"success": true, "message": 'Deleted'}));
+                      await models.File.remove({user_id: toDelete});
                     } else {
                       res.statusCode = HttpStatusCodes.NO_CONTENT;
                       res.setHeader('Content-Type', 'application/json');

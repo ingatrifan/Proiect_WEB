@@ -9,14 +9,14 @@ const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = "SUPER_SECRET_KEY_RESET";
 
 rout.registerEndPoint('GET','/register',(req,res)=>{
-    pageHTML.renderRegister(req,res);
+    pageHTML.renderPage(req,res);
 });
 
 rout.registerEndPoint('GET','/login',(req,res)=>{
-    pageHTML.renderLogin(req,res);
+    pageHTML.renderPage(req,res);
 });
 rout.registerEndPoint('GET','/forgot',(req,res)=>{
-    pageHTML.renderLogin(req,res);
+    pageHTML.renderPage(req,res);
 })
 rout.registerEndPoint('GET','/reset',(req,res)=>{
     let resetToken = url.parse(req.url,true).query.token;
@@ -24,7 +24,7 @@ rout.registerEndPoint('GET','/reset',(req,res)=>{
     let expired = jwt.verify(resetToken,PRIVATE_KEY);
     console.log(expired)
     if (expired)
-        pageHTML.renderLogin(req,res)
+        pageHTML.renderPage(req,res)
     else {
         res.write('Token is expired or invalid');
         res.end();
@@ -33,7 +33,7 @@ rout.registerEndPoint('GET','/reset',(req,res)=>{
 
 rout.registerEndPoint('GET','/mainPage',(req,res)=>{
     //mainPage.mainPage(req,res);
-     pageHTML.renderLogin(req,res);
+     pageHTML.renderPage(req,res);
 });
 
 rout.registerEndPoint('GET','/',(req,res)=>{//landing page here
@@ -41,7 +41,7 @@ rout.registerEndPoint('GET','/',(req,res)=>{//landing page here
 });
 
 rout.registerEndPoint('GET','/about',(req,res)=>{
-    pageHTML.renderLogin(req,res);//cuz it's pretty much the same also
+    pageHTML.renderPage(req,res);//cuz it's pretty much the same also
 });
 
 rout.registerEndPoint('GET','/fileList',(req,res) => {
@@ -49,15 +49,15 @@ rout.registerEndPoint('GET','/fileList',(req,res) => {
 });
 
 rout.registerEndPoint('GET','/dashboard',(req,res) => {
-  pageHTML.renderLogin(req,res);
+  pageHTML.renderPage(req,res);
 });
 
 rout.registerEndPoint('GET','/scholarly' , (req,res)=> {
-  pageHTML.renderLogin(req,res);
+  pageHTML.renderPage(req,res);
 });
 
 rout.registerEndPoint('GET','/guide' , (req,res) => {
-  pageHTML.renderLogin(req,res);
+  pageHTML.renderPage(req,res);
 });
 
 module.exports={

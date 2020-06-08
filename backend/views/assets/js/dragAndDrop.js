@@ -61,10 +61,12 @@ function initializeProgress(numfiles) {
   function uploadFile(file) { 
     // event.preventDefault(); 
     const formData = new FormData();
-    
+    let currentUrl = window.location.href;
+    let parent = currentUrl.split('=')[1];
     formData.append('file',file);
     formData.append('serverToken',localStorage.getItem('serverToken'));
-    const url = 'http://'+window.location.host+'/upload';
+    let url = 'http://'+window.location.host+'/upload';
+    if(parent)url+=`?parent=${parent}`;
     fetch(url,
       {
         method:'POST',

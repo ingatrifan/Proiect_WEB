@@ -18,6 +18,10 @@ const fileSchema = new Schema(
       type:Array,
       default:null
     },
+    folder:{
+      type:String,
+      default:null
+    },
     lastLength:{
       type:Number,
       defautl:null

@@ -37,7 +37,7 @@ await models.User.remove({},()=>console.log("Cleaning users"));
   console.log(b);
   b.save(function(){
     console.log("inserted test rat");
-  });
+  })
 }
 connectDB();
 const router = new Router();

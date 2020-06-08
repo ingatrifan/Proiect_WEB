@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+@import url(//db.onlinewebfonts.com/c/0b6986b36b7d81188f996e58f2ec0643?family=Sharp+Grotesk+DB+Cyr+Medium+22);
+
 :root {
   --main-color: #89ff79;
   --second-color: #000;
@@ -254,10 +257,6 @@ progress{
   .google-btn :active {
     background:#1669F2;
   }
-
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:500);
-@import url(//db.onlinewebfonts.com/c/0b6986b36b7d81188f996e58f2ec0643?family=Sharp+Grotesk+DB+Cyr+Medium+22);
 
 @keyframes modalopen {
     from {

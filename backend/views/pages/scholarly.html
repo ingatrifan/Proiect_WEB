@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta property="keywords" content="project,infoiasi,web"> 
+    <title>STOL</title>
+    <link rel="stylesheet" href="../assets/css/scholarly.min.css">
+    <script src="../assets/js/scholarly.min.js"></script>
+  </head>
+  <body prefix="schema: http://schema.org">
+    <header>
+      <div class="banner">
+        <img src="../assets/images/scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
+        <div class="status">In development</div>
+      </div>
+      <h1>STOL - Scholarly HTML report</h1>
+    </header>
+    <!--
+      XXX
+      - check refs
+      - the math example has too much maths
+      - bring back some of the old style
+      - make semantics, validation, processing sub-sections of each structural element
+      - have a section before that for general constructs
+        - explain why use RDFa
+        - explain our patterns: RDFa, roles
+      - figure captions need to get set throughout
+      - dedication? see doc-dedication
+      - syntactic constraints (prefix)
+      - needs more sthenurines
+      - examples of everything
+      - some notes on using Semantic CSS
+      - needs more RDFa in the spec itself
+    -->
+    <div role="contentinfo">
+      <dl>
+        <dt>Authors</dt>
+        <dd>
+          <a href="https://github.com/robbyyt" target="_blank">Tabacaru Robert</a>
+          <br>
+          <a href="https://github.com/ingatrifan" target="_blank">Trifan Inga</a>
+          <br>
+          <a href="https://github.com/kreL-Lo" target="_blank">Miru Ciprian</a>
+          <br>
+        </dd>
+        <dt>Bugs &amp; Feedback</dt>
+        <dd>
+          <a href="https://github.com/ingatrifan/Proiect_WEB/issues" target="_blank">We welcome pull requests and appreciate anyone who takes time to report issues!</a>
+        </dd>
+      </dl>
+    </div>
+    <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+      <h2>Abstract</h2>
+      <p>
+        STOL is a web application that allows users to bypass the storage limits of regular drive services by allowing you to store files in the cloud while being connected
+        on multiple drive accounts, without having to worry that uploading a certain file will exceed the limit of one of those particular accounts.
+      </p>
+    </section>
+    <section id="introduction" role="doc-introduction">
+      <!-- review? -->
+      <h2>Introduction</h2>
+      <p>
+        The application aims to abstract the usual file system operations available to anyone on their
+        local environment. It does this by fragmenting the files and storing them using various
+        online cloud-storage services such as Google Drive, Dropbox and Microsoft OneDrive.
+        Also, support is provided for the easy reconstruction and download of the files stored using our application.
+       <br>
+        To be able to do this, our users need to authorize the application to make changes in a specific folder in their drive accounts.
+        <br>
+        This is all done by taking advantage of the Oauth 2.0 protocols, so the user doesn't actually need to give us access to any private information such as passwords etc.
+      </p>
+    </section>
+    <section id="structure">
+      <!-- review? -->
+      <h2>Structure</h2>
+      <p>
+        The following section contains details about the application's structure and the technologies
+        used to create it.
+      </p>
+      <section id="Frontend">
+        <!-- review? -->
+        <h3>Frontend</h3>
+        <p>
+          On the frontend side multiple pages were implemented using vanilla(and valid) HTML5,
+          CSS and JavaScript.
+        </p>
+        <section id="Pages">
+          <h3>Pages</h3>
+          <ul>
+            <li>Landing page
+              <br>
+              <p>
+                This is the page the user sees when accessing the website
+                for the first time. It briefly describes the application
+                and guides the user towards the other pages.
+              </p>
+            </li>
+            <li>Main Page
+              <br>
+              <p>
+                This page is the primary part of the application, this is where the (logged in)
+                user can access his saved files and interact with them.<br>
+                The layout of the page is beginner-friendly so all users, no matter how experienced,
+                can get by easily. Users can upload, view, download, and rename files. 
+              </p>
+            </li>
+            <li>Log-in and Register Pages
+              <br>
+              <p>
+                The log-in and register pages contain forms that the user needs to fill in order to create or access an already existing account.
+              </p>
+            </li>
+            <li>About Us Page
+              <br>
+              <p>
+                This page offers more information about the creators of the application.
+              </p>
+            </li>
+          </ul>
+        </section>
+        <section id="user-experience">
+          <h3>User experience</h3>
+          <p>
+            <ul>
+              <li>The application header is displayed on every page and makes it easy for the user to log in/out or to navigate to other pages.</li>
+              <li>When first accessing the app, the user will have to simply create an account by filling a simple form found on the register page.</li>
+              <li>When logged in and on the main page, the user can easily connect his Google,Dropbox and OneDrive accounts to start taking advantage of our services.</li>
+              <li>Managing files(downloading,uploading and deleting) is made very easy by our beginner-friendly user interface. The upload button is easy to see and you
+                can even use drag-and-drop to upload files, and as for deleting or renaming files, you can simply hover over a file and do that easily.
+              </li>
+            </ul>
+          </p>
+        </section>
+      </section>
+      <section id="Backend">
+        <h3>Backend</h3>
+        <p>The application's backend was built using node.js(to create an API). Listed below will be the different services the API provides.<br>
+          Also, our application authenticates user's sessions using JWT's (JSON Web Tokens).
+        </p>
+        <section id="account-management">
+          <h3>Account Management</h3>
+          <p>As in most applications, the user needs to be able to create or to log into an account.</p>
+          <h4>Endpoints:</h4>
+          <ul>
+            <li>Login: POST /login</li>
+            <li>Register: POST /register</li>
+            <li>Validate token: POST /validateToken </li>
+          </ul>
+        </section>
+        <section id="file-management">
+          <h3>File management</h3>
+          <p>Allows the user to use our API to manage his files.</p>
+          <h4>Endpoints:</h4>
+          <ul>
+            <li>Upload a file: POST /upload</li>
+            <li>Delete a file: DELETE /delete</li>
+            <li>Download a file: GET /download </li>
+          </ul>
+        </section>
+        <section id="oauth-management">
+          <h3>Oauth authorization manager</h3>
+          <p>Provides the neccessary endpoints so that the user can connect his drive accounts.</p>
+          <h4>Endpoints:</h4>
+          <ul>
+            <li>For Google: GET /authorize/google</li>
+            <li>For Dropbox: GET /authorize/dropbox</li>
+            <li>For OneDrive: GET /authorize/onedrive</li>
+          </ul>
+        </section>
+        <section id="page-manager">
+          <h3>Page manager</h3>
+          <p>Serves the required html pages at the appropriate endpoints.</p>
+          <h4>Endpoints (all are accessed through GET requests):</h4>
+          <ul>
+            <li>/register</li>
+            <li>/login</li>
+            <li>/mainPage</li>
+            <li>/  (for landing page)</li>
+            <li>/about</li>
+            <li>/dashboard</li>
+          </ul>
+        </section>
+      </section>
+    </section>
+    <section id="diagrams">
+      <h3>Diagrams</h3>
+      <section id="use-cases">
+        <h3>Use-cases</h3>
+        <img src="../assets/images/scholarly/TW.png" alt="use-cases">
+        <img src="../assets/images/scholarly/auth.png" alt="use-case-auth">
+      </section>
+      <section id="mvc">
+        <h3>Arhitecture</h3>
+        <img src="../assets/images/scholarly/mvc.png" alt="mvc">
+      </section>
+    </section>
+    <section id="collaboration">
+      <h3>Collaboration</h3>
+      <p>Github was used for versioning and collaborating.<br>
+        Every team member worked on his own branch and we used pull requests to integrate
+        different commits into the master branch.
+      </p>
+    </section>
+    <section id="storage">
+      <h3>Storage of data</h3>
+      <ul>
+        <li><h4>Frontend:</h4>
+          LocalStorage was used on the frontend to store the user's JWT token.
+        </li>
+        <li>
+          <h4>Backend:</h4>
+          MongoDB was used to store data about the users and their files.
+        </li>
+      </ul>
+    </section>
+    <section id="development-stages">
+      <h3>Development stages</h3>
+      <ol>
+        <li>Create basic versions for every frontend page.</li>
+        <li>Created a basic version of the node.js server.</li>
+        <li>Added routing.</li>
+        <li>Added log-in and register functionalities.</li>
+        <li>Implemented oAuth authorization for every drive service</li>
+        <li>Implemented download,upload and delete for every drive service.</li>
+        <li>Added file fragmentation and reconstruction.</li>
+        <li>Integrated file operations with the frontend</li>
+        <li>Created the administration module</li>
+        <li>Refactored code, added tests and bug-fixing</li>
+      </ol>
+    </section>
+  </body>
+</html>

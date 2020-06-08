@@ -1,3 +1,11 @@
+:root {
+  --main-color: #89ff79;
+  --second-color: #000;
+  --third-color: gray;
+  --accent-color: rgb(31, 30, 30);
+  --white-accent: rgb(245, 241, 241);
+}
+
 #drop-area {
     border: 2px dashed #ccc;
     border-radius: 20px;
@@ -94,7 +102,7 @@ progress{
 }
 
 .modal-header {
-    background: black;
+    background: var(--third-color);
     padding: 5px;
     color: #fff;
     text-align: center;
@@ -103,7 +111,7 @@ progress{
 .modal-body {
     text-align: center;
     padding: 10px 20px;
-    background: black;
+    background: var(--third-color);
     color:white;
 }
 .modal-body > p{

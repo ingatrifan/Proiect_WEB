@@ -25,7 +25,6 @@ function register(){
     });
 }
 
-
 function postData(url,data,succes){
     // an encoding required
     var httpRequest = new XMLHttpRequest();

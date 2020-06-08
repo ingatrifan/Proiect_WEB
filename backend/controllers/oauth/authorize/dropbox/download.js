@@ -2,7 +2,8 @@ const fs = require('fs');
 const {Curl } = require('node-libcurl');
 const path= require('path');
 const request=require('request');
-async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
+const crypto = require('crypto');
+async function  download(accessToken,fileId,userId,fileName,start,end,fileOut,hash){
     return new Promise((response,reject)=>{
         let tempPath = path.join(process.cwd(),'tmp',userId,fileName);
         const url ='https://content.dropboxapi.com/2/files/download';
@@ -20,6 +21,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
             let written = 0;
             if (fileOut) {
                 written = fs.writeSync(fileOut, buff, 0, nmemb * size)
+                hash.update(buff)
             } else {
                 
                 process.stdout.write(buff.toString())
@@ -33,7 +35,7 @@ async function  download(accessToken,fileId,userId,fileName,start,end,fileOut){
         
         curl.on('end', (statusCode, body) => {
             curl.close()
-            response({tmpPath:tempPath});
+            response({tmpPath:tempPath,hash:hash});
   })
 })
 

@@ -2,9 +2,8 @@ const fs = require('fs');
 const {Curl } = require('node-libcurl');
 const path= require('path');
 
-async function downloadFile(donwnloadURL,userId,fileName,start,end,position,fileOut){
+async function downloadFile(donwnloadURL,userId,fileName,start,end,position,fileOut,hash){
     return new Promise((response,reject)=>{
-    console.log('HERER',userId,fileName);
     let tempPath = path.join(process.cwd(),'tmp',userId,fileName);
     let range ='bytes='+start+'-'+end
     const curl = new Curl();
@@ -16,7 +15,8 @@ async function downloadFile(donwnloadURL,userId,fileName,start,end,position,file
         let written = 0
       
         if (fileOut) {
-          written = fs.writeSync(fileOut, buff, 0, nmemb * size)
+          written = fs.writeSync(fileOut, buff, 0, nmemb * size);
+          hash.update(buff);
         } else {
           written = size * nmemb
         }
@@ -28,7 +28,7 @@ async function downloadFile(donwnloadURL,userId,fileName,start,end,position,file
    curl.on('error', (e)=>{console.log(e);curl.close.bind(curl)})
    curl.on('end', (statusCode, body) => {
         curl.close()
-        response({tmpPath:tempPath,position:position});
+        response({tmpPath:tempPath,position:position,hash:hash});
   })});}
 
 module.exports={

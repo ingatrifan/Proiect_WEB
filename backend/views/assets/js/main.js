@@ -8,8 +8,14 @@ const searchInput = document.getElementById("search");
 const createFolderModal = document.getElementById('createFolderModal');
 // Events
 modalBtn.addEventListener('click', openModal);
-window.onload = getFileInfo();
 window.addEventListener('click',outsideClick);
+window.onload=initMainPage();
+
+function initMainPage(){
+  verifyToken();
+  getFileInfo();
+}
+
 
   
 function openModal() {
@@ -33,7 +39,6 @@ function closeModals() {
   deleteModal.style.display = 'none';
   createFolderModal.style.display = 'none'
 }
-
 // Close If Outside Click
 function outsideClick(e) {
   if (e.target == modal) {
@@ -57,7 +62,6 @@ function downloadFile(element){
   const id = element.id;
   let divId =  document.getElementById(id);
   let fileName = divId.childNodes[3].childNodes[1].innerHTML
-  console.log(fileName);
   const url = 'http://'+window.location.host+'/download?serverToken='+token+'&idFile='+id;
   fetch(url)
   .then(resp=>{
@@ -79,25 +83,48 @@ function downloadFile(element){
 
 }
 function createFolder(){
+  let currentUrl = window.location.href;
+  let parent = currentUrl.split('=')[1];
   fileName = document.getElementById('fileName').value;
   const token = localStorage.getItem('serverToken');
-  let url = `http://localhost/fileList?serverToken=${token}&fileName=${fileName}`;
+  let url = `http://localhost/createFolder?token=${token}&name=${fileName}&parent=${parent}`;
   fetch(url)
   .then(response => window.location.reload())
 }
-
-function getFileInfo() {
+function openFolder(id){
+  console.log("opening folder")
+  let url = window.location.href;
+  url += '?parent='+id;
+  window.location.replace(url);
+}
+function getFileInfo(){
   const token = localStorage.getItem('serverToken');
   let filesDiv = document.getElementById('main-content');
+  let currentUrl = window.location.href;
+  let parent = currentUrl.split('=')[1];
+  console.log(parent)
   let url = `http://localhost/fileList?serverToken=${token}`;
   if (searchInput.value.length > 0)url+=`&search=${searchInput.value}`;
-  console.log(url)
+  if(parent)url+=`&parent=${parent}`;
   fetch(url)
   .then(response =>response.json())
   .then(json => {
     let htmlContent = '';
     for(let f in json.folder.files) {
-      let fileContent = `
+      let fileContent;
+      if (json.folder.files[f].extension == "folder"){
+        fileContent =`
+          <div class="flex-card col-2" onclick="openFolder('${json.folder.files[f].idFile}')" id = "${json.folder.files[f].idFile}" > 
+            <div class="flex-card__media">
+              <img src="../assets/images/icons/187640-file-types/png/${json.folder.files[f].extension}.png" alt = "img1" >
+            </div>
+            <div class="flex-card__content">
+              <h3 id = "${json.folder.files[f].idFile}" class="flex-card__content-title">${json.folder.files[f].name}</h3>
+            </div>
+        </div>
+        `
+      } else
+      fileContent =`
       <div class="flex-card col-2" id = "${json.folder.files[f].idFile}" > 
         <div class="flex-card__media">
           <img src="../assets/images/icons/187640-file-types/png/${json.folder.files[f].extension}.png" alt = "img1" >
@@ -140,7 +167,6 @@ function googleAuth(){
   let url ='https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A//www.googleapis.com/auth/drive&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri=http%3A//localhost/authorize/google&client_id=282450647382-g7epadv9ud6slg873pm75gmhinhqjsao.apps.googleusercontent.com';
   
   url+='&state='+ localStorage.getItem('serverToken');
-  console.log(url);
   window.location.replace(url);
 }
 //function ONEDRIVE
@@ -165,4 +191,19 @@ function postData(method,url,data,success) {
   httpRequest.send(JSON.stringify(data));
 }
 
+
+
+function verifyToken(){
+  const url = 'http://'+window.location.host+'/validateToken';
+  let data = {serverToken:localStorage.getItem('serverToken')};
+  postData('POST',url,data,(dataServer)=>{
+      if(dataServer.readyState===dataServer.DONE && dataServer.status ==200)
+      {
+        let body = JSON.parse(dataServer.responseText);
+      }
+      else if(dataServer.status ==401){
+        window.location.replace('http://'+window.location.host+'/login');
+      }
+  });
+}
 

@@ -62,7 +62,6 @@ class MultiPartParser {
         var pos = 0;
         var nextPos;
         var  endState=false;
-        var endPos;
         while(endState==false){ 
             
             pos = buffer.toString().indexOf(this.boundry,pos);

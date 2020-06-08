@@ -10,8 +10,11 @@ const uniq = require('uniqid');
 const parser = require('../utils/multipartParser');
 const path = require('path');
 const fs = require('fs');
+const url = require('url');
 exports.upload = async (req,res) => { 
   try {
+    let parent = url.parse(req.url,true).query.parent;
+    if (!parent)parent=null;
     let params = await parser.multiPartParse(req,res);  
       let token = params.serverToken.split('\r\n')[2];
       if(validation.checkValidation(token,res)==false)
@@ -36,7 +39,7 @@ exports.upload = async (req,res) => {
               .then(fragments=>
               {
                 parseUpload(fragments,auth_values.user).then(fragments=>{
-                  let fileModel = new models.File({id_user:auth_values.user,fileName:params.fileName,id_file:uniq(),fragments:fragments});
+                  let fileModel = new models.File({id_user:auth_values.user,fileName:params.fileName,id_file:uniq(),fragments:fragments,folder:parent});
                   fileModel.save().then(()=>{
                     cleanUp(params.filePath,auth_values.user);
                     res.statusCode = HttpStatusCodes.OK;

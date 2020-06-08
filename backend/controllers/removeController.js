@@ -14,8 +14,6 @@ async function remove(req,res){
         buffer+=data;
     })
     req.on('end',async()=>{
-        console.log('removing');
-        console.log(buffer);
         var data =JSON.parse(buffer);
         let serverToken = data.serverToken;
         let idFile = data.idFile;

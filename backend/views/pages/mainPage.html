@@ -20,33 +20,35 @@
                     <li><a href="/about">About us</a></li>
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
-                </ul>      
+                </ul>
             </nav>
-        </div>
+      </div>
     <div class="up">
-        <div class="image">
-           <img onclick="openConnectModal()" src="../assets/images/title-icon.svg" alt=""> 
-        </div>
         <div class="search-space">
             <div class="search">
                 <input id="search" type="text" placeholder="  Are you looking for something?">
             </div>
             <i onclick="getFileInfo()" class="fas fa-search"></i>
         </div>
-    </div>
-    <div class="down">
         <div class="left-side">
             <div class="add">
                 <button id ="modal-btn">
                     <i class="fas fa-plus"></i>
                 </button>
             </div>
-            <div class="create-folder">
-                <button onclick="openCreateFolder()" id ="folderCreation">
-                    New folder
+            <div class="add">
+                <button id ="modal-btn">
+                    <i class="fas fa-folder" onclick="openCreateFolder()"></i>
                 </button>
             </div>
+            <div class="add">
+              <button id ="modal-btn">
+                  <i class="fa fa-user" onclick="openConnectModal()"></i>
+              </button>
+          </div>
         </div>
+    </div>
+    <div class="down">
         <div class="container" id="main-content">
            
         </div>

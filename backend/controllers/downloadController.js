@@ -20,8 +20,6 @@ async function donwload(req,res){
         return  
     let auth_values =jwt.decode(token,PRIVATE_KEY);
 
-    //fetch the file info from db -> check tokens(DONE  )->validate files(DONE)  ->fetch data
-
     let tmpPath= path.join(process.cwd(),'tmp',auth_values.user);
     try{
         await fs.mkdirSync(tmpPath);    

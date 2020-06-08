@@ -20,7 +20,9 @@ exports.createFolder = async(req,res) =>{
             res.setHeader('Content-Type', 'application/json');
             return res.end(JSON.stringify({"success": false,"message": 'User does not exist'}));
         }
-        if(!parent) parent = null;
+        console.log('PARRENT',parent);
+        if(parent!==null) parent = null;
+        console.log('PARRENT',parent);
         let folder = new db.File({fileName:name,id_user:user.email,folder:parent});
         await folder.save();
         res.statusCode = httpsStatusCodes.CREATED;

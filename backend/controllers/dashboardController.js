@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const PRIVATE_KEY = 'SUPER_SECRET_KEY';
 const url = require('url');
 const validation = require('../utils/checkValidation');
+const HttpStatusCodes = require("http-status-codes");
 
 function formatBytes(bytes, decimals = 2) {
   if (bytes === 0) return '0 Bytes';
@@ -104,3 +105,56 @@ exports.dashboardInfoController = async (req,res) => {
       })
     }
 };
+
+exports.deleteUser = async(req,res) => {
+  let uri = url.parse(req.url).query;
+  let values = uri.split('&');
+  let token = values[0].split('=')[1];
+  let toDelete = values[1].split('=')[1];
+
+  if(validation.checkValidation(token,res) == false) {
+    return;
+  }else {
+      let authValues = jwt.decode(token,PRIVATE_KEY);
+      await models.User.findOne({email: authValues.user},async(err,user)=> {
+        if(!err) {
+          if(user.isAdmin) {
+            await models.User.findOne({email: toDelete},async(err,user)=> {
+              if(!err) {
+                if(user.isAdmin) { 
+                  res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify({"success": false, "message": 'Delete failed, cant delete admin'}));
+                }
+                else {
+                  await models.User.remove({email: toDelete}, (err)=> {
+                    if(!err) {
+                      res.statusCode = HttpStatusCodes.NO_CONTENT;
+                      res.setHeader('Content-Type', 'application/json');
+                      res.end(JSON.stringify({"success": true, "message": 'Deleted'}));
+                    } else {
+                      res.statusCode = HttpStatusCodes.NO_CONTENT;
+                      res.setHeader('Content-Type', 'application/json');
+                      res.end(JSON.stringify({"success": false, "message": 'Error removing user...'}));
+                    }
+                  })
+                }
+              } else {
+                res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({"success": false, "message": 'Delete failed, no admin rights'}));
+              }
+            });
+          } else {
+            res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({"success": false, "message": 'Delete failed, no admin rights'}));
+          }
+        }else {
+          res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR;
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({"success": false, "message": 'Delete failed'}));
+        }
+      });
+    }
+  };

@@ -15,6 +15,7 @@ function initMainPage(){
   checkForConnectedDrives();
   verifyToken();
   getFileInfo();
+  addAdminButton();
 }
 
 
@@ -239,4 +240,43 @@ function checkForConnectedDrives() {
     }
   });
 }
+
+function verifiyAdmin() {
+  return new Promise((resolve) => {
+    let token = localStorage.getItem('serverToken');
+    if(!token) {
+      resolve(false);
+
+    } else {
+      const url = `http://localhost/verifyAdmin?serverToken=${token}`;
+      fetch(url)
+      .then(response => response.json())
+      .then(json => {
+        if(json.error) {
+          resolve(false);
+        }
+        else {
+          if(json.admin != true) {
+            resolve(false);
+          }
+        }
+        resolve(true);
+      })
+    }
+  });
+};
+
+async function addAdminButton() {
+  let isAdmin = await verifiyAdmin();
+  const dashButtonDiv = document.getElementById('dashboardBtn');
+  if(isAdmin) {
+    dashButtonDiv.innerHTML=`<button id ="modal-btn">
+    <i class="fa fa-bar-chart"></i>
+    </button>`
+    dashButtonDiv.onclick = () => {
+      window.location.replace('/dashboard');
+    }
+  }
+}
+
 

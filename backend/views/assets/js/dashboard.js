@@ -1,3 +1,17 @@
+window.onload = populateOrRedirect(); 
+
+function populateOrRedirect() {
+  verifiyAdmin().then(response => {
+    if(response) {
+      populateTable().then(()=>{
+        console.log('populated')
+      });
+    }
+    else {
+      window.location.replace("/"); 
+    }
+  });
+}
 
 const searchTable = () => {
   const searchInput = document.getElementById('search-input');
@@ -27,7 +41,7 @@ const populateTable = async () => {
   .then(json => {
     if(!json.error) {
       const table = document.getElementById('users-table');
-      const deleteCell = '<td class="delete"><i class="fas fa-user-times"></i></td>';
+      const deleteCell = '<td class="delete" onclick="return clickDelete(this)"><i class="fas fa-user-times"></i></td>';
       const cantDeleteCell ="<td>Can't delete admin!</td>";
         let tablebody = ''
       for(let i = 0; i <json.length; i++) {
@@ -98,7 +112,7 @@ const getCSVTable = ()=> {
   URL.revokeObjectURL(blobUrl);
 };
 
-const verifiyAdmin = async()=> {
+async function verifiyAdmin() {
   return new Promise((resolve) => {
     let token = localStorage.getItem('serverToken');
     if(!token) {
@@ -123,13 +137,30 @@ const verifiyAdmin = async()=> {
   });
 }
 
-window.onload = async()=> {
-  let isAdmin = await verifiyAdmin();
-
-  if(isAdmin) {
-    await populateTable();
-  }
-  else {
-    window.location.replace("/");
-  }
+function clickDelete(element) {
+  let emailField = element.parentNode.firstChild;
+  let row = element.parentNode;
+  let emailText = emailField.textContent || emailField.innerText;
+  deleteUser(emailText).then(()=> {
+    row.parentNode.removeChild(row);
+    return false;
+  })
 }
+
+async function deleteUser(email) {
+  let token = localStorage.getItem('serverToken');
+  const url = `http://localhost/deleteUser?serverToken=${token}&email=${email}`;
+  fetch(url,{
+    method: 'delete'
+  }).then(json => {
+    if(json.status == 204) {
+      console.log('deleted...');
+      return true;
+    }
+    else {
+      console.log('error...');
+      return false;
+    }
+  })
+}
+

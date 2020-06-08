@@ -8,39 +8,56 @@
       <link rel="stylesheet" href="../assets/css/landingPage.css">
       <link rel="stylesheet" href="../assets/css/dahsboard.css">
       <script type="text/javascript" src="../assets/js/dashboard.js"></script>
+      <script type ="text/javascript" src = "../assets/js/header.js"></script>
+      <link rel="stylesheet" href="../assets/css/navbar.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
       <script src="https://kit.fontawesome.com/d6976534fe.js" crossorigin="anonymous"></script>
       <title>Welcome to STOL</title>
       <link rel="shortcut icon" href="../assets/images/title-icon.svg">
   </head>
   <body>
-      <!--Main Content-->
-      <div class="main-container">
-        <input type="text" id="search-input" onkeyup="searchTable()" placeholder="Search for users...">
-        <button onclick="getCSVTable()">Export as CSV</button>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th>E -mail</th>
-                <th>Admin</th>
-                <th>
-                  <img src="../assets/images/drives/Google-Drive-icon.png">
-                </th>
-                <th>
-                  <img src="../assets/images/drives/Dropbox_Logo_02.svg">
-                </th>
-                <th>
-                  <img src="../assets/images/drives/New-OneDrive-iCon-2-300x242.png">
-                </th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody id="users-table">
-            </tbody>
-          </table>
-        </div>
+    <div class="page">
+      <div class="navbar">
+        <nav>
+            <ul id = "navbar">
+                <li class="logo"><a id="logo" href="/">STOL - Modern Cloud Storage</a></li>
+                <li><a href="/about">About us</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+            </ul>
+        </nav>
       </div>
-      <!--End of Main Content-->
+        <!--Main Content-->
+        <div class="main-container">
+          <input type="text" id="search-input" onkeyup="searchTable()" placeholder="Search for users...">
+          <button onclick="getCSVTable()">Export as CSV</button>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>E -mail</th>
+                  <th>Admin</th>
+                  <th>
+                    <img src="../assets/images/drives/Google-Drive-icon.png">
+                  </th>
+                  <th>
+                    <img src="../assets/images/drives/Dropbox_Logo_02.svg">
+                  </th>
+                  <th>
+                    <img src="../assets/images/drives/New-OneDrive-iCon-2-300x242.png">
+                  </th>
+                  <th>
+                    Number of files
+                  </th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody id="users-table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--End of Main Content-->
+    </div>
   </body>
 </html>

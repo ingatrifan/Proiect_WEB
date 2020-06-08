@@ -12,6 +12,7 @@ window.addEventListener('click',outsideClick);
 window.onload=initMainPage();
 
 function initMainPage(){
+  checkForConnectedDrives();
   verifyToken();
   getFileInfo();
 }
@@ -210,6 +211,32 @@ function verifyToken(){
       else if(dataServer.status ==401){
         window.location.replace('http://'+window.location.host+'/login');
       }
+  });
+}
+
+function checkForConnectedDrives() {
+  let token = localStorage.getItem('serverToken');
+  let url = `http://localhost/verifyExistingTokens?serverToken=${token}`;
+  console.log('here')
+  const connectedDrivesElement = document.getElementById('connected');
+  fetch(url)
+  .then(response => response.json())
+  .then(json => {
+    if(!json.error) {
+      let html = 'Connected drives: '
+      for(let [key,value] of Object.entries(json)) {
+        if(value) {
+          html+=key + ','
+        }
+      }
+      if( html == 'Connected drives: ') {
+        html = ''
+      }
+      else {
+        html = html.slice(0,-1);
+      }
+      connectedDrivesElement.innerHTML = html;
+    }
   });
 }
 

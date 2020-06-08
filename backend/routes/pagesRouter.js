@@ -52,6 +52,14 @@ rout.registerEndPoint('GET','/dashboard',(req,res) => {
   pageHTML.renderLogin(req,res);
 });
 
+rout.registerEndPoint('GET','/scholarly' , (req,res)=> {
+  pageHTML.renderLogin(req,res);
+});
+
+rout.registerEndPoint('GET','/guide' , (req,res) => {
+  pageHTML.renderLogin(req,res);
+});
+
 module.exports={
     rout
 };

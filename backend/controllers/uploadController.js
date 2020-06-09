@@ -17,8 +17,13 @@ exports.upload = async (req,res) => {
     if (!parent)parent=null;
     let params = await parser.multiPartParse(req,res);  
       let token = params.serverToken.split('\r\n')[2];
-      if(validation.checkValidation(token,res)==false)
+      if(validation.checkValidation(token,res)==false){
+        try{
+          fs.unlinkSync(params.filePath) ;
+         }
+         catch(e){}
         return;
+      }
 
     let auth_values = jwt.decode(token,PRIVATE_KEY);
     
@@ -26,8 +31,13 @@ exports.upload = async (req,res) => {
       await models.User.findOne({email:auth_values.user},async (err,user)=>{
         if(!err){
           let tokens=[];
-          if(checkUserDriveAccounts(res,user)==false) 
-            return
+          if(checkUserDriveAccounts(res,user)==false) {
+            try{
+              fs.unlinkSync(params.filePath) ;
+             }
+             catch(e){}
+            return;
+          }
           user = await utilities.tokenRefresher.refreshTokens(user);
           tokens.push({info:user.googleAuth});
           tokens.push({info:user.dropboxAuth});
@@ -55,6 +65,10 @@ exports.upload = async (req,res) => {
       });
   }catch (error) {
     console.error(error)
+    try{
+      fs.unlinkSync(params.filePath) ;
+     }
+     catch(e){}
     res.statusCode = HttpStatusCodes.INTERNAL_SERVER_ERROR
     res.setHeader('Content-Type', 'application/json')
     res.end(JSON.stringify({"success": false, "message": 'Upload Failed'}))

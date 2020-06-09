@@ -63,9 +63,14 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
       })
         curl.on('end', async  (statusCode, body,more) => {
             curl.close();
-            await fs.closeSync(fd)
-            await fs.closeSync(myfd);
-            await fs.unlinkSync(tmp);
+            try{
+                await fs.closeSync(fd)
+                await fs.closeSync(myfd);
+                await fs.unlinkSync(tmp);
+            }
+            catch(e){
+
+            }
             if(statusCode==308)//get range
             {
                 let range = more[0].range.split('=')[1].split('-');

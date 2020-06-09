@@ -40,9 +40,14 @@ async function uploadFile(fragment,SESION_UPLOADURL,numBytes,start,end,fileSize,
         })
         
             curl.on('end', async (statusCode, body) => {
+                try{
                 await fs.closeSync(fd)
                 await fs.closeSync(myfd);
                 await fs.unlinkSync(tmp);
+                }
+                catch(e){
+                    
+                }
                 resolve(body);
                 
                 curl.close();

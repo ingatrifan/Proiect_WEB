@@ -41,7 +41,8 @@ exports.upload = async (req,res) => {
                 parseUpload(fragments,auth_values.user).then(fragments=>{
                   let fileModel = new models.File({id_user:auth_values.user,fileName:params.fileName,id_file:uniq(),fragments:fragments,folder:parent});
                   fileModel.save().then(()=>{
-                    cleanUp(params.filePath,auth_values.user);
+                 
+                    cleanUp(fragments,params);
                     res.statusCode = HttpStatusCodes.OK;
                     res.setHeader('Content-Type', 'application/json');
                     res.end(JSON.stringify({"success": true,"message": 'Successfully upload'}));
@@ -142,9 +143,20 @@ function checkUserDriveAccounts(res,user){
   }
 return true;
 }
-function cleanUp(originalFilePath,userId){
-  fs.unlinkSync(originalFilePath);
-  let userFolderPath = path.join(process.cwd(),'tmp',userId);
-  fragmentation.deleteFolderRecursive(userFolderPath);
+function cleanUp(fragments,params){
+  try{
+  for(let i= 0;i<fragments.length;i++){
+   fs.unlinkSync(fragments[i].filePath) ;
+  }
+  }
+  catch(e){}
+  console.log("params",params);
+  try{
+
+     fs.unlinkSync(params.filePath) ;
+
+    }
+    catch(e){}
+  
 }
 

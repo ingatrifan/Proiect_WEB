@@ -116,7 +116,6 @@ class MultiPartParser {
     }
     
     parseHeader(buffer){
-        console.log(buffer.toString());
         let body = buffer.toString().split('name')[1];
         let contentName = body.split('"')[1];
         let fileName;

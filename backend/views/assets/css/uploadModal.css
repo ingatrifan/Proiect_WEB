@@ -40,7 +40,7 @@ p {
     background: #ccc;
     cursor: pointer;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: none;
     color:black!important;
 }
 .button:hover {
@@ -194,7 +194,7 @@ progress{
 .button-connect span{
     font-size: 16px;
     line-height: 40px;
-
+    color: black;
 }
 .action-buttons{
     width:100%;

@@ -11,7 +11,9 @@
   <body prefix="schema: http://schema.org">
     <header>
       <div class="banner">
-        <img src="../assets/images/scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
+        <a href="/">
+          <img src="../assets/images/scholarly-html.svg" width="227" height="50" alt="Scholarly HTML logo">
+        </a>
         <div class="status">In development</div>
       </div>
       <h1>STOL - Scholarly HTML report</h1>
@@ -117,6 +119,18 @@
                 This page offers more information about the creators of the application.
               </p>
             </li>
+            <li> Reset
+              <br>
+              <p>Allows the user to reset his password.</p>
+            </li>
+            <li> Forgot password
+              <br>
+              <p>Allows the user to input his email to receive a password reset link</p>
+            </li>
+            <li> Dashboard
+              <br>
+              <p>A page that admin accounts can access to view user account information and manage users.</p>
+            </li>
           </ul>
         </section>
         <section id="user-experience">
@@ -154,6 +168,7 @@
             <li>Upload a file: POST /upload</li>
             <li>Delete a file: DELETE /delete</li>
             <li>Download a file: GET /download </li>
+            <li>Create a folder: GET /createFolder</li>
           </ul>
         </section>
         <section id="oauth-management">
@@ -179,6 +194,15 @@
             <li>/dashboard</li>
           </ul>
         </section>
+        <section id="dashboard-manager">
+          <h3>Dashboard manager</h3>
+          <p>Used by admins.</p>
+          <ul>
+            <li>Get info about all users: GET /userInfo</li>
+            <li>Verify if an user is an admin: GET /verifyAdmin</li>
+            <li>Delete user: DELETE /deleteUser</li>
+          </ul>
+        </section>
       </section>
     </section>
     <section id="diagrams">
@@ -197,7 +221,8 @@
       <h3>Collaboration</h3>
       <p>Github was used for versioning and collaborating.<br>
         Every team member worked on his own branch and we used pull requests to integrate
-        different commits into the master branch.
+        different commits into the master branch.<br>
+        Trello was used to assign and keep track of tasks.
       </p>
     </section>
     <section id="storage">
@@ -208,7 +233,7 @@
         </li>
         <li>
           <h4>Backend:</h4>
-          MongoDB was used to store data about the users and their files.
+          MongoDB was used to store data about the users and their files and folders.
         </li>
       </ul>
     </section>
@@ -224,8 +249,40 @@
         <li>Added file fragmentation and reconstruction.</li>
         <li>Integrated file operations with the frontend</li>
         <li>Created the administration module</li>
+        <li>Added mailing system</li>
+        <li>Added folder system</li>
         <li>Refactored code, added tests and bug-fixing</li>
       </ol>
+    </section>
+    <section id="testing">
+      <h3>Testing</h3>
+      Cypress was used to create unit tests for both the backend and the frontend.
+    </section>
+    <section id="bibliography">
+      <h3>Bibliography</h3>
+      <p>Only the most relevant links</p>
+      <ul>
+        <li>https://stackoverflow.com/questions/32404185/event-onclick-on-td-and-tr</li>
+        <li>https://fontawesome.com/icons/</li>
+        <li>https://codepen.io/amybam/pen/YzXrZQM</li>
+        <li>https://codepen.io/colorlib/pen/rxddKy</li>
+        <li>https://codepen.io/emmanuelraj/pen/gEYxYe</li>
+        <li>https://stackoverflow.com/questions/37456237/how-make-static-files-css-js-in-node-js-only-node-js</li>
+        <li>https://www.youtube.com/watch?v=-14wilWWOXo</li>
+        <li>https://www.youtube.com/watch?v=gaxtYdwMLcA</li>
+        <li>https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/</li>
+        <li>https://codepen.io/jimjammc/pen/PMOVZB</li>
+        <li>https://medium.com/@humadvii/downloading-files-from-google-drive-using-node-js-3704c142a5f6</li>
+        <li>https://codepen.io/jimjammc/pen/PMOVZB</li>
+        <li>https://www.cssmatic.com/box-shadow</li>
+        <li>https://css-tricks.com/snippets/css/a-guide-to-flexbox/</li>
+        <li>https://developer.mozilla.org/en-US/docs/Web/CSS</li>
+        <li>https://fonts.googleapis.com/css?family=Roboto&display=swap</li>
+        <li>https://dev.to/kodnificent/how-to-build-a-router-with-vanilla-javascript-2a18</li>
+        <li>https://teamtreehouse.com/community/cant-get-css-files-to-load-or-javascript-to-work-in-nodejs-server</li>
+        <li>https://www.w3schools.com/</li>
+        <li>https://profs.info.uaic.ro/~busaco/teach/courses/web/web-film.html (too many good documentation links to count)</li>
+      </ul>
     </section>
   </body>
 </html>

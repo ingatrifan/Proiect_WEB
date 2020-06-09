@@ -40,17 +40,6 @@ await models.User.remove({},()=>console.log("Cleaning users"));
   b.save(function(){
     console.log("inserted test rat");
   })*/
-  let c = new models.User({
-    email:'robert@mailinator.com',
-    name :'test',
-    password :await bcrypt.hash('asdf',10).then(data=>{return data}),
-    confirmed:true,
-    isAdmin:false
-  });
-  console.log(c);
-  c.save(function(){
-    console.log("inserted test rat");
-  })
 }
 connectDB();
 const router = new Router();
